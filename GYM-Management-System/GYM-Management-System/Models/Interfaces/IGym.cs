@@ -17,7 +17,7 @@ namespace GYM_Management_System.Models.Interfaces
 
         // Update Gym
 
-        Task<Gym> UpdateGym(int gymid , GymDTO gym);
+        Task<Gym> UpdateGym(int gymid , GymDTO updatedGym);
 
         // Delete Gym
 
