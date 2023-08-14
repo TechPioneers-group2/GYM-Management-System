@@ -20,12 +20,35 @@ namespace GYM_Management_System
                 .AddDbContext<GymDbContext>
                 (opions => opions.UseSqlServer(connString));
 
+            //------------ Swagger implementation -----------------------------------------------\\
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo()
 
-
+                {
+                    Title = "Gym-System",
+                    Version = "v1",
+                });
+            });
 
 
 
             var app = builder.Build();
+
+
+            //------------ Swagger implementation -----------------------------------------------\\
+            app.UseSwagger(options =>
+            {
+                options.RouteTemplate = "/api/{documentName}/swagger.json";
+            });
+
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/api/v1/swagger.json", "Gym-System");
+                options.RoutePrefix = "docs";
+            });
+
+
 
             app.MapGet("/", () => "Hello World!");
 

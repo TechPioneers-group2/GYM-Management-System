@@ -7,6 +7,7 @@ namespace GYM_Management_System.Data
     {
         public GymDbContext(DbContextOptions options) : base(options)
         {
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
