@@ -1,8 +1,7 @@
-# Gym Management System: Enhanced Gym Operations and Client Experience ?????
-
+# Gym Management System: Enhanced Gym Operations and Client Experience 🏢🖥️
 Welcome to our Gym Management System, a sophisticated solution meticulously crafted to optimize gym operations, empower staff members, and provide clients with an exceptional gym experience.
 
-## Key Features ??
+## Key Features 🔑
 
 - **Effortless Gym Operations:** Equips gym managers with a comprehensive suite of tools to streamline administrative tasks, ensuring smooth member management and resource allocation.
 
@@ -18,5 +17,5 @@ Our Gym Management System harmoniously blends operational efficiency, employee e
 
 ---
 
-## ERD: ??
+## ERD: 📊
 ![ERD Image](./ERD.png)
