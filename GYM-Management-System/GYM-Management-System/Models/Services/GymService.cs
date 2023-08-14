@@ -37,26 +37,60 @@ namespace GYM_Management_System.Models.Services
         public async Task DeleteGym(int gymid)
         {
             var deletedGym = await _gymDbContext.Gyms.FindAsync(gymid);
-            if (deletedGym !=null)
+            if (deletedGym != null)
             {
                 _gymDbContext.Gyms.Remove(deletedGym);
                 await _gymDbContext.SaveChangesAsync();
             }
         }
 
-        public Task<GymDTO> GetGym(int gymid)
+        public async Task<GymDTO> GetGym(int gymid)
         {
-            throw new NotImplementedException();
+            return await _gymDbContext.Gyms
+                .Select(Gm => new GymDTO
+                {
+                    GymID = Gm.GymID,
+                    Name = Gm.Name,
+                    Address = Gm.Address,
+                    CurrentCapacity = Gm.CurrentCapacity,
+                    MaxCapacity = Gm.MaxCapacity,
+                    ActiveHours = Gm.ActiveHours,
+                    Notification = Gm.Notification
+                }).FirstOrDefaultAsync(gm => gm.GymID == gymid);
         }
 
-        public Task<List<GymDTO>> GetGyms()
+        public async Task<List<GymDTO>> GetGyms()
         {
-            throw new NotImplementedException();
+            return await _gymDbContext.Gyms
+                .Select(Gm => new GymDTO
+                {
+                    GymID = Gm.GymID,
+                    Name = Gm.Name,
+                    Address = Gm.Address,
+                    CurrentCapacity = Gm.CurrentCapacity,
+                    MaxCapacity = Gm.MaxCapacity,
+                    ActiveHours = Gm.ActiveHours,
+                    Notification = Gm.Notification
+                }).ToListAsync();
         }
 
-        public Task<Gym> UpdateGym(int gymid, GymDTO gym)
+        public async Task<Gym> UpdateGym(int gymid, GymDTO updatedGym)
         {
-            throw new NotImplementedException();
+            var currentGym = await _gymDbContext.Gyms.FindAsync(gymid);
+
+            if (currentGym != null)
+            {
+                currentGym.Name = updatedGym.Name;
+                currentGym.Address = updatedGym.Address;
+                currentGym.MaxCapacity = updatedGym.MaxCapacity;
+                currentGym.CurrentCapacity = updatedGym.CurrentCapacity;
+                currentGym.ActiveHours = updatedGym.ActiveHours;
+                currentGym.Notification = updatedGym.Notification;
+                _gymDbContext.Entry(currentGym).State = EntityState.Modified;
+                await _gymDbContext.SaveChangesAsync();
+            }
+
+            return currentGym;
         }
     }
 }
