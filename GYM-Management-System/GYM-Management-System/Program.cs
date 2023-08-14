@@ -1,4 +1,6 @@
 using GYM_Management_System.Data;
+using GYM_Management_System.Models.Interfaces;
+using GYM_Management_System.Models.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace GYM_Management_System
@@ -19,6 +21,8 @@ namespace GYM_Management_System
             builder.Services
                 .AddDbContext<GymDbContext>
                 (opions => opions.UseSqlServer(connString));
+
+            builder.Services.AddTransient<IGym, GymService>();
 
             //------------ Swagger implementation -----------------------------------------------\\
             builder.Services.AddSwaggerGen(options =>
