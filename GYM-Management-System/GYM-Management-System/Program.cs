@@ -24,7 +24,7 @@ namespace GYM_Management_System
                 (opions => opions.UseSqlServer(connString));
 
             builder.Services.AddTransient<IGym, GymService>();
-            builder.Services.AddTransient<ISubscriptionTier, SubscriptionTierService>();
+            builder.Services.AddTransient<IClient, ClientService>();
 
             //------------ Swagger implementation -----------------------------------------------\\
             builder.Services.AddSwaggerGen(options =>
@@ -54,9 +54,6 @@ namespace GYM_Management_System
                 options.RoutePrefix = "docs";
             });
 
-
-
-            app.MapControllers();
             app.MapGet("/", () => "Hello World!");
 
             app.Run();

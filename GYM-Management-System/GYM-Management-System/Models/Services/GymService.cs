@@ -16,7 +16,7 @@ namespace GYM_Management_System.Models.Services
         {
             _gymDbContext = gymDbContext;
         }
-        public async Task<Gym> Create(GymDTO gym)
+        public async Task<Gym> CreateGym(PostGymDTO gym)
         {
             var newGym = new Gym()
             {
@@ -44,10 +44,10 @@ namespace GYM_Management_System.Models.Services
             }
         }
 
-        public async Task<GymDTO> GetGym(int gymid)
+        public async Task<GetGymDTO> GetGym(int gymid)
         {
             return await _gymDbContext.Gyms
-                .Select(Gm => new GymDTO
+                .Select(Gm => new GetGymDTO
                 {
                     GymID = Gm.GymID,
                     Name = Gm.Name,
@@ -59,10 +59,10 @@ namespace GYM_Management_System.Models.Services
                 }).FirstOrDefaultAsync(gm => gm.GymID == gymid);
         }
 
-        public async Task<List<GymDTO>> GetGyms()
+        public async Task<List<GetGymDTO>> GetGyms()
         {
             return await _gymDbContext.Gyms
-                .Select(Gm => new GymDTO
+                .Select(Gm => new GetGymDTO
                 {
                     GymID = Gm.GymID,
                     Name = Gm.Name,
@@ -74,14 +74,13 @@ namespace GYM_Management_System.Models.Services
                 }).ToListAsync();
         }
 
-        public async Task<Gym> UpdateGym(int gymid, GymDTO updatedGym)
+        public async Task<Gym> UpdateGym(int gymid, PutGymDTO updatedGym)
         {
             var currentGym = await _gymDbContext.Gyms.FindAsync(gymid);
 
             if (currentGym != null)
             {
                 currentGym.Name = updatedGym.Name;
-                currentGym.Address = updatedGym.Address;
                 currentGym.MaxCapacity = updatedGym.MaxCapacity;
                 currentGym.CurrentCapacity = updatedGym.CurrentCapacity;
                 currentGym.ActiveHours = updatedGym.ActiveHours;
