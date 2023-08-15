@@ -25,14 +25,14 @@ namespace GYM_Management_System.Controllers
 
         // GET: api/Gyms
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GymDTO>>> GetGyms()
+        public async Task<ActionResult<IEnumerable<GetGymDTO>>> GetGyms()
         {
             return await _gym.GetGyms();
         }
 
         // GET: api/Gyms/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<GymDTO>> GetGym(int id)
+        public async Task<ActionResult<GetGymDTO>> GetGym(int id)
         {
             return await _gym.GetGym(id);
         }
@@ -40,18 +40,18 @@ namespace GYM_Management_System.Controllers
         // PUT: api/Gyms/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGym(int id, GymDTO gym)
+        public async Task<IActionResult> PutGym(int id, PutGymDTO gym)
         {
-            var updatehotel = await _gym.UpdateGym(id, gym);
-            return Ok(updatehotel);
+            var updatedgym = await _gym.UpdateGym(id, gym);
+            return Ok(updatedgym);
         }
 
         // POST: api/Gyms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Gym>> PostGym(GymDTO gym)
+        public async Task<ActionResult<Gym>> PostGym(PostGymDTO gym)
         {
-            await _gym.Create(gym);
+            await _gym.CreateGym(gym);
             return CreatedAtAction("GetGym", new { id = gym.GymID }, gym);
         }
 
