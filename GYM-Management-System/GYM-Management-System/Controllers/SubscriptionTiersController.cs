@@ -25,14 +25,14 @@ namespace GYM_Management_System.Controllers
 
         // GET: api/SubscriptionTiers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SubscriptionTierDTO>>> GetSubscriptionTiers()
+        public async Task<ActionResult<IEnumerable<GetSubscriptionTierDTO>>> GetSubscriptionTiers()
         {
           return await _SubscriptionTier.GetAllSubscriptionTier();
         }
 
         // GET: api/SubscriptionTiers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<SubscriptionTierDTO>> GetSubscriptionTier(int id)
+        public async Task<ActionResult<GetSubscriptionTierDTO>> GetSubscriptionTier(int id)
         {
           return await _SubscriptionTier.GetSubscriptionTier(id);
         }
@@ -40,7 +40,7 @@ namespace GYM_Management_System.Controllers
         // PUT: api/SubscriptionTiers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSubscriptionTier(int id, SubscriptionTierDTO subscriptionTier)
+        public async Task<IActionResult> PutSubscriptionTier(int id, UpdateSubscriptionTierDTO subscriptionTier)
         {
             var updatedsubtier = await _SubscriptionTier.UpdateSubscriptionTier(id, subscriptionTier);
             return Ok(updatedsubtier);
@@ -49,11 +49,12 @@ namespace GYM_Management_System.Controllers
         // POST: api/SubscriptionTiers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<SubscriptionTier>> PostSubscriptionTier(SubscriptionTierDTO subscriptionTier)
+        public async Task<ActionResult<SubscriptionTier>> PostSubscriptionTier(PostSubscriptionTierDTO subscriptionTier)
         {
             var createdsubtier = await _SubscriptionTier.Create(subscriptionTier);
-            return CreatedAtAction("GetSubscriptionTier",
-                new { id = subscriptionTier.SubscriptionTierID }, subscriptionTier);
+            return 
+                CreatedAtAction("GetSubscriptionTier",
+               new { id = subscriptionTier.SubscriptionTierID }, subscriptionTier);
 
          }
 

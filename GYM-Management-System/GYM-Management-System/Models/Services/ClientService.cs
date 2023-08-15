@@ -23,7 +23,8 @@ namespace GYM_Management_System.Models.Services
                 SubscriptionTierID = client.SubscriptionTierID,
                 Name = client.Name,
                 InGym = client.InGym,
-                SubscriptionDate = DateTimeOffset.Now.DateTime,
+                SubscriptionDate = client.SubscriptionDate,
+                SubscriptionExpiry = client.SubscriptionExpiry
                 //SubscriptionExpiry = Convert.ToDateTime(DateTimeOffset.Now) + SubscriptionTier.Length
             };
             _context.Clients.Add(newClient);
