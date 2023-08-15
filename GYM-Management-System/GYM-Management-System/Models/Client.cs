@@ -12,7 +12,7 @@
         public DateTime SubscriptionDate { get; set; }
         public DateTime SubscriptionExpiry { get; set; }
         //N.P
-        public Gym Gym { get; set; }
-        public SubscriptionTier SubscriptionTier { get; set; }
+        public Gym? Gym { get; set; }
+        public SubscriptionTier? SubscriptionTier { get; set; }
     }
 }
