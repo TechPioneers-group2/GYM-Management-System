@@ -43,7 +43,10 @@ namespace GYM_Management_System.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGymEquipment(int id, EquipmentDTOPut gymEquipment)
         {
-
+            if (id != gymEquipment.GymEquipmentID )
+            {
+                return BadRequest("the id not matches");
+            }
             var updatedEq = await _equipment.UpdateGymEquipment(id, gymEquipment);
             return Ok(updatedEq);
         }
