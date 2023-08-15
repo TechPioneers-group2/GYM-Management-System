@@ -31,7 +31,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/Clients/5
-        [HttpGet("{id}")]
+        [HttpGet("{gymid}/{clientid}")]
         public async Task<ActionResult<GetClientDTO>> GetClient(int gymid, int clientid)
         {
             return await _client.GetClient(gymid, clientid);
@@ -53,7 +53,7 @@ namespace GYM_Management_System.Controllers
         public async Task<ActionResult<Client>> PostClient(PostClientDTO client)
         {
             await _client.CreateClient(client);
-            return CreatedAtAction("GetHotel", new { id = client.ClientID }, client);
+            return CreatedAtAction("GetClient", new { id = client.ClientID }, client);
         }
 
         // DELETE: api/Clients/5
