@@ -48,7 +48,7 @@ namespace GYM_Management_System.Controllers
 
         // POST: api/Gyms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost ]
         public async Task<ActionResult<Gym>> PostGym(GymDTO gym)
         {
             await _gym.Create(gym);
