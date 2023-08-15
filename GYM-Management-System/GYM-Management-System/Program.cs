@@ -1,4 +1,5 @@
 using GYM_Management_System.Data;
+using GYM_Management_System.Models;
 using GYM_Management_System.Models.Interfaces;
 using GYM_Management_System.Models.Services;
 using Microsoft.EntityFrameworkCore;
@@ -54,7 +55,7 @@ namespace GYM_Management_System
             });
 
             app.MapGet("/", () => "Hello World!");
-            app.MapControllers();
+
             app.Run();
         }
     }

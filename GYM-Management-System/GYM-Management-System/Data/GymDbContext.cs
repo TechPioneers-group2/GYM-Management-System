@@ -19,6 +19,10 @@ namespace GYM_Management_System.Data
             modelBuilder.Entity<Client>()
                 .Property(c => c.SubscriptionExpiry)
                 .HasColumnType("date");
+
+            modelBuilder.Entity<SubscriptionTier>()
+               .Property(c => c.Length)
+               .HasColumnType("date");
         }
 
         public DbSet<Gym> Gyms { get; set; }
