@@ -26,6 +26,7 @@ namespace GYM_Management_System
             builder.Services.AddTransient<IGym, GymService>();
             builder.Services.AddTransient<IClient, ClientService>();
             builder.Services.AddTransient<ISubscriptionTier, SubscriptionTierService>();
+            builder.Services.AddTransient<IGymEquipment, GymEquipmentsService>();
 
             //------------ Swagger implementation -----------------------------------------------\\
             builder.Services.AddSwaggerGen(options =>
