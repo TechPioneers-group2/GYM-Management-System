@@ -10,4 +10,13 @@
 
         //N.P
     }
+    public class EquipmentDTOPut
+    {
+        public int GymEquipmentID { get; set; }
+        public string Name { get; set; }
+        public int OutOfService { get; set; }
+        public int Quantity { get; set; }
+
+        //N.P
+    }
 }

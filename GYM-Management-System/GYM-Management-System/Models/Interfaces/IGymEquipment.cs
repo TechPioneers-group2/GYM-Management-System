@@ -12,7 +12,7 @@ namespace GYM_Management_System.Models.Interfaces
         // GET GymEquipment By ID
         Task<EquipmentDTO> GetEquipmentById(int GymEquipmentID);
         // Update GymEquipment Data
-        Task<GymEquipment> UpdateGymEquipment (int GymEquipmentID , EquipmentDTO equipmentDTO);
+        Task<GymEquipment> UpdateGymEquipment (int GymEquipmentID , EquipmentDTOPut equipmentDTO);
         // Delete GymEquipment
 
         Task DeleteGymEquipment (int GymEquipmentID);

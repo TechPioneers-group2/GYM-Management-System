@@ -70,7 +70,7 @@ namespace GYM_Management_System.Models.Services
             return allEquipment;
         }
 
-        public async Task<GymEquipment> UpdateGymEquipment(int GymEquipmentID, EquipmentDTO equipmentDTO)
+        public async Task<GymEquipment> UpdateGymEquipment(int GymEquipmentID, EquipmentDTOPut equipmentDTO)
         {
             var Selected = await _gymDbContext.GymEquipments.FindAsync(GymEquipmentID);
             if (Selected != null)
@@ -78,7 +78,7 @@ namespace GYM_Management_System.Models.Services
                 Selected.Name = equipmentDTO.Name;
                 Selected.Quantity = equipmentDTO.Quantity;
                 Selected.OutOfService = equipmentDTO.OutOfService;
-                Selected.GymID = GymEquipmentID;
+              
                _gymDbContext.Entry(Selected).State = EntityState.Modified;
                 await _gymDbContext.SaveChangesAsync();
 

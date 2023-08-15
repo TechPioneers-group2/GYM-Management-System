@@ -41,7 +41,7 @@ namespace GYM_Management_System.Controllers
         // PUT: api/GymEquipments/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGymEquipment(int id, EquipmentDTO gymEquipment)
+        public async Task<IActionResult> PutGymEquipment(int id, EquipmentDTOPut gymEquipment)
         {
 
             var updatedEq = await _equipment.UpdateGymEquipment(id, gymEquipment);
