@@ -12,6 +12,9 @@ namespace GYM_Management_System.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Client>()
+        .HasKey(c => new { c.GymID, c.ClientID });
+
             modelBuilder.Entity<SubscriptionTier>().HasData
                 (
                   new SubscriptionTier
