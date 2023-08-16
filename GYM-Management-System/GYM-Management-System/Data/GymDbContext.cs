@@ -17,7 +17,7 @@ namespace GYM_Management_System.Data
                   new SubscriptionTier
                   {
                       SubscriptionTierID = 1,
-                      Name = "3 months",
+                    Name = "1 month",
                       Price = "30 JD",
                       Length = new DateTime(2023, 3, 1)
                   },
