@@ -18,7 +18,7 @@ namespace GYM_Management_System.Models.Interfaces
         Task<Client> UpdateClient(int gymid, int clientid, UpdateClientDTO client);
 
         // Delete Client
-        Task DeleteClient(int clientid);
+        Task DeleteClient(int gmyid, int clientid);
 
     }
 }

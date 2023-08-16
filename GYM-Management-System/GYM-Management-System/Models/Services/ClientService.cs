@@ -32,9 +32,9 @@ namespace GYM_Management_System.Models.Services
             return newClient;
         }
 
-        public async Task DeleteClient(int clientid)
+        public async Task DeleteClient(int gymid, int clientid)
         {
-            var DeletedClient = await _context.Clients.FindAsync(clientid);
+            var DeletedClient = await _context.Clients.FindAsync(gymid, clientid);
             if (DeletedClient != null)
             {
                 _context.Clients.Remove(DeletedClient);

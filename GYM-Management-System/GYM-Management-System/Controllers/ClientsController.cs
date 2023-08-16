@@ -53,14 +53,14 @@ namespace GYM_Management_System.Controllers
         public async Task<ActionResult<Client>> PostClient(PostClientDTO client)
         {
             await _client.CreateClient(client);
-            return CreatedAtAction("GetClient", new { id = client.ClientID }, client);
+            return CreatedAtAction("GetClient", new { gymid = client.GymID, clientid = client.ClientID }, client);
         }
 
         // DELETE: api/Clients/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteClient(int id)
+        public async Task<IActionResult> DeleteClient(int gymid, int clientid)
         {
-            await _client.DeleteClient(id);
+            await _client.DeleteClient(gymid, clientid);
             return NoContent();
         }
 

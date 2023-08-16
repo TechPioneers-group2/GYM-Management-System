@@ -24,13 +24,10 @@ namespace GYM_Management_System.Migrations
 
             modelBuilder.Entity("GYM_Management_System.Models.Client", b =>
                 {
-                    b.Property<int>("ClientID")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("GymID")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClientID"));
-
-                    b.Property<int>("GymID")
+                    b.Property<int>("ClientID")
                         .HasColumnType("int");
 
                     b.Property<bool>("InGym")
@@ -49,9 +46,7 @@ namespace GYM_Management_System.Migrations
                     b.Property<int>("SubscriptionTierID")
                         .HasColumnType("int");
 
-                    b.HasKey("ClientID");
-
-                    b.HasIndex("GymID");
+                    b.HasKey("GymID", "ClientID");
 
                     b.HasIndex("SubscriptionTierID");
 
@@ -60,8 +55,8 @@ namespace GYM_Management_System.Migrations
                     b.HasData(
                         new
                         {
-                            ClientID = 1,
                             GymID = 1,
+                            ClientID = 1,
                             InGym = false,
                             Name = "ammar",
                             SubscriptionDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
