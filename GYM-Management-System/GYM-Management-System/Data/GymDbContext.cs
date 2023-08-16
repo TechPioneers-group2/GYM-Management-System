@@ -30,7 +30,7 @@ namespace GYM_Management_System.Data
                       SubscriptionTierID = 2,
                       Name = "6 months",
                       Price = "150 JD",
-                      Length = 3
+                      Length = 6
                   }
                 );
 

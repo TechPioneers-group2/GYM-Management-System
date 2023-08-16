@@ -16,30 +16,62 @@ namespace GYM_Management_System.Models.Services
             _context = context;
             _subscriptionTier = subscriptionTier;
         }
+        //public async Task<Client> CreateClient(int gymid, PostClientDTO client)
+        //{
+        //    //var supTierList = await _context.SubscriptionTiers.ToListAsync();
+        //    //var Length = supTierList
+        //    //    .Select(x => new SubscriptionTier
+        //    //    {
+        //    //        SubscriptionTierID = x.SubscriptionTierID
+        //    //    }).FirstOrDefault();
+
+        //    var newClient =  new Client()
+        //    {
+        //        ClientID = client.ClientID,
+        //        GymID= gymid,
+        //        SubscriptionTierID = client.SubscriptionTierID,
+        //        Name = client.Name,
+        //        InGym = client.InGym,
+        //      // SubscriptionDate = client.SubscriptionDate,
+        //       SubscriptionDate = DateTime.UtcNow,
+        //        SubscriptionExpiry = DateTime.UtcNow.AddMonths(3),
+        //    };
+        //    //newClient.SubscriptionDate = DateTime.UtcNow;
+        //    //newClient.SubscriptionExpiry = DateTime.UtcNow.AddMonths(3);
+        //    _context.Clients.Add(newClient);
+        //    await _context.SaveChangesAsync();
+        //    return newClient;
+        //}
+
         public async Task<Client> CreateClient(int gymid, PostClientDTO client)
         {
-            var supTierList = await _context.SubscriptionTiers.ToListAsync();
-            //var Length = supTierList
-            //    .Select(x => new SubscriptionTier 
-            //    {
-            //        SubscriptionTierID = x.SubscriptionTierID
-            //    }).FirstOrDefault();
-            
+            var subscriptionTier = await _subscriptionTier.GetSubscriptionTier(client.SubscriptionTierID);
+
+            if (subscriptionTier == null)
+            {
+                // Handle the case where the subscription tier doesn't exist
+                return null;
+            }
+
+            var currentDate = DateTime.UtcNow;
+            var subscriptionExpiry = currentDate.AddMonths(subscriptionTier.Length);
+
             var newClient = new Client()
             {
                 ClientID = client.ClientID,
+                GymID = gymid,
                 SubscriptionTierID = client.SubscriptionTierID,
                 Name = client.Name,
                 InGym = client.InGym,
-                SubscriptionDate = client.SubscriptionDate,
-                SubscriptionExpiry = client.SubscriptionExpiry,
+                SubscriptionDate = currentDate, // Set the subscription date to today's date
+                SubscriptionExpiry = subscriptionExpiry, // Set the calculated expiry date
             };
-            newClient.SubscriptionDate = DateTime.UtcNow;
-            newClient.SubscriptionExpiry = DateTime.UtcNow.AddMonths(3);
+
             _context.Clients.Add(newClient);
             await _context.SaveChangesAsync();
             return newClient;
         }
+
 
         public async Task DeleteClient(int gymid, int clientid)
         {
