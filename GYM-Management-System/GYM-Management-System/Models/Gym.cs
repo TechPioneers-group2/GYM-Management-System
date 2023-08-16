@@ -13,7 +13,7 @@
         //NP
         public List<Employee>? Employees { get; set; }
         public List<Client>? Clients { get; set; }
-        public List<Supplement>? Supplements { get; set; }
+        public List<GymSupplement>? GymSupplements { get; set; }
         public List<GymEquipment>? GymEquipments { get; set; }
 
     }

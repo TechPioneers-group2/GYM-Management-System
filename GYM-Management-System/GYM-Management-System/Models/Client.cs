@@ -1,4 +1,7 @@
-﻿namespace GYM_Management_System.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace GYM_Management_System.Models
 {
     public class Client
     {
@@ -13,6 +16,7 @@
         public DateTime SubscriptionExpiry { get; set; }
 
         //N.P
+       //[ForeignKey("GymID")]
         public Gym? Gym { get; set; }
         
         public int SubscriptionTierID { get; set; }
