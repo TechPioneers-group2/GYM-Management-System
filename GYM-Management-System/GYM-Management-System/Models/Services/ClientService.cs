@@ -9,13 +9,22 @@ namespace GYM_Management_System.Models.Services
     public class ClientService : IClient
     {
         private readonly GymDbContext _context;
+        private readonly ISubscriptionTier _subscriptionTier;
 
-        public ClientService(GymDbContext context)
+        public ClientService(GymDbContext context, ISubscriptionTier subscriptionTier)
         {
             _context = context;
+            _subscriptionTier = subscriptionTier;
         }
         public async Task<Client> CreateClient(int gymid, PostClientDTO client)
         {
+            var supTierList = await _context.SubscriptionTiers.ToListAsync();
+            //var Length = supTierList
+            //    .Select(x => new SubscriptionTier 
+            //    {
+            //        SubscriptionTierID = x.SubscriptionTierID
+            //    }).FirstOrDefault();
+            
             var newClient = new Client()
             {
                 ClientID = client.ClientID,
@@ -23,9 +32,10 @@ namespace GYM_Management_System.Models.Services
                 Name = client.Name,
                 InGym = client.InGym,
                 SubscriptionDate = client.SubscriptionDate,
-                SubscriptionExpiry = client.SubscriptionExpiry
-                //SubscriptionExpiry = Convert.ToDateTime(DateTimeOffset.Now) + SubscriptionTier.Length
+                SubscriptionExpiry = client.SubscriptionExpiry,
             };
+            newClient.SubscriptionDate = DateTime.UtcNow;
+            newClient.SubscriptionExpiry = DateTime.UtcNow.AddMonths(3);
             _context.Clients.Add(newClient);
             await _context.SaveChangesAsync();
             return newClient;

@@ -10,7 +10,7 @@ namespace GYM_Management_System.Models.Interfaces
 		// GET All Employees
 		Task<List<EmployeeDTO>> GetEmployees();
 		// GET Employee By ID
-		Task<Employee> GetEmployee(int id);
+		Task<EmployeeDTO> GetEmployee(int id);
 
 		// Get Employees by GymId
 

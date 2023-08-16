@@ -52,6 +52,7 @@ namespace GYM_Management_System.Controllers
         [HttpPost("{gymid}")]
         public async Task<ActionResult<Client>> PostClient(int gymid, PostClientDTO client)
         {
+             
             await _client.CreateClient(gymid, client);
             return CreatedAtAction("GetClient", new { gymid = client.GymID, clientid = client.ClientID }, client);
         }

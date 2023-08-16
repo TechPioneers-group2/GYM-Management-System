@@ -22,7 +22,7 @@ namespace GYM_Management_System.Data
                       SubscriptionTierID = 1,
                       Name = "3 months",
                       Price = "30 JD",
-                      Length = new DateTime(2023, 3, 1)
+                      Length = 3
                   },
 
                   new SubscriptionTier
@@ -30,7 +30,7 @@ namespace GYM_Management_System.Data
                       SubscriptionTierID = 2,
                       Name = "6 months",
                       Price = "150 JD",
-                      Length = new DateTime(2023, 3, 1)
+                      Length = 3
                   }
                 );
 
@@ -86,9 +86,6 @@ namespace GYM_Management_System.Data
                 .Property(c => c.SubscriptionExpiry)
                 .HasColumnType("date");
 
-            modelBuilder.Entity<SubscriptionTier>()
-               .Property(c => c.Length)
-               .HasColumnType("date");
         }
 
         public DbSet<Gym> Gyms { get; set; }

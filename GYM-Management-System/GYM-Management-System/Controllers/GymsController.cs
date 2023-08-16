@@ -25,14 +25,14 @@ namespace GYM_Management_System.Controllers
 
         // GET: api/Gyms
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GetGymDTO>>> GetGyms()
+        public async Task<ActionResult<IEnumerable<GetUserGymDTO>>> GetGyms()
         {
             return await _gym.GetGyms();
         }
 
         // GET: api/Gyms/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetGymDTO>> GetGym(int id)
+        public async Task<ActionResult<GetUserGymDTO>> GetGym(int id)
         {
             return await _gym.GetGym(id);
         }
