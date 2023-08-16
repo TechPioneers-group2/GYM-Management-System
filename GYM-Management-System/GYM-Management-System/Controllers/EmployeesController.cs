@@ -38,7 +38,7 @@ namespace GYM_Management_System.Controllers
 
         // GET: api/Employees/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Employee>> GetEmployee(int id)
+        public async Task<ActionResult<EmployeeDTO>> GetEmployee(int id)
         {
             var employee = await _employee.GetEmployee(id);
 

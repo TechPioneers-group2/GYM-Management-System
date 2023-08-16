@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GYM_Management_System.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    [Migration("20230815205440_InitialDBWithDataSeeding")]
-    partial class InitialDBWithDataSeeding
+    [Migration("20230816180520_INITIAL")]
+    partial class INITIAL
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -203,8 +203,8 @@ namespace GYM_Management_System.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubscriptionTierID"));
 
-                    b.Property<DateTime>("Length")
-                        .HasColumnType("date");
+                    b.Property<int>("Length")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -222,14 +222,14 @@ namespace GYM_Management_System.Migrations
                         new
                         {
                             SubscriptionTierID = 1,
-                            Length = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Length = 3,
                             Name = "3 months",
                             Price = "30 JD"
                         },
                         new
                         {
                             SubscriptionTierID = 2,
-                            Length = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Length = 3,
                             Name = "6 months",
                             Price = "150 JD"
                         });

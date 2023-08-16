@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GYM_Management_System.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialDBWithDataSeeding : Migration
+    public partial class INITIAL : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -39,7 +39,7 @@ namespace GYM_Management_System.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Length = table.Column<DateTime>(type: "date", nullable: false)
+                    Length = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -158,8 +158,8 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "SubscriptionTierID", "Length", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "3 months", "30 JD" },
-                    { 2, new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "6 months", "150 JD" }
+                    { 1, 3, "3 months", "30 JD" },
+                    { 2, 3, "6 months", "150 JD" }
                 });
 
             migrationBuilder.InsertData(

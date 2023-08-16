@@ -49,8 +49,6 @@ namespace GYM_Management_System.Models.Services
                     Price = tier.Price,
                     Length = tier.Length
                 }).ToListAsync();
-                   
-                
         }
 
         public async Task<GetSubscriptionTierDTO> GetSubscriptionTier( int SubscriptionTierid)

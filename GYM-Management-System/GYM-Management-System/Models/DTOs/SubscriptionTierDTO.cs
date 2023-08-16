@@ -6,7 +6,7 @@
         public string Name { get; set; }
         public string Price { get; set; }
 
-        public DateTime Length { get; set; }    
+        public int Length { get; set; }    
 
         public List<Client>? Clients { get; set; }
 
@@ -17,11 +17,7 @@
         public int SubscriptionTierID { get; set; }
         public string Name { get; set; }
         public string Price { get; set; }
-
-        public DateTime Length { get; set; }
-
-       
-
+        public int Length { get; set; }
     }
 
     public class UpdateSubscriptionTierDTO
@@ -29,10 +25,13 @@
        
         public string Name { get; set; }
         public string Price { get; set; }
+        public int Length { get; set; }    
 
-        public DateTime Length { get; set; }
+    }
 
-        
-
+    public class GymGetSubscriptionTierDTO
+    {
+        public string Name { get; set; }
+        public string Price { get; set; }
     }
 }

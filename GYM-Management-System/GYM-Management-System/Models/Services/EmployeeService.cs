@@ -53,12 +53,23 @@ namespace GYM_Management_System.Models.Services
 			
 		}
 
-		public async Task<Employee> GetEmployee(int id)
+		public async Task<EmployeeDTO> GetEmployee(int id)
 		{
-			Employee employee = await _db.Employees
-				.Include(em => em.Gym)
+			var employee = await _db.Employees
 				.FirstOrDefaultAsync(em=> em.EmployeeID==id);
-			 return employee;
+			var employeeDTO = new EmployeeDTO()
+			{
+                EmployeeID = employee.EmployeeID,
+                GymID = employee.GymID,
+                Name = employee.Name,
+                JobDescription = employee.JobDescription,
+                IsAvailable = employee.IsAvailable,
+                WorkingDays = employee.WorkingDays,
+                WorkingHours = employee.WorkingHours,
+                Salary = employee.Salary,
+            };
+
+			return employeeDTO;
 		}
 
 		public async Task<List<EmployeeDTO>> GetEmployees()
