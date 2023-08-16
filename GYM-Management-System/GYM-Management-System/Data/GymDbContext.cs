@@ -14,13 +14,13 @@ namespace GYM_Management_System.Data
         {
             modelBuilder.Entity<SubscriptionTier>().HasData
                 (
-                  new SubscriptionTier
-                  {
-                      SubscriptionTierID = 1,
+                new SubscriptionTier
+                {
+                    SubscriptionTierID = 1,
                     Name = "1 month",
-                      Price = "30 JD",
-                      Length = new DateTime(2023, 3, 1)
-                  },
+                    Price = "30 JD",
+                    Length = new DateTime(2023, 3, 1)
+                },
                   new SubscriptionTier
                   {
                       SubscriptionTierID = 2,
