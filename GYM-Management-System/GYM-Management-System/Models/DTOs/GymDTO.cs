@@ -28,10 +28,10 @@
 
         //NP
 
-        public List<GymEquipment> Equipments { get; set; }
-        public List<Client> clients { get; set; }
-        public List<Employee> employees { get; set; }
-        public List<SubscriptionTier> subscriptiontiers { get; set; }
+        public List<EquipmentDTOPut> Equipments { get; set; }
+        public List<PostClientDTO> clients { get; set; }
+        public List<GetEmployeesByGymId> employees { get; set; }
+        public List<GymGetSubscriptionTierDTO> subscriptiontiers { get; set; }
     }
 
     public class PostGymDTO
@@ -55,4 +55,6 @@
         public string? Notification { get; set; }
 
     }
+
+    
 }

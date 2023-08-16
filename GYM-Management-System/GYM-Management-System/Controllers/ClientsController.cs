@@ -49,13 +49,33 @@ namespace GYM_Management_System.Controllers
 
         // POST: api/Clients
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPost("{gymid}")]
+        //public async Task<ActionResult<Client>> PostClient(int gymid, PostClientDTO client)
+        //{
+
+        //    await _client.CreateClient(gymid, client);
+        //    return CreatedAtAction("GetClient", new { gymid = client.GymID, clientid = client.ClientID }, client);
+        //}
+
         [HttpPost("{gymid}")]
-        public async Task<ActionResult<Client>> PostClient(int gymid, PostClientDTO client)
+        public async Task<ActionResult<Client>> PostClient(int gymid, PostClientDTO clientDto)
         {
-             
-            await _client.CreateClient(gymid, client);
-            return CreatedAtAction("GetClient", new { gymid = client.GymID, clientid = client.ClientID }, client);
+            var createdClient = await _client.CreateClient(gymid, clientDto);
+
+            // If the client creation was successful
+            if (createdClient != null)
+            {
+                // Set the properties of the clientDto object with the values returned from the CreateClient method
+                clientDto.SubscriptionDate = createdClient.SubscriptionDate;
+                clientDto.SubscriptionExpiry = createdClient.SubscriptionExpiry;
+
+                return CreatedAtAction("GetClient", new { gymid = createdClient.GymID, clientid = createdClient.ClientID }, clientDto);
+            }
+
+            // Handle the case where client creation failed
+            return BadRequest("Failed to create client");
         }
+
 
         // DELETE: api/Clients/5
         [HttpDelete("{id}")]
