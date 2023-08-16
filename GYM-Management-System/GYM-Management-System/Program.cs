@@ -1,4 +1,7 @@
 using GYM_Management_System.Data;
+using GYM_Management_System.Models;
+using GYM_Management_System.Models.Interfaces;
+using GYM_Management_System.Models.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace GYM_Management_System
@@ -19,6 +22,11 @@ namespace GYM_Management_System
             builder.Services
                 .AddDbContext<GymDbContext>
                 (opions => opions.UseSqlServer(connString));
+
+            builder.Services.AddTransient<IGym, GymService>();
+            builder.Services.AddTransient<IClient, ClientService>();
+            builder.Services.AddTransient<ISubscriptionTier, SubscriptionTierService>();
+            builder.Services.AddTransient<IGymEquipment, GymEquipmentsService>();
 
             //------------ Swagger implementation -----------------------------------------------\\
             builder.Services.AddSwaggerGen(options =>
@@ -48,10 +56,8 @@ namespace GYM_Management_System
                 options.RoutePrefix = "docs";
             });
 
-
-
             app.MapGet("/", () => "Hello World!");
-
+            app.MapControllers();
             app.Run();
         }
     }

@@ -4,6 +4,7 @@ using GYM_Management_System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GYM_Management_System.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    partial class GymDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230815135803_removeNullableFromLength")]
+    partial class removeNullableFromLength
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,18 +59,6 @@ namespace GYM_Management_System.Migrations
                     b.HasIndex("SubscriptionTierID");
 
                     b.ToTable("Clients");
-
-                    b.HasData(
-                        new
-                        {
-                            ClientID = 1,
-                            GymID = 1,
-                            InGym = false,
-                            Name = "ammar",
-                            SubscriptionDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SubscriptionExpiry = new DateTime(2023, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SubscriptionTierID = 1
-                        });
                 });
 
             modelBuilder.Entity("GYM_Management_System.Models.Employee", b =>
@@ -145,28 +136,6 @@ namespace GYM_Management_System.Migrations
                     b.HasKey("GymID");
 
                     b.ToTable("Gyms");
-
-                    b.HasData(
-                        new
-                        {
-                            GymID = 1,
-                            ActiveHours = "5AM-9PM",
-                            Address = "Amman",
-                            CurrentCapacity = 0,
-                            MaxCapacity = "150",
-                            Name = "GYM1",
-                            Notification = "Every thing ok"
-                        },
-                        new
-                        {
-                            GymID = 2,
-                            ActiveHours = "5AM-9PM",
-                            Address = "Zarqa",
-                            CurrentCapacity = 0,
-                            MaxCapacity = "150",
-                            Name = "GYM1",
-                            Notification = "Every thing ok"
-                        });
                 });
 
             modelBuilder.Entity("GYM_Management_System.Models.GymEquipment", b =>
@@ -219,22 +188,6 @@ namespace GYM_Management_System.Migrations
                     b.HasKey("SubscriptionTierID");
 
                     b.ToTable("SubscriptionTiers");
-
-                    b.HasData(
-                        new
-                        {
-                            SubscriptionTierID = 1,
-                            Length = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "3 months",
-                            Price = "30 JD"
-                        },
-                        new
-                        {
-                            SubscriptionTierID = 2,
-                            Length = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "6 months",
-                            Price = "150 JD"
-                        });
                 });
 
             modelBuilder.Entity("GYM_Management_System.Models.Supplement", b =>
@@ -275,7 +228,7 @@ namespace GYM_Management_System.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GYM_Management_System.Models.SubscriptionTier", "SubscriptionTierOBJ")
+                    b.HasOne("GYM_Management_System.Models.SubscriptionTier", "SubscriptionTier")
                         .WithMany("Clients")
                         .HasForeignKey("SubscriptionTierID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -283,7 +236,7 @@ namespace GYM_Management_System.Migrations
 
                     b.Navigation("Gym");
 
-                    b.Navigation("SubscriptionTierOBJ");
+                    b.Navigation("SubscriptionTier");
                 });
 
             modelBuilder.Entity("GYM_Management_System.Models.Employee", b =>

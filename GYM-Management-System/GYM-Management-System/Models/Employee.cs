@@ -12,7 +12,7 @@
         public string Salary { get; set; }
 
         //N.P
-        public Gym Gym { get; set; }
+        public Gym? Gym { get; set; }
 
 
     }
