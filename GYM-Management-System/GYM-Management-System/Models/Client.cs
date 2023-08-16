@@ -15,7 +15,6 @@
         //N.P
         public Gym? Gym { get; set; }
         
-
         public int SubscriptionTierID { get; set; }
         public SubscriptionTier SubscriptionTierOBJ { get; set; }
     }

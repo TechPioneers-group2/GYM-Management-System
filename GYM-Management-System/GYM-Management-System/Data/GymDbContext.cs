@@ -21,7 +21,6 @@ namespace GYM_Management_System.Data
                       Price = "30 JD",
                       Length = new DateTime(2023, 3, 1)
                   },
-
                   new SubscriptionTier
                   {
                       SubscriptionTierID = 2,
