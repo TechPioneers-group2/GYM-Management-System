@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace GYM_Management_System.Migrations
 {
     /// <inheritdoc />
-    public partial class DbSetupAndAddModels : Migration
+    public partial class InitialDBWithDataSeeding : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,7 +38,8 @@ namespace GYM_Management_System.Migrations
                     SubscriptionTierID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Length = table.Column<DateTime>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -116,18 +119,17 @@ namespace GYM_Management_System.Migrations
                 name: "Clients",
                 columns: table => new
                 {
-                    ClientID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClientID = table.Column<int>(type: "int", nullable: false),
                     GymID = table.Column<int>(type: "int", nullable: false),
-                    SubscriptionTierID = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InGym = table.Column<bool>(type: "bit", nullable: false),
                     SubscriptionDate = table.Column<DateTime>(type: "date", nullable: false),
-                    SubscriptionExpiry = table.Column<DateTime>(type: "date", nullable: false)
+                    SubscriptionExpiry = table.Column<DateTime>(type: "date", nullable: false),
+                    SubscriptionTierID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clients", x => x.ClientID);
+                    table.PrimaryKey("PK_Clients", x => new { x.GymID, x.ClientID });
                     table.ForeignKey(
                         name: "FK_Clients_Gyms_GymID",
                         column: x => x.GymID,
@@ -142,10 +144,28 @@ namespace GYM_Management_System.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Clients_GymID",
+            migrationBuilder.InsertData(
+                table: "Gyms",
+                columns: new[] { "GymID", "ActiveHours", "Address", "CurrentCapacity", "MaxCapacity", "Name", "Notification" },
+                values: new object[,]
+                {
+                    { 1, "5AM-9PM", "Amman", 0, "150", "GYM1", "Every thing ok" },
+                    { 2, "5AM-9PM", "Zarqa", 0, "150", "GYM1", "Every thing ok" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SubscriptionTiers",
+                columns: new[] { "SubscriptionTierID", "Length", "Name", "Price" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "3 months", "30 JD" },
+                    { 2, new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "6 months", "150 JD" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Clients",
-                column: "GymID");
+                columns: new[] { "ClientID", "GymID", "InGym", "Name", "SubscriptionDate", "SubscriptionExpiry", "SubscriptionTierID" },
+                values: new object[] { 1, 1, false, "ammar", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Clients_SubscriptionTierID",
