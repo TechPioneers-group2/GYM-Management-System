@@ -14,12 +14,11 @@ namespace GYM_Management_System.Models.Services
         {
             _context = context;
         }
-        public async Task<Client> CreateClient(PostClientDTO client)
+        public async Task<Client> CreateClient(int gymid, PostClientDTO client)
         {
             var newClient = new Client()
             {
                 ClientID = client.ClientID,
-                GymID = client.GymID,
                 SubscriptionTierID = client.SubscriptionTierID,
                 Name = client.Name,
                 InGym = client.InGym,
@@ -58,7 +57,7 @@ namespace GYM_Management_System.Models.Services
                 }).FirstOrDefaultAsync(cID => cID.ClientID == clientid && cID.GymID == gymid);
         }
 
-        public async Task<List<GetClientDTO>> GetClients()
+        public async Task<List<GetClientDTO>> GetClients(int gymid)
         {
             return await _context.Clients
                 .Select(nc => new GetClientDTO()
