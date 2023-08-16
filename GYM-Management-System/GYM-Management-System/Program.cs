@@ -23,9 +23,10 @@ namespace GYM_Management_System
                 (opions => opions.UseSqlServer(connString));
 
             builder.Services.AddTransient<IGym, GymService>();
+			builder.Services.AddTransient<IEmployee, EmployeeService>();
 
-            //------------ Swagger implementation -----------------------------------------------\\
-            builder.Services.AddSwaggerGen(options =>
+			//------------ Swagger implementation -----------------------------------------------\\
+			builder.Services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo()
 
@@ -52,9 +53,9 @@ namespace GYM_Management_System
                 options.RoutePrefix = "docs";
             });
 
+			app.MapControllers();
 
-
-            app.MapGet("/", () => "Hello World!");
+			app.MapGet("/", () => "Hello World!");
 
             app.Run();
         }
