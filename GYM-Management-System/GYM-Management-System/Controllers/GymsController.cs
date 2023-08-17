@@ -62,5 +62,39 @@ namespace GYM_Management_System.Controllers
             await _gym.DeleteGym(id);
             return NoContent();
         }
+        //// POST : api/Rooms/5/Amenity/5
+        //[HttpPost]
+        //[Route("{roomId}/Amenity/{amenityId}")]
+        //public async Task<IActionResult> AddAmenityToRoom(int roomId, int amenityId)
+        //{
+        //    await _room.AddAmenityToRoom(roomId, amenityId);
+
+        //    return NoContent();
+        //}
+        [HttpPost]
+        [Route("{gymId}/Supplement/{SupplementId}")]
+        public async Task<IActionResult> AddSupplementsToGym(int gymId, int SupplementId)
+        {
+            await _gym.AddSupplementToGym(gymId, SupplementId);
+
+            return Ok();
+        }
+        [HttpPut]
+        [Route("{gymId}/Supplement/{supplementId}")]
+        public async Task<IActionResult> UpdateSupplementForGym(int gymId, int supplementId, GymSupplementDTO gymSupplement)
+        {
+            await _gym.UpdateSupplementForGym(gymId, supplementId, gymSupplement);
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route("{gymId}/Supplement/{supplementId}")]
+        public async Task<IActionResult> RemoveSupplementFromGym(int gymId, int supplementId)
+        {
+            await _gym.RemoveSupplementFromGym(gymId, supplementId);
+
+            return NoContent();
+        }
     }
 }
