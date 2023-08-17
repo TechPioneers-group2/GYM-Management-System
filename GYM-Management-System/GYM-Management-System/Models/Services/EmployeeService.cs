@@ -12,7 +12,7 @@ namespace GYM_Management_System.Models.Services
         public EmployeeService(GymDbContext db)
         {
 			_db = db; 
-				}
+    	}
 
 		public async Task<EmployeeDTO> Create(CreatEmployeeDTO creatEmployeeDTO)
 		{
