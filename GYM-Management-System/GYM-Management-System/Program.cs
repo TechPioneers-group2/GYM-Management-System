@@ -69,5 +69,6 @@ namespace GYM_Management_System
             app.MapControllers();
             app.Run();
         }
+        //Merge
     }
 }
