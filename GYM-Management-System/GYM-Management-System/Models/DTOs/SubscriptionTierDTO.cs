@@ -8,7 +8,7 @@
 
         public int Length { get; set; }    
 
-        public List<Client>? Clients { get; set; }
+        
 
     }
 
@@ -33,5 +33,16 @@
     {
         public string Name { get; set; }
         public string Price { get; set; }
+    }
+
+    public class ClientGetSubscriptionTierDTO
+    {
+        public string Name { get; set; }
+    }
+
+    public class ClientUpdateSubscriptionTierDTO
+    {
+        public int SubscriptionTierID { get; set; }
+        public string Name { get; set; }
     }
 }
