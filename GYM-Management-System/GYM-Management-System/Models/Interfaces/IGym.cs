@@ -23,7 +23,7 @@ namespace GYM_Management_System.Models.Interfaces
 
         Task DeleteGym(int gymid);
 
-        Task<List<GetManagerGymDTO>> GetGymClient();
+        Task<List<GetManagerGymDTO>> GetGymManger();
 
 
 

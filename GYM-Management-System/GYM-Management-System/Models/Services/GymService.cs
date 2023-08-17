@@ -100,7 +100,7 @@ namespace GYM_Management_System.Models.Services
                  return returnVar;
         }
 
-        public async Task<List<GetManagerGymDTO>> GetGymClient()
+        public async Task<List<GetManagerGymDTO>> GetGymManger()
         {
             var suppTierList = await _gymDbContext.SubscriptionTiers.ToListAsync();
             var supptierDTO = new List<GymGetSubscriptionTierDTO>();

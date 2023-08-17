@@ -62,5 +62,11 @@ namespace GYM_Management_System.Controllers
             await _gym.DeleteGym(id);
             return NoContent();
         }
+        // GET: api/Gyms/Manger
+        [HttpGet("Manger")]
+        public async Task<ActionResult<IEnumerable<GetManagerGymDTO>>> GetGymsManger()
+        {
+            return await _gym.GetGymManger();
+        }
     }
 }
