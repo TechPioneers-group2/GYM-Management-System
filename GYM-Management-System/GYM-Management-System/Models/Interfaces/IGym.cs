@@ -8,12 +8,12 @@ namespace GYM_Management_System.Models.Interfaces
         Task<Gym> CreateGym(PostGymDTO gym);
 
         // GET All Gyms
-        Task<List<GetGymDTO>> GetGyms();
+        Task<List<GetUserGymDTO>> GetGyms();
 
 
         // GET Gym By ID
 
-        Task<GetGymDTO> GetGym(int gymid);
+        Task<GetUserGymDTO> GetGym(int gymid);
 
         // Update Gym
 
@@ -22,6 +22,10 @@ namespace GYM_Management_System.Models.Interfaces
         // Delete Gym
 
         Task DeleteGym(int gymid);
+
+        Task<List<GetManagerGymDTO>> GetGymClient();
+
+
 
 
         // Add all supplements in one Gym

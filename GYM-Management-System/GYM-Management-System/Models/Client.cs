@@ -5,10 +5,12 @@ namespace GYM_Management_System.Models
 {
     public class Client
     {
+        // Primary Key
         public int ClientID { get; set; }
+
         // Forgein Key
+        //both are composite key
         public int GymID { get; set; }
-        // Forgein Key
         
         public string Name { get; set; }
         public bool InGym { get; set; }

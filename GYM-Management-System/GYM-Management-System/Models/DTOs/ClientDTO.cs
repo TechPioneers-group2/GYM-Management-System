@@ -41,5 +41,5 @@
         public int SubscriptionTierID { get; set; }
         public bool InGym { get; set; }
     }
-
+    
 }

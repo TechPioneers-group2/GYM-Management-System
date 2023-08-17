@@ -9,32 +9,48 @@ namespace GYM_Management_System.Models.Services
     public class ClientService : IClient
     {
         private readonly GymDbContext _context;
+        private readonly ISubscriptionTier _subscriptionTier;
 
-        public ClientService(GymDbContext context)
+        public ClientService(GymDbContext context, ISubscriptionTier subscriptionTier)
         {
             _context = context;
+            _subscriptionTier = subscriptionTier;
         }
-        public async Task<Client> CreateClient(PostClientDTO client)
+        
+
+        public async Task<Client> CreateClient(int gymid, PostClientDTO client)
         {
+            var subscriptionTier = await _subscriptionTier.GetSubscriptionTier(client.SubscriptionTierID);
+
+            if (subscriptionTier == null)
+            {
+                // Handle the case where the subscription tier doesn't exist
+                return null;
+            }
+
+            var currentDate = DateTime.UtcNow;
+            var subscriptionExpiry = currentDate.AddMonths(subscriptionTier.Length);
+
             var newClient = new Client()
             {
                 ClientID = client.ClientID,
-                GymID = client.GymID,
+                GymID = gymid,
                 SubscriptionTierID = client.SubscriptionTierID,
                 Name = client.Name,
                 InGym = client.InGym,
-                SubscriptionDate = client.SubscriptionDate,
-                SubscriptionExpiry = client.SubscriptionExpiry
-                //SubscriptionExpiry = Convert.ToDateTime(DateTimeOffset.Now) + SubscriptionTier.Length
+                SubscriptionDate = currentDate, // Set the subscription date to today's date
+                SubscriptionExpiry = subscriptionExpiry, // Set the calculated expiry date
             };
+
             _context.Clients.Add(newClient);
             await _context.SaveChangesAsync();
             return newClient;
         }
 
-        public async Task DeleteClient(int clientid)
+
+        public async Task DeleteClient(int gymid, int clientid)
         {
-            var DeletedClient = await _context.Clients.FindAsync(clientid);
+            var DeletedClient = await _context.Clients.FindAsync(gymid, clientid);
             if (DeletedClient != null)
             {
                 _context.Clients.Remove(DeletedClient);
@@ -58,7 +74,7 @@ namespace GYM_Management_System.Models.Services
                 }).FirstOrDefaultAsync(cID => cID.ClientID == clientid && cID.GymID == gymid);
         }
 
-        public async Task<List<GetClientDTO>> GetClients()
+        public async Task<List<GetClientDTO>> GetClients(int gymid)
         {
             return await _context.Clients
                 .Select(nc => new GetClientDTO()

@@ -12,15 +12,19 @@ namespace GYM_Management_System.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Client>()
+        .HasKey(c => new { c.GymID, c.ClientID });
+
             modelBuilder.Entity<SubscriptionTier>().HasData
                 (
-                new SubscriptionTier
-                {
-                    SubscriptionTierID = 1,
-                    Name = "1 month",
-                    Price = "30 JD",
-                    Length = new DateTime(2023, 3, 1)
-                },
+                  new SubscriptionTier
+                  {
+                      SubscriptionTierID = 1,
+                      Name = "3 months",
+                      Price = "30 JD",
+                      Length = 3
+                  },
+
                   new SubscriptionTier
                   {
                       SubscriptionTierID = 2,
@@ -33,8 +37,8 @@ namespace GYM_Management_System.Data
                   {
                       SubscriptionTierID = 3,
                       Name = "6 months",
-                      Price = "110 JD",
-                      Length = new DateTime(2023, 3, 1)
+                      Price = "150 JD",
+                      Length = 6
                   }
                 );
 
@@ -99,13 +103,6 @@ namespace GYM_Management_System.Data
                 .Property(c => c.SubscriptionExpiry)
                 .HasColumnType("date");
 
-            modelBuilder.Entity<SubscriptionTier>()
-               .Property(c => c.Length)
-               .HasColumnType("date");
-
-
-            modelBuilder.Entity<GymSupplement>().HasKey(
-                sq => new { sq.GymID, sq.SupplementID });
         }
 
         public DbSet<Gym> Gyms { get; set; }

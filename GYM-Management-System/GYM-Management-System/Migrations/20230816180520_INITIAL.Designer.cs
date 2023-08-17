@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GYM_Management_System.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    [Migration("20230815195150_newSeedingData")]
-    partial class newSeedingData
+    [Migration("20230816180520_INITIAL")]
+    partial class INITIAL
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,13 +27,10 @@ namespace GYM_Management_System.Migrations
 
             modelBuilder.Entity("GYM_Management_System.Models.Client", b =>
                 {
-                    b.Property<int>("ClientID")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("GymID")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClientID"));
-
-                    b.Property<int>("GymID")
+                    b.Property<int>("ClientID")
                         .HasColumnType("int");
 
                     b.Property<bool>("InGym")
@@ -52,9 +49,7 @@ namespace GYM_Management_System.Migrations
                     b.Property<int>("SubscriptionTierID")
                         .HasColumnType("int");
 
-                    b.HasKey("ClientID");
-
-                    b.HasIndex("GymID");
+                    b.HasKey("GymID", "ClientID");
 
                     b.HasIndex("SubscriptionTierID");
 
@@ -63,8 +58,8 @@ namespace GYM_Management_System.Migrations
                     b.HasData(
                         new
                         {
-                            ClientID = 1,
                             GymID = 1,
+                            ClientID = 1,
                             InGym = false,
                             Name = "ammar",
                             SubscriptionDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -208,8 +203,8 @@ namespace GYM_Management_System.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubscriptionTierID"));
 
-                    b.Property<DateTime>("Length")
-                        .HasColumnType("date");
+                    b.Property<int>("Length")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -227,14 +222,14 @@ namespace GYM_Management_System.Migrations
                         new
                         {
                             SubscriptionTierID = 1,
-                            Length = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Length = 3,
                             Name = "3 months",
                             Price = "30 JD"
                         },
                         new
                         {
                             SubscriptionTierID = 2,
-                            Length = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Length = 3,
                             Name = "6 months",
                             Price = "150 JD"
                         });
