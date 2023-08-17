@@ -4,7 +4,6 @@
     {
         public int SupplementID { get; set; }
         public int GymID { get; set; }
-        public int Quantity { get; set; }
 
         // Navigation props
         public Gym? Gym { get; set; }

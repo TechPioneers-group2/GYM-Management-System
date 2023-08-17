@@ -6,7 +6,6 @@
         public string Name { get; set; }
         public string Price { get; set; }
 
-
         // Navigation props
         public List<GymSupplement> Supplements { get; set; }
 

@@ -71,12 +71,8 @@ namespace GYM_Management_System.Models.Services
                 updatedSupplement.Name = updatedSupplementDTO.Name;
                 updatedSupplement.Price = updatedSupplementDTO.Price;
 
-                _supplement.Entry(updatedSupplement).State = EntityState.Modified;
                 await _supplement.SaveChangesAsync();
 
-                GetSupplementDTO SupplementDTO = await GetSupplementById(updatedSupplement.SupplementID);
-                SupplementDTO.SupplementID = updatedSupplement.SupplementID;
-                return SupplementDTO;
             }
 
             return null;
