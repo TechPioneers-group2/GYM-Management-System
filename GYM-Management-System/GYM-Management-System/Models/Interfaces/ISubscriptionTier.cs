@@ -14,7 +14,7 @@ namespace GYM_Management_System.Models.Interfaces
         Task<GetSubscriptionTierDTO> GetSubscriptionTier(int SubscriptionTierid);
 
         // Update SubscriptionTier 
-        Task<SubscriptionTier> UpdateSubscriptionTier(int SubscriptionTierId, UpdateSubscriptionTierDTO subscriptionTier);
+        Task<UpdateSubscriptionTierDTO> UpdateSubscriptionTier(int SubscriptionTierId, UpdateSubscriptionTierDTO subscriptionTier);
 
         // Delete SubscriptionTier
         Task DeleteSubscriptionTier(int SubscriptionTierId);

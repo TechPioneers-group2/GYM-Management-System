@@ -65,7 +65,7 @@ namespace GYM_Management_System.Models.Services
                
         }
 
-        public async Task<SubscriptionTier> UpdateSubscriptionTier(int SubscriptionTierId, UpdateSubscriptionTierDTO subscriptionTier)
+        public async Task<UpdateSubscriptionTierDTO> UpdateSubscriptionTier(int SubscriptionTierId, UpdateSubscriptionTierDTO subscriptionTier)
         {
             var updatedsubtier = await _SubscriptionTier.SubscriptionTiers.
                  FindAsync(SubscriptionTierId);
@@ -80,7 +80,7 @@ namespace GYM_Management_System.Models.Services
                 await _SubscriptionTier.SaveChangesAsync();
             }
 
-            return updatedsubtier;
+            return subscriptionTier;
 
         }
     }

@@ -66,7 +66,7 @@ namespace GYM_Management_System.Models.Services
                 }).FirstOrDefaultAsync(sp => sp.SupplementID == supplementId);
         }
 
-        public async Task<Supplement> UpdateSupplement(int supplementId, SupplementDTO updatedSupplementDTO)
+        public async Task<SupplementDTO> UpdateSupplement(int supplementId, SupplementDTO updatedSupplementDTO)
         {
             var updatedSupplement = await _supplement.Supplements.FindAsync(supplementId);
 
@@ -80,7 +80,7 @@ namespace GYM_Management_System.Models.Services
 
             }
 
-            return updatedSupplement;
+            return updatedSupplementDTO;
         }
     }
 }
