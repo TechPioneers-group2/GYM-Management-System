@@ -24,9 +24,6 @@ namespace GYM_Management_System.Models.Services
                 Name = equipmentDTO.Name,
                 OutOfService = equipmentDTO.OutOfService,
                 GymID = equipmentDTO.GymID
-
-
-
             };
             _gymDbContext.GymEquipments.Add(newEquipment);
             await _gymDbContext.SaveChangesAsync();

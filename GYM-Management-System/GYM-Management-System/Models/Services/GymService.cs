@@ -12,13 +12,12 @@ namespace GYM_Management_System.Models.Services
     {
         private readonly GymDbContext _gymDbContext;
         private readonly ISubscriptionTier _tier;
-        private readonly IClient _client;
+        
 
         public GymService(GymDbContext gymDbContext, ISubscriptionTier supTier, IClient client)
         {
             _gymDbContext = gymDbContext;
             _tier = supTier;
-            _client = client;
         }
 
         
@@ -54,17 +53,36 @@ namespace GYM_Management_System.Models.Services
         
         public async Task<GetUserGymDTO> GetGym(int gymid)
         {
-            var suppTierList = await  _gymDbContext.SubscriptionTiers.ToListAsync();
-            var supptierDTO = new List<GymGetSubscriptionTierDTO>();
-            foreach (var suppTier in suppTierList)
+            //var suppTierList = await  _gymDbContext.SubscriptionTiers.ToListAsync();
+          //  var supptierDTO = new List<GymGetSubscriptionTierDTO>();
+
+            //foreach (var suppTier in suppTierList)
+            //{
+            //    GymGetSubscriptionTierDTO ggstDTO = new GymGetSubscriptionTierDTO() 
+            //    {
+            //        Name = suppTier.Name,
+            //        Price = suppTier.Price
+            //    };
+            //    supptierDTO.Add(ggstDTO);
+            //}
+
+            var eq = await _gymDbContext.GymEquipments
+                .Select(eqp=> new EquipmentDTOPut
             {
-                GymGetSubscriptionTierDTO ggstDTO = new GymGetSubscriptionTierDTO() 
-                {
-                    Name = suppTier.Name,
-                    Price = suppTier.Price
-                };
-                supptierDTO.Add(ggstDTO);
-            }
+                Name= eqp.Name,
+                Quantity= eqp.Quantity,
+                OutOfService= eqp.OutOfService,
+                GymEquipmentID= eqp.GymEquipmentID,
+            }).ToListAsync();
+
+
+            var suppTierList = await _gymDbContext.SubscriptionTiers
+            .Select(suppTier => new GymGetSubscriptionTierDTO
+            {
+                Name = suppTier.Name,
+                Price = suppTier.Price
+            }).ToListAsync();
+
             var returnVar =  await _gymDbContext.Gyms
                 .Select(Gm => new GetUserGymDTO
                 {
@@ -74,18 +92,12 @@ namespace GYM_Management_System.Models.Services
                     CurrentCapacity = _gymDbContext.Clients.Count(x => x.GymID == Gm.GymID && x.InGym == true),
                     MaxCapacity = Gm.MaxCapacity,
                     ActiveHours = Gm.ActiveHours,
-                    Notification = Gm.Notification,
-                    Equipments = Gm.GymEquipments.Select(geq=> new EquipmentDTOPut() 
-                    {
-                        GymEquipmentID = geq.GymEquipmentID,
-                        Name = geq.Name,
-                        OutOfService = geq.OutOfService,
-                        Quantity = geq.Quantity,
-                    }).ToList(),
-                    
+                    Notification = Gm.Notification, 
                 }).FirstOrDefaultAsync(gm => gm.GymID == gymid);
-            returnVar.SubscriptionTier = supptierDTO;
-            return returnVar;
+                 returnVar.SubscriptionTier = suppTierList;
+                 returnVar.Equipments = eq;
+
+                 return returnVar;
         }
 
         public async Task<List<GetManagerGymDTO>> GetGymClient()
@@ -170,11 +182,13 @@ namespace GYM_Management_System.Models.Services
 
             foreach (var gym in returnVar)
             {
-                // Calculate the current capacity outside of the query
-                gym.CurrentCapacity = _gymDbContext.Clients.Count(x => x.GymID == gym.GymID && x.InGym == true);
+                
+                gym.CurrentCapacity = _gymDbContext.Clients
+               .Count(x => x.GymID == gym.GymID && x.InGym == true);
 
-                // Set the subscription tier information
-                gym.SubscriptionTier = suppTierList.Select(suppTier => new GymGetSubscriptionTierDTO
+                
+                gym.SubscriptionTier = suppTierList
+                .Select(suppTier => new GymGetSubscriptionTierDTO
                 {
                     Name = suppTier.Name,
                     Price = suppTier.Price
