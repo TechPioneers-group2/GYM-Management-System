@@ -105,6 +105,14 @@ namespace GYM_Management_System.Data
                 WorkingHours = "9:00AM - 5:00PM",
                 Salary = "330 JD",
             });
+            modelBuilder.Entity<Supplement>().HasData(
+                new Supplement
+                {
+                    SupplementID = 1,
+                    Name = "Whey Protein Powder",
+                    Price = "80 JD"
+
+                });
 
 
             modelBuilder.Entity<Client>()
@@ -114,6 +122,7 @@ namespace GYM_Management_System.Data
             modelBuilder.Entity<Client>()
                         .Property(c => c.SubscriptionExpiry)
                         .HasColumnType("date");
+
 
             modelBuilder.Entity<GymSupplement>().HasKey(
                 sq => new { sq.GymID, sq.SupplementID });
