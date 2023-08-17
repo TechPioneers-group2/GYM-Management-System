@@ -12,7 +12,7 @@ namespace GYM_Management_System.Models.Services
     {
         private readonly GymDbContext _gymDbContext;
         private readonly ISubscriptionTier _tier;
-        
+
 
         public GymService(GymDbContext gymDbContext, ISubscriptionTier supTier, IClient client)
         {
@@ -20,7 +20,7 @@ namespace GYM_Management_System.Models.Services
             _tier = supTier;
         }
 
-        
+
 
         public async Task<Gym> CreateGym(PostGymDTO gym)
         {
@@ -50,57 +50,11 @@ namespace GYM_Management_System.Models.Services
             }
         }
 
-        public async Task<GetGymDTO> GetGym(int gymid)
-        {
 
-            var gym = await _gymDbContext.Gyms
-                           .Include(q => q.GymSupplements)
-                           .ThenInclude(gs => gs.Supplements)
-                           .FirstOrDefaultAsync(id => id.GymID == gymid);
-            var gymDto = new GetGymDTO()
-            {
-                GymID = gymid,
-                Name = gym.Name,
-                Address = gym.Address,
-                CurrentCapacity = gym.CurrentCapacity,
-                MaxCapacity = gym.MaxCapacity,
-                ActiveHours = gym.ActiveHours,
-                Notification = gym.Notification,
-                
-            };
-
-            //var gym = await _gymDbContext.Gyms
-            //    .Select(Gm => new GetGymDTO
-            //    {
-            //        GymID = Gm.GymID,
-            //        Name = Gm.Name,
-            //        Address = Gm.Address,
-            //        CurrentCapacity = Gm.CurrentCapacity,
-            //        MaxCapacity = Gm.MaxCapacity,
-            //        ActiveHours = Gm.ActiveHours,
-            //        Notification = Gm.Notification,
-            //        GymSupplements = Gm.GymSupplements.Select(g => new GymSupplementDTO
-            //        {
-            //            SupplementID = g.SupplementID,
-            //            GymID = g.GymID,
-            //            Quantity = g.Quantity,
-            //            Supplements = g.Supplements != null ? new List<GetGymSupplementDTO>
-            //            {
-            //        new GetGymSupplementDTO
-            //        {
-            //            Name = g.Supplements.First().Name,
-            //            Price = g.Supplements.First().Price,
-            //        }
-            //            } : null
-            //        }).ToList()
-            //    }).FirstOrDefaultAsync(gm => gm.GymID == gymid);
-
-            return gymDto;
-        
         public async Task<GetUserGymDTO> GetGym(int gymid)
         {
             //var suppTierList = await  _gymDbContext.SubscriptionTiers.ToListAsync();
-          //  var supptierDTO = new List<GymGetSubscriptionTierDTO>();
+            //  var supptierDTO = new List<GymGetSubscriptionTierDTO>();
 
             //foreach (var suppTier in suppTierList)
             //{
@@ -111,15 +65,48 @@ namespace GYM_Management_System.Models.Services
             //    };
             //    supptierDTO.Add(ggstDTO);
             //}
+            //var gymSupplements = await _gymDbContext.Gyms
+            //               .Include(q => q.GymSupplements)
+            //               .ThenInclude(gs => gs.Supplements)
+            //               .FirstOrDefaultAsync(id => id.GymID == gymid);
+
+            //var gymSupplements = _gymDbContext.GymSupplements
+            //                    .Include(x => x.Supplements)
+            //                    .FirstOrDefault(id => id.GymID == gymid);
+
+            //var gymSupplements = _gymDbContext.GymSupplements.Select(x => new GymSupplementDTO
+            //{
+            //    GymID = x.GymID,
+            //    Quantity = x.Quantity,
+            //    SupplementID = x.SupplementID,
+            //    Supplements = x.Supplements.
+            //});
+            var gymSupplements = _gymDbContext.GymSupplements
+                    .Include(x => x.Supplements) // Include the Supplements navigation property
+                    .Where(x => x.GymID == gymid) // Filter by GymID
+                    .Select(x => new GymSupplementDTO
+                    {
+                        GymID = x.GymID,
+                        Quantity = x.Quantity,
+                        SupplementID = x.SupplementID,
+                        Supplements = new GetGymSupplementDTO
+                        {
+                            Name = x.Supplements.Name,
+                            Price = x.Supplements.Price
+                        }
+                    })
+                    .ToList();
+
+
 
             var eq = await _gymDbContext.GymEquipments
-                .Select(eqp=> new EquipmentDTOPut
-            {
-                Name= eqp.Name,
-                Quantity= eqp.Quantity,
-                OutOfService= eqp.OutOfService,
-                GymEquipmentID= eqp.GymEquipmentID,
-            }).ToListAsync();
+                .Select(eqp => new EquipmentDTOPut
+                {
+                    Name = eqp.Name,
+                    Quantity = eqp.Quantity,
+                    OutOfService = eqp.OutOfService,
+                    GymEquipmentID = eqp.GymEquipmentID,
+                }).ToListAsync();
 
 
             var suppTierList = await _gymDbContext.SubscriptionTiers
@@ -129,7 +116,7 @@ namespace GYM_Management_System.Models.Services
                 Price = suppTier.Price
             }).ToListAsync();
 
-            var returnVar =  await _gymDbContext.Gyms
+            var returnVar = await _gymDbContext.Gyms
                 .Select(Gm => new GetUserGymDTO
                 {
                     GymID = Gm.GymID,
@@ -138,12 +125,12 @@ namespace GYM_Management_System.Models.Services
                     CurrentCapacity = _gymDbContext.Clients.Count(x => x.GymID == Gm.GymID && x.InGym == true),
                     MaxCapacity = Gm.MaxCapacity,
                     ActiveHours = Gm.ActiveHours,
-                    Notification = Gm.Notification, 
+                    Notification = Gm.Notification,
                 }).FirstOrDefaultAsync(gm => gm.GymID == gymid);
-                 returnVar.SubscriptionTier = suppTierList;
-                 returnVar.Equipments = eq;
-
-                 return returnVar;
+            returnVar.SubscriptionTier = suppTierList;
+            returnVar.Equipments = eq;
+            returnVar.Supplements = gymSupplements;
+            return returnVar;
         }
 
         public async Task<List<GetManagerGymDTO>> GetGymClient()
@@ -161,12 +148,6 @@ namespace GYM_Management_System.Models.Services
             }
             var returnVar = await _gymDbContext.Gyms
                 .Select(Gm => new GetManagerGymDTO
-
-
-        public async Task<List<GetGymDTO>> GetGyms()
-        {
-            return await _gymDbContext.Gyms
-                .Select(Gm => new GetGymDTO
                 {
                     GymID = Gm.GymID,
                     Name = Gm.Name,
@@ -184,22 +165,22 @@ namespace GYM_Management_System.Models.Services
                     }).ToList(),
                     clients = Gm.Clients.Select(cl => new PostClientDTO()
                     {
-                       Name=cl.Name,
-                       ClientID=cl.ClientID,
-                       InGym=cl.InGym,
-                       SubscriptionDate=cl.SubscriptionDate,
-                       SubscriptionExpiry=cl.SubscriptionExpiry,
-                       SubscriptionTierID=cl.SubscriptionTierID
-                    } ).ToList(),
-                    employees= Gm.Employees.Select(em=> new GetEmployeesByGymId()
+                        Name = cl.Name,
+                        ClientID = cl.ClientID,
+                        InGym = cl.InGym,
+                        SubscriptionDate = cl.SubscriptionDate,
+                        SubscriptionExpiry = cl.SubscriptionExpiry,
+                        SubscriptionTierID = cl.SubscriptionTierID
+                    }).ToList(),
+                    employees = Gm.Employees.Select(em => new GetEmployeesByGymId()
                     {
-                        Name=em.Name,
-                        EmployeeID=em.EmployeeID,
-                        Salary=em.Salary,
-                        JobDescription=em.JobDescription,
-                        IsAvailable=em.IsAvailable,
-                        WorkingDays=em.WorkingDays,
-                        WorkingHours=em.WorkingHours
+                        Name = em.Name,
+                        EmployeeID = em.EmployeeID,
+                        Salary = em.Salary,
+                        JobDescription = em.JobDescription,
+                        IsAvailable = em.IsAvailable,
+                        WorkingDays = em.WorkingDays,
+                        WorkingHours = em.WorkingHours
                     }).ToList(),
                 }).ToListAsync();
             foreach (var gym in returnVar)
@@ -234,11 +215,11 @@ namespace GYM_Management_System.Models.Services
 
             foreach (var gym in returnVar)
             {
-                
+
                 gym.CurrentCapacity = _gymDbContext.Clients
                .Count(x => x.GymID == gym.GymID && x.InGym == true);
 
-                
+
                 gym.SubscriptionTier = suppTierList
                 .Select(suppTier => new GymGetSubscriptionTierDTO
                 {
@@ -249,6 +230,8 @@ namespace GYM_Management_System.Models.Services
 
             return returnVar;
         }
+
+
 
         public async Task<Gym> UpdateGym(int gymid, PutGymDTO updatedGym)
         {
@@ -268,48 +251,18 @@ namespace GYM_Management_System.Models.Services
             return currentGym;
         }
 
-        //public async Task<List<GetGymDTO>> GetSupplementsInGym(int gymid)
-        //{
-        //    var supplememts = await _gymDbContext.GymSupplements
-        //        .Where(d => d.GymID == gymid)
-        //        .Select(d => new GetGymDTO()
-        //        {
-        //            GymID = d.GymID,
-
-        //            Name = d.Name,
-        //            Address = d.Address,
-        //            CurrentCapacity = Gm.CurrentCapacity,
-        //            MaxCapacity = Gm.MaxCapacity,
-        //            ActiveHours = Gm.ActiveHours,
-        //            Notification = Gm.Notification,
-        //            Supplements = Gm.GymSupplements.Select(X => new GetSupplementDTO
-        //            {
-        //                SupplementID = X.Supplements.SupplementID,
-        //                Name = X.Supplements.Name,
-        //                Price = X.Supplements.Price,
-        //                Quantity = X.Supplements.Quantity,
-        //            }
-        //        })
-        //        .ToListAsync();
-
-        //    return doctors;
-        //}
-        public async Task AddSupplementToGym(int gymId, int SupplementId)
+        public async Task AddSupplementToGym(int gymId, int supplementId)
         {
             GymSupplement newGymSupplement = new GymSupplement()
             {
                 GymID = gymId,
-                SupplementID = SupplementId
+                SupplementID = supplementId
             };
             _gymDbContext.Entry(newGymSupplement).State = EntityState.Added;
             await _gymDbContext.SaveChangesAsync();
-
         }
-
         public async Task<GymSupplement> UpdateSupplementForGym(int gymId, int supplementId, GymSupplementDTO gymSupplement)
         {
-
-
             var supplementValue = await _gymDbContext.GymSupplements.FindAsync(gymId, supplementId);
 
             if (supplementValue != null)
@@ -320,13 +273,11 @@ namespace GYM_Management_System.Models.Services
                 await _gymDbContext.SaveChangesAsync();
             }
             return supplementValue;
-
         }
-
         public async Task RemoveSupplementFromGym(int gymId, int supplementId)
         {
             var removedSupplement = await _gymDbContext.GymSupplements
-                                       .FirstOrDefaultAsync(x => x.GymID == gymId && x.SupplementID == supplementId);
+                                      .FirstOrDefaultAsync(x => x.GymID == gymId && x.SupplementID == supplementId);
 
             if (removedSupplement != null)
             {
@@ -334,6 +285,5 @@ namespace GYM_Management_System.Models.Services
                 await _gymDbContext.SaveChangesAsync();
             }
         }
-
     }
 }

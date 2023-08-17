@@ -20,9 +20,9 @@ namespace GYM_Management_System.Data
                   new SubscriptionTier
                   {
                       SubscriptionTierID = 1,
-                      Name = "3 months",
+                      Name = "1 month",
                       Price = "30 JD",
-                      Length = 3
+                      Length = 1
                   },
 
                   new SubscriptionTier
@@ -30,14 +30,14 @@ namespace GYM_Management_System.Data
                       SubscriptionTierID = 2,
                       Name = "3 months",
                       Price = "60 JD",
-                      Length = new DateTime(2023, 3, 1)
+                      Length = 3
                   },
 
                   new SubscriptionTier
                   {
                       SubscriptionTierID = 3,
                       Name = "6 months",
-                      Price = "150 JD",
+                      Price = "110 JD",
                       Length = 6
                   }
                 );
@@ -94,14 +94,29 @@ namespace GYM_Management_System.Data
                 }
                 );
 
+            modelBuilder.Entity<Employee>().HasData(new Employee
+            {
+                EmployeeID = 1,
+                GymID = 1,
+                Name = "Ahmad Albisany",
+                JobDescription = "Trainer",
+                IsAvailable = true,
+                WorkingDays = "Sat - Fri",
+                WorkingHours = "9:00AM - 5:00PM",
+                Salary = "330 JD",
+            });
+
 
             modelBuilder.Entity<Client>()
                 .Property(c => c.SubscriptionDate)
                 .HasColumnType("date"); // Use the appropriate database type for DateOnly
 
             modelBuilder.Entity<Client>()
-                .Property(c => c.SubscriptionExpiry)
-                .HasColumnType("date");
+                        .Property(c => c.SubscriptionExpiry)
+                        .HasColumnType("date");
+
+            modelBuilder.Entity<GymSupplement>().HasKey(
+                sq => new { sq.GymID, sq.SupplementID });
 
         }
 

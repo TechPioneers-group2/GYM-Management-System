@@ -65,8 +65,8 @@ namespace GYM_Management_System.Migrations
                         },
                         new
                         {
-                            ClientID = 2,
                             GymID = 2,
+                            ClientID = 2,
                             InGym = false,
                             Name = "Ammar Albisany",
                             SubscriptionDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -114,6 +114,19 @@ namespace GYM_Management_System.Migrations
                     b.HasIndex("GymID");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            EmployeeID = 1,
+                            GymID = 1,
+                            IsAvailable = true,
+                            JobDescription = "Trainer",
+                            Name = "Ahmad Albisany",
+                            Salary = "330 JD",
+                            WorkingDays = "Sat - Fri",
+                            WorkingHours = "9:00AM - 5:00PM"
+                        });
                 });
 
             modelBuilder.Entity("GYM_Management_System.Models.Gym", b =>
@@ -215,6 +228,8 @@ namespace GYM_Management_System.Migrations
 
                     b.HasKey("GymID", "SupplementID");
 
+                    b.HasIndex("SupplementID");
+
                     b.ToTable("GymSupplements");
                 });
 
@@ -245,13 +260,20 @@ namespace GYM_Management_System.Migrations
                         new
                         {
                             SubscriptionTierID = 1,
-                            Length = 3,
-                            Name = "3 months",
+                            Length = 1,
+                            Name = "1 month",
                             Price = "30 JD"
                         },
                         new
                         {
                             SubscriptionTierID = 2,
+                            Length = 3,
+                            Name = "3 months",
+                            Price = "60 JD"
+                        },
+                        new
+                        {
+                            SubscriptionTierID = 3,
                             Length = 6,
                             Name = "6 months",
                             Price = "110 JD"
@@ -277,24 +299,6 @@ namespace GYM_Management_System.Migrations
                     b.HasKey("SupplementID");
 
                     b.ToTable("Supplements");
-                });
-
-            modelBuilder.Entity("GymSupplementSupplement", b =>
-                {
-                    b.Property<int>("SupplementsSupplementID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GymSupplementsGymID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GymSupplementsSupplementID")
-                        .HasColumnType("int");
-
-                    b.HasKey("SupplementsSupplementID", "GymSupplementsGymID", "GymSupplementsSupplementID");
-
-                    b.HasIndex("GymSupplementsGymID", "GymSupplementsSupplementID");
-
-                    b.ToTable("GymSupplementSupplement");
                 });
 
             modelBuilder.Entity("GYM_Management_System.Models.Client", b =>
@@ -346,22 +350,15 @@ namespace GYM_Management_System.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("GYM_Management_System.Models.Supplement", "Supplements")
+                        .WithMany("GymSupplements")
+                        .HasForeignKey("SupplementID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Gym");
-                });
 
-            modelBuilder.Entity("GymSupplementSupplement", b =>
-                {
-                    b.HasOne("GYM_Management_System.Models.Supplement", null)
-                        .WithMany()
-                        .HasForeignKey("SupplementsSupplementID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GYM_Management_System.Models.GymSupplement", null)
-                        .WithMany()
-                        .HasForeignKey("GymSupplementsGymID", "GymSupplementsSupplementID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Supplements");
                 });
 
             modelBuilder.Entity("GYM_Management_System.Models.Gym", b =>
@@ -378,6 +375,11 @@ namespace GYM_Management_System.Migrations
             modelBuilder.Entity("GYM_Management_System.Models.SubscriptionTier", b =>
                 {
                     b.Navigation("Clients");
+                });
+
+            modelBuilder.Entity("GYM_Management_System.Models.Supplement", b =>
+                {
+                    b.Navigation("GymSupplements");
                 });
 #pragma warning restore 612, 618
         }

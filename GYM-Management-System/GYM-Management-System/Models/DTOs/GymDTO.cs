@@ -11,9 +11,10 @@
         public string? Notification { get; set; }
 
         //NP
-        
+
         public List<EquipmentDTOPut>? Equipments { get; set; }
         public List<GymGetSubscriptionTierDTO>? SubscriptionTier { get; set; }
+        public List<GymSupplementDTO>? Supplements { get; set; }
     }
 
     public class GetManagerGymDTO
@@ -59,5 +60,5 @@
 
     }
 
-    
+
 }

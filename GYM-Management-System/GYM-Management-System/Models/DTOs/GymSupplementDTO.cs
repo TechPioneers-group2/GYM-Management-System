@@ -6,7 +6,7 @@
         public int GymID { get; set; }
         public int Quantity { get; set; }
 
-       // public List<GetGymSupplementDTO>? Supplements { get; set; }
+        public GetGymSupplementDTO? Supplements { get; set; }
 
     }
 }
