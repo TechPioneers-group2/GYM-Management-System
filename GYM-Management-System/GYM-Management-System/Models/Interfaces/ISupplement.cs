@@ -5,16 +5,16 @@ namespace GYM_Management_System.Models.Interfaces
     public interface ISupplement
     {
         // Create a Supplement
-        Task<GetSupplementDTO> CreateSupplement(GetSupplementDTO supplementDTO);
+        Task<SupplementDTO> CreateSupplement(SupplementDTO supplementDTO);
 
         // GET All Supplements
-        Task<List<GetSupplementDTO>> GetAllSupplements();
+        Task<List<SupplementDTO>> GetAllSupplements();
 
         // GET Supplement By ID
-        Task<GetSupplementDTO> GetSupplementById(int supplementId);
+        Task<SupplementDTO> GetSupplementById(int supplementId);
 
         // Update Supplement Data
-        Task<GetSupplementDTO> UpdateSupplement(int supplementId, UpdateSupplementDTO updatedSupplementDTO);
+        Task<Supplement> UpdateSupplement(int supplementId, SupplementDTO supplement);
 
         // Delete Supplement
         Task<bool> DeleteSupplement(int supplementId);

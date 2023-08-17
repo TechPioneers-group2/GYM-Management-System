@@ -46,18 +46,53 @@ namespace GYM_Management_System.Models.Services
 
         public async Task<GetGymDTO> GetGym(int gymid)
         {
-            return await _gymDbContext.Gyms
-                .Select(Gm => new GetGymDTO
-                {
-                    GymID = Gm.GymID,
-                    Name = Gm.Name,
-                    Address = Gm.Address,
-                    CurrentCapacity = Gm.CurrentCapacity,
-                    MaxCapacity = Gm.MaxCapacity,
-                    ActiveHours = Gm.ActiveHours,
-                    Notification = Gm.Notification
-                }).FirstOrDefaultAsync(gm => gm.GymID == gymid);
+
+            var gym = await _gymDbContext.Gyms
+                           .Include(q => q.GymSupplements)
+                           .ThenInclude(gs => gs.Supplements)
+                           .FirstOrDefaultAsync(id => id.GymID == gymid);
+            var gymDto = new GetGymDTO()
+            {
+                GymID = gymid,
+                Name = gym.Name,
+                Address = gym.Address,
+                CurrentCapacity = gym.CurrentCapacity,
+                MaxCapacity = gym.MaxCapacity,
+                ActiveHours = gym.ActiveHours,
+                Notification = gym.Notification,
+                
+            };
+
+            //var gym = await _gymDbContext.Gyms
+            //    .Select(Gm => new GetGymDTO
+            //    {
+            //        GymID = Gm.GymID,
+            //        Name = Gm.Name,
+            //        Address = Gm.Address,
+            //        CurrentCapacity = Gm.CurrentCapacity,
+            //        MaxCapacity = Gm.MaxCapacity,
+            //        ActiveHours = Gm.ActiveHours,
+            //        Notification = Gm.Notification,
+            //        GymSupplements = Gm.GymSupplements.Select(g => new GymSupplementDTO
+            //        {
+            //            SupplementID = g.SupplementID,
+            //            GymID = g.GymID,
+            //            Quantity = g.Quantity,
+            //            Supplements = g.Supplements != null ? new List<GetGymSupplementDTO>
+            //            {
+            //        new GetGymSupplementDTO
+            //        {
+            //            Name = g.Supplements.First().Name,
+            //            Price = g.Supplements.First().Price,
+            //        }
+            //            } : null
+            //        }).ToList()
+            //    }).FirstOrDefaultAsync(gm => gm.GymID == gymid);
+
+            return gymDto;
         }
+
+
 
         public async Task<List<GetGymDTO>> GetGyms()
         {
@@ -91,5 +126,73 @@ namespace GYM_Management_System.Models.Services
 
             return currentGym;
         }
+
+        //public async Task<List<GetGymDTO>> GetSupplementsInGym(int gymid)
+        //{
+        //    var supplememts = await _gymDbContext.GymSupplements
+        //        .Where(d => d.GymID == gymid)
+        //        .Select(d => new GetGymDTO()
+        //        {
+        //            GymID = d.GymID,
+
+        //            Name = d.Name,
+        //            Address = d.Address,
+        //            CurrentCapacity = Gm.CurrentCapacity,
+        //            MaxCapacity = Gm.MaxCapacity,
+        //            ActiveHours = Gm.ActiveHours,
+        //            Notification = Gm.Notification,
+        //            Supplements = Gm.GymSupplements.Select(X => new GetSupplementDTO
+        //            {
+        //                SupplementID = X.Supplements.SupplementID,
+        //                Name = X.Supplements.Name,
+        //                Price = X.Supplements.Price,
+        //                Quantity = X.Supplements.Quantity,
+        //            }
+        //        })
+        //        .ToListAsync();
+
+        //    return doctors;
+        //}
+        public async Task AddSupplementToGym(int gymId, int SupplementId)
+        {
+            GymSupplement newGymSupplement = new GymSupplement()
+            {
+                GymID = gymId,
+                SupplementID = SupplementId
+            };
+            _gymDbContext.Entry(newGymSupplement).State = EntityState.Added;
+            await _gymDbContext.SaveChangesAsync();
+
+        }
+
+        public async Task<GymSupplement> UpdateSupplementForGym(int gymId, int supplementId, GymSupplementDTO gymSupplement)
+        {
+
+
+            var supplementValue = await _gymDbContext.GymSupplements.FindAsync(gymId, supplementId);
+
+            if (supplementValue != null)
+            {
+                supplementValue.Quantity = gymSupplement.Quantity;
+                _gymDbContext.Entry(supplementValue).State = EntityState.Modified;
+
+                await _gymDbContext.SaveChangesAsync();
+            }
+            return supplementValue;
+
+        }
+
+        public async Task RemoveSupplementFromGym(int gymId, int supplementId)
+        {
+            var removedSupplement = await _gymDbContext.GymSupplements
+                                       .FirstOrDefaultAsync(x => x.GymID == gymId && x.SupplementID == supplementId);
+
+            if (removedSupplement != null)
+            {
+                _gymDbContext.GymSupplements.Remove(removedSupplement);
+                await _gymDbContext.SaveChangesAsync();
+            }
+        }
+
     }
 }

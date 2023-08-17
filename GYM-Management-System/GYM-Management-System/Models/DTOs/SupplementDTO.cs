@@ -1,6 +1,6 @@
 ﻿namespace GYM_Management_System.Models.DTOs
 {
-    public class GetSupplementDTO
+    public class SupplementDTO
     {
         public int SupplementID { get; set; }
         public string Name { get; set; }
@@ -12,10 +12,9 @@
     }
 
 
-    public class UpdateSupplementDTO
+    public class GetGymSupplementDTO
     {
         public string Name { get; set; }
         public string Price { get; set; }
-
     }
 }

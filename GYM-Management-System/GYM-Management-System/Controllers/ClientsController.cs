@@ -64,5 +64,7 @@ namespace GYM_Management_System.Controllers
             return NoContent();
         }
 
+       
+
     }
 }

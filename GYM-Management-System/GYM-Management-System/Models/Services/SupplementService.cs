@@ -13,18 +13,21 @@ namespace GYM_Management_System.Models.Services
             _supplement = supplement;
         }
 
-        public async Task<GetSupplementDTO> CreateSupplement(GetSupplementDTO supplementDTO)
+        public async Task<SupplementDTO> CreateSupplement(SupplementDTO supplementDTO)
         {
             var newSupplement = new Supplement()
             {
                 SupplementID = supplementDTO.SupplementID,
                 Name = supplementDTO.Name,
                 Price = supplementDTO.Price,
+
             };
-            _supplement.Supplements.Add(newSupplement);
+            _supplement.Entry(newSupplement).State = EntityState.Added;
             await _supplement.SaveChangesAsync();
+            supplementDTO.SupplementID = newSupplement.SupplementID;
 
             return supplementDTO;
+
         }
 
         public async Task<bool> DeleteSupplement(int supplementId)
@@ -39,29 +42,31 @@ namespace GYM_Management_System.Models.Services
             return false;
         }
 
-        public async Task<List<GetSupplementDTO>> GetAllSupplements()
+        public async Task<List<SupplementDTO>> GetAllSupplements()
         {
             return await _supplement.Supplements
-                .Select(t => new GetSupplementDTO
+                .Select(t => new SupplementDTO
                 {
                     SupplementID = t.SupplementID,
                     Name = t.Name,
                     Price = t.Price,
+
                 }).ToListAsync();
         }
 
-        public async Task<GetSupplementDTO> GetSupplementById(int supplementId)
+        public async Task<SupplementDTO> GetSupplementById(int supplementId)
         {
             return await _supplement.Supplements
-                .Select(t => new GetSupplementDTO
+                .Select(t => new SupplementDTO
                 {
                     SupplementID = t.SupplementID,
                     Name = t.Name,
                     Price = t.Price,
+
                 }).FirstOrDefaultAsync(sp => sp.SupplementID == supplementId);
         }
 
-        public async Task<GetSupplementDTO> UpdateSupplement(int supplementId, UpdateSupplementDTO updatedSupplementDTO)
+        public async Task<Supplement> UpdateSupplement(int supplementId, SupplementDTO updatedSupplementDTO)
         {
             var updatedSupplement = await _supplement.Supplements.FindAsync(supplementId);
 
@@ -75,7 +80,7 @@ namespace GYM_Management_System.Models.Services
 
             }
 
-            return null;
+            return updatedSupplement;
         }
     }
 }

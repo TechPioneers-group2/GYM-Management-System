@@ -104,7 +104,8 @@ namespace GYM_Management_System.Data
                .HasColumnType("date");
 
 
-            modelBuilder.Entity<GymSupplement>().HasKey(sq => new { sq.GymID, sq.SupplementID });
+            modelBuilder.Entity<GymSupplement>().HasKey(
+                sq => new { sq.GymID, sq.SupplementID });
         }
 
         public DbSet<Gym> Gyms { get; set; }
@@ -112,7 +113,7 @@ namespace GYM_Management_System.Data
         public DbSet<Client> Clients { get; set; }
         public DbSet<GymEquipment> GymEquipments { get; set; }
         public DbSet<Supplement> Supplements { get; set; }
-        public DbSet<GymSupplement>GymSupplements { get; set; }
+        public DbSet<GymSupplement> GymSupplements { get; set; }
         public DbSet<SubscriptionTier> SubscriptionTiers { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using GYM_Management_System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GYM_Management_System.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    partial class GymDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230817081239_QuantitypropsAdded")]
+    partial class QuantitypropsAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -220,6 +223,8 @@ namespace GYM_Management_System.Migrations
 
                     b.HasKey("GymID", "SupplementID");
 
+                    b.HasIndex("SupplementID");
+
                     b.ToTable("GymSupplements");
                 });
 
@@ -286,27 +291,12 @@ namespace GYM_Management_System.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
                     b.HasKey("SupplementID");
 
                     b.ToTable("Supplements");
-                });
-
-            modelBuilder.Entity("GymSupplementSupplement", b =>
-                {
-                    b.Property<int>("SupplementsSupplementID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GymSupplementsGymID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GymSupplementsSupplementID")
-                        .HasColumnType("int");
-
-                    b.HasKey("SupplementsSupplementID", "GymSupplementsGymID", "GymSupplementsSupplementID");
-
-                    b.HasIndex("GymSupplementsGymID", "GymSupplementsSupplementID");
-
-                    b.ToTable("GymSupplementSupplement");
                 });
 
             modelBuilder.Entity("GYM_Management_System.Models.Client", b =>
@@ -358,22 +348,15 @@ namespace GYM_Management_System.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("GYM_Management_System.Models.Supplement", "Supplements")
+                        .WithMany("GymSupplements")
+                        .HasForeignKey("SupplementID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Gym");
-                });
 
-            modelBuilder.Entity("GymSupplementSupplement", b =>
-                {
-                    b.HasOne("GYM_Management_System.Models.Supplement", null)
-                        .WithMany()
-                        .HasForeignKey("SupplementsSupplementID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GYM_Management_System.Models.GymSupplement", null)
-                        .WithMany()
-                        .HasForeignKey("GymSupplementsGymID", "GymSupplementsSupplementID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Supplements");
                 });
 
             modelBuilder.Entity("GYM_Management_System.Models.Gym", b =>
@@ -390,6 +373,11 @@ namespace GYM_Management_System.Migrations
             modelBuilder.Entity("GYM_Management_System.Models.SubscriptionTier", b =>
                 {
                     b.Navigation("Clients");
+                });
+
+            modelBuilder.Entity("GYM_Management_System.Models.Supplement", b =>
+                {
+                    b.Navigation("GymSupplements");
                 });
 #pragma warning restore 612, 618
         }

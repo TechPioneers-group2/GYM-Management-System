@@ -25,23 +25,40 @@ namespace GYM_Management_System.Controllers
 
         // GET: api/Supplements
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GetSupplementDTO>>> GetSupplements()
+        public async Task<ActionResult<IEnumerable<SupplementDTO>>> GetSupplements()
         {
+            if (_supplements == null)
+            {
+                return NotFound();
+            }
             return await _supplements.GetAllSupplements();
         }
 
         // GET: api/Supplements/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetSupplementDTO>> GetSupplement(int id)
+        public async Task<ActionResult<SupplementDTO>> GetSupplement(int id)
         {
-            return await _supplements.GetSupplementById(id);
+            if (_supplements == null)
+            {
+                return NotFound();
+            }
+            var supplements = await _supplements.GetSupplementById(id);
+            if (supplements == null)
+            {
+                return NotFound();
+            }
+            return supplements;
         }
 
         // PUT: api/Supplements/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSupplement(int id, UpdateSupplementDTO supplement)
+        public async Task<IActionResult> PutSupplement([FromRoute] int id, [FromBody] SupplementDTO supplement)
         {
+            if (id != supplement.SupplementID)
+            {
+                return BadRequest();
+            }
             var updatedSupplement = await _supplements.UpdateSupplement(id, supplement);
 
             return Ok(updatedSupplement);
@@ -53,8 +70,13 @@ namespace GYM_Management_System.Controllers
         // POST: api/Supplements
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<GetSupplementDTO>> PostSupplement(GetSupplementDTO supplement)
+        public async Task<ActionResult<SupplementDTO>> PostSupplement(SupplementDTO supplement)
         {
+
+            if (_supplements == null)
+            {
+                return Problem("Entity set 'GymDbContext.Supplement'  is null.");
+            }
             await _supplements.CreateSupplement(supplement);
             return CreatedAtAction("GetSupplement", new
             {

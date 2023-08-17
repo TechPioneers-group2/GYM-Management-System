@@ -10,8 +10,8 @@
         public string? ActiveHours { get; set; }
         public string? Notification { get; set; }
 
-        //NP
-      
+        public List<GymSupplementDTO>? GymSupplements { get; set; }
+
     }
 
     public class PostGymDTO
@@ -33,6 +33,7 @@
         public int CurrentCapacity { get; set; }
         public string? ActiveHours { get; set; }
         public string? Notification { get; set; }
+        public List<SupplementDTO>? Supplements { get; set; }
 
     }
 }
