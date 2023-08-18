@@ -2,7 +2,6 @@
 {
 	public class UpdateEmployeeDTO
 	{
-		//public int EmployeeID { get; set; }
 		public int GymID { get; set; }
 		public string Name { get; set; }
 		public string JobDescription { get; set; }

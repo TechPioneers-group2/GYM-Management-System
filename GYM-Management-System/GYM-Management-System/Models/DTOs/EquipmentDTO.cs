@@ -8,11 +8,9 @@
         public int OutOfService { get; set; }
         public int Quantity { get; set; }
 
-        //N.P
     }
 	public class CreatEquipmentDTO
 	{
-		//public int GymEquipmentID { get; set; }
 		public int GymID { get; set; }
 		public string Name { get; set; }
 		public int OutOfService { get; set; }
@@ -32,11 +30,7 @@
     }
 	public class EquipmentDTOPutservice
 	{
-		//public int GymEquipmentID { get; set; }
-		public string Name { get; set; }
 		public int OutOfService { get; set; }
 		public int Quantity { get; set; }
-
-		//N.P
 	}
 }

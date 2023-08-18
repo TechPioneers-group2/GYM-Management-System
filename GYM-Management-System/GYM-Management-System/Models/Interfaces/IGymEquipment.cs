@@ -14,7 +14,6 @@ namespace GYM_Management_System.Models.Interfaces
         // Update GymEquipment Data
         Task<EquipmentDTO> UpdateGymEquipment (int GymEquipmentID , EquipmentDTOPutservice equipmentDTO);
         // Delete GymEquipment
-
         Task DeleteGymEquipment (int GymEquipmentID);
     }
 }

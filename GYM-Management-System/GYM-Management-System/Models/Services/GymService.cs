@@ -26,7 +26,6 @@ namespace GYM_Management_System.Models.Services
         {
             var newGym = new Gym()
             {
-                GymID = gym.GymID,
                 Name = gym.Name,
                 Address = gym.Address,
                 CurrentCapacity = gym.CurrentCapacity,
@@ -53,34 +52,7 @@ namespace GYM_Management_System.Models.Services
 
         public async Task<GetUserGymDTO> GetGym(int gymid)
         {
-            //var suppTierList = await  _gymDbContext.SubscriptionTiers.ToListAsync();
-            //  var supptierDTO = new List<GymGetSubscriptionTierDTO>();
 
-            //foreach (var suppTier in suppTierList)
-            //{
-            //    GymGetSubscriptionTierDTO ggstDTO = new GymGetSubscriptionTierDTO() 
-            //    {
-            //        Name = suppTier.Name,
-            //        Price = suppTier.Price
-            //    };
-            //    supptierDTO.Add(ggstDTO);
-            //}
-            //var gymSupplements = await _gymDbContext.Gyms
-            //               .Include(q => q.GymSupplements)
-            //               .ThenInclude(gs => gs.Supplements)
-            //               .FirstOrDefaultAsync(id => id.GymID == gymid);
-
-            //var gymSupplements = _gymDbContext.GymSupplements
-            //                    .Include(x => x.Supplements)
-            //                    .FirstOrDefault(id => id.GymID == gymid);
-
-            //var gymSupplements = _gymDbContext.GymSupplements.Select(x => new GymSupplementDTO
-            //{
-            //    GymID = x.GymID,
-            //    Quantity = x.Quantity,
-            //    SupplementID = x.SupplementID,
-            //    Supplements = x.Supplements.
-            //});
             var gymSupplements = _gymDbContext.GymSupplements
                     .Include(x => x.Supplements) // Include the Supplements navigation property
                     .Where(x => x.GymID == gymid) // Filter by GymID

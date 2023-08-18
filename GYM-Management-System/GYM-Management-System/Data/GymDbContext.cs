@@ -12,9 +12,6 @@ namespace GYM_Management_System.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Client>()
-        .HasKey(c => new { c.GymID, c.ClientID });
-
             modelBuilder.Entity<SubscriptionTier>().HasData
                 (
                   new SubscriptionTier
@@ -114,14 +111,6 @@ namespace GYM_Management_System.Data
 
                 });
 
-
-            modelBuilder.Entity<Client>()
-                .Property(c => c.SubscriptionDate)
-                .HasColumnType("date"); // Use the appropriate database type for DateOnly
-
-            modelBuilder.Entity<Client>()
-                        .Property(c => c.SubscriptionExpiry)
-                        .HasColumnType("date");
 
 
             modelBuilder.Entity<GymSupplement>().HasKey(

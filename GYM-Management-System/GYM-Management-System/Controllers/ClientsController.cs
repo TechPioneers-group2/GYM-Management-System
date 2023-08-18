@@ -47,16 +47,6 @@ namespace GYM_Management_System.Controllers
 
         }
 
-        // POST: api/Clients
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost("{gymid}")]
-        //public async Task<ActionResult<Client>> PostClient(int gymid, PostClientDTO client)
-        //{
-
-        //    await _client.CreateClient(gymid, client);
-        //    return CreatedAtAction("GetClient", new { gymid = client.GymID, clientid = client.ClientID }, client);
-        //}
-
         [HttpPost("{gymid}")]
         public async Task<ActionResult<Client>> PostClient(int gymid, PostClientDTO clientDto)
         {

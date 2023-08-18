@@ -59,7 +59,6 @@ namespace GYM_Management_System.Controllers
             {
                 return BadRequest();
             }
-            var updatedSupplement = await _supplements.UpdateSupplement(id, supplement);
 
             return Ok(updatedSupplement);
         }
@@ -80,7 +79,6 @@ namespace GYM_Management_System.Controllers
             //}, supplement);
             return supplementDto;
 
-		}
 
         // DELETE: api/Supplements/5
         [HttpDelete("{id}")]

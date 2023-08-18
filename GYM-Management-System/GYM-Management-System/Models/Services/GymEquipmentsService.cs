@@ -26,7 +26,6 @@ namespace GYM_Management_System.Models.Services
                 GymID = equipmentDTO.GymID
             };
 
-            // add the await and Async 
              await _gymDbContext.GymEquipments.AddAsync(newEquipment);
             await _gymDbContext.SaveChangesAsync();
             //equipmentDTO.GymEquipmentID = newEquipment.GymEquipmentID;

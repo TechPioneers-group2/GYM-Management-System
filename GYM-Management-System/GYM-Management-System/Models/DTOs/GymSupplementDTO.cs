@@ -12,11 +12,7 @@
 
 	public class UpdateGymSupplementDTO
 	{
-		
 		public int Quantity { get; set; }
-
-	
-
 	}
 
 	

@@ -62,15 +62,7 @@ namespace GYM_Management_System.Controllers
             await _gym.DeleteGym(id);
             return NoContent();
         }
-        //// POST : api/Rooms/5/Amenity/5
-        //[HttpPost]
-        //[Route("{roomId}/Amenity/{amenityId}")]
-        //public async Task<IActionResult> AddAmenityToRoom(int roomId, int amenityId)
-        //{
-        //    await _room.AddAmenityToRoom(roomId, amenityId);
 
-        //    return NoContent();
-        //}
         [HttpPost]
         [Route("{gymId}/Supplement/{SupplementId}")]
         public async Task<IActionResult> AddSupplementsToGym(int gymId, int SupplementId)

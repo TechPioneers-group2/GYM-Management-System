@@ -17,10 +17,8 @@ namespace GYM_Management_System.Models.Services
         {
             var newSupplement = new Supplement()
             {
-                //SupplementID = supplementDTO.SupplementID,
                 Name = supplementDTO.Name,
                 Price = supplementDTO.Price,
-
             };
             _supplement.Entry(newSupplement).State = EntityState.Added;
             await _supplement.SaveChangesAsync();
@@ -32,7 +30,6 @@ namespace GYM_Management_System.Models.Services
 			};
 
 			return SupplementDtoReturn;
-
         }
 
         public async Task<bool> DeleteSupplement(int supplementId)
@@ -77,7 +74,6 @@ namespace GYM_Management_System.Models.Services
 
             if (updatedSupplement != null)
             {
-
                 updatedSupplement.Name = updatedSupplementDTO.Name;
                 updatedSupplement.Price = updatedSupplementDTO.Price;
 

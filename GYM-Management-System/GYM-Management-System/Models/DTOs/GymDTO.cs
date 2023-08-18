@@ -27,8 +27,6 @@
         public string? ActiveHours { get; set; }
         public string? Notification { get; set; }
 
-        public List<GymSupplementDTO>? GymSupplements { get; set; }
-
         //NP
 
         public List<EquipmentDTOPut> Equipments { get; set; }
@@ -39,7 +37,6 @@
 
     public class PostGymDTO
     {
-        public int GymID { get; set; }
         public string? Name { get; set; }
         public string? Address { get; set; }
         public string? MaxCapacity { get; set; }
@@ -47,7 +44,6 @@
         public string? ActiveHours { get; set; }
         public string? Notification { get; set; }
 
-    }
 
     public class PutGymDTO
     {
