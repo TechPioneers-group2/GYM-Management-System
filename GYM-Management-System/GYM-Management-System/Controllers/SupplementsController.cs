@@ -70,19 +70,17 @@ namespace GYM_Management_System.Controllers
         // POST: api/Supplements
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<SupplementDTO>> PostSupplement(SupplementDTO supplement)
+        public async Task<ActionResult<SupplementDTO>> PostSupplement(CreatSupplementDTO supplement)
         {
 
-            if (_supplements == null)
-            {
-                return Problem("Entity set 'GymDbContext.Supplement'  is null.");
-            }
-            await _supplements.CreateSupplement(supplement);
-            return CreatedAtAction("GetSupplement", new
-            {
-                id = supplement.SupplementID,
-            }, supplement);
-        }
+           var supplementDto= await _supplements.CreateSupplement(supplement);
+            //return CreatedAtAction("GetSupplement", new
+            //{
+            //    id = supplement.SupplementID,
+            //}, supplement);
+            return supplementDto;
+
+		}
 
         // DELETE: api/Supplements/5
         [HttpDelete("{id}")]

@@ -5,7 +5,7 @@ namespace GYM_Management_System.Models.Interfaces
     public interface ISubscriptionTier
     {
         // Create a SubscriptionTier
-        Task<SubscriptionTier> Create(PostSubscriptionTierDTO subscriptionTier);
+        Task<PostSubscriptionTierDTO> Create(CreatSubscriptionTierDTO subscriptionTier);
 
         // GET All SubscriptionTiers
         Task<List<GetSubscriptionTierDTO>> GetAllSubscriptionTier();

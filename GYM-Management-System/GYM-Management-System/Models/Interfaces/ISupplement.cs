@@ -5,7 +5,7 @@ namespace GYM_Management_System.Models.Interfaces
     public interface ISupplement
     {
         // Create a Supplement
-        Task<SupplementDTO> CreateSupplement(SupplementDTO supplementDTO);
+        Task<SupplementDTO> CreateSupplement(CreatSupplementDTO supplementDTO);
 
         // GET All Supplements
         Task<List<SupplementDTO>> GetAllSupplements();

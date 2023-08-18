@@ -45,4 +45,13 @@
         public int SubscriptionTierID { get; set; }
         public string Name { get; set; }
     }
+
+	public class CreatSubscriptionTierDTO
+	{
+
+		public string Name { get; set; }
+		public string Price { get; set; }
+		public int Length { get; set; }
+
+	}
 }

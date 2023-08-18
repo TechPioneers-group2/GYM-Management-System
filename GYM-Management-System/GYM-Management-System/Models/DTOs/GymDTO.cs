@@ -51,12 +51,12 @@
 
     public class PutGymDTO
     {
-        public string? Name { get; set; }
+       // public string? Name { get; set; }
         public string? MaxCapacity { get; set; }
         public int CurrentCapacity { get; set; }
         public string? ActiveHours { get; set; }
         public string? Notification { get; set; }
-        public List<SupplementDTO>? Supplements { get; set; }
+        //public List<SupplementDTO>? Supplements { get; set; }
 
     }
 

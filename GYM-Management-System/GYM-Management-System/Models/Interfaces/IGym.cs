@@ -35,7 +35,7 @@ namespace GYM_Management_System.Models.Interfaces
         Task RemoveSupplementFromGym(int gymId, int supplementId);
 
         // Update all supplements in a Gym
-        Task<GymSupplement> UpdateSupplementForGym(int gymId, int supplementId, GymSupplementDTO gymSupplement);
+        Task<GymSupplement> UpdateSupplementForGym(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplement);
 
     }
 }

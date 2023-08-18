@@ -81,12 +81,13 @@ namespace GYM_Management_System.Controllers
         }
         [HttpPut]
         [Route("{gymId}/Supplement/{supplementId}")]
-        public async Task<IActionResult> UpdateSupplementForGym(int gymId, int supplementId, GymSupplementDTO gymSupplement)
+        public async Task<IActionResult> UpdateSupplementForGym(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplemen)
         {
-            await _gym.UpdateSupplementForGym(gymId, supplementId, gymSupplement);
+            var gymSupplement=await _gym.UpdateSupplementForGym(gymId, supplementId, updateGymSupplemen);
 
             return Ok();
-        }
+
+		}
 
         [HttpDelete]
         [Route("{gymId}/Supplement/{supplementId}")]

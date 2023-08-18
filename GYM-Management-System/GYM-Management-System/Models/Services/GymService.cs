@@ -196,6 +196,7 @@ namespace GYM_Management_System.Models.Services
             var suppTierList = await _gymDbContext.SubscriptionTiers.ToListAsync();
 
             var returnVar = await _gymDbContext.Gyms
+
                 .Select(Gm => new GetUserGymDTO
                 {
                     GymID = Gm.GymID,
@@ -211,6 +212,20 @@ namespace GYM_Management_System.Models.Services
                         OutOfService = geq.OutOfService,
                         Quantity = geq.Quantity,
                     }).ToList(),
+					//--- adding the GymSupplementDTO
+					Supplements = Gm.GymSupplements.Select(GS => new GymSupplementDTO()
+                    {
+
+						GymID = GS.GymID,
+						Quantity = GS.Quantity,
+						SupplementID = GS.SupplementID,
+						Supplements = new GetGymSupplementDTO
+						{
+							Name = GS.Supplements.Name,
+							Price = GS.Supplements.Price
+						}
+					}).ToList()
+                    //------
                 }).ToListAsync();
 
             foreach (var gym in returnVar)
@@ -239,7 +254,7 @@ namespace GYM_Management_System.Models.Services
 
             if (currentGym != null)
             {
-                currentGym.Name = updatedGym.Name;
+                //currentGym.Name = updatedGym.Name;
                 currentGym.MaxCapacity = updatedGym.MaxCapacity;
                 currentGym.CurrentCapacity = updatedGym.CurrentCapacity;
                 currentGym.ActiveHours = updatedGym.ActiveHours;
@@ -261,16 +276,17 @@ namespace GYM_Management_System.Models.Services
             _gymDbContext.Entry(newGymSupplement).State = EntityState.Added;
             await _gymDbContext.SaveChangesAsync();
         }
-        public async Task<GymSupplement> UpdateSupplementForGym(int gymId, int supplementId, GymSupplementDTO gymSupplement)
+        public async Task<GymSupplement> UpdateSupplementForGym(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplement)
         {
             var supplementValue = await _gymDbContext.GymSupplements.FindAsync(gymId, supplementId);
 
             if (supplementValue != null)
             {
-                supplementValue.Quantity = gymSupplement.Quantity;
+                supplementValue.Quantity = updateGymSupplement.Quantity;
                 _gymDbContext.Entry(supplementValue).State = EntityState.Modified;
 
                 await _gymDbContext.SaveChangesAsync();
+                
             }
             return supplementValue;
         }
