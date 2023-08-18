@@ -183,10 +183,9 @@ namespace GYM_Management_System.Data
                 sq => new { sq.GymID, sq.SupplementID });
 
 
-            SeedRole(modelBuilder, "DistrictManager", "create", "update", "delete", "read");
-            SeedRole(modelBuilder, "PropertyManager", "create", "update", "read");
-            SeedRole(modelBuilder, "Agent", "update", "read");
-            SeedRole(modelBuilder, "AnonymousUsers", "read");
+            SeedRole(modelBuilder, "Admin", "createAdmin", "updateAdmin", "deleteAdmin", "readAdmin");
+            SeedRole(modelBuilder, "Employee", "createEmployee", "updateEmployee", "readEmployee");
+            SeedRole(modelBuilder, "Client", "updateClient", "readClient");
 
         }
 

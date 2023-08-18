@@ -39,7 +39,7 @@ namespace GYM_Management_System
             builder.Services.AddTransient<IClient, ClientService>();
             builder.Services.AddTransient<ISubscriptionTier, SubscriptionTierService>();
             builder.Services.AddTransient<IGymEquipment, GymEquipmentsService>();
-			builder.Services.AddTransient<IEmployee, EmployeeService>();
+            builder.Services.AddTransient<IEmployee, EmployeeService>();
             builder.Services.AddTransient<ISupplement, SupplementService>();
 
             builder.Services.AddScoped<jwtTokenServices>();
@@ -52,6 +52,14 @@ namespace GYM_Management_System
             }).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = jwtTokenServices.GetValidationParameters(builder.Configuration);
+            });
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("create", policy => policy.RequireClaim("persmissions", "create"));
+                options.AddPolicy("update", policy => policy.RequireClaim("persmissions", "update"));
+                options.AddPolicy("delete", policy => policy.RequireClaim("persmissions", "delete"));
+                options.AddPolicy("read", policy => policy.RequireClaim("persmissions", "read"));
             });
 
             //------------ Swagger implementation -----------------------------------------------\\
