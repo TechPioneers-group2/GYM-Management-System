@@ -34,7 +34,13 @@ namespace GYM_Management_System.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<GetUserGymDTO>> GetGym(int id)
         {
-            return await _gym.GetGym(id);
+            var gym = await _gym.GetGym(id);
+
+            if (gym != null)
+            {
+                return gym;
+            }
+            return NotFound();
         }
 
         // PUT: api/Gyms/5
@@ -49,11 +55,16 @@ namespace GYM_Management_System.Controllers
         // POST: api/Gyms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Gym>> PostGym(PostGymDTO gym)
+        public async Task<ActionResult<PostGymDTO>> PostGym(PostGymDTO gym)
         {
-            await _gym.CreateGym(gym);
-            return CreatedAtAction("GetGym", new { id = gym.GymID }, gym);
+            var newGym = await _gym.CreateGym(gym);
+            if (newGym == null)
+            {
+                return BadRequest();
+            }
+            return Ok(newGym);
         }
+
 
         // DELETE: api/Gyms/5
         [HttpDelete("{id}")]
@@ -65,9 +76,9 @@ namespace GYM_Management_System.Controllers
 
         [HttpPost]
         [Route("{gymId}/Supplement/{SupplementId}")]
-        public async Task<IActionResult> AddSupplementsToGym(int gymId, int SupplementId)
+        public async Task<IActionResult> AddSupplementsToGym(int gymId, int SupplementId, int quantity)
         {
-            await _gym.AddSupplementToGym(gymId, SupplementId);
+            await _gym.AddSupplementToGym(gymId, SupplementId, quantity);
 
             return Ok();
         }
@@ -75,11 +86,11 @@ namespace GYM_Management_System.Controllers
         [Route("{gymId}/Supplement/{supplementId}")]
         public async Task<IActionResult> UpdateSupplementForGym(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplemen)
         {
-            var gymSupplement=await _gym.UpdateSupplementForGym(gymId, supplementId, updateGymSupplemen);
+            var gymSupplement = await _gym.UpdateSupplementForGym(gymId, supplementId, updateGymSupplemen);
 
             return Ok();
 
-		}
+        }
 
         [HttpDelete]
         [Route("{gymId}/Supplement/{supplementId}")]

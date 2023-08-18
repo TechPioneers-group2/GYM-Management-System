@@ -17,10 +17,10 @@
 
     }
 
-	public class CreatSupplementDTO
-	{
-		public string Name { get; set; }
-		public string Price { get; set; }
+    public class CreatSupplementDTO
+    {
+        public string Name { get; set; }
+        public string Price { get; set; }
 
-	}
+    }
 }

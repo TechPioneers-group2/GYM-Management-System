@@ -14,9 +14,9 @@ namespace GYM_Management_System.Models.Interfaces
         Task<SupplementDTO> GetSupplementById(int supplementId);
 
         // Update Supplement Data
-        Task<SupplementDTO> UpdateSupplement(int supplementId, SupplementDTO supplement);
+        Task<SupplementDTO> UpdateSupplement(int supplementId, CreatSupplementDTO supplement);
 
         // Delete Supplement
-        Task<bool> DeleteSupplement(int supplementId);
+        Task<string> DeleteSupplement(int supplementId);
     }
 }

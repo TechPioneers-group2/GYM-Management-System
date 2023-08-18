@@ -2,8 +2,8 @@
 using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
 using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.EntityFrameworkCore; // For Entity Framework Core's asynchronous methods
-using System.Linq; // For IQueryable and other LINQ-related functionalities
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace GYM_Management_System.Models.Services
 {
@@ -19,16 +19,16 @@ namespace GYM_Management_System.Models.Services
         {
             var newEquipment = new GymEquipment()
             {
-                //GymEquipmentID = equipmentDTO.GymEquipmentID,
+
                 Quantity = equipmentDTO.Quantity,
                 Name = equipmentDTO.Name,
                 OutOfService = equipmentDTO.OutOfService,
                 GymID = equipmentDTO.GymID
             };
 
-             await _gymDbContext.GymEquipments.AddAsync(newEquipment);
+            await _gymDbContext.GymEquipments.AddAsync(newEquipment);
             await _gymDbContext.SaveChangesAsync();
-            //equipmentDTO.GymEquipmentID = newEquipment.GymEquipmentID;
+
             var equipmentDtoResult = new EquipmentDTO()
             {
                 GymEquipmentID = newEquipment.GymEquipmentID,
@@ -38,7 +38,7 @@ namespace GYM_Management_System.Models.Services
                 GymID = newEquipment.GymID
             };
 
-			return equipmentDtoResult;
+            return equipmentDtoResult;
         }
 
         public async Task DeleteGymEquipment(int GymEquipmentID)
@@ -60,11 +60,11 @@ namespace GYM_Management_System.Models.Services
                 Name = E.Name,
                 OutOfService = E.OutOfService,
                 GymID = E.GymID
-            }).FirstOrDefaultAsync(e => e.GymEquipmentID==GymEquipmentID);
-            return Equipment;   
+            }).FirstOrDefaultAsync(e => e.GymEquipmentID == GymEquipmentID);
+            return Equipment;
         }
 
-        public  async Task<List<EquipmentDTO>> GetGymEquipments()
+        public async Task<List<EquipmentDTO>> GetGymEquipments()
         {
             var allEquipment = await _gymDbContext.GymEquipments.Select(E => new EquipmentDTO
             {
@@ -82,22 +82,22 @@ namespace GYM_Management_System.Models.Services
             var Selected = await _gymDbContext.GymEquipments.FindAsync(GymEquipmentID);
             if (Selected != null)
             {
-                Selected.Name = equipmentDTO.Name;
+
                 Selected.Quantity = equipmentDTO.Quantity;
                 Selected.OutOfService = equipmentDTO.OutOfService;
-              
-               _gymDbContext.Entry(Selected).State = EntityState.Modified;
+
+                _gymDbContext.Entry(Selected).State = EntityState.Modified;
                 await _gymDbContext.SaveChangesAsync();
-				var equipmentDtoResult = new EquipmentDTO()
-				{
-					GymEquipmentID = Selected.GymEquipmentID,
-					Quantity = Selected.Quantity,
-					Name = Selected.Name,
-					OutOfService = Selected.OutOfService,
-					GymID = Selected.GymID
-				};
-                return equipmentDtoResult;  
-			}
+                var equipmentDtoResult = new EquipmentDTO()
+                {
+                    GymEquipmentID = Selected.GymEquipmentID,
+                    Quantity = Selected.Quantity,
+                    Name = Selected.Name,
+                    OutOfService = Selected.OutOfService,
+                    GymID = Selected.GymID
+                };
+                return equipmentDtoResult;
+            }
             return null;
 
 

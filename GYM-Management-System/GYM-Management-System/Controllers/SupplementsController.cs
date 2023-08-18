@@ -29,9 +29,16 @@ namespace GYM_Management_System.Controllers
         {
             if (_supplements == null)
             {
-                return NotFound();
+                return NotFound("No supplements found.");
             }
-            return await _supplements.GetAllSupplements();
+
+            var supplements = await _supplements.GetAllSupplements();
+            if (supplements == null || !supplements.Any())
+            {
+                return NotFound("No supplements found.");
+            }
+
+            return supplements;
         }
 
         // GET: api/Supplements/5
@@ -40,28 +47,34 @@ namespace GYM_Management_System.Controllers
         {
             if (_supplements == null)
             {
-                return NotFound();
+                return NotFound("Supplements data not available.");
             }
-            var supplements = await _supplements.GetSupplementById(id);
-            if (supplements == null)
+
+            var supplement = await _supplements.GetSupplementById(id);
+            if (supplement == null)
             {
-                return NotFound();
+                return NotFound("Supplement not found.");
             }
-            return supplements;
+
+            return supplement;
         }
+
 
         // PUT: api/Supplements/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSupplement([FromRoute] int id, [FromBody] SupplementDTO supplement)
+        public async Task<ActionResult<SupplementDTO>> PutSupplement(int id, CreatSupplementDTO supplement)
         {
-            if (id != supplement.SupplementID)
+            var updatedSupplement = await _supplements.UpdateSupplement(id, supplement);
+
+            if (updatedSupplement == null)
             {
-                return BadRequest();
+                return NotFound("Supplement not found.");
             }
 
-            return Ok(updatedSupplement);
+            return updatedSupplement;
         }
+
 
 
 
@@ -71,13 +84,16 @@ namespace GYM_Management_System.Controllers
         [HttpPost]
         public async Task<ActionResult<SupplementDTO>> PostSupplement(CreatSupplementDTO supplement)
         {
-
-           var supplementDto= await _supplements.CreateSupplement(supplement);
-            //return CreatedAtAction("GetSupplement", new
-            //{
-            //    id = supplement.SupplementID,
-            //}, supplement);
-            return supplementDto;
+            try
+            {
+                var supplementDto = await _supplements.CreateSupplement(supplement);
+                return CreatedAtAction(nameof(GetSupplement), new { id = supplementDto.SupplementID }, supplementDto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while creating the supplement.");
+            }
+        }
 
 
         // DELETE: api/Supplements/5

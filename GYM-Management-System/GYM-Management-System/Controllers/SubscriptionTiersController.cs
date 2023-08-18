@@ -27,14 +27,14 @@ namespace GYM_Management_System.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetSubscriptionTierDTO>>> GetSubscriptionTiers()
         {
-          return await _SubscriptionTier.GetAllSubscriptionTier();
+            return await _SubscriptionTier.GetAllSubscriptionTier();
         }
 
         // GET: api/SubscriptionTiers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<GetSubscriptionTierDTO>> GetSubscriptionTier(int id)
         {
-          return await _SubscriptionTier.GetSubscriptionTier(id);
+            return await _SubscriptionTier.GetSubscriptionTier(id);
         }
 
         // PUT: api/SubscriptionTiers/5
@@ -53,11 +53,8 @@ namespace GYM_Management_System.Controllers
         {
             var createdsubtier = await _SubscriptionTier.Create(subscriptionTier);
 
-            return createdsubtier;
-
-
-
-		 }
+            return Ok(createdsubtier);
+        }
 
         // DELETE: api/SubscriptionTiers/5
         [HttpDelete("{id}")]
@@ -67,6 +64,6 @@ namespace GYM_Management_System.Controllers
             return NoContent();
         }
 
-        
+
     }
 }
