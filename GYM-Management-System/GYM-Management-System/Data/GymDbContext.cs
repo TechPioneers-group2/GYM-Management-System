@@ -1,9 +1,10 @@
 ﻿using GYM_Management_System.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace GYM_Management_System.Data
 {
-    public class GymDbContext : DbContext
+    public class GymDbContext : IdentityDbContext<ApplicationUser>
     {
         public GymDbContext(DbContextOptions options) : base(options)
         {
@@ -12,6 +13,7 @@ namespace GYM_Management_System.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Client>()
         .HasKey(c => new { c.GymID, c.ClientID });
 
@@ -20,7 +22,7 @@ namespace GYM_Management_System.Data
                   new SubscriptionTier
                   {
                       SubscriptionTierID = 1,
-                      Name = "1 month",
+                      Name = "one month",
                       Price = "30 JD",
                       Length = 1
                   },
@@ -29,17 +31,17 @@ namespace GYM_Management_System.Data
                   {
                       SubscriptionTierID = 2,
                       Name = "3 months",
-                      Price = "60 JD",
+                      Price = "50 JD",
                       Length = 3
                   },
-
-                  new SubscriptionTier
-                  {
-                      SubscriptionTierID = 3,
-                      Name = "6 months",
-                      Price = "110 JD",
-                      Length = 6
-                  }
+              
+                new SubscriptionTier
+                {
+                    SubscriptionTierID = 3,
+                    Name = "6 months",
+                    Price = "80 JD",
+                    Length = 6
+                }
                 );
 
             modelBuilder.Entity<Gym>().HasData
@@ -92,6 +94,54 @@ namespace GYM_Management_System.Data
                     SubscriptionDate = new DateTime(2023, 1, 1),
                     SubscriptionExpiry = new DateTime(2023, 4, 4),
                 }
+                ); modelBuilder.Entity<Employee>().HasData
+                (
+
+                new Employee
+                {
+                   EmployeeID= 1,
+                   Name="Ahmad",
+                   Salary="500" ,
+                   WorkingDays="sun-thu",
+                   WorkingHours="2-10",
+                   JobDescription="coach",
+                   IsAvailable =false,
+                   GymID=1 ,
+                }
+                ); modelBuilder.Entity<Employee>().HasData
+                (
+
+                new Employee
+                {GymID=1,
+                    EmployeeID = 2,
+                    Name = "moh",
+                    Salary = "500",
+                    WorkingDays = "sun-thu",
+                    WorkingHours = "2-10",
+                    JobDescription = "trainer",
+                    IsAvailable = false,
+                }
+                ); modelBuilder.Entity<GymEquipment>().HasData
+                (
+
+                new GymEquipment
+                {
+                   GymEquipmentID=1,
+                   Name="tradmal",
+                   Quantity=5 ,
+                   OutOfService=0,
+                   GymID=1,
+                }
+                ); modelBuilder.Entity<GymEquipment>().HasData
+                (
+
+                new GymEquipment
+                {GymID=1,
+                    GymEquipmentID = 2,
+                    Name = "bench press",
+                    Quantity = 2,
+                    OutOfService = 0,
+                }
                 );
 
             modelBuilder.Entity<Employee>().HasData(new Employee
@@ -113,6 +163,7 @@ namespace GYM_Management_System.Data
                     Price = "80 JD"
 
                 });
+
 
 
             modelBuilder.Entity<Client>()

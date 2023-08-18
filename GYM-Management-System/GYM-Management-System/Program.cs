@@ -2,6 +2,7 @@ using GYM_Management_System.Data;
 using GYM_Management_System.Models;
 using GYM_Management_System.Models.Interfaces;
 using GYM_Management_System.Models.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace GYM_Management_System
@@ -17,12 +18,19 @@ namespace GYM_Management_System
             builder.Services.AddControllers().AddNewtonsoftJson(options =>
       options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
     );
+            /// regstor the identty
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
 
+                // There are other options like this
+            })
+  .AddEntityFrameworkStores<GymDbContext>();
             string connString = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services
                 .AddDbContext<GymDbContext>
                 (opions => opions.UseSqlServer(connString));
-
+            builder.Services.AddTransient<IUser, UserService>();
             builder.Services.AddTransient<IGym, GymService>();
             builder.Services.AddTransient<IClient, ClientService>();
             builder.Services.AddTransient<ISubscriptionTier, SubscriptionTierService>();
@@ -62,5 +70,6 @@ namespace GYM_Management_System
             app.MapControllers();
             app.Run();
         }
+        //Merge
     }
 }
