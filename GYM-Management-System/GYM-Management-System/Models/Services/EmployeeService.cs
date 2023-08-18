@@ -133,6 +133,7 @@ namespace GYM_Management_System.Models.Services
             if (employee != null)
             {
                 employee.GymID = updateEmployeeDTO.GymID;
+                employee.Name = updateEmployeeDTO.Name;
                 employee.JobDescription = updateEmployeeDTO.JobDescription;
                 employee.WorkingDays = updateEmployeeDTO.WorkingDays;
                 employee.WorkingHours = updateEmployeeDTO.WorkingHours;

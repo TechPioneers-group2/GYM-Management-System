@@ -38,10 +38,10 @@ namespace GYM_Management_System.Controllers
 
         [Authorize(Policy = "readAdmin")]
         [Authorize(Policy = "readEmployee")]
-        [HttpGet("{gymid}/{clientid}")]
-        public async Task<ActionResult<GetClientDTO>> GetClient(int gymid, int clientid)
+        [HttpGet("/api/client/{clientid}/gym/{gymid}")]
+        public async Task<ActionResult<GetClientDTO>> GetClient(int clientid, int gymid)
         {
-            return await _client.GetClient(gymid, clientid);
+            return await _client.GetClient(clientid, gymid);
         }
 
         // PUT: api/Clients/5
@@ -65,7 +65,8 @@ namespace GYM_Management_System.Controllers
         public async Task<ActionResult<Client>> PostClient(int gymid, PostClientDTO clientDto)
         {
             var createdClient = await _client.CreateClient(gymid, clientDto);
-            // If the client creation was successful
+
+            
             if (createdClient != null)
             {
                 // Set the properties of the clientDto object with the values returned from the CreateClient method
@@ -75,7 +76,7 @@ namespace GYM_Management_System.Controllers
                 return CreatedAtAction("GetClient", new { gymid = createdClient.GymID, clientid = createdClient.ClientID }, clientDto);
             }
 
-            // Handle the case where client creation failed
+            
             return BadRequest("Failed to create client");
         }
 

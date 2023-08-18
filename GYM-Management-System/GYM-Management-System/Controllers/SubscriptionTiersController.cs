@@ -59,10 +59,7 @@ namespace GYM_Management_System.Controllers
         {
             var createdsubtier = await _SubscriptionTier.Create(subscriptionTier);
 
-            return createdsubtier;
-
-
-
+            return Ok(createdsubtier);
         }
 
         // DELETE: api/SubscriptionTiers/5

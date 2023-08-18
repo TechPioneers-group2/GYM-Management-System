@@ -1,6 +1,7 @@
 ﻿using GYM_Management_System.Data;
 using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -24,7 +25,6 @@ namespace GYM_Management_System.Models.Services
 
             if (subscriptionTier == null)
             {
-                // Handle the case where the subscription tier doesn't exist
                 return null;
             }
 
@@ -121,12 +121,9 @@ namespace GYM_Management_System.Models.Services
                     Name = queryST.Name
                 };
 
-
+                return returnedClient;
             }
-
-            return returnedClient;
+            return null;
         }
-
-
     }
 }

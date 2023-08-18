@@ -40,7 +40,7 @@ namespace GYM_Management_System.Controllers
         public async Task<ActionResult<EquipmentDTO>> GetGymEquipment(int id)
         {
             var equipment = await _equipment.GetEquipmentById(id);
-            return equipment;
+            return Ok(equipment);
         }
 
         // PUT: api/GymEquipments/5
@@ -70,7 +70,7 @@ namespace GYM_Management_System.Controllers
         public async Task<ActionResult<EquipmentDTO>> PostGymEquipment(CreatEquipmentDTO gymEquipment)
         {
             var gymEq = await _equipment.Create(gymEquipment);
-            //return CreatedAtAction("GetGymEquipment", new { id = gymEq.GymEquipmentID }, gymEquipment);
+
             return gymEq;
 
         }

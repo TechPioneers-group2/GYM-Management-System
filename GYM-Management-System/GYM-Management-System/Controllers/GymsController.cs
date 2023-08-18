@@ -46,7 +46,13 @@ namespace GYM_Management_System.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<GetUserGymDTO>> GetGym(int id)
         {
-            return await _gym.GetGym(id);
+            var gym = await _gym.GetGym(id);
+
+            if (gym != null)
+            {
+                return gym;
+            }
+            return NotFound();
         }
 
         // PUT: api/Gyms/5
@@ -63,11 +69,16 @@ namespace GYM_Management_System.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [Authorize(Policy = "createAdmin")]
         [HttpPost]
-        public async Task<ActionResult<Gym>> PostGym(PostGymDTO gym)
+        public async Task<ActionResult<PostGymDTO>> PostGym(PostGymDTO gym)
         {
-            await _gym.CreateGym(gym);
-            return CreatedAtAction("GetGym", new { id = gym.GymID }, gym);
+            var newGym = await _gym.CreateGym(gym);
+            if (newGym == null)
+            {
+                return BadRequest();
+            }
+            return Ok(newGym);
         }
+
 
         // DELETE: api/Gyms/5
         [Authorize(Policy = "deleteAdmin")]
@@ -77,22 +88,13 @@ namespace GYM_Management_System.Controllers
             await _gym.DeleteGym(id);
             return NoContent();
         }
-        //// POST : api/Rooms/5/Amenity/5
-        //[HttpPost]
-        //[Route("{roomId}/Amenity/{amenityId}")]
-        //public async Task<IActionResult> AddAmenityToRoom(int roomId, int amenityId)
-        //{
-        //    await _room.AddAmenityToRoom(roomId, amenityId);
-
-        //    return NoContent();
-        //}
         [Authorize(Policy = "createAdmin")]
         [Authorize(Policy = "createEmployee")]
         [HttpPost]
         [Route("{gymId}/Supplement/{SupplementId}")]
-        public async Task<IActionResult> AddSupplementsToGym(int gymId, int SupplementId)
+        public async Task<IActionResult> AddSupplementsToGym(int gymId, int SupplementId, int quantity)
         {
-            await _gym.AddSupplementToGym(gymId, SupplementId);
+            await _gym.AddSupplementToGym(gymId, SupplementId, quantity);
 
             return Ok();
         }
