@@ -258,68 +258,6 @@ namespace GYM_Management_System.Models.Services
             return returnVar;
         }
 
-        public async Task<List<GetManagerGymDTO>> GetGymManger()
-        {
-            var suppTierList = await _gymDbContext.SubscriptionTiers.ToListAsync();
-
-            var supptierDTO = suppTierList.Select(suppTier => new GymGetSubscriptionTierDTO
-            {
-                Name = suppTier.Name,
-                Price = suppTier.Price
-            }).ToList();
-
-            var returnVar = await _gymDbContext.Gyms
-                .Select(Gm => new GetManagerGymDTO
-                {
-                    GymID = Gm.GymID,
-                    Name = Gm.Name,
-                    Address = Gm.Address,
-                    CurrentCapacity = Gm.CurrentCapacity,
-                    MaxCapacity = Gm.MaxCapacity,
-                    ActiveHours = Gm.ActiveHours,
-                    Notification = Gm.Notification,
-                    Equipments = Gm.GymEquipments.Select(geq => new EquipmentDTOPut
-                    {
-                        GymEquipmentID = geq.GymEquipmentID,
-                        Name = geq.Name,
-                        OutOfService = geq.OutOfService,
-                        Quantity = geq.Quantity,
-                    }).ToList(),
-                    clients = Gm.Clients.Select(cl => new PostClientDTO
-                    {
-                        Name = cl.Name,
-                        ClientID = cl.ClientID,
-                        InGym = cl.InGym,
-                        SubscriptionDate = cl.SubscriptionDate,
-                        SubscriptionExpiry = cl.SubscriptionExpiry,
-                        SubscriptionTierID = cl.SubscriptionTierID
-                    }).ToList(),
-                    employees = Gm.Employees.Select(em => new GetEmployeesByGymId
-                    {
-                        Name = em.Name,
-                        EmployeeID = em.EmployeeID,
-                        Salary = em.Salary,
-                        JobDescription = em.JobDescription,
-                        IsAvailable = em.IsAvailable,
-                        WorkingDays = em.WorkingDays,
-                        WorkingHours = em.WorkingHours
-                    }).ToList(),
-                    Supplements = Gm.GymSupplements.Select(x => new GymSupplementDTO
-                    {
-                        GymID=x.GymID,
-                        SupplementID = x.SupplementID,
-                        Quantity = x.Quantity,
-                        Supplements = new GetGymSupplementDTO
-                        {
-                            Name = x.Supplements.Name,
-                            Price = x.Supplements.Price
-                        }
-                    }).ToList(),
-                    subscriptiontiers = supptierDTO
-                }).ToListAsync();
-
-            return returnVar;
-        }
 
 
         public async Task<List<GetUserGymDTO>> GetGyms()
