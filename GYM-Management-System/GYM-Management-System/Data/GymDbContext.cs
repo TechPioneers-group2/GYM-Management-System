@@ -1,4 +1,5 @@
 ﻿using GYM_Management_System.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -100,20 +101,21 @@ namespace GYM_Management_System.Data
 
                 new Employee
                 {
-                   EmployeeID= 1,
-                   Name="Ahmad",
-                   Salary="500" ,
-                   WorkingDays="sun-thu",
-                   WorkingHours="2-10",
-                   JobDescription="coach",
-                   IsAvailable =false,
-                   GymID=1 ,
+                    EmployeeID = 1,
+                    Name = "Ahmad",
+                    Salary = "500",
+                    WorkingDays = "sun-thu",
+                    WorkingHours = "2-10",
+                    JobDescription = "coach",
+                    IsAvailable = false,
+                    GymID = 1,
                 }
                 ); modelBuilder.Entity<Employee>().HasData
                 (
 
                 new Employee
-                {GymID=1,
+                {
+                    GymID = 1,
                     EmployeeID = 2,
                     Name = "moh",
                     Salary = "500",
@@ -127,17 +129,18 @@ namespace GYM_Management_System.Data
 
                 new GymEquipment
                 {
-                   GymEquipmentID=1,
-                   Name="tradmal",
-                   Quantity=5 ,
-                   OutOfService=0,
-                   GymID=1,
+                    GymEquipmentID = 1,
+                    Name = "tradmal",
+                    Quantity = 5,
+                    OutOfService = 0,
+                    GymID = 1,
                 }
                 ); modelBuilder.Entity<GymEquipment>().HasData
                 (
 
                 new GymEquipment
-                {GymID=1,
+                {
+                    GymID = 1,
                     GymEquipmentID = 2,
                     Name = "bench press",
                     Quantity = 2,
@@ -179,6 +182,36 @@ namespace GYM_Management_System.Data
             modelBuilder.Entity<GymSupplement>().HasKey(
                 sq => new { sq.GymID, sq.SupplementID });
 
+
+            SeedRole(modelBuilder, "DistrictManager", "create", "update", "delete", "read");
+            SeedRole(modelBuilder, "PropertyManager", "create", "update", "read");
+            SeedRole(modelBuilder, "Agent", "update", "read");
+            SeedRole(modelBuilder, "AnonymousUsers", "read");
+
+        }
+
+        int nextId = 1;
+        private void SeedRole(ModelBuilder modelBuilder, string roleName, params string[] permissions)
+        {
+            var role = new IdentityRole
+            {
+                Id = roleName.ToLower(),
+                Name = roleName,
+                NormalizedName = roleName.ToUpper(),
+                ConcurrencyStamp = Guid.Empty.ToString()
+            };
+
+            var roleClaim = permissions.Select(permissions =>
+            new IdentityRoleClaim<string>
+            {
+                Id = nextId++,
+                RoleId = role.Id,
+                ClaimType = "permissions",
+                ClaimValue = permissions
+            }
+            ).ToArray();
+
+            modelBuilder.Entity<IdentityRole>().HasData(role);
         }
 
         public DbSet<Gym> Gyms { get; set; }
