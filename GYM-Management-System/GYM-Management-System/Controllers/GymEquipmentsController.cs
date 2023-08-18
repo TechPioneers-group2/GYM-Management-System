@@ -34,8 +34,8 @@ namespace GYM_Management_System.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<EquipmentDTO>> GetGymEquipment(int id)
         {
-          var equipment = await _equipment.GetEquipmentById(id);
-            return equipment;
+            var equipment = await _equipment.GetEquipmentById(id);
+            return Ok(equipment);
         }
 
         // PUT: api/GymEquipments/5
@@ -43,13 +43,13 @@ namespace GYM_Management_System.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<EquipmentDTO>> PutGymEquipment(int id, EquipmentDTOPutservice gymEquipment)
         {
-			var updatedEq = await _equipment.UpdateGymEquipment(id, gymEquipment);
-			if (updatedEq==null)
+            var updatedEq = await _equipment.UpdateGymEquipment(id, gymEquipment);
+            if (updatedEq == null)
             {
-				return NotFound();
-				//return BadRequest("the id not matches");
-			}
-            
+                return NotFound();
+                //return BadRequest("the id not matches");
+            }
+
             return updatedEq;
         }
 
@@ -58,22 +58,22 @@ namespace GYM_Management_System.Controllers
         [HttpPost]
         public async Task<ActionResult<EquipmentDTO>> PostGymEquipment(CreatEquipmentDTO gymEquipment)
         {
-           var gymEq= await _equipment.Create(gymEquipment);
-             //return CreatedAtAction("GetGymEquipment", new { id = gymEq.GymEquipmentID }, gymEquipment);
+            var gymEq = await _equipment.Create(gymEquipment);
+
             return gymEq;
 
-		}
+        }
 
         // DELETE: api/GymEquipments/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGymEquipment(int id)
         {
-          
+
             await _equipment.DeleteGymEquipment(id);
 
             return NoContent();
         }
 
-       
+
     }
 }
