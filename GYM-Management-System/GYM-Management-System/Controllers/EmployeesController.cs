@@ -9,6 +9,7 @@ using GYM_Management_System.Data;
 using GYM_Management_System.Models;
 using GYM_Management_System.Models.Interfaces;
 using GYM_Management_System.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GYM_Management_System.Controllers
 {
@@ -24,6 +25,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/Employees
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetEmployees()
         {
@@ -37,6 +39,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/Employees/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<EmployeeDTO>> GetEmployee(int id)
         {
@@ -53,6 +56,7 @@ namespace GYM_Management_System.Controllers
 
         // PUT: api/Employees/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult<EmployeeDTO>> PutEmployee(UpdateEmployeeDTO updateEmployeeDTO, int id)
         {
@@ -67,6 +71,7 @@ namespace GYM_Management_System.Controllers
 
         // POST: api/Employees
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<EmployeeDTO>> PostEmployee(CreatEmployeeDTO creatEmployeeDTO)
         {
@@ -79,6 +84,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // DELETE: api/Employees/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmployee(int id)
         {
@@ -88,6 +94,9 @@ namespace GYM_Management_System.Controllers
 
 
         }
+
+
+        [Authorize]
         [Route("/api/Employees/Gym/{gymId}")]
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<GetEmployeesByGymId>>> GetEmployeesByGymId(int gymId)

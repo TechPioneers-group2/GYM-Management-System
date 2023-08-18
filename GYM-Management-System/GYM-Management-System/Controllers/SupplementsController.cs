@@ -9,6 +9,7 @@ using GYM_Management_System.Data;
 using GYM_Management_System.Models;
 using GYM_Management_System.Models.Interfaces;
 using GYM_Management_System.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GYM_Management_System.Controllers
 {
@@ -52,6 +53,7 @@ namespace GYM_Management_System.Controllers
 
         // PUT: api/Supplements/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSupplement([FromRoute] int id, [FromBody] SupplementDTO supplement)
         {
@@ -69,6 +71,7 @@ namespace GYM_Management_System.Controllers
 
         // POST: api/Supplements
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<SupplementDTO>> PostSupplement(CreatSupplementDTO supplement)
         {
@@ -83,6 +86,7 @@ namespace GYM_Management_System.Controllers
 		}
 
         // DELETE: api/Supplements/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<string> DeleteSupplement(int id)
         {

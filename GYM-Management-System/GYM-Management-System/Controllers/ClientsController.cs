@@ -9,6 +9,7 @@ using GYM_Management_System.Data;
 using GYM_Management_System.Models;
 using GYM_Management_System.Models.Interfaces;
 using GYM_Management_System.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GYM_Management_System.Controllers
 {
@@ -23,6 +24,7 @@ namespace GYM_Management_System.Controllers
             _client = context;
         }
 
+        [Authorize]
         // GET: api/Clients
         [HttpGet("{gymid}")]
         public async Task<ActionResult<IEnumerable<GetClientDTO>>> GetClients(int gymid)
@@ -31,6 +33,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/Clients/5
+        [Authorize]
         [HttpGet("{gymid}/{clientid}")]
         public async Task<ActionResult<GetClientDTO>> GetClient(int gymid, int clientid)
         {
@@ -39,6 +42,7 @@ namespace GYM_Management_System.Controllers
 
         // PUT: api/Clients/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPut("{gymid}/{clientid}")]
         public async Task<IActionResult> PutClient(int gymid, int clientid, UpdateClientDTO client)
         {
@@ -56,7 +60,7 @@ namespace GYM_Management_System.Controllers
         //    await _client.CreateClient(gymid, client);
         //    return CreatedAtAction("GetClient", new { gymid = client.GymID, clientid = client.ClientID }, client);
         //}
-
+        [Authorize]
         [HttpPost("{gymid}")]
         public async Task<ActionResult<Client>> PostClient(int gymid, PostClientDTO clientDto)
         {
@@ -78,6 +82,7 @@ namespace GYM_Management_System.Controllers
 
 
         // DELETE: api/Clients/5
+        [Authorize]
         [HttpDelete("/api/Gym/{gymid}/Client/{clientid}")]
         public async Task<IActionResult> DeleteClient(int gymid, int clientid)
         {

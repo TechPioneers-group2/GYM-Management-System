@@ -9,6 +9,7 @@ using GYM_Management_System.Data;
 using GYM_Management_System.Models;
 using GYM_Management_System.Models.Interfaces;
 using GYM_Management_System.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GYM_Management_System.Controllers
 {
@@ -24,6 +25,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/Gyms
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetUserGymDTO>>> GetGyms()
         {
@@ -48,6 +50,7 @@ namespace GYM_Management_System.Controllers
 
         // POST: api/Gyms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Gym>> PostGym(PostGymDTO gym)
         {
@@ -56,6 +59,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // DELETE: api/Gyms/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGym(int id)
         {
@@ -71,6 +75,7 @@ namespace GYM_Management_System.Controllers
 
         //    return NoContent();
         //}
+        [Authorize]
         [HttpPost]
         [Route("{gymId}/Supplement/{SupplementId}")]
         public async Task<IActionResult> AddSupplementsToGym(int gymId, int SupplementId)
@@ -79,6 +84,9 @@ namespace GYM_Management_System.Controllers
 
             return Ok();
         }
+
+
+        [Authorize]
         [HttpPut]
         [Route("{gymId}/Supplement/{supplementId}")]
         public async Task<IActionResult> UpdateSupplementForGym(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplemen)
@@ -89,6 +97,7 @@ namespace GYM_Management_System.Controllers
 
 		}
 
+        [Authorize]
         [HttpDelete]
         [Route("{gymId}/Supplement/{supplementId}")]
         public async Task<IActionResult> RemoveSupplementFromGym(int gymId, int supplementId)

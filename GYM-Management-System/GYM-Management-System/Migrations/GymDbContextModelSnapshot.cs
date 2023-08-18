@@ -179,6 +179,39 @@ namespace GYM_Management_System.Migrations
                     b.HasIndex("GymID");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            EmployeeID = 1,
+                            GymID = 1,
+                            IsAvailable = true,
+                            JobDescription = "Trainer",
+                            Name = "Ahmad Albisany",
+                            Salary = "330 JD",
+                            WorkingDays = "Sat - Fri",
+                            WorkingHours = "9:00AM - 5:00PM"
+                        });
+                        },
+                        new
+                        {
+                            EmployeeID = 2,
+                            GymID = 1,
+                            IsAvailable = false,
+                            JobDescription = "trainer",
+                            Name = "moh",
+                            Salary = "500",
+                            WorkingDays = "sun-thu",
+                            WorkingHours = "2-10"
+=========
+                            IsAvailable = true,
+                            JobDescription = "Trainer",
+                            Name = "Ahmad Albisany",
+                            Salary = "330 JD",
+                            WorkingDays = "Sat - Fri",
+                            WorkingHours = "9:00AM - 5:00PM"
+>>>>>>>>> Temporary merge branch 2
+                        });
                 });
 
             modelBuilder.Entity("GYM_Management_System.Models.Gym", b =>
@@ -311,11 +344,7 @@ namespace GYM_Management_System.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubscriptionTierID"));
 
-                    b.Property<int>("Length")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
+                            Name = "1 month",
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")
@@ -323,30 +352,34 @@ namespace GYM_Management_System.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SubscriptionTierID");
-
-                    b.ToTable("SubscriptionTiers");
-
-                    b.HasData(
-                        new
+                            Price = "60 JD"
                         {
                             SubscriptionTierID = 1,
                             Length = 1,
+<<<<<<<<< Temporary merge branch 1
                             Name = "one month",
-                            Price = "30 JD"
-                        },
-                        new
+=========
+                            Price = "110 JD"
                         {
                             SubscriptionTierID = 2,
                             Length = 3,
                             Name = "3 months",
+<<<<<<<<< Temporary merge branch 1
                             Price = "50 JD"
+=========
+                            Price = "60 JD"
+>>>>>>>>> Temporary merge branch 2
                         },
                         new
                         {
                             SubscriptionTierID = 3,
                             Length = 6,
                             Name = "6 months",
+<<<<<<<<< Temporary merge branch 1
                             Price = "80 JD"
+=========
+                            Price = "110 JD"
+>>>>>>>>> Temporary merge branch 2
                         });
                 });
 

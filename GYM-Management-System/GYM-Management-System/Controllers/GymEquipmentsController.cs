@@ -9,6 +9,7 @@ using GYM_Management_System.Data;
 using GYM_Management_System.Models;
 using GYM_Management_System.Models.Interfaces;
 using GYM_Management_System.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GYM_Management_System.Controllers
 {
@@ -40,6 +41,7 @@ namespace GYM_Management_System.Controllers
 
         // PUT: api/GymEquipments/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult<EquipmentDTO>> PutGymEquipment(int id, EquipmentDTOPutservice gymEquipment)
         {
@@ -55,6 +57,7 @@ namespace GYM_Management_System.Controllers
 
         // POST: api/GymEquipments
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<EquipmentDTO>> PostGymEquipment(CreatEquipmentDTO gymEquipment)
         {
@@ -65,6 +68,7 @@ namespace GYM_Management_System.Controllers
 		}
 
         // DELETE: api/GymEquipments/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGymEquipment(int id)
         {

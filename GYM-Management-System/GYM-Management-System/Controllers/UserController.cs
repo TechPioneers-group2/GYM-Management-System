@@ -1,6 +1,7 @@
 ﻿using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
 using GYM_Management_System.Models.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -16,6 +17,8 @@ namespace GYM_Management_System.Controllers
         {
             userService = user;
         }
+
+        
         [HttpPost("Login")]
         public async Task<ActionResult<UserDTO>> Login(LogInDTO loginDto)
         {
@@ -27,6 +30,8 @@ namespace GYM_Management_System.Controllers
             }
             return Ok(user);
         }
+
+        [Authorize]
         [HttpPost("Register")]
         public async Task<ActionResult<UserDTO>> RegisterAgent(RegisterUserDTO Data)
         {
@@ -37,6 +42,8 @@ namespace GYM_Management_System.Controllers
             }
             return BadRequest(new ValidationProblemDetails(ModelState));
         }
+
+       
     }
     }
 

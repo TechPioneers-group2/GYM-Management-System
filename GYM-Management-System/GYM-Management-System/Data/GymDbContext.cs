@@ -14,6 +14,7 @@ namespace GYM_Management_System.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Client>()
         .HasKey(c => new { c.GymID, c.ClientID });
 
@@ -22,7 +23,7 @@ namespace GYM_Management_System.Data
                   new SubscriptionTier
                   {
                       SubscriptionTierID = 1,
-                      Name = "one month",
+                      Name = "1 month",
                       Price = "30 JD",
                       Length = 1
                   },
@@ -31,17 +32,17 @@ namespace GYM_Management_System.Data
                   {
                       SubscriptionTierID = 2,
                       Name = "3 months",
-                      Price = "50 JD",
+                      Price = "60 JD",
                       Length = 3
                   },
-              
-                new SubscriptionTier
-                {
-                    SubscriptionTierID = 3,
-                    Name = "6 months",
-                    Price = "80 JD",
-                    Length = 6
-                }
+
+                  new SubscriptionTier
+                  {
+                      SubscriptionTierID = 3,
+                      Name = "6 months",
+                      Price = "110 JD",
+                      Length = 6
+                  }
                 );
 
             modelBuilder.Entity<Gym>().HasData
