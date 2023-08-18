@@ -31,7 +31,7 @@ namespace GYM_Management_System.Controllers
             return Ok(user);
         }
 
-        [Authorize(Policy = "createAdmin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost("AdminRegister")]
         public async Task<ActionResult<UserDTO>> RegisterAdmin(RegisterAdminDTO Data)
         {

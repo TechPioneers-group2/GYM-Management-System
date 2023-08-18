@@ -42,8 +42,7 @@ namespace GYM_Management_System.Controllers
 
         // PUT: api/SubscriptionTiers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [Authorize(Policy = "updateAdmin")]
-        [Authorize(Policy = "updateEmployee")]
+        [Authorize(Roles = "Admin, Employee")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSubscriptionTier(int id, UpdateSubscriptionTierDTO subscriptionTier)
         {
@@ -53,7 +52,7 @@ namespace GYM_Management_System.Controllers
 
         // POST: api/SubscriptionTiers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [Authorize(Policy = "createAdmin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<PostSubscriptionTierDTO>> PostSubscriptionTier(CreatSubscriptionTierDTO subscriptionTier)
         {
@@ -63,7 +62,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // DELETE: api/SubscriptionTiers/5
-        [Authorize(Policy = "deleteAdmin")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSubscriptionTier(int id)
         {

@@ -66,7 +66,7 @@ namespace GYM_Management_System.Controllers
 
         // PUT: api/Supplements/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [Authorize(Policy = "updateAdmin")]
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<ActionResult<SupplementDTO>> PutSupplement(int id, CreatSupplementDTO supplement)
         {
@@ -86,7 +86,7 @@ namespace GYM_Management_System.Controllers
 
         // POST: api/Supplements
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [Authorize(Policy = "createAdmin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<SupplementDTO>> PostSupplement(CreatSupplementDTO supplement)
         {
@@ -108,7 +108,7 @@ namespace GYM_Management_System.Controllers
         public async Task<string> DeleteSupplement(int id)
         {
 
-            var result = await _supplements.DeleteSupplement(id);
+            bool result = await _supplements.DeleteSupplement(id);
             if (result == true)
             {
                 return "Deleted Succesfully!";

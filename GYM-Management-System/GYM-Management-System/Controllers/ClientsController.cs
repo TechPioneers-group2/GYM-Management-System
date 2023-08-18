@@ -26,8 +26,7 @@ namespace GYM_Management_System.Controllers
 
         // GET: api/Clients
 
-        [Authorize(Policy = "readAdmin")]
-        [Authorize(Policy = "readEmployee")]
+        [Authorize(Roles = "Admin, Employee")]
         [HttpGet("{gymid}")]
         public async Task<ActionResult<IEnumerable<GetClientDTO>>> GetClients(int gymid)
         {
@@ -36,8 +35,7 @@ namespace GYM_Management_System.Controllers
 
         // GET: api/Clients/5
 
-        [Authorize(Policy = "readAdmin")]
-        [Authorize(Policy = "readEmployee")]
+        [Authorize(Roles = "Admin, Employee")]
         [HttpGet("/api/client/{clientid}/gym/{gymid}")]
         public async Task<ActionResult<GetClientDTO>> GetClient(int clientid, int gymid)
         {
@@ -47,8 +45,7 @@ namespace GYM_Management_System.Controllers
         // PUT: api/Clients/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 
-        [Authorize(Policy = "updateAdmin")]
-        [Authorize(Policy = "updateEmployee")]
+        [Authorize(Roles = "Admin, Employee")]
         [HttpPut("{gymid}/{clientid}")]
         public async Task<IActionResult> PutClient(int gymid, int clientid, UpdateClientDTO client)
         {
@@ -59,8 +56,7 @@ namespace GYM_Management_System.Controllers
         // POST: api/Clients
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 
-        [Authorize(Policy = "createAdmin")]
-        [Authorize(Policy = "createEmployee")]
+        [Authorize(Roles = "Admin, Employee")]
         [HttpPost("{gymid}")]
         public async Task<ActionResult<Client>> PostClient(int gymid, PostClientDTO clientDto)
         {
@@ -81,8 +77,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // DELETE: api/Clients/5
-        [Authorize(Policy = "deleteAdmin")]
-        [Authorize(Policy = "deleteEmployee")]
+        [Authorize(Roles = "Admin, Employee")]
         [HttpDelete("/api/Gym/{gymid}/Client/{clientid}")]
         public async Task<IActionResult> DeleteClient(int gymid, int clientid)
         {
