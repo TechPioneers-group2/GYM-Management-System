@@ -14,6 +14,7 @@ namespace GYM_Management_System.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Client>()
         .HasKey(c => new { c.GymID, c.ClientID });
 

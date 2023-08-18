@@ -2,6 +2,7 @@ using GYM_Management_System.Data;
 using GYM_Management_System.Models;
 using GYM_Management_System.Models.Interfaces;
 using GYM_Management_System.Models.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,11 +27,14 @@ namespace GYM_Management_System
                 // There are other options like this
             })
   .AddEntityFrameworkStores<GymDbContext>();
+
             string connString = builder.Configuration.GetConnectionString("DefaultConnection");
+
             builder.Services
                 .AddDbContext<GymDbContext>
                 (opions => opions.UseSqlServer(connString));
-            builder.Services.AddTransient<IUser, UserService>();
+
+            builder.Services.AddTransient<IUser, IdentityUserService>();
             builder.Services.AddTransient<IGym, GymService>();
             builder.Services.AddTransient<IClient, ClientService>();
             builder.Services.AddTransient<ISubscriptionTier, SubscriptionTierService>();
@@ -38,8 +42,20 @@ namespace GYM_Management_System
 			builder.Services.AddTransient<IEmployee, EmployeeService>();
             builder.Services.AddTransient<ISupplement, SupplementService>();
 
-			//------------ Swagger implementation -----------------------------------------------\\
-			builder.Services.AddSwaggerGen(options =>
+            builder.Services.AddScoped<jwtTokenServices>();
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = jwtTokenServices.GetValidationParameters(builder.Configuration);
+            });
+
+            //------------ Swagger implementation -----------------------------------------------\\
+            builder.Services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo()
 
@@ -52,7 +68,9 @@ namespace GYM_Management_System
 
 
             var app = builder.Build();
-
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             //------------ Swagger implementation -----------------------------------------------\\
             app.UseSwagger(options =>
