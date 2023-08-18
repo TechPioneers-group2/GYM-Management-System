@@ -31,7 +31,8 @@ namespace GYM_Management_System.Models.DTOs
         public string? Notification { get; set; }
 
         //NP
-        public List<GymSupplementDTO>? GymSupplements { get; set; }
+
+        public List<GymSupplementDTO>? Supplements { get; set; }
         public List<EquipmentDTOPut> Equipments { get; set; }
         public List<PostClientDTO> clients { get; set; }
         public List<GetEmployeesByGymId> employees { get; set; }
