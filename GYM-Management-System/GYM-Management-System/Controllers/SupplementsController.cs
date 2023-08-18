@@ -25,6 +25,8 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/Supplements
+
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SupplementDTO>>> GetSupplements()
         {
@@ -36,6 +38,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/Supplements/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<SupplementDTO>> GetSupplement(int id)
         {
@@ -53,7 +56,7 @@ namespace GYM_Management_System.Controllers
 
         // PUT: api/Supplements/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [Authorize]
+        [Authorize(Policy = "updateAdmin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSupplement([FromRoute] int id, [FromBody] SupplementDTO supplement)
         {
@@ -71,22 +74,22 @@ namespace GYM_Management_System.Controllers
 
         // POST: api/Supplements
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [Authorize]
+        [Authorize(Policy = "createAdmin")]
         [HttpPost]
         public async Task<ActionResult<SupplementDTO>> PostSupplement(CreatSupplementDTO supplement)
         {
 
-           var supplementDto= await _supplements.CreateSupplement(supplement);
+            var supplementDto = await _supplements.CreateSupplement(supplement);
             //return CreatedAtAction("GetSupplement", new
             //{
             //    id = supplement.SupplementID,
             //}, supplement);
             return supplementDto;
 
-		}
+        }
 
         // DELETE: api/Supplements/5
-        [Authorize]
+        [Authorize(Policy = "deleteAdmin")]
         [HttpDelete("{id}")]
         public async Task<string> DeleteSupplement(int id)
         {

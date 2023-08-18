@@ -25,22 +25,25 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/SubscriptionTiers
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetSubscriptionTierDTO>>> GetSubscriptionTiers()
         {
-          return await _SubscriptionTier.GetAllSubscriptionTier();
+            return await _SubscriptionTier.GetAllSubscriptionTier();
         }
 
         // GET: api/SubscriptionTiers/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<GetSubscriptionTierDTO>> GetSubscriptionTier(int id)
         {
-          return await _SubscriptionTier.GetSubscriptionTier(id);
+            return await _SubscriptionTier.GetSubscriptionTier(id);
         }
 
         // PUT: api/SubscriptionTiers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [Authorize]
+        [Authorize(Policy = "updateAdmin")]
+        [Authorize(Policy = "updateEmployee")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSubscriptionTier(int id, UpdateSubscriptionTierDTO subscriptionTier)
         {
@@ -50,7 +53,7 @@ namespace GYM_Management_System.Controllers
 
         // POST: api/SubscriptionTiers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [Authorize]
+        [Authorize(Policy = "createAdmin")]
         [HttpPost]
         public async Task<ActionResult<PostSubscriptionTierDTO>> PostSubscriptionTier(CreatSubscriptionTierDTO subscriptionTier)
         {
@@ -60,10 +63,10 @@ namespace GYM_Management_System.Controllers
 
 
 
-		 }
+        }
 
         // DELETE: api/SubscriptionTiers/5
-        [Authorize]
+        [Authorize(Policy = "deleteAdmin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSubscriptionTier(int id)
         {
@@ -71,6 +74,6 @@ namespace GYM_Management_System.Controllers
             return NoContent();
         }
 
-        
+
     }
 }

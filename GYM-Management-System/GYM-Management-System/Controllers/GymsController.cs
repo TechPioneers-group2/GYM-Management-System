@@ -26,6 +26,14 @@ namespace GYM_Management_System.Controllers
 
         // GET: api/Gyms
 
+        [Authorize(Roles = "Admin")]
+        [HttpGet("Manager")]
+        public async Task<ActionResult<List<GetManagerGymDTO>>> GetGymManager()
+        {
+            return await _gym.GetGymManger();
+        }
+
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetUserGymDTO>>> GetGyms()
         {
@@ -33,6 +41,8 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/Gyms/5
+
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<GetUserGymDTO>> GetGym(int id)
         {
@@ -41,6 +51,7 @@ namespace GYM_Management_System.Controllers
 
         // PUT: api/Gyms/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Policy = "updateAdmin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGym(int id, PutGymDTO gym)
         {
@@ -50,7 +61,7 @@ namespace GYM_Management_System.Controllers
 
         // POST: api/Gyms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [Authorize]
+        [Authorize(Policy = "createAdmin")]
         [HttpPost]
         public async Task<ActionResult<Gym>> PostGym(PostGymDTO gym)
         {
@@ -59,7 +70,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // DELETE: api/Gyms/5
-        [Authorize]
+        [Authorize(Policy = "deleteAdmin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGym(int id)
         {
@@ -75,7 +86,8 @@ namespace GYM_Management_System.Controllers
 
         //    return NoContent();
         //}
-        [Authorize]
+        [Authorize(Policy = "createAdmin")]
+        [Authorize(Policy = "createEmployee")]
         [HttpPost]
         [Route("{gymId}/Supplement/{SupplementId}")]
         public async Task<IActionResult> AddSupplementsToGym(int gymId, int SupplementId)
@@ -86,18 +98,20 @@ namespace GYM_Management_System.Controllers
         }
 
 
-        [Authorize]
+        [Authorize(Policy = "updateAdmin")]
+        [Authorize(Policy = "updateEmployee")]
         [HttpPut]
         [Route("{gymId}/Supplement/{supplementId}")]
         public async Task<IActionResult> UpdateSupplementForGym(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplemen)
         {
-            var gymSupplement=await _gym.UpdateSupplementForGym(gymId, supplementId, updateGymSupplemen);
+            var gymSupplement = await _gym.UpdateSupplementForGym(gymId, supplementId, updateGymSupplemen);
 
             return Ok();
 
-		}
+        }
 
-        [Authorize]
+        [Authorize(Policy = "deleteAdmin")]
+        [Authorize(Policy = "deleteEmployee")]
         [HttpDelete]
         [Route("{gymId}/Supplement/{supplementId}")]
         public async Task<IActionResult> RemoveSupplementFromGym(int gymId, int supplementId)

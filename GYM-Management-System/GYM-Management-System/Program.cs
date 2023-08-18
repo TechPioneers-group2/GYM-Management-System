@@ -5,6 +5,7 @@ using GYM_Management_System.Models.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace GYM_Management_System
 {
@@ -56,11 +57,18 @@ namespace GYM_Management_System
 
             builder.Services.AddAuthorization(options =>
             {
-                options.AddPolicy("create", policy => policy.RequireClaim("persmissions", "create"));
-                options.AddPolicy("update", policy => policy.RequireClaim("persmissions", "update"));
-                options.AddPolicy("delete", policy => policy.RequireClaim("persmissions", "delete"));
-                options.AddPolicy("read", policy => policy.RequireClaim("persmissions", "read"));
+                options.AddPolicy("createAdmin", policy => policy.RequireClaim("persmissions", "create"));
+                options.AddPolicy("createEmployee", policy => policy.RequireClaim("persmissions", "create"));
+                options.AddPolicy("updateAdmin", policy => policy.RequireClaim("persmissions", "update"));
+                options.AddPolicy("updateEmployee", policy => policy.RequireClaim("persmissions", "update"));
+                options.AddPolicy("updateClient", policy => policy.RequireClaim("persmissions", "update"));
+                options.AddPolicy("deleteAdmin", policy => policy.RequireClaim("persmissions", "delete"));
+                options.AddPolicy("deleteEmployee", policy => policy.RequireClaim("persmissions", "delete"));
+                options.AddPolicy("readAdmin", policy => policy.RequireClaim("persmissions", "deposit"));
+                options.AddPolicy("readEmployee", policy => policy.RequireClaim("persmissions", "deposit"));
+                options.AddPolicy("readClient", policy => policy.RequireClaim("persmissions", "deposit"));
             });
+
 
             //------------ Swagger implementation -----------------------------------------------\\
             builder.Services.AddSwaggerGen(options =>

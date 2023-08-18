@@ -7,9 +7,13 @@ namespace GYM_Management_System.Models.Interfaces
 {
     public interface IUser
     {
-        public Task<UserDTO> Register(RegisterUserDTO registerDTO, ModelStateDictionary modelState);
+        public Task<UserDTO> RegisterAdmin(RegisterAdminDTO registerAdminDTO, ModelStateDictionary modelState);
+        public Task<UserDTO> RegisterEmployee(RegisterEmployeeDTO registerEmployeeDTO, ModelStateDictionary modelState);
+        public Task<UserDTO> RegisterUser(RegisterClientDTO registerClientDTO, ModelStateDictionary modelState);
         public Task<UserDTO> LogIn(string UserName, string Password);
-       // public Task<UserDTO> Authenticate(string UserName, string Password);
+
+        //public Task<UserDTO> Authenticate(string UserName, string Password);
+
         // public Task<ActionResult<UserDTO>> RegisterAgent(RegisterUserDTO registerDTO, ModelStateDictionary modelState);
     }
 }

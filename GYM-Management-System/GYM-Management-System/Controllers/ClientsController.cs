@@ -24,8 +24,10 @@ namespace GYM_Management_System.Controllers
             _client = context;
         }
 
-        [Authorize]
         // GET: api/Clients
+
+        [Authorize(Policy = "readAdmin")]
+        [Authorize(Policy = "readEmployee")]
         [HttpGet("{gymid}")]
         public async Task<ActionResult<IEnumerable<GetClientDTO>>> GetClients(int gymid)
         {
@@ -33,7 +35,9 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/Clients/5
-        [Authorize]
+
+        [Authorize(Policy = "readAdmin")]
+        [Authorize(Policy = "readEmployee")]
         [HttpGet("{gymid}/{clientid}")]
         public async Task<ActionResult<GetClientDTO>> GetClient(int gymid, int clientid)
         {
@@ -42,30 +46,25 @@ namespace GYM_Management_System.Controllers
 
         // PUT: api/Clients/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [Authorize]
+
+        [Authorize(Policy = "updateAdmin")]
+        [Authorize(Policy = "updateEmployee")]
         [HttpPut("{gymid}/{clientid}")]
         public async Task<IActionResult> PutClient(int gymid, int clientid, UpdateClientDTO client)
         {
             var updatedClient = await _client.UpdateClient(gymid, clientid, client);
             return Ok(updatedClient);
-
         }
 
         // POST: api/Clients
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost("{gymid}")]
-        //public async Task<ActionResult<Client>> PostClient(int gymid, PostClientDTO client)
-        //{
 
-        //    await _client.CreateClient(gymid, client);
-        //    return CreatedAtAction("GetClient", new { gymid = client.GymID, clientid = client.ClientID }, client);
-        //}
-        [Authorize]
+        [Authorize(Policy = "createAdmin")]
+        [Authorize(Policy = "createEmployee")]
         [HttpPost("{gymid}")]
         public async Task<ActionResult<Client>> PostClient(int gymid, PostClientDTO clientDto)
         {
             var createdClient = await _client.CreateClient(gymid, clientDto);
-
             // If the client creation was successful
             if (createdClient != null)
             {
@@ -80,17 +79,14 @@ namespace GYM_Management_System.Controllers
             return BadRequest("Failed to create client");
         }
 
-
         // DELETE: api/Clients/5
-        [Authorize]
+        [Authorize(Policy = "deleteAdmin")]
+        [Authorize(Policy = "deleteEmployee")]
         [HttpDelete("/api/Gym/{gymid}/Client/{clientid}")]
         public async Task<IActionResult> DeleteClient(int gymid, int clientid)
         {
             await _client.DeleteClient(gymid, clientid);
             return NoContent();
         }
-
-
-
     }
 }

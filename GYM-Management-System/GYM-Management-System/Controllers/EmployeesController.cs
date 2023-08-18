@@ -25,7 +25,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/Employees
-        [Authorize]
+        [Authorize(Policy = "readAdmin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetEmployees()
         {
@@ -39,7 +39,8 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/Employees/5
-        [Authorize]
+        [Authorize(Policy = "readAdmin")]
+        [Authorize(Policy = "readEmployee")]
         [HttpGet("{id}")]
         public async Task<ActionResult<EmployeeDTO>> GetEmployee(int id)
         {
@@ -49,14 +50,12 @@ namespace GYM_Management_System.Controllers
             {
                 return NotFound();
             }
-
-
             return employee;
         }
 
         // PUT: api/Employees/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [Authorize]
+        [Authorize(Policy = "updateAdmin")]
         [HttpPut("{id}")]
         public async Task<ActionResult<EmployeeDTO>> PutEmployee(UpdateEmployeeDTO updateEmployeeDTO, int id)
         {
@@ -71,7 +70,8 @@ namespace GYM_Management_System.Controllers
 
         // POST: api/Employees
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [Authorize]
+
+        [Authorize(Policy = "createAdmin")]
         [HttpPost]
         public async Task<ActionResult<EmployeeDTO>> PostEmployee(CreatEmployeeDTO creatEmployeeDTO)
         {
@@ -84,11 +84,12 @@ namespace GYM_Management_System.Controllers
         }
 
         // DELETE: api/Employees/5
-        [Authorize]
+
+        [Authorize(Policy = "deleteAdmin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmployee(int id)
         {
-             await _employee.Delete(id);
+            await _employee.Delete(id);
 
             return NoContent();
 
@@ -96,19 +97,19 @@ namespace GYM_Management_System.Controllers
         }
 
 
-        [Authorize]
+        [Authorize(Policy = "readAdmin")]
         [Route("/api/Employees/Gym/{gymId}")]
-		[HttpGet]
-		public async Task<ActionResult<IEnumerable<GetEmployeesByGymId>>> GetEmployeesByGymId(int gymId)
-		{
-			var emloyees = await _employee.GetEmployeesByGymId(gymId);
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<GetEmployeesByGymId>>> GetEmployeesByGymId(int gymId)
+        {
+            var emloyees = await _employee.GetEmployeesByGymId(gymId);
 
-			if (emloyees == null)
-			{
-				return NotFound();
-			}
-			return emloyees;
-		}
+            if (emloyees == null)
+            {
+                return NotFound();
+            }
+            return emloyees;
+        }
 
-	}
+    }
 }

@@ -16,7 +16,7 @@ namespace GYM_Management_System.Models.Services
             _context = context;
             _subscriptionTier = subscriptionTier;
         }
-        
+
 
         public async Task<Client> CreateClient(int gymid, PostClientDTO client)
         {
@@ -46,7 +46,6 @@ namespace GYM_Management_System.Models.Services
             await _context.SaveChangesAsync();
             return newClient;
         }
-
 
         public async Task DeleteClient(int gymid, int clientid)
         {
@@ -128,6 +127,6 @@ namespace GYM_Management_System.Models.Services
             return returnedClient;
         }
 
-        
+
     }
 }
