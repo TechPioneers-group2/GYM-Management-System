@@ -13,19 +13,27 @@ namespace GYM_Management_System.Models.Services
         {
             _SubscriptionTier = SubscriptionTier;
         }
-        public async Task<SubscriptionTier> Create(PostSubscriptionTierDTO subscriptionTier)
+        public async Task<PostSubscriptionTierDTO> Create(CreatSubscriptionTierDTO subscriptionTier)
         {
             var newSubscriptionTier = new SubscriptionTier()
             {
-               SubscriptionTierID = subscriptionTier.SubscriptionTierID,
+              // SubscriptionTierID = subscriptionTier.SubscriptionTierID,
                 Name = subscriptionTier.Name,
                 Price = subscriptionTier.Price,
                 Length = subscriptionTier.Length
             };
             _SubscriptionTier.Add(newSubscriptionTier);
             await _SubscriptionTier.SaveChangesAsync();
-            subscriptionTier.SubscriptionTierID = newSubscriptionTier.SubscriptionTierID; 
-            return newSubscriptionTier;
+            //subscriptionTier.SubscriptionTierID = newSubscriptionTier.SubscriptionTierID;
+            var SubsTierDto = new PostSubscriptionTierDTO()
+            {
+				SubscriptionTierID = newSubscriptionTier.SubscriptionTierID,
+				Name = newSubscriptionTier.Name,
+				Price = newSubscriptionTier.Price,
+				Length = newSubscriptionTier.Length
+			};
+
+			return SubsTierDto;
         }
 
         public async Task DeleteSubscriptionTier(int SubscriptionTierId)
@@ -65,7 +73,7 @@ namespace GYM_Management_System.Models.Services
                
         }
 
-        public async Task<SubscriptionTier> UpdateSubscriptionTier(int SubscriptionTierId, UpdateSubscriptionTierDTO subscriptionTier)
+        public async Task<UpdateSubscriptionTierDTO> UpdateSubscriptionTier(int SubscriptionTierId, UpdateSubscriptionTierDTO subscriptionTier)
         {
             var updatedsubtier = await _SubscriptionTier.SubscriptionTiers.
                  FindAsync(SubscriptionTierId);
@@ -80,7 +88,7 @@ namespace GYM_Management_System.Models.Services
                 await _SubscriptionTier.SaveChangesAsync();
             }
 
-            return updatedsubtier;
+            return subscriptionTier;
 
         }
     }

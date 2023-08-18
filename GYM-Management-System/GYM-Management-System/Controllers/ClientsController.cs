@@ -78,12 +78,14 @@ namespace GYM_Management_System.Controllers
 
 
         // DELETE: api/Clients/5
-        [HttpDelete("{id}")]
+        [HttpDelete("/api/Gym/{gymid}/Client/{clientid}")]
         public async Task<IActionResult> DeleteClient(int gymid, int clientid)
         {
             await _client.DeleteClient(gymid, clientid);
             return NoContent();
         }
+
+       
 
     }
 }

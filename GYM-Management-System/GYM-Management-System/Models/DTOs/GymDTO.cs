@@ -11,9 +11,10 @@
         public string? Notification { get; set; }
 
         //NP
-        
+
         public List<EquipmentDTOPut>? Equipments { get; set; }
         public List<GymGetSubscriptionTierDTO>? SubscriptionTier { get; set; }
+        public List<GymSupplementDTO>? Supplements { get; set; }
     }
 
     public class GetManagerGymDTO
@@ -25,6 +26,8 @@
         public int CurrentCapacity { get; set; }
         public string? ActiveHours { get; set; }
         public string? Notification { get; set; }
+
+        public List<GymSupplementDTO>? GymSupplements { get; set; }
 
         //NP
 
@@ -48,13 +51,14 @@
 
     public class PutGymDTO
     {
-        public string? Name { get; set; }
+       // public string? Name { get; set; }
         public string? MaxCapacity { get; set; }
         public int CurrentCapacity { get; set; }
         public string? ActiveHours { get; set; }
         public string? Notification { get; set; }
+        //public List<SupplementDTO>? Supplements { get; set; }
 
     }
 
-    
+
 }

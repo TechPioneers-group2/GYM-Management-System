@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GYM_Management_System.Migrations
 {
     /// <inheritdoc />
-    public partial class INITIAL : Migration
+    public partial class NewMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -44,6 +44,20 @@ namespace GYM_Management_System.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SubscriptionTiers", x => x.SubscriptionTierID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Supplements",
+                columns: table => new
+                {
+                    SupplementID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Supplements", x => x.SupplementID);
                 });
 
             migrationBuilder.CreateTable(
@@ -94,28 +108,6 @@ namespace GYM_Management_System.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Supplements",
-                columns: table => new
-                {
-                    SupplementID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    GymID = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Supplements", x => x.SupplementID);
-                    table.ForeignKey(
-                        name: "FK_Supplements_Gyms_GymID",
-                        column: x => x.GymID,
-                        principalTable: "Gyms",
-                        principalColumn: "GymID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Clients",
                 columns: table => new
                 {
@@ -144,13 +136,38 @@ namespace GYM_Management_System.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "GymSupplements",
+                columns: table => new
+                {
+                    SupplementID = table.Column<int>(type: "int", nullable: false),
+                    GymID = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GymSupplements", x => new { x.GymID, x.SupplementID });
+                    table.ForeignKey(
+                        name: "FK_GymSupplements_Gyms_GymID",
+                        column: x => x.GymID,
+                        principalTable: "Gyms",
+                        principalColumn: "GymID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GymSupplements_Supplements_SupplementID",
+                        column: x => x.SupplementID,
+                        principalTable: "Supplements",
+                        principalColumn: "SupplementID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Gyms",
                 columns: new[] { "GymID", "ActiveHours", "Address", "CurrentCapacity", "MaxCapacity", "Name", "Notification" },
                 values: new object[,]
                 {
-                    { 1, "5AM-9PM", "Amman", 0, "150", "GYM1", "Every thing ok" },
-                    { 2, "5AM-9PM", "Zarqa", 0, "150", "GYM1", "Every thing ok" }
+                    { 1, "5AM-12PM", "Amman", 0, "150", "WillPower-Amman", "Every thing ok" },
+                    { 2, "6AM-12PM", "Zarqa", 0, "120", "WillPower-Zarqa", "Every thing ok" }
                 });
 
             migrationBuilder.InsertData(
@@ -158,14 +175,29 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "SubscriptionTierID", "Length", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1, 3, "3 months", "30 JD" },
-                    { 2, 3, "6 months", "150 JD" }
+                    { 1, 1, "1 month", "30 JD" },
+                    { 2, 3, "3 months", "60 JD" },
+                    { 3, 6, "6 months", "110 JD" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Supplements",
+                columns: new[] { "SupplementID", "Name", "Price" },
+                values: new object[] { 1, "Whey Protein Powder", "80 JD" });
 
             migrationBuilder.InsertData(
                 table: "Clients",
                 columns: new[] { "ClientID", "GymID", "InGym", "Name", "SubscriptionDate", "SubscriptionExpiry", "SubscriptionTierID" },
-                values: new object[] { 1, 1, false, "ammar", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 });
+                values: new object[,]
+                {
+                    { 1, 1, false, "Ahmad Harhoosh", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 2, 2, false, "Ammar Albisany", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Employees",
+                columns: new[] { "EmployeeID", "GymID", "IsAvailable", "JobDescription", "Name", "Salary", "WorkingDays", "WorkingHours" },
+                values: new object[] { 1, 1, true, "Trainer", "Ahmad Albisany", "330 JD", "Sat - Fri", "9:00AM - 5:00PM" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Clients_SubscriptionTierID",
@@ -183,9 +215,9 @@ namespace GYM_Management_System.Migrations
                 column: "GymID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Supplements_GymID",
-                table: "Supplements",
-                column: "GymID");
+                name: "IX_GymSupplements_SupplementID",
+                table: "GymSupplements",
+                column: "SupplementID");
         }
 
         /// <inheritdoc />
@@ -201,13 +233,16 @@ namespace GYM_Management_System.Migrations
                 name: "GymEquipments");
 
             migrationBuilder.DropTable(
-                name: "Supplements");
+                name: "GymSupplements");
 
             migrationBuilder.DropTable(
                 name: "SubscriptionTiers");
 
             migrationBuilder.DropTable(
                 name: "Gyms");
+
+            migrationBuilder.DropTable(
+                name: "Supplements");
         }
     }
 }

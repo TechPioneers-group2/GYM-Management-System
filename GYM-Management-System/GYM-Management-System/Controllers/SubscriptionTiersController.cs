@@ -49,14 +49,15 @@ namespace GYM_Management_System.Controllers
         // POST: api/SubscriptionTiers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<SubscriptionTier>> PostSubscriptionTier(PostSubscriptionTierDTO subscriptionTier)
+        public async Task<ActionResult<PostSubscriptionTierDTO>> PostSubscriptionTier(CreatSubscriptionTierDTO subscriptionTier)
         {
             var createdsubtier = await _SubscriptionTier.Create(subscriptionTier);
-            return 
-                CreatedAtAction("GetSubscriptionTier",
-               new { id = subscriptionTier.SubscriptionTierID }, subscriptionTier);
 
-         }
+            return createdsubtier;
+
+
+
+		 }
 
         // DELETE: api/SubscriptionTiers/5
         [HttpDelete("{id}")]

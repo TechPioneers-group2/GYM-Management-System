@@ -69,13 +69,18 @@ namespace GYM_Management_System.Models.Services
                     Name = nc.Name,
                     InGym = nc.InGym,
                     SubscriptionDate = nc.SubscriptionDate,
-                    SubscriptionExpiry = nc.SubscriptionExpiry
+                    SubscriptionExpiry = nc.SubscriptionExpiry,
+                    subscriptionTier = new ClientGetSubscriptionTierDTO()
+                    {
+                        Name = nc.SubscriptionTierOBJ.Name
+                    }
 
                 }).FirstOrDefaultAsync(cID => cID.ClientID == clientid && cID.GymID == gymid);
         }
 
         public async Task<List<GetClientDTO>> GetClients(int gymid)
         {
+
             return await _context.Clients
                 .Select(nc => new GetClientDTO()
                 {
@@ -85,13 +90,17 @@ namespace GYM_Management_System.Models.Services
                     Name = nc.Name,
                     InGym = nc.InGym,
                     SubscriptionDate = nc.SubscriptionDate,
-                    SubscriptionExpiry = nc.SubscriptionExpiry
-
-                }).ToListAsync();
+                    SubscriptionExpiry = nc.SubscriptionExpiry,
+                    subscriptionTier = new ClientGetSubscriptionTierDTO()
+                    {
+                        Name = nc.SubscriptionTierOBJ.Name
+                    }
+                }).Where(cl => cl.GymID == gymid).ToListAsync();
         }
 
-        public async Task<Client> UpdateClient(int gymid, int clientid, UpdateClientDTO client)
+        public async Task<GetClientDTO> UpdateClient(int gymid, int clientid, UpdateClientDTO client)
         {
+            GetClientDTO returnedClient = new GetClientDTO();
             var currentClient = await _context.Clients.FindAsync(gymid, clientid);
             if (currentClient != null)
             {
@@ -99,8 +108,26 @@ namespace GYM_Management_System.Models.Services
                 currentClient.InGym = client.InGym;
                 _context.Entry(currentClient).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
+
+                returnedClient.ClientID = currentClient.ClientID;
+                returnedClient.GymID = currentClient.GymID;
+                returnedClient.Name = currentClient.Name;
+                returnedClient.SubscriptionDate = currentClient.SubscriptionDate;
+                returnedClient.SubscriptionExpiry = currentClient.SubscriptionExpiry;
+                returnedClient.SubscriptionTierID = currentClient.SubscriptionTierID;
+                returnedClient.InGym = currentClient.InGym;
+                var queryST = await _context.SubscriptionTiers.FirstOrDefaultAsync(x => x.SubscriptionTierID == currentClient.SubscriptionTierID);
+                returnedClient.subscriptionTier = new ClientGetSubscriptionTierDTO
+                {
+                    Name = queryST.Name
+                };
+
+
             }
-            return currentClient;
+
+            return returnedClient;
         }
+
+        
     }
 }
