@@ -51,7 +51,6 @@ namespace GYM_Management_System.Models.Services
                 await _db.SaveChangesAsync();
             }
 
-
         }
 
         public async Task<EmployeeDTO> GetEmployee(int id)

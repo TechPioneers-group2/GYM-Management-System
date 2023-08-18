@@ -4,6 +4,7 @@ using GYM_Management_System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GYM_Management_System.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    partial class GymDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230818164355_InitialWithDataSeedingForRoles")]
+    partial class InitialWithDataSeedingForRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,15 +114,43 @@ namespace GYM_Management_System.Migrations
                     b.Property<int>("SubscriptionTierID")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("GymID", "ClientID");
 
                     b.HasIndex("SubscriptionTierID");
 
                     b.ToTable("Clients");
+
+                    b.HasData(
+                        new
+                        {
+                            GymID = 2,
+                            ClientID = 1,
+                            InGym = true,
+                            Name = "Ahmad Harhoosh",
+                            SubscriptionDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SubscriptionExpiry = new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SubscriptionTierID = 1
+                        },
+                        new
+                        {
+                            GymID = 1,
+                            ClientID = 2,
+                            InGym = true,
+                            Name = "Ammar Albesani",
+                            SubscriptionDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SubscriptionExpiry = new DateTime(2023, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SubscriptionTierID = 2
+                        },
+                        new
+                        {
+                            GymID = 3,
+                            ClientID = 3,
+                            InGym = false,
+                            Name = "Ala' Abusalem",
+                            SubscriptionDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SubscriptionExpiry = new DateTime(2023, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SubscriptionTierID = 3
+                        });
                 });
 
             modelBuilder.Entity("GYM_Management_System.Models.Employee", b =>
@@ -148,10 +179,6 @@ namespace GYM_Management_System.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("WorkingDays")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -165,6 +192,41 @@ namespace GYM_Management_System.Migrations
                     b.HasIndex("GymID");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            EmployeeID = 1,
+                            GymID = 1,
+                            IsAvailable = true,
+                            JobDescription = "Dietitian",
+                            Name = "Nadine Almasri",
+                            Salary = "370 JD",
+                            WorkingDays = "Saturday - Friday",
+                            WorkingHours = "9:00AM - 5:00PM"
+                        },
+                        new
+                        {
+                            EmployeeID = 2,
+                            GymID = 2,
+                            IsAvailable = true,
+                            JobDescription = "Trainer",
+                            Name = "Al-Hareth Alhyari",
+                            Salary = "400 JD",
+                            WorkingDays = "Saturday - Thursday",
+                            WorkingHours = "9:00AM - 5:00PM"
+                        },
+                        new
+                        {
+                            EmployeeID = 3,
+                            GymID = 3,
+                            IsAvailable = true,
+                            JobDescription = "Trainer",
+                            Name = "Bashar Owainat",
+                            Salary = "430 JD",
+                            WorkingDays = "Monday - Friday",
+                            WorkingHours = "4:00PM - 12:00AM"
+                        });
                 });
 
             modelBuilder.Entity("GYM_Management_System.Models.Gym", b =>

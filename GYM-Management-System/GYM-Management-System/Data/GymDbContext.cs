@@ -1,9 +1,11 @@
 ﻿using GYM_Management_System.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace GYM_Management_System.Data
 {
-    public class GymDbContext : DbContext
+    public class GymDbContext : IdentityDbContext<ApplicationUser>
     {
         public GymDbContext(DbContextOptions options) : base(options)
         {
@@ -12,39 +14,47 @@ namespace GYM_Management_System.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Client>().HasKey(
+                c => new { c.GymID, c.ClientID });
+
+            modelBuilder.Entity<GymSupplement>().HasKey(
+                sq => new { sq.GymID, sq.SupplementID });
+
             modelBuilder.Entity<SubscriptionTier>().HasData
-                (
-                  new SubscriptionTier
-                  {
-                      SubscriptionTierID = 1,
-                      Name = "1 month",
-                      Price = "30 JD",
-                      Length = 1
-                  },
+            (
+              new SubscriptionTier
+              {
+                  SubscriptionTierID = 1,
+                  Name = "1 month",
+                  Price = "30 JD",
+                  Length = 1
+              },
 
-                  new SubscriptionTier
-                  {
-                      SubscriptionTierID = 2,
-                      Name = "3 months",
-                      Price = "60 JD",
-                      Length = 3
-                  },
+              new SubscriptionTier
+              {
+                  SubscriptionTierID = 2,
+                  Name = "3 months",
+                  Price = "60 JD",
+                  Length = 3
+              },
 
-                  new SubscriptionTier
-                  {
-                      SubscriptionTierID = 3,
-                      Name = "6 months",
-                      Price = "110 JD",
-                      Length = 6
-                  },
-                  new SubscriptionTier
-                  {
-                      SubscriptionTierID = 4,
-                      Name = "12 months",
-                      Price = "200 JD",
-                      Length = 12
-                  }
-                );
+              new SubscriptionTier
+              {
+                  SubscriptionTierID = 3,
+                  Name = "6 months",
+                  Price = "110 JD",
+                  Length = 6
+              },
+              new SubscriptionTier
+              {
+                  SubscriptionTierID = 4,
+                  Name = "12 months",
+                  Price = "200 JD",
+                  Length = 12
+              }
+            );
 
             modelBuilder.Entity<Gym>().HasData
 
@@ -85,99 +95,99 @@ namespace GYM_Management_System.Data
                 );
 
 
-            modelBuilder.Entity<Client>().HasData
-                (new Client
-                {
-                    ClientID = 1,
-                    GymID = 2,
-                    SubscriptionTierID = 1,
-                    Name = "Ahmad Harhoosh",
-                    InGym = true,
-                    SubscriptionDate = new DateTime(2023, 1, 1),
-                    SubscriptionExpiry = new DateTime(2023, 2, 1),
-                },
+            //modelBuilder.Entity<Client>().HasData
+            //    (new Client
+            //    {
+            //        ClientID = 1,
+            //        GymID = 2,
+            //        SubscriptionTierID = 1,
+            //        Name = "Ahmad Harhoosh",
+            //        InGym = true,
+            //        SubscriptionDate = new DateTime(2023, 1, 1),
+            //        SubscriptionExpiry = new DateTime(2023, 2, 1),
+            //    },
 
-                new Client
-                {
-                    ClientID = 2,
-                    GymID = 1,
-                    SubscriptionTierID = 2,
-                    Name = "Ammar Albesani",
-                    InGym = true,
-                    SubscriptionDate = new DateTime(2023, 1, 1),
-                    SubscriptionExpiry = new DateTime(2023, 4, 4),
-                },
+            //    new Client
+            //    {
+            //        ClientID = 2,
+            //        GymID = 1,
+            //        SubscriptionTierID = 2,
+            //        Name = "Ammar Albesani",
+            //        InGym = true,
+            //        SubscriptionDate = new DateTime(2023, 1, 1),
+            //        SubscriptionExpiry = new DateTime(2023, 4, 4),
+            //    },
 
-                new Client
-                {
-                    ClientID = 3,
-                    GymID = 3,
-                    SubscriptionTierID = 3,
-                    Name = "Ala' Abusalem",
-                    InGym = false,
-                    SubscriptionDate = new DateTime(2023, 1, 1),
-                    SubscriptionExpiry = new DateTime(2023, 6, 1),
-                }
-                );
+            //    new Client
+            //    {
+            //        ClientID = 3,
+            //        GymID = 3,
+            //        SubscriptionTierID = 3,
+            //        Name = "Ala' Abusalem",
+            //        InGym = false,
+            //        SubscriptionDate = new DateTime(2023, 1, 1),
+            //        SubscriptionExpiry = new DateTime(2023, 6, 1),
+            //    }
+            //    );
 
-            modelBuilder.Entity<Employee>().HasData(
-                new Employee
-                {
-                    EmployeeID = 1,
-                    GymID = 1,
-                    Name = "Nadine Almasri",
-                    JobDescription = "Dietitian",
-                    IsAvailable = true,
-                    WorkingDays = "Saturday - Friday",
-                    WorkingHours = "9:00AM - 5:00PM",
-                    Salary = "370 JD",
-                }, new Employee
-                {
-                    EmployeeID = 2,
-                    GymID = 2,
-                    Name = "Al-Hareth Alhyari",
-                    JobDescription = "Trainer",
-                    IsAvailable = true,
-                    WorkingDays = "Saturday - Thursday",
-                    WorkingHours = "9:00AM - 5:00PM",
-                    Salary = "400 JD",
-                }, new Employee
-                {
-                    EmployeeID = 3,
-                    GymID = 3,
-                    Name = "Bashar Owainat",
-                    JobDescription = "Trainer",
-                    IsAvailable = true,
-                    WorkingDays = "Monday - Friday",
-                    WorkingHours = "4:00PM - 12:00AM",
-                    Salary = "430 JD",
-                });
+            //modelBuilder.Entity<Employee>().HasData(
+            //    new Employee
+            //    {
+            //        EmployeeID = 1,
+            //        GymID = 1,
+            //        Name = "Nadine Almasri",
+            //        JobDescription = "Dietitian",
+            //        IsAvailable = true,
+            //        WorkingDays = "Saturday - Friday",
+            //        WorkingHours = "9:00AM - 5:00PM",
+            //        Salary = "370 JD",
+            //    }, new Employee
+            //    {
+            //        EmployeeID = 2,
+            //        GymID = 2,
+            //        Name = "Al-Hareth Alhyari",
+            //        JobDescription = "Trainer",
+            //        IsAvailable = true,
+            //        WorkingDays = "Saturday - Thursday",
+            //        WorkingHours = "9:00AM - 5:00PM",
+            //        Salary = "400 JD",
+            //    }, new Employee
+            //    {
+            //        EmployeeID = 3,
+            //        GymID = 3,
+            //        Name = "Bashar Owainat",
+            //        JobDescription = "Trainer",
+            //        IsAvailable = true,
+            //        WorkingDays = "Monday - Friday",
+            //        WorkingHours = "4:00PM - 12:00AM",
+            //        Salary = "430 JD",
+            //    });
 
             modelBuilder.Entity<Supplement>().HasData(
-                new Supplement
-                {
-                    SupplementID = 1,
-                    Name = "Whey Protein Powder",
-                    Price = "80 JD"
-                },
-                new Supplement
-                {
-                    SupplementID = 2,
-                    Name = "Creatine Monohydrate",
-                    Price = "40 JD"
-                },
-                new Supplement
-                {
-                    SupplementID = 3,
-                    Name = "Branched-Chain Amino Acids (BCAAs)",
-                    Price = "30 JD"
-                },
-                new Supplement
-                {
-                    SupplementID = 4,
-                    Name = "Pre-Workout Blend",
-                    Price = "50 JD"
-                });
+    new Supplement
+    {
+        SupplementID = 1,
+        Name = "Whey Protein Powder",
+        Price = "80 JD"
+    },
+    new Supplement
+    {
+        SupplementID = 2,
+        Name = "Creatine Monohydrate",
+        Price = "40 JD"
+    },
+    new Supplement
+    {
+        SupplementID = 3,
+        Name = "Branched-Chain Amino Acids (BCAAs)",
+        Price = "30 JD"
+    },
+    new Supplement
+    {
+        SupplementID = 4,
+        Name = "Pre-Workout Blend",
+        Price = "50 JD"
+    });
 
             modelBuilder.Entity<GymEquipment>().HasData(
                 new GymEquipment
@@ -213,12 +223,35 @@ namespace GYM_Management_System.Data
                     OutOfService = 0,
                 });
 
-            modelBuilder.Entity<Client>()
-        .HasKey(c => new { c.GymID, c.ClientID });
 
-            modelBuilder.Entity<GymSupplement>().HasKey(
-                sq => new { sq.GymID, sq.SupplementID });
+            SeedRole(modelBuilder, "Admin", "createAdmin", "updateAdmin", "deleteAdmin", "readAdmin");
+            SeedRole(modelBuilder, "Employee", "createEmployee", "updateEmployee", "readEmployee");
+            SeedRole(modelBuilder, "Client", "updateClient", "readClient");
 
+        }
+
+        int nextId = 1;
+        private void SeedRole(ModelBuilder modelBuilder, string roleName, params string[] permissions)
+        {
+            var role = new IdentityRole
+            {
+                Id = roleName.ToLower(),
+                Name = roleName,
+                NormalizedName = roleName.ToUpper(),
+                ConcurrencyStamp = Guid.Empty.ToString()
+            };
+
+            var roleClaim = permissions.Select(permissions =>
+            new IdentityRoleClaim<string>
+            {
+                Id = nextId++,
+                RoleId = role.Id,
+                ClaimType = "permissions",
+                ClaimValue = permissions
+            }
+            ).ToArray();
+
+            modelBuilder.Entity<IdentityRole>().HasData(role);
         }
 
         public DbSet<Gym> Gyms { get; set; }

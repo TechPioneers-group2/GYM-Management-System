@@ -9,6 +9,7 @@ using GYM_Management_System.Data;
 using GYM_Management_System.Models;
 using GYM_Management_System.Models.Interfaces;
 using GYM_Management_System.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GYM_Management_System.Controllers
 {
@@ -24,6 +25,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/SubscriptionTiers
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetSubscriptionTierDTO>>> GetSubscriptionTiers()
         {
@@ -31,6 +33,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/SubscriptionTiers/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<GetSubscriptionTierDTO>> GetSubscriptionTier(int id)
         {
@@ -39,6 +42,7 @@ namespace GYM_Management_System.Controllers
 
         // PUT: api/SubscriptionTiers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Admin, Employee")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSubscriptionTier(int id, UpdateSubscriptionTierDTO subscriptionTier)
         {
@@ -48,6 +52,7 @@ namespace GYM_Management_System.Controllers
 
         // POST: api/SubscriptionTiers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<PostSubscriptionTierDTO>> PostSubscriptionTier(CreatSubscriptionTierDTO subscriptionTier)
         {
@@ -57,6 +62,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // DELETE: api/SubscriptionTiers/5
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSubscriptionTier(int id)
         {

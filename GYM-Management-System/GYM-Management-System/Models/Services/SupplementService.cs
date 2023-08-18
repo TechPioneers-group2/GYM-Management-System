@@ -42,16 +42,16 @@ namespace GYM_Management_System.Models.Services
         }
 
 
-        public async Task<string> DeleteSupplement(int supplementId)
+        public async Task<bool> DeleteSupplement(int supplementId)
         {
             var deletedSupplement = await _supplement.Supplements.FindAsync(supplementId);
             if (deletedSupplement != null)
             {
                 _supplement.Supplements.Remove(deletedSupplement);
                 await _supplement.SaveChangesAsync();
-                return "Deleted Successfully";
+                return true;
             }
-            return "Deleted Failed!";
+            return false;
         }
 
 

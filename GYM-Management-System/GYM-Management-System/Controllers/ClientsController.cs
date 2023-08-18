@@ -9,6 +9,7 @@ using GYM_Management_System.Data;
 using GYM_Management_System.Models;
 using GYM_Management_System.Models.Interfaces;
 using GYM_Management_System.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GYM_Management_System.Controllers
 {
@@ -24,6 +25,8 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/Clients
+
+        [Authorize(Roles = "Admin, Employee")]
         [HttpGet("{gymid}")]
         public async Task<ActionResult<IEnumerable<GetClientDTO>>> GetClients(int gymid)
         {
@@ -31,6 +34,8 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/Clients/5
+
+        [Authorize(Roles = "Admin, Employee")]
         [HttpGet("/api/client/{clientid}/gym/{gymid}")]
         public async Task<ActionResult<GetClientDTO>> GetClient(int clientid, int gymid)
         {
@@ -39,14 +44,19 @@ namespace GYM_Management_System.Controllers
 
         // PUT: api/Clients/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
+        [Authorize(Roles = "Admin, Employee")]
         [HttpPut("{gymid}/{clientid}")]
         public async Task<IActionResult> PutClient(int gymid, int clientid, UpdateClientDTO client)
         {
             var updatedClient = await _client.UpdateClient(gymid, clientid, client);
             return Ok(updatedClient);
-
         }
 
+        // POST: api/Clients
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
+        [Authorize(Roles = "Admin, Employee")]
         [HttpPost("{gymid}")]
         public async Task<ActionResult<Client>> PostClient(int gymid, PostClientDTO clientDto)
         {
@@ -66,16 +76,13 @@ namespace GYM_Management_System.Controllers
             return BadRequest("Failed to create client");
         }
 
-
         // DELETE: api/Clients/5
+        [Authorize(Roles = "Admin, Employee")]
         [HttpDelete("/api/Gym/{gymid}/Client/{clientid}")]
         public async Task<IActionResult> DeleteClient(int gymid, int clientid)
         {
             await _client.DeleteClient(gymid, clientid);
             return NoContent();
         }
-
-
-
     }
 }
