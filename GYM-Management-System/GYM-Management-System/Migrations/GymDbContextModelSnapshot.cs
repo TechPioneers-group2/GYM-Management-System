@@ -299,6 +299,14 @@ namespace GYM_Management_System.Migrations
                     b.HasKey("SupplementID");
 
                     b.ToTable("Supplements");
+
+                    b.HasData(
+                        new
+                        {
+                            SupplementID = 1,
+                            Name = "Whey Protein Powder",
+                            Price = "80 JD"
+                        });
                 });
 
             modelBuilder.Entity("GYM_Management_System.Models.Client", b =>

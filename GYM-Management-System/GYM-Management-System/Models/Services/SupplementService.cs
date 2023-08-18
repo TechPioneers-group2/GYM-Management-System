@@ -13,20 +13,25 @@ namespace GYM_Management_System.Models.Services
             _supplement = supplement;
         }
 
-        public async Task<SupplementDTO> CreateSupplement(SupplementDTO supplementDTO)
+        public async Task<SupplementDTO> CreateSupplement(CreatSupplementDTO supplementDTO)
         {
             var newSupplement = new Supplement()
             {
-                SupplementID = supplementDTO.SupplementID,
+                //SupplementID = supplementDTO.SupplementID,
                 Name = supplementDTO.Name,
                 Price = supplementDTO.Price,
 
             };
             _supplement.Entry(newSupplement).State = EntityState.Added;
             await _supplement.SaveChangesAsync();
-            supplementDTO.SupplementID = newSupplement.SupplementID;
+            //supplementDTO.SupplementID = newSupplement.SupplementID;
+            var SupplementDtoReturn = new SupplementDTO() {
+				SupplementID = newSupplement.SupplementID,
+				Name = newSupplement.Name,
+				Price = newSupplement.Price,
+			};
 
-            return supplementDTO;
+			return SupplementDtoReturn;
 
         }
 

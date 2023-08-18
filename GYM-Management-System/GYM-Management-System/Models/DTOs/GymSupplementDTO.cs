@@ -9,4 +9,15 @@
         public GetGymSupplementDTO? Supplements { get; set; }
 
     }
+
+	public class UpdateGymSupplementDTO
+	{
+		
+		public int Quantity { get; set; }
+
+	
+
+	}
+
+	
 }

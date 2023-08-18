@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GYM_Management_System.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class NewMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -179,6 +179,11 @@ namespace GYM_Management_System.Migrations
                     { 2, 3, "3 months", "60 JD" },
                     { 3, 6, "6 months", "110 JD" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Supplements",
+                columns: new[] { "SupplementID", "Name", "Price" },
+                values: new object[] { 1, "Whey Protein Powder", "80 JD" });
 
             migrationBuilder.InsertData(
                 table: "Clients",

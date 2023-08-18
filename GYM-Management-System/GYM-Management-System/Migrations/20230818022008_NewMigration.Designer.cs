@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GYM_Management_System.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    [Migration("20230817161444_initial")]
-    partial class initial
+    [Migration("20230818022008_NewMigration")]
+    partial class NewMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -302,6 +302,14 @@ namespace GYM_Management_System.Migrations
                     b.HasKey("SupplementID");
 
                     b.ToTable("Supplements");
+
+                    b.HasData(
+                        new
+                        {
+                            SupplementID = 1,
+                            Name = "Whey Protein Powder",
+                            Price = "80 JD"
+                        });
                 });
 
             modelBuilder.Entity("GYM_Management_System.Models.Client", b =>

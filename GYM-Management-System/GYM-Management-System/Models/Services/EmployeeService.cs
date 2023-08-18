@@ -142,7 +142,7 @@ namespace GYM_Management_System.Models.Services
 
 				EmployeeDTO employeeDTO = new EmployeeDTO()
 				{
-					EmployeeID = updateEmployeeDTO.EmployeeID,
+					EmployeeID = employeeId,
 					GymID = updateEmployeeDTO.GymID,
 					Name = updateEmployeeDTO.Name,
 					JobDescription = updateEmployeeDTO.JobDescription,
