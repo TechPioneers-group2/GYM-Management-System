@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GYM_Management_System.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    [Migration("20230818201405_UpdatedModelsToAccountForRegistry")]
-    partial class UpdatedModelsToAccountForRegistry
+    [Migration("20230818222620_initialsetupdatabase")]
+    partial class initialsetupdatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
