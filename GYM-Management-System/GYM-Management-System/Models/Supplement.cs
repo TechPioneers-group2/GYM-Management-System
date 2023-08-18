@@ -3,13 +3,11 @@
     public class Supplement
     {
         public int SupplementID { get; set; }
-        public int GymID { get; set; }
         public string Name { get; set; }
         public string Price { get; set; }
-        public string Quantity { get; set; }
 
-        //N.P
-        public Gym Gym { get; set; }
+        // Navigation props
+        public List<GymSupplement>? GymSupplements { get; set; }
 
     }
 }

@@ -9,6 +9,7 @@ using GYM_Management_System.Data;
 using GYM_Management_System.Models;
 using GYM_Management_System.Models.Interfaces;
 using GYM_Management_System.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GYM_Management_System.Controllers
 {
@@ -39,6 +40,7 @@ namespace GYM_Management_System.Controllers
 
         // PUT: api/SubscriptionTiers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSubscriptionTier(int id, UpdateSubscriptionTierDTO subscriptionTier)
         {
@@ -48,17 +50,20 @@ namespace GYM_Management_System.Controllers
 
         // POST: api/SubscriptionTiers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost]
-        public async Task<ActionResult<SubscriptionTier>> PostSubscriptionTier(PostSubscriptionTierDTO subscriptionTier)
+        public async Task<ActionResult<PostSubscriptionTierDTO>> PostSubscriptionTier(CreatSubscriptionTierDTO subscriptionTier)
         {
             var createdsubtier = await _SubscriptionTier.Create(subscriptionTier);
-            return 
-                CreatedAtAction("GetSubscriptionTier",
-               new { id = subscriptionTier.SubscriptionTierID }, subscriptionTier);
 
-         }
+            return createdsubtier;
+
+
+
+		 }
 
         // DELETE: api/SubscriptionTiers/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSubscriptionTier(int id)
         {

@@ -9,6 +9,7 @@ using GYM_Management_System.Data;
 using GYM_Management_System.Models;
 using GYM_Management_System.Models.Interfaces;
 using GYM_Management_System.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GYM_Management_System.Controllers
 {
@@ -40,28 +41,34 @@ namespace GYM_Management_System.Controllers
 
         // PUT: api/GymEquipments/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGymEquipment(int id, EquipmentDTOPut gymEquipment)
+        public async Task<ActionResult<EquipmentDTO>> PutGymEquipment(int id, EquipmentDTOPutservice gymEquipment)
         {
-            if (id != gymEquipment.GymEquipmentID )
+			var updatedEq = await _equipment.UpdateGymEquipment(id, gymEquipment);
+			if (updatedEq==null)
             {
-                return BadRequest("the id not matches");
-            }
-            var updatedEq = await _equipment.UpdateGymEquipment(id, gymEquipment);
-            return Ok(updatedEq);
+				return NotFound();
+				//return BadRequest("the id not matches");
+			}
+            
+            return updatedEq;
         }
 
         // POST: api/GymEquipments
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize]
         [HttpPost]
-        public async Task<ActionResult<GymEquipment>> PostGymEquipment(EquipmentDTO gymEquipment)
+        public async Task<ActionResult<EquipmentDTO>> PostGymEquipment(CreatEquipmentDTO gymEquipment)
         {
-             await _equipment.Create(gymEquipment);
-            return CreatedAtAction("GetGymEquipment", new { id = gymEquipment.GymEquipmentID }, gymEquipment);
+           var gymEq= await _equipment.Create(gymEquipment);
+             //return CreatedAtAction("GetGymEquipment", new { id = gymEq.GymEquipmentID }, gymEquipment);
+            return gymEq;
 
-        }
+		}
 
         // DELETE: api/GymEquipments/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGymEquipment(int id)
         {

@@ -9,6 +9,7 @@ namespace GYM_Management_System.Models.Interfaces
     {
         public Task<UserDTO> Register(RegisterUserDTO registerDTO, ModelStateDictionary modelState);
         public Task<UserDTO> LogIn(string UserName, string Password);
-       // public Task<ActionResult<UserDTO>> RegisterAgent(RegisterUserDTO registerDTO, ModelStateDictionary modelState);
+       // public Task<UserDTO> Authenticate(string UserName, string Password);
+        // public Task<ActionResult<UserDTO>> RegisterAgent(RegisterUserDTO registerDTO, ModelStateDictionary modelState);
     }
 }
