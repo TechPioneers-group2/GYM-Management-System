@@ -14,33 +14,38 @@ namespace GYM_Management_System.Models.Services
             _db = db;
         }
 
-        public async Task<EmployeeDTO> Create(CreatEmployeeDTO creatEmployeeDTO)
-        {
-            var newEmployee = new Employee()
-            {
-                GymID = creatEmployeeDTO.GymID,
-                Name = creatEmployeeDTO.Name,
-                JobDescription = creatEmployeeDTO.JobDescription,
-                IsAvailable = creatEmployeeDTO.IsAvailable,
-                WorkingDays = creatEmployeeDTO.WorkingDays,
-                WorkingHours = creatEmployeeDTO.WorkingHours,
-                Salary = creatEmployeeDTO.Salary,
-            };
-            await _db.AddAsync(newEmployee);
-            await _db.SaveChangesAsync();
-            EmployeeDTO employeeDTO = new EmployeeDTO()
-            {
-                EmployeeID = newEmployee.EmployeeID,
-                GymID = creatEmployeeDTO.GymID,
-                Name = creatEmployeeDTO.Name,
-                JobDescription = creatEmployeeDTO.JobDescription,
-                IsAvailable = creatEmployeeDTO.IsAvailable,
-                WorkingDays = creatEmployeeDTO.WorkingDays,
-                WorkingHours = creatEmployeeDTO.WorkingHours,
-                Salary = creatEmployeeDTO.Salary,
-            };
-            return employeeDTO;
-        }
+		public async Task<EmployeeDTO> Create(CreatEmployeeDTO creatEmployeeDTO)
+		{
+			var gym = await _db.Gyms.FindAsync(creatEmployeeDTO.GymID);
+			if(gym==null)
+			{
+				return null;	
+			}
+			var newEmployee = new Employee()
+			{
+				GymID = creatEmployeeDTO.GymID,
+				Name = creatEmployeeDTO.Name,
+				JobDescription = creatEmployeeDTO.JobDescription,
+				IsAvailable = creatEmployeeDTO.IsAvailable,
+				WorkingDays = creatEmployeeDTO.WorkingDays,
+				WorkingHours = creatEmployeeDTO.WorkingHours,
+				Salary = creatEmployeeDTO.Salary,
+			};
+			await _db.AddAsync(newEmployee);
+			await _db.SaveChangesAsync();
+			EmployeeDTO employeeDTO = new EmployeeDTO()
+			{
+				EmployeeID= newEmployee.EmployeeID,
+				GymID = creatEmployeeDTO.GymID,
+				Name = creatEmployeeDTO.Name,
+				JobDescription = creatEmployeeDTO.JobDescription,
+				IsAvailable = creatEmployeeDTO.IsAvailable,
+				WorkingDays = creatEmployeeDTO.WorkingDays,
+				WorkingHours = creatEmployeeDTO.WorkingHours,
+				Salary = creatEmployeeDTO.Salary,
+			}; 
+			return employeeDTO;
+		}
 
         public async Task Delete(int employeeId)
         {
