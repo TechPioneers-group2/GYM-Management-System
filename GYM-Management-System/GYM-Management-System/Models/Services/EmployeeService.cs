@@ -16,6 +16,11 @@ namespace GYM_Management_System.Models.Services
 
 		public async Task<EmployeeDTO> Create(CreatEmployeeDTO creatEmployeeDTO)
 		{
+			var gym = await _db.Gyms.FindAsync(creatEmployeeDTO.GymID);
+			if(gym==null)
+			{
+				return null;	
+			}
 			var newEmployee = new Employee()
 			{
 				GymID = creatEmployeeDTO.GymID,
