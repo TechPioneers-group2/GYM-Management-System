@@ -17,7 +17,6 @@ namespace GYM_Management_System.Models.Services
 
         private ISubscriptionTier _subscriptionTier;
 
-
         public IdentityUserService(GymDbContext context, UserManager<ApplicationUser> manager, jwtTokenServices tokenServices, ISubscriptionTier subscriptionTier)
         {
             _context = context;

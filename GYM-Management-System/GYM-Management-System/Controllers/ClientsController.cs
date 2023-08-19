@@ -25,7 +25,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/Clients
-
+        
         [Authorize(Roles = "Admin, Employee")]
         [HttpGet("{gymid}")]
         public async Task<ActionResult<IEnumerable<GetClientDTO>>> GetClients(int gymid)

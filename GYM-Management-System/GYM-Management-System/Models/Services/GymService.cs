@@ -20,8 +20,6 @@ namespace GYM_Management_System.Models.Services
             _tier = supTier;
         }
 
-
-
         public async Task<PostGymDTO> CreateGym(PostGymDTO gym)
         {
             var newGym = new Gym()
@@ -134,6 +132,7 @@ namespace GYM_Management_System.Models.Services
                 };
                 supptierDTO.Add(ggstDTO);
             }
+
             var returnVar = await _gymDbContext.Gyms
                 .Select(Gm => new GetManagerGymDTO
                 {

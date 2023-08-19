@@ -34,7 +34,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/GymEquipments/5
-
+        
         [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<EquipmentDTO>> GetGymEquipment(int id)
