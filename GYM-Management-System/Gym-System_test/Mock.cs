@@ -45,6 +45,18 @@ namespace Gym_System_test
             }
         }
 
+        protected async Task UpdateSupplementForTest(int supplementId, string newName, string newPrice)
+        {
+            var supplementToUpdate = await _db.Supplements.FindAsync(supplementId);
+            if (supplementToUpdate != null)
+            {
+                supplementToUpdate.Name = newName;
+                supplementToUpdate.Price = newPrice;
+                _db.Entry(supplementToUpdate).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
+            }
+        }
+
 
         public void Dispose()
         {
