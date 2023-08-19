@@ -5,7 +5,7 @@ namespace GYM_Management_System.Models.Interfaces
     public interface IGym
     {
         // Create a Gym
-        Task<Gym> CreateGym(PostGymDTO gym);
+        Task<PostGymDTO> CreateGym(PostGymDTO gym);
 
         // GET All Gyms
         Task<List<GetUserGymDTO>> GetGyms();
@@ -17,19 +17,19 @@ namespace GYM_Management_System.Models.Interfaces
 
         // Update Gym
 
-        Task<Gym> UpdateGym(int gymid, PutGymDTO updatedGym);
+        Task<PutGymDTO> UpdateGym(int gymid, PutGymDTO updatedGym);
 
         // Delete Gym
 
         Task DeleteGym(int gymid);
 
-        Task<List<GetManagerGymDTO>> GetGymClient();
+        Task<List<GetManagerGymDTO>> GetGymManger();
 
 
 
 
-        // Add all supplements in one Gym
-        Task AddSupplementToGym(int gymId, int supplementId);
+        // Add a supplement to a Gym
+        Task AddSupplementToGym(int gymId, int supplementId, int quantity);
 
         // Delete all supplements in a Gym
         Task RemoveSupplementFromGym(int gymId, int supplementId);

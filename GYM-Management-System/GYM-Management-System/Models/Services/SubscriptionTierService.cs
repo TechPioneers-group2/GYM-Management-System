@@ -17,30 +17,31 @@ namespace GYM_Management_System.Models.Services
         {
             var newSubscriptionTier = new SubscriptionTier()
             {
-              // SubscriptionTierID = subscriptionTier.SubscriptionTierID,
+
                 Name = subscriptionTier.Name,
                 Price = subscriptionTier.Price,
                 Length = subscriptionTier.Length
             };
             _SubscriptionTier.Add(newSubscriptionTier);
             await _SubscriptionTier.SaveChangesAsync();
-            //subscriptionTier.SubscriptionTierID = newSubscriptionTier.SubscriptionTierID;
+
             var SubsTierDto = new PostSubscriptionTierDTO()
             {
-				SubscriptionTierID = newSubscriptionTier.SubscriptionTierID,
-				Name = newSubscriptionTier.Name,
-				Price = newSubscriptionTier.Price,
-				Length = newSubscriptionTier.Length
-			};
+                SubscriptionTierID = newSubscriptionTier.SubscriptionTierID,
+                Name = newSubscriptionTier.Name,
+                Price = newSubscriptionTier.Price,
+                Length = newSubscriptionTier.Length
+            };
 
-			return SubsTierDto;
+            return SubsTierDto;
         }
 
         public async Task DeleteSubscriptionTier(int SubscriptionTierId)
         {
-                 var deletedSubscriptionTier =  await
-                _SubscriptionTier.SubscriptionTiers.FindAsync(SubscriptionTierId);
-            if (deletedSubscriptionTier !=null)
+            var deletedSubscriptionTier = await
+           _SubscriptionTier.SubscriptionTiers.FindAsync(SubscriptionTierId);
+
+            if (deletedSubscriptionTier != null)
             {
                 _SubscriptionTier.SubscriptionTiers.Remove(deletedSubscriptionTier);
                 await _SubscriptionTier.SaveChangesAsync();
@@ -50,16 +51,16 @@ namespace GYM_Management_System.Models.Services
         public async Task<List<GetSubscriptionTierDTO>> GetAllSubscriptionTier()
         {
             return await _SubscriptionTier.SubscriptionTiers
-                .Select(tier => new  GetSubscriptionTierDTO
+                .Select(tier => new GetSubscriptionTierDTO
                 {
-                    SubscriptionTierID=tier.SubscriptionTierID,
+                    SubscriptionTierID = tier.SubscriptionTierID,
                     Name = tier.Name,
                     Price = tier.Price,
                     Length = tier.Length
                 }).ToListAsync();
         }
 
-        public async Task<GetSubscriptionTierDTO> GetSubscriptionTier( int SubscriptionTierid)
+        public async Task<GetSubscriptionTierDTO> GetSubscriptionTier(int SubscriptionTierid)
         {
             return await _SubscriptionTier.SubscriptionTiers
                .Select(tier => new GetSubscriptionTierDTO
@@ -70,7 +71,7 @@ namespace GYM_Management_System.Models.Services
                    Length = tier.Length
 
                }).FirstOrDefaultAsync(tr => tr.SubscriptionTierID == SubscriptionTierid);
-               
+
         }
 
         public async Task<UpdateSubscriptionTierDTO> UpdateSubscriptionTier(int SubscriptionTierId, UpdateSubscriptionTierDTO subscriptionTier)
@@ -78,13 +79,13 @@ namespace GYM_Management_System.Models.Services
             var updatedsubtier = await _SubscriptionTier.SubscriptionTiers.
                  FindAsync(SubscriptionTierId);
 
-            if (updatedsubtier !=null)
+            if (updatedsubtier != null)
             {
-               
+
                 updatedsubtier.Name = subscriptionTier.Name;
-                updatedsubtier.Price= subscriptionTier.Price;
-                updatedsubtier.Length =subscriptionTier.Length;
-                _SubscriptionTier.Entry(updatedsubtier).State= EntityState.Modified;
+                updatedsubtier.Price = subscriptionTier.Price;
+                updatedsubtier.Length = subscriptionTier.Length;
+                _SubscriptionTier.Entry(updatedsubtier).State = EntityState.Modified;
                 await _SubscriptionTier.SaveChangesAsync();
             }
 

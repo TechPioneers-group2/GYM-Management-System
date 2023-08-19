@@ -9,6 +9,7 @@ using GYM_Management_System.Data;
 using GYM_Management_System.Models;
 using GYM_Management_System.Models.Interfaces;
 using GYM_Management_System.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GYM_Management_System.Controllers
 {
@@ -24,70 +25,90 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/Supplements
+
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SupplementDTO>>> GetSupplements()
         {
             if (_supplements == null)
             {
-                return NotFound();
+                return NotFound("No supplements found.");
             }
-            return await _supplements.GetAllSupplements();
+
+            var supplements = await _supplements.GetAllSupplements();
+            if (supplements == null || !supplements.Any())
+            {
+                return NotFound("No supplements found.");
+            }
+
+            return supplements;
         }
 
         // GET: api/Supplements/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<SupplementDTO>> GetSupplement(int id)
         {
             if (_supplements == null)
             {
-                return NotFound();
+                return NotFound("Supplements data not available.");
             }
-            var supplements = await _supplements.GetSupplementById(id);
-            if (supplements == null)
+
+            var supplement = await _supplements.GetSupplementById(id);
+            if (supplement == null)
             {
-                return NotFound();
+                return NotFound("Supplement not found.");
             }
-            return supplements;
+
+            return supplement;
         }
+
 
         // PUT: api/Supplements/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSupplement([FromRoute] int id, [FromBody] SupplementDTO supplement)
+        public async Task<ActionResult<SupplementDTO>> PutSupplement(int id, CreatSupplementDTO supplement)
         {
-            if (id != supplement.SupplementID)
-            {
-                return BadRequest();
-            }
             var updatedSupplement = await _supplements.UpdateSupplement(id, supplement);
 
-            return Ok(updatedSupplement);
+            if (updatedSupplement == null)
+            {
+                return NotFound("Supplement not found.");
+            }
+
+            return updatedSupplement;
         }
+
 
 
 
 
         // POST: api/Supplements
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<SupplementDTO>> PostSupplement(CreatSupplementDTO supplement)
         {
+            try
+            {
+                var supplementDto = await _supplements.CreateSupplement(supplement);
+                return CreatedAtAction(nameof(GetSupplement), new { id = supplementDto.SupplementID }, supplementDto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while creating the supplement.");
+            }
+        }
 
-           var supplementDto= await _supplements.CreateSupplement(supplement);
-            //return CreatedAtAction("GetSupplement", new
-            //{
-            //    id = supplement.SupplementID,
-            //}, supplement);
-            return supplementDto;
-
-		}
 
         // DELETE: api/Supplements/5
+        [Authorize(Policy = "deleteAdmin")]
         [HttpDelete("{id}")]
         public async Task<string> DeleteSupplement(int id)
         {
 
-            var result = await _supplements.DeleteSupplement(id);
+            bool result = await _supplements.DeleteSupplement(id);
             if (result == true)
             {
                 return "Deleted Succesfully!";

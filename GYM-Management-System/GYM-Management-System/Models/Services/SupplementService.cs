@@ -15,25 +15,32 @@ namespace GYM_Management_System.Models.Services
 
         public async Task<SupplementDTO> CreateSupplement(CreatSupplementDTO supplementDTO)
         {
-            var newSupplement = new Supplement()
+            try
             {
-                //SupplementID = supplementDTO.SupplementID,
-                Name = supplementDTO.Name,
-                Price = supplementDTO.Price,
+                var newSupplement = new Supplement()
+                {
+                    Name = supplementDTO.Name,
+                    Price = supplementDTO.Price,
+                };
 
-            };
-            _supplement.Entry(newSupplement).State = EntityState.Added;
-            await _supplement.SaveChangesAsync();
-            //supplementDTO.SupplementID = newSupplement.SupplementID;
-            var SupplementDtoReturn = new SupplementDTO() {
-				SupplementID = newSupplement.SupplementID,
-				Name = newSupplement.Name,
-				Price = newSupplement.Price,
-			};
+                _supplement.Entry(newSupplement).State = EntityState.Added;
+                await _supplement.SaveChangesAsync();
 
-			return SupplementDtoReturn;
+                var SupplementDtoReturn = new SupplementDTO()
+                {
+                    SupplementID = newSupplement.SupplementID,
+                    Name = newSupplement.Name,
+                    Price = newSupplement.Price,
+                };
 
+                return SupplementDtoReturn;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while creating the supplement.", ex);
+            }
         }
+
 
         public async Task<bool> DeleteSupplement(int supplementId)
         {
@@ -47,45 +54,81 @@ namespace GYM_Management_System.Models.Services
             return false;
         }
 
+
         public async Task<List<SupplementDTO>> GetAllSupplements()
         {
-            return await _supplement.Supplements
-                .Select(t => new SupplementDTO
-                {
-                    SupplementID = t.SupplementID,
-                    Name = t.Name,
-                    Price = t.Price,
+            try
+            {
+                var supplements = await _supplement.Supplements
+                    .Select(t => new SupplementDTO
+                    {
+                        SupplementID = t.SupplementID,
+                        Name = t.Name,
+                        Price = t.Price,
 
-                }).ToListAsync();
+                    }).ToListAsync();
+
+                return supplements;
+            }
+            catch (Exception ex)
+            {
+                return new List<SupplementDTO>();
+            }
         }
+
 
         public async Task<SupplementDTO> GetSupplementById(int supplementId)
         {
-            return await _supplement.Supplements
-                .Select(t => new SupplementDTO
-                {
-                    SupplementID = t.SupplementID,
-                    Name = t.Name,
-                    Price = t.Price,
-
-                }).FirstOrDefaultAsync(sp => sp.SupplementID == supplementId);
-        }
-
-        public async Task<SupplementDTO> UpdateSupplement(int supplementId, SupplementDTO updatedSupplementDTO)
-        {
-            var updatedSupplement = await _supplement.Supplements.FindAsync(supplementId);
-
-            if (updatedSupplement != null)
+            try
             {
+                var supplement = await _supplement.Supplements
+                    .Select(t => new SupplementDTO
+                    {
+                        SupplementID = t.SupplementID,
+                        Name = t.Name,
+                        Price = t.Price,
 
-                updatedSupplement.Name = updatedSupplementDTO.Name;
-                updatedSupplement.Price = updatedSupplementDTO.Price;
+                    }).FirstOrDefaultAsync(sp => sp.SupplementID == supplementId);
 
-                await _supplement.SaveChangesAsync();
-
+                return supplement;
             }
-
-            return updatedSupplementDTO;
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
+
+
+        public async Task<SupplementDTO> UpdateSupplement(int supplementId, CreatSupplementDTO updatedSupplementDTO)
+        {
+            try
+            {
+                Supplement updatedSupplement = await _supplement.Supplements.FindAsync(supplementId);
+
+                if (updatedSupplement != null)
+                {
+                    updatedSupplement.Name = updatedSupplementDTO.Name;
+                    updatedSupplement.Price = updatedSupplementDTO.Price;
+                    _supplement.Entry(updatedSupplement).State = EntityState.Modified;
+                    await _supplement.SaveChangesAsync();
+
+                    SupplementDTO supplementDTO = new SupplementDTO()
+                    {
+                        SupplementID = supplementId,
+                        Name = updatedSupplementDTO.Name,
+                        Price = updatedSupplementDTO.Price,
+                    };
+                    return supplementDTO;
+                }
+
+                return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
     }
 }

@@ -2,6 +2,7 @@
 {
     public class Employee
     {
+        public string UserId { get; set; }
         public int EmployeeID { get; set; }
         public int GymID { get; set; }
         public string Name { get; set; }

@@ -9,6 +9,7 @@ using GYM_Management_System.Data;
 using GYM_Management_System.Models;
 using GYM_Management_System.Models.Interfaces;
 using GYM_Management_System.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GYM_Management_System.Controllers
 {
@@ -23,6 +24,8 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/GymEquipments
+
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EquipmentDTO>>> GetGymEquipments()
         {
@@ -31,49 +34,55 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/GymEquipments/5
+
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<EquipmentDTO>> GetGymEquipment(int id)
         {
-          var equipment = await _equipment.GetEquipmentById(id);
-            return equipment;
+            var equipment = await _equipment.GetEquipmentById(id);
+            return Ok(equipment);
         }
 
         // PUT: api/GymEquipments/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
+        [Authorize(Roles = "Admin, Employee")]
         [HttpPut("{id}")]
         public async Task<ActionResult<EquipmentDTO>> PutGymEquipment(int id, EquipmentDTOPutservice gymEquipment)
         {
-			var updatedEq = await _equipment.UpdateGymEquipment(id, gymEquipment);
-			if (updatedEq==null)
+            var updatedEq = await _equipment.UpdateGymEquipment(id, gymEquipment);
+            if (updatedEq == null)
             {
-				return NotFound();
-				//return BadRequest("the id not matches");
-			}
-            
+                return NotFound();
+                //return BadRequest("the id not matches");
+            }
+
             return updatedEq;
         }
 
         // POST: api/GymEquipments
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
+        [Authorize(Roles = "Admin, Employee")]
         [HttpPost]
         public async Task<ActionResult<EquipmentDTO>> PostGymEquipment(CreatEquipmentDTO gymEquipment)
         {
-           var gymEq= await _equipment.Create(gymEquipment);
-             //return CreatedAtAction("GetGymEquipment", new { id = gymEq.GymEquipmentID }, gymEquipment);
+            var gymEq = await _equipment.Create(gymEquipment);
+
             return gymEq;
 
-		}
+        }
 
         // DELETE: api/GymEquipments/5
+
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGymEquipment(int id)
         {
-          
+
             await _equipment.DeleteGymEquipment(id);
 
             return NoContent();
         }
-
-       
     }
 }
