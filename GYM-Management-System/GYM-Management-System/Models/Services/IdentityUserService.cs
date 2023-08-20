@@ -35,7 +35,8 @@ namespace GYM_Management_System.Models.Services
                 {
                     Id = user.Id,
                     UserName = user.UserName,
-                    Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15))
+                    Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15)),
+                    Roles = await _userManager.GetRolesAsync(user)
                 };
             }
             return null;
