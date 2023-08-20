@@ -10,18 +10,19 @@ namespace GYM_Management_System.Models.Services
     public class ClientService : IClient
     {
         private readonly GymDbContext _context;
-        private readonly ISubscriptionTier _subscriptionTier;
+       // private readonly ISubscriptionTier _subscriptionTier;
 
-        public ClientService(GymDbContext context, ISubscriptionTier subscriptionTier)
+        public ClientService(GymDbContext context)
         {
             _context = context;
-            _subscriptionTier = subscriptionTier;
+            
         }
 
 
         public async Task<Client> CreateClient(int gymid, PostClientDTO client)
         {
-            var subscriptionTier = await _subscriptionTier.GetSubscriptionTier(client.SubscriptionTierID);
+            var subscriptionTier = await _context.SubscriptionTiers
+                .FirstOrDefaultAsync(tr => tr.SubscriptionTierID == client.SubscriptionTierID);
 
             if (subscriptionTier == null)
             {
@@ -47,9 +48,9 @@ namespace GYM_Management_System.Models.Services
             return newClient;
         }
 
-        public async Task DeleteClient(int gymid, int clientid)
+        public async Task DeleteClient(int clientid, int gymid)
         {
-            var DeletedClient = await _context.Clients.FindAsync(gymid, clientid);
+            var DeletedClient = await _context.Clients.FindAsync(clientid,gymid);
             if (DeletedClient != null)
             {
                 _context.Clients.Remove(DeletedClient);
@@ -59,7 +60,8 @@ namespace GYM_Management_System.Models.Services
 
         public async Task<GetClientDTO> GetClient(int clientid, int gymid)
         {
-            return await _context.Clients
+             
+                 var newclient=await _context.Clients
                 .Select(nc => new GetClientDTO()
                 {
                     ClientID = nc.ClientID,
@@ -75,6 +77,13 @@ namespace GYM_Management_System.Models.Services
                     }
 
                 }).FirstOrDefaultAsync(cID => cID.ClientID == clientid && cID.GymID == gymid);
+
+            if (newclient == null)
+            {
+                return null;
+            }
+
+            return newclient;
         }
 
         public async Task<List<GetClientDTO>> GetClients(int gymid)
@@ -97,10 +106,10 @@ namespace GYM_Management_System.Models.Services
                 }).Where(cl => cl.GymID == gymid).ToListAsync();
         }
 
-        public async Task<GetClientDTO> UpdateClient(int gymid, int clientid, UpdateClientDTO client)
+        public async Task<GetClientDTO> UpdateClient(int clientid, int gymid, UpdateClientDTO client)
         {
             GetClientDTO returnedClient = new GetClientDTO();
-            var currentClient = await _context.Clients.FindAsync(gymid, clientid);
+            var currentClient = await _context.Clients.FindAsync(clientid, gymid);
             if (currentClient != null)
             {
                 currentClient.SubscriptionTierID = client.SubscriptionTierID;
