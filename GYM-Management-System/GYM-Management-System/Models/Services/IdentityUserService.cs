@@ -73,27 +73,28 @@ namespace GYM_Management_System.Models.Services
                 PhoneNumber = registerAdminDTO.PhoneNumber,
             };
 
-            var result = await _userManager.CreateAsync(user, registerAdminDTO.Password);
-            if (result.Succeeded)
-            {
-                await _userManager.AddToRolesAsync(user, registerAdminDTO.Roles);
-                return new UserDTO
-                {
-                    Id = user.Id,
-                    UserName = user.UserName,
-                    Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15)),
-                    Roles = (List<string>)await _userManager.GetRolesAsync(user)
-                };
-            }
-            foreach (var error in result.Errors)
-            {
-                var errorKey = error.Code.Contains("Password") ? nameof(registerAdminDTO.Password) :
-                     error.Code.Contains("Email") ? nameof(registerAdminDTO.Email) :
-                      error.Code.Contains("UserName") ? nameof(registerAdminDTO.UserName) : "";
-                modelState.AddModelError(errorKey, error.Description);
-            }
-            return null;
-        }
+			var result = await _userManager.CreateAsync(user, registerAdminDTO.Password);
+			if (result.Succeeded)
+			{
+				await _userManager.AddToRolesAsync(user, registerAdminDTO.Roles);
+				return new UserDTO
+				{
+					Id = user.Id,
+					UserName = user.UserName,
+					Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15)),
+					Roles = await _userManager.GetRolesAsync(user)
+				};
+			}
+			foreach (var error in result.Errors)
+			{
+				var errorKey = error.Code.Contains("Password") ? nameof(registerAdminDTO.Password) :
+					 error.Code.Contains("Email") ? nameof(registerAdminDTO.Email) :
+					  error.Code.Contains("UserName") ? nameof(registerAdminDTO.UserName) : "";
+				modelState.AddModelError(errorKey, error.Description);
+
+			}
+			return null;
+		}
 
         /// <summary>
         /// Registers an employee user.
@@ -111,45 +112,46 @@ namespace GYM_Management_System.Models.Services
                 Email = registerEmployeeDTO.Email,
             };
 
-            var result = await _userManager.CreateAsync(user, registerEmployeeDTO.Password);
+			var result = await _userManager.CreateAsync(user, registerEmployeeDTO.Password);
 
-            foreach (var error in result.Errors)
-            {
-                var errorKey = error.Code.Contains("Password") ? nameof(registerEmployeeDTO.Password) :
-                     error.Code.Contains("Email") ? nameof(registerEmployeeDTO.Email) :
-                      error.Code.Contains("UserName") ? nameof(registerEmployeeDTO.UserName) : "";
-                modelState.AddModelError(errorKey, error.Description);
-            }
+			foreach (var error in result.Errors)
+			{
+				var errorKey = error.Code.Contains("Password") ? nameof(registerEmployeeDTO.Password) :
+					 error.Code.Contains("Email") ? nameof(registerEmployeeDTO.Email) :
+					  error.Code.Contains("UserName") ? nameof(registerEmployeeDTO.UserName) : "";
+				modelState.AddModelError(errorKey, error.Description);
+			}
 
-            if (result.Succeeded)
-            {
-                {
-                    var newEmployee = new Employee()
-                    {
-                        UserId = user.Id,
-                        GymID = registerEmployeeDTO.GymID,
-                        Name = registerEmployeeDTO.Name,
-                        JobDescription = registerEmployeeDTO.JobDescription,
-                        IsAvailable = registerEmployeeDTO.IsAvailable,
-                        WorkingDays = registerEmployeeDTO.WorkingDays,
-                        WorkingHours = registerEmployeeDTO.WorkingHours,
-                        Salary = registerEmployeeDTO.Salary
-                    };
+			if (result.Succeeded)
+			{
+				{
+					var newEmployee = new Employee()
+					{
+						UserId = user.Id,
+						GymID = registerEmployeeDTO.GymID,
+						Name = registerEmployeeDTO.Name,
+						JobDescription = registerEmployeeDTO.JobDescription,
+						IsAvailable = registerEmployeeDTO.IsAvailable,
+						WorkingDays = registerEmployeeDTO.WorkingDays,
+						WorkingHours = registerEmployeeDTO.WorkingHours,
+						Salary = registerEmployeeDTO.Salary
+					};
 
-                    _context.Employees.Add(newEmployee);
-                    await _context.SaveChangesAsync();
-                }
-                await _userManager.AddToRolesAsync(user, registerEmployeeDTO.Roles);
-                return new UserDTO()
-                {
-                    Id = user.Id,
-                    UserName = user.UserName,
-                    Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15)),
-                    Roles = (List<string>)await _userManager.GetRolesAsync(user),
-                };
-            }
-            return null;
-        }
+					_context.Employees.Add(newEmployee);
+					await _context.SaveChangesAsync();
+
+				}
+				await _userManager.AddToRolesAsync(user, registerEmployeeDTO.Roles);
+				return new UserDTO()
+				{
+					Id = user.Id,
+					UserName = user.UserName,
+					Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15)),
+					Roles = await _userManager.GetRolesAsync(user),
+				};
+			}
+			return null;
+		}
 
         /// <summary>
         /// Registers a client user.
@@ -167,47 +169,48 @@ namespace GYM_Management_System.Models.Services
                 Email = registerClientDTO.Email,
             };
 
-            var result = await _userManager.CreateAsync(user, registerClientDTO.Password);
+			var result = await _userManager.CreateAsync(user, registerClientDTO.Password);
 
-            foreach (var error in result.Errors)
-            {
-                var errorKey = error.Code.Contains("Password") ? nameof(registerClientDTO.Password) :
-                     error.Code.Contains("Email") ? nameof(registerClientDTO.Email) :
-                      error.Code.Contains("UserName") ? nameof(registerClientDTO.UserName) : "";
-                modelState.AddModelError(errorKey, error.Description);
-            }
+			foreach (var error in result.Errors)
+			{
+				var errorKey = error.Code.Contains("Password") ? nameof(registerClientDTO.Password) :
+					 error.Code.Contains("Email") ? nameof(registerClientDTO.Email) :
+					  error.Code.Contains("UserName") ? nameof(registerClientDTO.UserName) : "";
+				modelState.AddModelError(errorKey, error.Description);
+			}
 
-            if (result.Succeeded)
-            {
-                {
-                    var subscriptionTier = await _subscriptionTier.GetSubscriptionTier(registerClientDTO.SubscriptionTierID);
-                    var currentDate = DateTime.UtcNow;
-                    var subscriptionExpiry = currentDate.AddMonths(subscriptionTier.Length);
+			if (result.Succeeded)
+			{
+				{
+					var subscriptionTier = await _subscriptionTier.GetSubscriptionTier(registerClientDTO.SubscriptionTierID);
+					var currentDate = DateTime.UtcNow;
+					var subscriptionExpiry = currentDate.AddMonths(subscriptionTier.Length);
 
-                    var newClient = new Client()
-                    {
-                        UserId = user.Id,
-                        GymID = registerClientDTO.GymID,
-                        Name = registerClientDTO.Name,
-                        SubscriptionDate = currentDate,
-                        SubscriptionExpiry = subscriptionExpiry,
-                        SubscriptionTierID = registerClientDTO.SubscriptionTierID,
-                        InGym = registerClientDTO.InGym
-                    };
+					var newClient = new Client()
+					{
+						UserId = user.Id,
+						GymID = registerClientDTO.GymID,
+						Name = registerClientDTO.Name,
+						SubscriptionDate = currentDate,
+						SubscriptionExpiry = subscriptionExpiry,
+						SubscriptionTierID = registerClientDTO.SubscriptionTierID,
+						InGym = registerClientDTO.InGym
+					};
 
-                    _context.Clients.Add(newClient);
-                    await _context.SaveChangesAsync();
-                }
-                await _userManager.AddToRolesAsync(user, registerClientDTO.Roles);
-                return new UserDTO()
-                {
-                    Id = user.Id,
-                    UserName = user.UserName,
-                    Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15)),
-                    Roles = (List<string>)await _userManager.GetRolesAsync(user),
-                };
-            }
-            return null;
-        }
-    }
+					_context.Clients.Add(newClient);
+					await _context.SaveChangesAsync();
+
+				}
+				await _userManager.AddToRolesAsync(user, registerClientDTO.Roles);
+				return new UserDTO()
+				{
+					Id = user.Id,
+					UserName = user.UserName,
+					Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15)),
+					Roles = await _userManager.GetRolesAsync(user),
+				};
+			}
+			return null;
+		}
+	}
 }

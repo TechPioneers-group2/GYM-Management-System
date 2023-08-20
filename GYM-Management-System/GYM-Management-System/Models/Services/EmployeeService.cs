@@ -184,21 +184,21 @@ namespace GYM_Management_System.Models.Services
                 _db.Entry(employee).State = EntityState.Modified;
                 await _db.SaveChangesAsync();
 
-                EmployeeDTO employeeDTO = new EmployeeDTO()
-                {
-                    EmployeeID = employeeId,
-                    GymID = updateEmployeeDTO.GymID,
-                    Name = updateEmployeeDTO.Name,
-                    JobDescription = updateEmployeeDTO.JobDescription,
-                    IsAvailable = updateEmployeeDTO.IsAvailable,
-                    WorkingDays = updateEmployeeDTO.WorkingDays,
-                    WorkingHours = updateEmployeeDTO.WorkingHours,
-                    Salary = updateEmployeeDTO.Salary,
-                };
+				EmployeeDTO employeeDTO = new EmployeeDTO()
+				{
+					EmployeeID = employeeId,
+					GymID = updateEmployeeDTO.GymID,
+					Name = updateEmployeeDTO.Name,
+					JobDescription = updateEmployeeDTO.JobDescription,
+					IsAvailable = updateEmployeeDTO.IsAvailable,
+					WorkingDays = updateEmployeeDTO.WorkingDays,
+					WorkingHours = updateEmployeeDTO.WorkingHours,
+					Salary = updateEmployeeDTO.Salary,
+				};
 
-                return employeeDTO;
-            }
-            return null;
-        }
-    }
+				return employeeDTO;
+			}
+			return null;
+		}
+	}
 }
