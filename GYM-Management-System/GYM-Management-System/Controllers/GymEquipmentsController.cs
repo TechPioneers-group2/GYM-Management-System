@@ -34,7 +34,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/GymEquipments/5
-        
+
         [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<EquipmentDTO>> GetGymEquipment(int id)
@@ -57,7 +57,7 @@ namespace GYM_Management_System.Controllers
                 //return BadRequest("the id not matches");
             }
 
-            return updatedEq;
+            return Ok(updatedEq);
         }
 
         // POST: api/GymEquipments
@@ -69,7 +69,7 @@ namespace GYM_Management_System.Controllers
         {
             var gymEq = await _equipment.Create(gymEquipment);
 
-            return gymEq;
+            return Ok(gymEq);
 
         }
 

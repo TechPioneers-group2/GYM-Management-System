@@ -37,7 +37,7 @@ namespace GYM_Management_System.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<GetSubscriptionTierDTO>> GetSubscriptionTier(int id)
         {
-            return await _SubscriptionTier.GetSubscriptionTier(id);
+            return Ok(await _SubscriptionTier.GetSubscriptionTier(id));
         }
 
         // PUT: api/SubscriptionTiers/5

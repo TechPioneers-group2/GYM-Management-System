@@ -41,7 +41,7 @@ namespace GYM_Management_System.Controllers
                 return NotFound("No supplements found.");
             }
 
-            return supplements;
+            return Ok(supplements);
         }
 
         // GET: api/Supplements/5
@@ -60,13 +60,13 @@ namespace GYM_Management_System.Controllers
                 return NotFound("Supplement not found.");
             }
 
-            return supplement;
+            return Ok(supplement);
         }
 
 
         // PUT: api/Supplements/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<ActionResult<SupplementDTO>> PutSupplement(int id, CreatSupplementDTO supplement)
         {
@@ -77,7 +77,7 @@ namespace GYM_Management_System.Controllers
                 return NotFound("Supplement not found.");
             }
 
-            return updatedSupplement;
+            return Ok(updatedSupplement);
         }
 
 
@@ -86,7 +86,7 @@ namespace GYM_Management_System.Controllers
 
         // POST: api/Supplements
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<SupplementDTO>> PostSupplement(CreatSupplementDTO supplement)
         {
@@ -103,7 +103,7 @@ namespace GYM_Management_System.Controllers
 
 
         // DELETE: api/Supplements/5
-        //[Authorize(Policy = "deleteAdmin")]
+        [Authorize(Policy = "deleteAdmin")]
         [HttpDelete("{id}")]
         public async Task<string> DeleteSupplement(int id)
         {

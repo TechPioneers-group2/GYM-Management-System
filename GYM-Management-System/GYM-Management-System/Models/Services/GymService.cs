@@ -310,16 +310,17 @@ namespace GYM_Management_System.Models.Services
             return null;
         }
 
-        public async Task AddSupplementToGym(int gymId, int supplementId, UpdateGymSupplementDTO newGymSupplement)
+        public async Task<GymSupplement> AddSupplementToGym(int gymId, int supplementId, UpdateGymSupplementDTO createdGymSupplement)
         {
-            GymSupplement newoneGymSupplement = new GymSupplement()
+            GymSupplement newGymSupplement = new GymSupplement()
             {
                 GymID = gymId,
                 SupplementID = supplementId,
-                Quantity = newGymSupplement.Quantity,
+                Quantity = createdGymSupplement.Quantity,
             };
-            _gymDbContext.Entry(newoneGymSupplement).State = EntityState.Added;
+            _gymDbContext.Entry(newGymSupplement).State = EntityState.Added;
             await _gymDbContext.SaveChangesAsync();
+            return newGymSupplement;
         }
         public async Task<GymSupplement> UpdateSupplementForGym(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplement)
         {

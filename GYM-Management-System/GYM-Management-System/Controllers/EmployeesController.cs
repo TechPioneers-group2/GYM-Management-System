@@ -35,7 +35,7 @@ namespace GYM_Management_System.Controllers
             {
                 return NotFound();
             }
-            return emloyees;
+            return Ok(emloyees);
         }
 
         // GET: api/Employees/5
@@ -49,7 +49,7 @@ namespace GYM_Management_System.Controllers
             {
                 return NotFound();
             }
-            return employee;
+            return Ok(employee);
         }
 
         // PUT: api/Employees/5
@@ -64,7 +64,7 @@ namespace GYM_Management_System.Controllers
                 return NotFound();
             }
 
-            return updatedEmployee;
+            return Ok(updatedEmployee);
         }
 
         // POST: api/Employees
@@ -79,7 +79,7 @@ namespace GYM_Management_System.Controllers
             {
                 return BadRequest();
             }
-            return employee;
+            return Ok(employee);
         }
 
         // DELETE: api/Employees/5
@@ -107,7 +107,7 @@ namespace GYM_Management_System.Controllers
             {
                 return NotFound();
             }
-            return emloyees;
+            return Ok(emloyees);
         }
 
     }

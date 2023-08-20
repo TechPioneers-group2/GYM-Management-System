@@ -29,14 +29,14 @@ namespace GYM_Management_System.Controllers
         [HttpGet("Manager")]
         public async Task<ActionResult<List<GetManagerGymDTO>>> GetGymManager()
         {
-            return await _gym.GetGymManger();
+            return Ok(Ok(await _gym.GetGymManger()));
         }
 
         [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetUserGymDTO>>> GetGyms()
         {
-            return await _gym.GetGyms();
+            return Ok(await _gym.GetGyms());
         }
 
         // GET: api/Gyms/5
@@ -49,7 +49,7 @@ namespace GYM_Management_System.Controllers
 
             if (gym != null)
             {
-                return gym;
+                return Ok(gym);
             }
             return NotFound();
         }
@@ -87,21 +87,19 @@ namespace GYM_Management_System.Controllers
             await _gym.DeleteGym(id);
             return NoContent();
         }
-        //[Authorize(Roles = "Admin, Employee")]
+        [Authorize(Roles = "Admin, Employee")]
         [HttpPost]
         [Route("{gymId}/Supplement/{SupplementId}")]
-        public async Task<IActionResult> AddSupplementsToGym(int gymId, int SupplementId, UpdateGymSupplementDTO newGymSupplement)
+        public async Task<ActionResult<GymSupplement>> AddSupplementsToGym(int gymId, int SupplementId, UpdateGymSupplementDTO newGymSupplement)
         {
-            await _gym.AddSupplementToGym(gymId, SupplementId, newGymSupplement);
-
-            return Ok();
+            return Ok(await _gym.AddSupplementToGym(gymId, SupplementId, newGymSupplement));
         }
 
 
-        //[Authorize(Roles = "Admin, Employee")]
+        [Authorize(Roles = "Admin, Employee")]
         [HttpPut]
         [Route("{gymId}/Supplement/{supplementId}")]
-        public async Task<IActionResult> UpdateSupplementForGym(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplemen)
+        public async Task<ActionResult<GymSupplement>> UpdateSupplementForGym(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplemen)
         {
             var gymSupplement = await _gym.UpdateSupplementForGym(gymId, supplementId, updateGymSupplemen);
 
@@ -109,7 +107,7 @@ namespace GYM_Management_System.Controllers
 
         }
 
-        // [Authorize(Roles = "Admin, Employee")]
+        [Authorize(Roles = "Admin, Employee")]
         [HttpDelete]
         [Route("{gymId}/Supplement/{supplementId}")]
         public async Task<IActionResult> RemoveSupplementFromGym(int gymId, int supplementId)

@@ -30,7 +30,7 @@ namespace GYM_Management_System.Controllers
         [HttpGet("{gymid}")]
         public async Task<ActionResult<IEnumerable<GetClientDTO>>> GetClients(int gymid)
         {
-            return await _client.GetClients(gymid);
+            return Ok(await _client.GetClients(gymid));
         }
 
         // GET: api/Clients/5
@@ -39,7 +39,7 @@ namespace GYM_Management_System.Controllers
         [HttpGet("{clientid}/gym/{gymid}")]
         public async Task<ActionResult<GetClientDTO>> GetClient(int clientid, int gymid)
         {
-            return await _client.GetClient(clientid, gymid);
+            return Ok(await _client.GetClient(clientid, gymid));
         }
 
         // PUT: api/Clients/5
@@ -56,7 +56,7 @@ namespace GYM_Management_System.Controllers
         // POST: api/Clients
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 
-       [Authorize(Roles = "Admin, Employee")]
+        [Authorize(Roles = "Admin, Employee")]
         [HttpPost("{gymid}")]
         public async Task<ActionResult<Client>> PostClient(int gymid, PostClientDTO clientDto)
         {

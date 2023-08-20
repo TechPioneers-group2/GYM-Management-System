@@ -30,6 +30,7 @@ namespace Gym_System_test
             var Gymlist = await gymservice.GetGyms();
             Assert.Equal(GymList.Count, Gymlist.Count);
         }
+
         [Fact]
         public async void TestAddNewGym()
         {
@@ -50,6 +51,7 @@ namespace Gym_System_test
 
 
         }
+
         [Fact]
         public async void TestingDeleteGym()
         {
@@ -64,6 +66,7 @@ namespace Gym_System_test
             Assert.Equal(3, gymList.Count);
 
         }
+
         [Fact]
         public async void TestForUpdatingGym()
         {
@@ -77,6 +80,7 @@ namespace Gym_System_test
             Assert.Equal("UpdatedAdress", newUpdted.Address);
             Assert.Equal("UpdatedTime", newUpdted.ActiveHours);
         }
+
         /*
         [Fact]
         public async void TestForAddSupplements()
@@ -135,15 +139,15 @@ namespace Gym_System_test
 
 
         }*/
+
         [Fact]
         public async Task TestForAddSupplementsToGym()
         {
             // Arrange
-            var supplement = await CreateNewGymSupplement();
             var gym = await TestCreateGym();
-
+            var supplement = await CreateNewGymSupplement();
             var subTeir = new SubscriptionTierService(_db);
-            var clientservice = new ClientService(_db, subTeir);
+            var clientservice = new ClientService(_db);
             var gymservice = new GymService(_db, subTeir, clientservice);
 
             var newGymSupplement = new UpdateGymSupplementDTO
@@ -161,15 +165,15 @@ namespace Gym_System_test
             Assert.Equal(supplement.SupplementID, updatedGym.Supplements[0].SupplementID);
             Assert.Equal(newGymSupplement.Quantity, updatedGym.Supplements[0].Quantity);
         }
+
         [Fact]
         public async Task TestForUpdatingSupplementForGym()
         {
             // Arrange
             var gym = await TestCreateGym();
             var supplement = await UpdateGymSupplement();
-
             var subTeir = new SubscriptionTierService(_db);
-            var clientservice = new ClientService(_db, subTeir);
+            var clientservice = new ClientService(_db);
             var gymservice = new GymService(_db, subTeir, clientservice);
 
             var updatedQuantity = 30; // Adjust the updated quantity as needed
@@ -196,7 +200,7 @@ namespace Gym_System_test
             var gym = await TestCreateGym();
 
             var subTeir = new SubscriptionTierService(_db);
-            var clientservice = new ClientService(_db, subTeir);
+            var clientservice = new ClientService(_db);
             var gymservice = new GymService(_db, subTeir, clientservice);
 
             // Act
