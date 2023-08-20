@@ -1,6 +1,7 @@
 ﻿using GYM_Management_System.Data;
 using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Net;
@@ -11,13 +12,13 @@ namespace GYM_Management_System.Models.Services
     public class GymService : IGym
     {
         private readonly GymDbContext _gymDbContext;
-      //  private readonly ISubscriptionTier _tier;
+        //  private readonly ISubscriptionTier _tier;
 
 
         public GymService(GymDbContext gymDbContext, ISubscriptionTier supTier, IClient client)
         {
             _gymDbContext = gymDbContext;
-           // _tier = supTier;
+            // _tier = supTier;
         }
 
 
@@ -69,7 +70,7 @@ namespace GYM_Management_System.Models.Services
                     .Where(x => x.GymID == gymid)
                     .Select(x => new GymSupplementDTO
                     {
-                        GymID = x.GymID,
+                        // GymID = x.GymID,
                         Quantity = x.Quantity,
                         SupplementID = x.SupplementID,
                         Supplements = new GetGymSupplementDTO
@@ -337,7 +338,7 @@ namespace GYM_Management_System.Models.Services
                     }).ToList(),
                     Supplements = Gm.GymSupplements.Select(GS => new GymSupplementDTO()
                     {
-                        GymID = GS.GymID,
+                        //GymID = GS.GymID,
                         Quantity = GS.Quantity,
                         SupplementID = GS.SupplementID,
                         Supplements = new GetGymSupplementDTO
@@ -386,15 +387,15 @@ namespace GYM_Management_System.Models.Services
             return null;
         }
 
-        public async Task AddSupplementToGym(int gymId, int supplementId, int quantity)
+        public async Task AddSupplementToGym(int gymId, int supplementId, UpdateGymSupplementDTO newGymSupplement)
         {
-            GymSupplement newGymSupplement = new GymSupplement()
+            GymSupplement newoneGymSupplement = new GymSupplement()
             {
                 GymID = gymId,
                 SupplementID = supplementId,
-                Quantity = quantity,
+                Quantity = newGymSupplement.Quantity,
             };
-            _gymDbContext.Entry(newGymSupplement).State = EntityState.Added;
+            _gymDbContext.Entry(newoneGymSupplement).State = EntityState.Added;
             await _gymDbContext.SaveChangesAsync();
         }
         public async Task<GymSupplement> UpdateSupplementForGym(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplement)

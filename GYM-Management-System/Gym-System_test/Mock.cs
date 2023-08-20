@@ -199,6 +199,19 @@ namespace Gym_System_test
             Assert.NotEqual(0, supplement.SupplementID);
             return supplement;
         }
+        protected async Task<GymSupplement> UpdateGymSupplement()
+        {
+            var supplement = new GymSupplement()
+            {
+                SupplementID = 1,
+                GymID = 4,
+                Quantity = 50,
+            };
+            _db.GymSupplements.Add(supplement);
+            await _db.SaveChangesAsync();
+            Assert.NotEqual(0, supplement.SupplementID);
+            return supplement;
+        }
         public void Dispose()
         {
             _db?.Dispose();
