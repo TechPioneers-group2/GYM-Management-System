@@ -105,7 +105,7 @@ namespace Gym_System_test
                 CurrentCapacity = 0,
                 MaxCapacity = "100",
                 ActiveHours = "2-5",
-                Notification="none"
+                Notification = "none"
 
 
             };
@@ -115,16 +115,29 @@ namespace Gym_System_test
             return gym;
 
         }
-       protected async Task<GymSupplement> CreateNewGymSupplement()
+        protected async Task<GymSupplement> CreateNewGymSupplement()
         {
             var supplement = new GymSupplement()
             {
                 SupplementID = 1,
-               GymID=1 ,
-               Quantity=50, 
+                GymID = 1,
+                Quantity = 50,
             };
             _db.GymSupplements.Add(supplement);
-            await _db.SaveChangesAsync(); 
+            await _db.SaveChangesAsync();
+            Assert.NotEqual(0, supplement.SupplementID);
+            return supplement;
+        }
+        protected async Task<GymSupplement> UpdateGymSupplement()
+        {
+            var supplement = new GymSupplement()
+            {
+                SupplementID = 1,
+                GymID = 4,
+                Quantity = 50,
+            };
+            _db.GymSupplements.Add(supplement);
+            await _db.SaveChangesAsync();
             Assert.NotEqual(0, supplement.SupplementID);
             return supplement;
         }
