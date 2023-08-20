@@ -56,7 +56,7 @@ namespace GYM_Management_System.Controllers
         // POST: api/Clients
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 
-        [Authorize(Roles = "Admin, Employee")]
+       [Authorize(Roles = "Admin, Employee")]
         [HttpPost("{gymid}")]
         public async Task<ActionResult<Client>> PostClient(int gymid, PostClientDTO clientDto)
         {

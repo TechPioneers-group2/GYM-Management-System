@@ -10,18 +10,19 @@ namespace GYM_Management_System.Models.Services
     public class ClientService : IClient
     {
         private readonly GymDbContext _context;
-        private readonly ISubscriptionTier _subscriptionTier;
+       // private readonly ISubscriptionTier _subscriptionTier;
 
-        public ClientService(GymDbContext context, ISubscriptionTier subscriptionTier)
+        public ClientService(GymDbContext context)
         {
             _context = context;
-            _subscriptionTier = subscriptionTier;
+            
         }
 
 
         public async Task<Client> CreateClient(int gymid, PostClientDTO client)
         {
-            var subscriptionTier = await _subscriptionTier.GetSubscriptionTier(client.SubscriptionTierID);
+            var subscriptionTier = await _context.SubscriptionTiers
+                .FirstOrDefaultAsync(tr => tr.SubscriptionTierID == client.SubscriptionTierID);
 
             if (subscriptionTier == null)
             {
@@ -57,9 +58,10 @@ namespace GYM_Management_System.Models.Services
             }
         }
 
-        public async Task<GetClientDTO> GetClient(int clientid, int gymid)
+        public async Task<GetClientDTO> GetClient( int gymid ,int clientid)
         {
-            return await _context.Clients
+             
+                 var newclient=await _context.Clients
                 .Select(nc => new GetClientDTO()
                 {
                     ClientID = nc.ClientID,
@@ -75,6 +77,13 @@ namespace GYM_Management_System.Models.Services
                     }
 
                 }).FirstOrDefaultAsync(cID => cID.ClientID == clientid && cID.GymID == gymid);
+
+            if (newclient == null)
+            {
+                return null;
+            }
+
+            return newclient;
         }
 
         public async Task<List<GetClientDTO>> GetClients(int gymid)

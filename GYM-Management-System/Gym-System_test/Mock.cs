@@ -1,14 +1,22 @@
 using GYM_Management_System.Data;
 using GYM_Management_System.Models;
+using GYM_Management_System.Models.DTOs;
+using GYM_Management_System.Models.Interfaces;
+using GYM_Management_System.Models.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Runtime.InteropServices;
 
 namespace Gym_System_test
 {
     public class Mock : IDisposable
     {
         private readonly SqliteConnection _connection;
-        protected readonly GymDbContext _db;
+        public readonly GymDbContext _db;
+        
+
 
         public Mock()
         {
@@ -20,6 +28,7 @@ namespace Gym_System_test
                   .UseSqlite(_connection).Options);
 
             _db.Database.EnsureCreated();
+            
         }
 
         protected async Task<Supplement> CreateAndSaveSupplementTest()
@@ -95,8 +104,71 @@ namespace Gym_System_test
             }
         }
 
+        
+
+        protected async Task<SubscriptionTier> CreateAndSaveSubscriptionTierTest()
+        {
+            var subscriptionTier = new SubscriptionTier()
+            {
+                Name = "Test Tier",
+                Price = "Test",
+                Length = 30,
+            };
+            _db.SubscriptionTiers.Add(subscriptionTier);
+            await _db.SaveChangesAsync();
+
+            Assert.NotEqual(0, subscriptionTier.SubscriptionTierID);
+            return subscriptionTier;
+        }
+
+        protected async Task DeleteSubscriptionTierForTest(int subscriptionTierId)
+        {
+            var subscriptionTierToDelete = await _db.SubscriptionTiers.FindAsync(subscriptionTierId);
+            if (subscriptionTierToDelete != null)
+            {
+                _db.SubscriptionTiers.Remove(subscriptionTierToDelete);
+                await _db.SaveChangesAsync();
+            }
+        }
+
+        protected async Task UpdateSubscriptionTierForTest(int subscriptionTierId, string newName, string newPrice, int newLength)
+        {
+            var subscriptionTierToUpdate = await _db.SubscriptionTiers.FindAsync(subscriptionTierId);
+            if (subscriptionTierToUpdate != null)
+            {
+                subscriptionTierToUpdate.Name = newName;
+                subscriptionTierToUpdate.Price = newPrice;
+                subscriptionTierToUpdate.Length = newLength;
+                _db.Entry(subscriptionTierToUpdate).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
+            }
+        }
+        //-------------
+     
+        protected async Task<Client> createClientAndSave()
+        {
 
 
+            var newClient1 = new Client()
+            {
+                UserId = "1",
+                GymID = 1,
+                Name = "test",
+                ClientID = 1, 
+                InGym=false,
+                SubscriptionDate= DateTime.Now,
+                SubscriptionExpiry= DateTime.Now.AddMonths(1),
+                SubscriptionTierID=1,
+               
+
+            };
+
+            _db.Clients.Add(newClient1);
+            await _db.SaveChangesAsync() ;
+            return newClient1;
+        }
+
+        //-----------
         public void Dispose()
         {
             _db?.Dispose();
