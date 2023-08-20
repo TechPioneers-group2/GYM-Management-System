@@ -166,8 +166,39 @@ namespace Gym_System_test
         }
 
         //-----------
-      
-        
+
+        protected async Task<Gym> TestCreateGym()
+        {
+            var gym = new Gym()
+            {
+                Name = "Test",
+                Address = "Amman",
+                CurrentCapacity = 0,
+                MaxCapacity = "100",
+                ActiveHours = "2-5",
+                Notification = "none"
+
+
+            };
+            _db.Gyms.Add(gym);
+            await _db.SaveChangesAsync();
+            Assert.NotEqual(0, gym.GymID);
+            return gym;
+
+        }
+        protected async Task<GymSupplement> CreateNewGymSupplement()
+        {
+            var supplement = new GymSupplement()
+            {
+                SupplementID = 1,
+                GymID = 1,
+                Quantity = 50,
+            };
+            _db.GymSupplements.Add(supplement);
+            await _db.SaveChangesAsync();
+            Assert.NotEqual(0, supplement.SupplementID);
+            return supplement;
+        }
         public void Dispose()
         {
             _db?.Dispose();
