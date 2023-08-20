@@ -1,5 +1,6 @@
 using GYM_Management_System.Data;
 using GYM_Management_System.Models;
+using GYM_Management_System.Models.DTOs;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
@@ -95,8 +96,59 @@ namespace Gym_System_test
             }
         }
 
+        protected async Task<Gym> TestCreateGym()
+        {
+            var gym = new Gym()
+            {
+                Name = "Test",
+                Address = "Amman",
+                CurrentCapacity = 0,
+                MaxCapacity = "100",
+                ActiveHours = "2-5",
+                Notification="none"
 
 
+            };
+            _db.Gyms.Add(gym);
+            await _db.SaveChangesAsync();
+            Assert.NotEqual(0, gym.GymID);
+            return gym;
+
+        }
+       protected async Task<GymSupplement> CreateNewGymSupplement()
+        {
+            var supplement = new GymSupplement()
+            {
+                SupplementID = 1,
+               GymID=1 ,
+               Quantity=50, 
+            };
+            _db.GymSupplements.Add(supplement);
+            await _db.SaveChangesAsync(); 
+            Assert.NotEqual(0, supplement.SupplementID);
+            return supplement;
+        }
+        /* protected async Task TestDeleteGym(int gymId)
+         {
+             var Deleted = await _db.Gyms.FindAsync(gymId);
+             if (Deleted != null)
+             {
+                 _db.Gyms.Remove(Deleted);
+                 await _db.SaveChangesAsync();
+             }
+         }
+
+         protected async Task TestUpdateGym(int gymId, PutGymDTO updatedGym)
+         {
+             var Updated = await _db.Gyms.FindAsync(gymId);
+             if (Updated != null)
+             {
+                 Updated.Address = updatedGym.Address;
+                 Updated.MaxCapacity = updatedGym.MaxCapacity;
+                 _db.Entry(Updated).State = EntityState.Modified;
+                 await _db.SaveChangesAsync();
+             }
+         }*/
         public void Dispose()
         {
             _db?.Dispose();
