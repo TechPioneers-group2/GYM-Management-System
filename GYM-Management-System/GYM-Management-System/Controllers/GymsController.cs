@@ -29,7 +29,7 @@ namespace GYM_Management_System.Controllers
         [HttpGet("Manager")]
         public async Task<ActionResult<List<GetManagerGymDTO>>> GetGymManager()
         {
-            return Ok(Ok(await _gym.GetGymManger()));
+            return Ok(await _gym.GetGymManger());
         }
 
         [AllowAnonymous]
@@ -55,7 +55,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // PUT: api/Gyms/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGym(int id, PutGymDTO gym)
@@ -65,7 +65,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // POST: api/Gyms
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<PostGymDTO>> PostGym(PostGymDTO gym)
