@@ -45,7 +45,7 @@ namespace Gym_System_test
         {
             var clientdb = new ClientService(_db);
             var client = await createClientAndSave();
-            var newclient = await clientdb.GetClient( client.GymID , client.ClientID);
+            var newclient = await clientdb.GetClient( client.ClientID , client.GymID);
 
             Assert.Equal("test", newclient.Name);
 
@@ -72,7 +72,7 @@ namespace Gym_System_test
         {
             var clientdb = new ClientService(_db);
             var client = await createClientAndSave();
-            var newclient = await clientdb.UpdateClient(client.GymID, client.ClientID, new UpdateClientDTO
+            var newclient = await clientdb.UpdateClient(client.ClientID, client.GymID, new UpdateClientDTO
             {
                 InGym = true,
                 SubscriptionTierID=1
@@ -88,8 +88,8 @@ namespace Gym_System_test
         {
             var clientdb = new ClientService(_db);
             var client = await createClientAndSave();
-            var newclient = await clientdb.GetClient( client.GymID , client.ClientID);
-            await clientdb.DeleteClient(newclient.GymID, newclient.ClientID);
+            var newclient = await clientdb.GetClient(client.ClientID, client.GymID);
+            await clientdb.DeleteClient(newclient.ClientID, newclient.GymID);
             var deletedone = await clientdb.GetClient(client.ClientID, client.GymID);
             Assert.Null(deletedone);
         }

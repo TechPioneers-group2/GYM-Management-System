@@ -36,7 +36,7 @@ namespace GYM_Management_System.Controllers
         // GET: api/Clients/5
 
         [Authorize(Roles = "Admin, Employee")]
-        [HttpGet("/api/client/{clientid}/gym/{gymid}")]
+        [HttpGet("{clientid}/gym/{gymid}")]
         public async Task<ActionResult<GetClientDTO>> GetClient(int clientid, int gymid)
         {
             return await _client.GetClient(clientid, gymid);
@@ -46,10 +46,10 @@ namespace GYM_Management_System.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 
         [Authorize(Roles = "Admin, Employee")]
-        [HttpPut("{gymid}/{clientid}")]
-        public async Task<IActionResult> PutClient(int gymid, int clientid, UpdateClientDTO client)
+        [HttpPut("{clientid}/gym/{gymid}")]
+        public async Task<IActionResult> PutClient(int clientid, int gymid, UpdateClientDTO client)
         {
-            var updatedClient = await _client.UpdateClient(gymid, clientid, client);
+            var updatedClient = await _client.UpdateClient(clientid, gymid, client);
             return Ok(updatedClient);
         }
 
@@ -78,10 +78,10 @@ namespace GYM_Management_System.Controllers
 
         // DELETE: api/Clients/5
         [Authorize(Roles = "Admin, Employee")]
-        [HttpDelete("/api/Gym/{gymid}/Client/{clientid}")]
-        public async Task<IActionResult> DeleteClient(int gymid, int clientid)
+        [HttpDelete("{clientid}/gym/{gymid}")]
+        public async Task<IActionResult> DeleteClient(int clientid, int gymid)
         {
-            await _client.DeleteClient(gymid, clientid);
+            await _client.DeleteClient(clientid, gymid);
             return NoContent();
         }
     }
