@@ -4,19 +4,28 @@ using GYM_Management_System.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using NuGet.Common;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace GYM_Management_System.Models.Services
 {
+    /// <summary>
+    /// Service for managing user-related operations using Identity.
+    /// </summary>
     public class IdentityUserService : IUser
     {
         private readonly GymDbContext _context;
-
         private UserManager<ApplicationUser> _userManager;
-
         private jwtTokenServices _tokenServices;
-
         private ISubscriptionTier _subscriptionTier;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IdentityUserService"/> class.
+        /// </summary>
+        /// <param name="context">The database context.</param>
+        /// <param name="manager">The UserManager for managing users.</param>
+        /// <param name="tokenServices">The JWT token service.</param>
+        /// <param name="subscriptionTier">The subscription tier service.</param>
         public IdentityUserService(GymDbContext context, UserManager<ApplicationUser> manager, jwtTokenServices tokenServices, ISubscriptionTier subscriptionTier)
         {
             _context = context;
@@ -25,6 +34,12 @@ namespace GYM_Management_System.Models.Services
             _subscriptionTier = subscriptionTier;
         }
 
+        /// <summary>
+        /// Logs a user in.
+        /// </summary>
+        /// <param name="UserName">The username of the user.</param>
+        /// <param name="Password">The password of the user.</param>
+        /// <returns>The logged-in user data.</returns>
         public async Task<UserDTO> LogIn(string UserName, string Password)
         {
             var user = await _userManager.FindByNameAsync(UserName);
@@ -36,13 +51,20 @@ namespace GYM_Management_System.Models.Services
                     Id = user.Id,
                     UserName = user.UserName,
                     Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15)),
-                    Roles = await _userManager.GetRolesAsync(user)
+                    Roles = (List<string>)await _userManager.GetRolesAsync(user)
                 };
             }
             return null;
         }
 
-        public async Task<UserDTO> RegisterAdmin(RegisterAdminDTO registerAdminDTO, ModelStateDictionary modelState)
+        /// <summary>
+        /// Registers an admin user.
+        /// </summary>
+        /// <param name="registerAdminDTO">The admin user data to register.</param>
+        /// <param name="modelState">The ModelStateDictionary to store validation errors.</param>
+        /// <param name="User">The ClaimsPrincipal user.</param>
+        /// <returns>The registered admin user data.</returns>
+        public async Task<UserDTO> RegisterAdmin(RegisterAdminDTO registerAdminDTO, ModelStateDictionary modelState, ClaimsPrincipal User)
         {
             var user = new ApplicationUser()
             {
@@ -60,7 +82,7 @@ namespace GYM_Management_System.Models.Services
                     Id = user.Id,
                     UserName = user.UserName,
                     Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15)),
-                    Roles = await _userManager.GetRolesAsync(user)
+                    Roles = (List<string>)await _userManager.GetRolesAsync(user)
                 };
             }
             foreach (var error in result.Errors)
@@ -69,12 +91,18 @@ namespace GYM_Management_System.Models.Services
                      error.Code.Contains("Email") ? nameof(registerAdminDTO.Email) :
                       error.Code.Contains("UserName") ? nameof(registerAdminDTO.UserName) : "";
                 modelState.AddModelError(errorKey, error.Description);
-
             }
             return null;
         }
 
-        public async Task<UserDTO> RegisterEmployee(RegisterEmployeeDTO registerEmployeeDTO, ModelStateDictionary modelState)
+        /// <summary>
+        /// Registers an employee user.
+        /// </summary>
+        /// <param name="registerEmployeeDTO">The employee user data to register.</param>
+        /// <param name="modelState">The ModelStateDictionary to store validation errors.</param>
+        /// <param name="claimsPrincipal">The ClaimsPrincipal user.</param>
+        /// <returns>The registered employee user data.</returns>
+        public async Task<UserDTO> RegisterEmployee(RegisterEmployeeDTO registerEmployeeDTO, ModelStateDictionary modelState, ClaimsPrincipal claimsPrincipal)
         {
             var user = new ApplicationUser()
             {
@@ -110,7 +138,6 @@ namespace GYM_Management_System.Models.Services
 
                     _context.Employees.Add(newEmployee);
                     await _context.SaveChangesAsync();
-
                 }
                 await _userManager.AddToRolesAsync(user, registerEmployeeDTO.Roles);
                 return new UserDTO()
@@ -118,13 +145,20 @@ namespace GYM_Management_System.Models.Services
                     Id = user.Id,
                     UserName = user.UserName,
                     Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15)),
-                    Roles = await _userManager.GetRolesAsync(user),
+                    Roles = (List<string>)await _userManager.GetRolesAsync(user),
                 };
             }
             return null;
         }
 
-        public async Task<UserDTO> RegisterUser(RegisterClientDTO registerClientDTO, ModelStateDictionary modelState)
+        /// <summary>
+        /// Registers a client user.
+        /// </summary>
+        /// <param name="registerClientDTO">The client user data to register.</param>
+        /// <param name="modelState">The ModelStateDictionary to store validation errors.</param>
+        /// <param name="claimsPrincipal">The ClaimsPrincipal user.</param>
+        /// <returns>The registered client user data.</returns>
+        public async Task<UserDTO> RegisterUser(RegisterClientDTO registerClientDTO, ModelStateDictionary modelState, ClaimsPrincipal claimsPrincipal)
         {
             var user = new ApplicationUser()
             {
@@ -163,7 +197,6 @@ namespace GYM_Management_System.Models.Services
 
                     _context.Clients.Add(newClient);
                     await _context.SaveChangesAsync();
-
                 }
                 await _userManager.AddToRolesAsync(user, registerClientDTO.Roles);
                 return new UserDTO()
@@ -171,7 +204,7 @@ namespace GYM_Management_System.Models.Services
                     Id = user.Id,
                     UserName = user.UserName,
                     Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15)),
-                    Roles = await _userManager.GetRolesAsync(user),
+                    Roles = (List<string>)await _userManager.GetRolesAsync(user),
                 };
             }
             return null;

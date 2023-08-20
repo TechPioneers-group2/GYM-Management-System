@@ -1,10 +1,19 @@
+using GYM_Management_System.Controllers;
 using GYM_Management_System.Data;
 using GYM_Management_System.Models;
 using GYM_Management_System.Models.DTOs;
+using GYM_Management_System.Models.Interfaces;
+using GYM_Management_System.Models.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using System;
 using System.Runtime.InteropServices;
+using System.Security.Claims;
 
 namespace Gym_System_test
 {
@@ -12,8 +21,10 @@ namespace Gym_System_test
     {
         private readonly SqliteConnection _connection;
         public readonly GymDbContext _db;
-        
-
+        protected readonly jwtTokenServices _JwtTokenService;
+        private readonly UserManager<ApplicationUser> _userManager;
+        protected readonly IUser _user;
+        protected readonly ISubscriptionTier _tier;
 
         public Mock()
         {
@@ -25,9 +36,11 @@ namespace Gym_System_test
                   .UseSqlite(_connection).Options);
 
             _db.Database.EnsureCreated();
+
+            _user = new IdentityUserService(_db, _userManager, _JwtTokenService, _tier);
             
         }
-
+       
         protected async Task<Supplement> CreateAndSaveSupplementTest()
         {
             var supplement = new Supplement()
@@ -101,7 +114,7 @@ namespace Gym_System_test
             }
         }
 
-        
+
 
         protected async Task<SubscriptionTier> CreateAndSaveSubscriptionTierTest()
         {
@@ -141,7 +154,7 @@ namespace Gym_System_test
             }
         }
         //-------------
-     
+
         protected async Task<Client> createClientAndSave()
         {
 
@@ -151,17 +164,17 @@ namespace Gym_System_test
                 UserId = "1",
                 GymID = 1,
                 Name = "test",
-                ClientID = 1, 
-                InGym=false,
-                SubscriptionDate= DateTime.Now,
-                SubscriptionExpiry= DateTime.Now.AddMonths(1),
-                SubscriptionTierID=1,
-               
+                ClientID = 1,
+                InGym = false,
+                SubscriptionDate = DateTime.Now,
+                SubscriptionExpiry = DateTime.Now.AddMonths(1),
+                SubscriptionTierID = 1,
+
 
             };
 
             _db.Clients.Add(newClient1);
-            await _db.SaveChangesAsync() ;
+            await _db.SaveChangesAsync();
             return newClient1;
         }
 
@@ -212,10 +225,21 @@ namespace Gym_System_test
             Assert.NotEqual(0, supplement.SupplementID);
             return supplement;
         }
-        public void Dispose()
+
+        protected static IUser SetupUserMock(UserDTO expected)
         {
-            _db?.Dispose();
-            _connection?.Dispose();
+            var userMock = new Mock<IUser>();
+
+            userMock.Setup(u => u.LogIn(It.IsAny<string>(), It.IsAny<string>()))
+                .ReturnsAsync(expected);
+
+            return userMock.Object;
+        }
+
+            public void Dispose()
+            {
+                _db?.Dispose();
+                _connection?.Dispose();
+            }
         }
     }
-}

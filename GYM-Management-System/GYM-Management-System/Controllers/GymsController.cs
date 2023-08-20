@@ -13,25 +13,38 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GYM_Management_System.Controllers
 {
+    /// <summary>
+    /// API controller for managing gyms in the gym management system.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class GymsController : ControllerBase
     {
         private readonly IGym _gym;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GymsController"/> class.
+        /// </summary>
+        /// <param name="context">The gym data access context.</param>
         public GymsController(IGym context)
         {
             _gym = context;
         }
 
-        // GET: api/Gyms
-        // [Authorize(Roles = "Admin")]
+        /// <summary>
+        /// Retrieves a list of gyms for gym managers.
+        /// </summary>
+        /// <returns>A list of gyms managed by users with manager roles.</returns>
         [HttpGet("Manager")]
         public async Task<ActionResult<List<GetManagerGymDTO>>> GetGymManager()
         {
             return Ok(await _gym.GetGymManger());
         }
 
+        /// <summary>
+        /// Retrieves a list of gyms (accessible to all users).
+        /// </summary>
+        /// <returns>A list of gyms.</returns>
         [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetUserGymDTO>>> GetGyms()
@@ -39,8 +52,11 @@ namespace GYM_Management_System.Controllers
             return Ok(await _gym.GetGyms());
         }
 
-        // GET: api/Gyms/5
-
+        /// <summary>
+        /// Retrieves gym details by its ID (accessible to all users).
+        /// </summary>
+        /// <param name="id">The ID of the gym.</param>
+        /// <returns>The gym details.</returns>
         [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<GetUserGymDTO>> GetGym(int id)
@@ -51,21 +67,29 @@ namespace GYM_Management_System.Controllers
             {
                 return Ok(gym);
             }
+
             return NotFound();
         }
 
-        // PUT: api/Gyms/5
-
+        /// <summary>
+        /// Updates gym details by its ID (accessible to Admin role).
+        /// </summary>
+        /// <param name="id">The ID of the gym to update.</param>
+        /// <param name="gym">The updated gym data.</param>
+        /// <returns>The updated gym data.</returns>
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGym(int id, PutGymDTO gym)
         {
-            var updatedgym = await _gym.UpdateGym(id, gym);
-            return Ok(updatedgym);
+            var updatedGym = await _gym.UpdateGym(id, gym);
+            return Ok(updatedGym);
         }
 
-        // POST: api/Gyms
-
+        /// <summary>
+        /// Creates a new gym (accessible to Admin role).
+        /// </summary>
+        /// <param name="gym">The gym data to create.</param>
+        /// <returns>The created gym data.</returns>
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<PostGymDTO>> PostGym(PostGymDTO gym)
@@ -78,8 +102,11 @@ namespace GYM_Management_System.Controllers
             return Ok(newGym);
         }
 
-
-        // DELETE: api/Gyms/5
+        /// <summary>
+        /// Deletes a gym by its ID (accessible to Admin role).
+        /// </summary>
+        /// <param name="id">The ID of the gym to delete.</param>
+        /// <returns>No content if the gym was successfully deleted.</returns>
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGym(int id)
@@ -87,6 +114,14 @@ namespace GYM_Management_System.Controllers
             await _gym.DeleteGym(id);
             return NoContent();
         }
+
+        /// <summary>
+        /// Adds supplements to a gym (accessible to Admin and Employee roles).
+        /// </summary>
+        /// <param name="gymId">The ID of the gym.</param>
+        /// <param name="supplementId">The ID of the supplement to add.</param>
+        /// <param name="newGymSupplement">The gym supplement data to add.</param>
+        /// <returns>The added gym supplement data.</returns>
         [Authorize(Roles = "Admin, Employee")]
         [HttpPost]
         [Route("{gymId}/Supplement/{SupplementId}")]
@@ -95,25 +130,34 @@ namespace GYM_Management_System.Controllers
             return Ok(await _gym.AddSupplementToGym(gymId, SupplementId, newGymSupplement));
         }
 
-
+        /// <summary>
+        /// Updates gym supplement details (accessible to Admin and Employee roles).
+        /// </summary>
+        /// <param name="gymId">The ID of the gym.</param>
+        /// <param name="supplementId">The ID of the supplement to update.</param>
+        /// <param name="updateGymSupplemen">The updated gym supplement data.</param>
+        /// <returns>The updated gym supplement data.</returns>
         [Authorize(Roles = "Admin, Employee")]
         [HttpPut]
         [Route("{gymId}/Supplement/{supplementId}")]
         public async Task<ActionResult<GymSupplement>> UpdateSupplementForGym(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplemen)
         {
             var gymSupplement = await _gym.UpdateSupplementForGym(gymId, supplementId, updateGymSupplemen);
-
             return Ok(gymSupplement);
-
         }
 
+        /// <summary>
+        /// Removes a supplement from a gym (accessible to Admin and Employee roles).
+        /// </summary>
+        /// <param name="gymId">The ID of the gym.</param>
+        /// <param name="supplementId">The ID of the supplement to remove.</param>
+        /// <returns>No content if the supplement was successfully removed.</returns>
         [Authorize(Roles = "Admin, Employee")]
         [HttpDelete]
         [Route("{gymId}/Supplement/{supplementId}")]
         public async Task<IActionResult> RemoveSupplementFromGym(int gymId, int supplementId)
         {
             await _gym.RemoveSupplementFromGym(gymId, supplementId);
-
             return NoContent();
         }
     }
