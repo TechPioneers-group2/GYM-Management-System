@@ -105,7 +105,7 @@ namespace GYM_Management_System.Controllers
         {
             var gymSupplement = await _gym.UpdateSupplementForGym(gymId, supplementId, updateGymSupplemen);
 
-            return Ok();
+            return Ok(gymSupplement);
 
         }
 
