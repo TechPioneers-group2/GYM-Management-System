@@ -18,4 +18,4 @@ Our Gym Management System harmoniously blends operational efficiency, employee e
 ---
 
 ## ERD: 📊
-![ERD Image](./ERD.png)
+![ERD Image](./FinalERD.png)

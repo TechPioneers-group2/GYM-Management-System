@@ -31,7 +31,7 @@ namespace GYM_Management_System.Controllers
             return Ok(user);
         }
 
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost("AdminRegister")]
         public async Task<ActionResult<UserDTO>> RegisterAdmin(RegisterAdminDTO Data)
         {
@@ -43,7 +43,7 @@ namespace GYM_Management_System.Controllers
             return BadRequest(new ValidationProblemDetails(ModelState));
         }
 
-        // [Authorize(Roles = "Admin, Employee")]
+        [Authorize(Roles = "Admin, Employee")]
         [HttpPost("EmployeeRegister")]
         public async Task<ActionResult<UserDTO>> RegisterEmployee(RegisterEmployeeDTO Data)
         {
@@ -55,7 +55,7 @@ namespace GYM_Management_System.Controllers
             return BadRequest(new ValidationProblemDetails(ModelState));
         }
 
-        //[AllowAnonymous]
+        [AllowAnonymous]
         [HttpPost("ClientRegister")]
         public async Task<ActionResult<UserDTO>> ClientRegister(RegisterClientDTO Data)
         {

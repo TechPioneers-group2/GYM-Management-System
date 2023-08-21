@@ -18,7 +18,7 @@ namespace Gym_System_test
         public async void TestGetAllGyms()
         {
             var subTeir = new SubscriptionTierService(_db);
-            var clientservice = new ClientService(_db, subTeir);
+            var clientservice = new ClientService(_db);
             var gymservice = new GymService(_db, subTeir, clientservice);
             var GymList = new List<PostGymDTO>()
             {
@@ -40,7 +40,7 @@ namespace Gym_System_test
 
 
             var subTeir = new SubscriptionTierService(_db);
-            var clientservice = new ClientService(_db, subTeir);
+            var clientservice = new ClientService(_db);
             var gymservice = new GymService(_db, subTeir, clientservice);
             var gymid = await gymservice.GetGym(gym.GymID);
             var gymList = await gymservice.GetGyms();
@@ -55,7 +55,7 @@ namespace Gym_System_test
         {
             var gym = await TestCreateGym();
             var subTeir = new SubscriptionTierService(_db);
-            var clientservice = new ClientService(_db, subTeir);
+            var clientservice = new ClientService(_db);
             var gymservice = new GymService(_db, subTeir, clientservice);
             await gymservice.DeleteGym(gym.GymID);
             var gymList = await gymservice.GetGyms();
@@ -69,7 +69,7 @@ namespace Gym_System_test
         {
             var gym = await TestCreateGym();
             var subTeir = new SubscriptionTierService(_db);
-            var clientservice = new ClientService(_db, subTeir);
+            var clientservice = new ClientService(_db);
             var gymservice = new GymService(_db, subTeir, clientservice);
             var UpdatedGym = new PutGymDTO() { Address = "UpdatedAdress", ActiveHours = "UpdatedTime", MaxCapacity = "200", CurrentCapacity = 20, Notification = "none" };
             var newUpdted = await gymservice.UpdateGym(gym.GymID, UpdatedGym);
@@ -143,7 +143,7 @@ namespace Gym_System_test
             var gym = await TestCreateGym();
 
             var subTeir = new SubscriptionTierService(_db);
-            var clientservice = new ClientService(_db, subTeir);
+            var clientservice = new ClientService(_db);
             var gymservice = new GymService(_db, subTeir, clientservice);
 
             var newGymSupplement = new UpdateGymSupplementDTO
@@ -169,7 +169,7 @@ namespace Gym_System_test
             var supplement = await UpdateGymSupplement();
 
             var subTeir = new SubscriptionTierService(_db);
-            var clientservice = new ClientService(_db, subTeir);
+            var clientservice = new ClientService(_db);
             var gymservice = new GymService(_db, subTeir, clientservice);
 
             var updatedQuantity = 30; // Adjust the updated quantity as needed
@@ -196,7 +196,7 @@ namespace Gym_System_test
             var gym = await TestCreateGym();
 
             var subTeir = new SubscriptionTierService(_db);
-            var clientservice = new ClientService(_db, subTeir);
+            var clientservice = new ClientService(_db);
             var gymservice = new GymService(_db, subTeir, clientservice);
 
             // Act

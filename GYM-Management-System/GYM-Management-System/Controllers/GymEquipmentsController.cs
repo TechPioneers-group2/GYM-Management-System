@@ -45,6 +45,7 @@ namespace GYM_Management_System.Controllers
 
         // PUT: api/GymEquipments/5
 
+
         [Authorize(Roles = "Admin, Employee")]
         [HttpPut("{id}")]
         public async Task<ActionResult<EquipmentDTO>> PutGymEquipment(int id, EquipmentDTOPutservice gymEquipment)
@@ -60,7 +61,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // POST: api/GymEquipments
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
 
         [Authorize(Roles = "Admin, Employee")]
         [HttpPost]

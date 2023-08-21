@@ -53,7 +53,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // PUT: api/Employees/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<ActionResult<EmployeeDTO>> PutEmployee(UpdateEmployeeDTO updateEmployeeDTO, int id)
@@ -68,7 +68,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // POST: api/Employees
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        
 
         [Authorize(Roles = "Admin")]
         [HttpPost]

@@ -44,6 +44,7 @@ namespace GYM_Management_System.Controllers
 
         // PUT: api/Clients/5
 
+
         [Authorize(Roles = "Admin, Employee")]
         [HttpPut("{clientid}/gym/{gymid}")]
         public async Task<IActionResult> PutClient(int clientid, int gymid, UpdateClientDTO client)
@@ -53,15 +54,15 @@ namespace GYM_Management_System.Controllers
         }
 
         // POST: api/Clients
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 
-       [Authorize(Roles = "Admin, Employee")]
+
+        [Authorize(Roles = "Admin, Employee")]
         [HttpPost("{gymid}")]
         public async Task<ActionResult<Client>> PostClient(int gymid, PostClientDTO clientDto)
         {
             var createdClient = await _client.CreateClient(gymid, clientDto);
 
-            
+
             if (createdClient != null)
             {
                 // Set the properties of the clientDto object with the values returned from the CreateClient method
@@ -71,7 +72,7 @@ namespace GYM_Management_System.Controllers
                 return CreatedAtAction("GetClient", new { gymid = createdClient.GymID, clientid = createdClient.ClientID }, clientDto);
             }
 
-            
+
             return BadRequest("Failed to create client");
         }
 

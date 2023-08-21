@@ -25,7 +25,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // GET: api/Gyms
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("Manager")]
         public async Task<ActionResult<List<GetManagerGymDTO>>> GetGymManager()
         {
@@ -55,7 +55,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // PUT: api/Gyms/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+       
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGym(int id, PutGymDTO gym)
@@ -65,7 +65,7 @@ namespace GYM_Management_System.Controllers
         }
 
         // POST: api/Gyms
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+       
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<PostGymDTO>> PostGym(PostGymDTO gym)
@@ -87,7 +87,7 @@ namespace GYM_Management_System.Controllers
             await _gym.DeleteGym(id);
             return NoContent();
         }
-        //[Authorize(Roles = "Admin, Employee")]
+        [Authorize(Roles = "Admin, Employee")]
         [HttpPost]
         [Route("{gymId}/Supplement/{SupplementId}")]
         public async Task<IActionResult> AddSupplementsToGym(int gymId, int SupplementId, UpdateGymSupplementDTO newGymSupplement)
@@ -98,7 +98,7 @@ namespace GYM_Management_System.Controllers
         }
 
 
-        //[Authorize(Roles = "Admin, Employee")]
+        [Authorize(Roles = "Admin, Employee")]
         [HttpPut]
         [Route("{gymId}/Supplement/{supplementId}")]
         public async Task<IActionResult> UpdateSupplementForGym(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplemen)
@@ -109,7 +109,7 @@ namespace GYM_Management_System.Controllers
 
         }
 
-        // [Authorize(Roles = "Admin, Employee")]
+        [Authorize(Roles = "Admin, Employee")]
         [HttpDelete]
         [Route("{gymId}/Supplement/{supplementId}")]
         public async Task<IActionResult> RemoveSupplementFromGym(int gymId, int supplementId)
