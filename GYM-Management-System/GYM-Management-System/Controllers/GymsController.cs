@@ -35,6 +35,7 @@ namespace GYM_Management_System.Controllers
         /// Retrieves a list of gyms for gym managers.
         /// </summary>
         /// <returns>A list of gyms managed by users with manager roles.</returns>
+        [Authorize(Roles = "Admin")]
         [HttpGet("Manager")]
         public async Task<ActionResult<List<GetManagerGymDTO>>> GetGymManager()
         {
@@ -125,10 +126,27 @@ namespace GYM_Management_System.Controllers
         [Authorize(Roles = "Admin, Employee")]
         [HttpPost]
         [Route("{gymId}/Supplement/{SupplementId}")]
-        public async Task<ActionResult<GymSupplement>> AddSupplementsToGym(int gymId, int SupplementId, UpdateGymSupplementDTO newGymSupplement)
+        public async Task<ActionResult<string>> AddSupplementsToGym(int gymId, int SupplementId, UpdateGymSupplementDTO newGymSupplement)
         {
-            return Ok(await _gym.AddSupplementToGym(gymId, SupplementId, newGymSupplement));
+            try
+            {
+                await _gym.AddSupplementToGym(gymId, SupplementId, newGymSupplement);
+
+
+                string successMessage = "Supplement was added successfully.";
+
+                return Ok(successMessage);
+            }
+            catch (Exception ex)
+            {
+
+                string errorMessage = "An error occurred while adding the supplement.";
+
+                return StatusCode(500, errorMessage);
+            }
         }
+
+
 
         /// <summary>
         /// Updates gym supplement details (accessible to Admin and Employee roles).
@@ -140,11 +158,27 @@ namespace GYM_Management_System.Controllers
         [Authorize(Roles = "Admin, Employee")]
         [HttpPut]
         [Route("{gymId}/Supplement/{supplementId}")]
-        public async Task<ActionResult<GymSupplement>> UpdateSupplementForGym(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplemen)
+        public async Task<ActionResult<GymSupplement>> UpdateSupplementForGym(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplement)
         {
-            var gymSupplement = await _gym.UpdateSupplementForGym(gymId, supplementId, updateGymSupplemen);
-            return Ok(gymSupplement);
+            try
+            {
+                var gymSupplement = await _gym.UpdateSupplementForGym(gymId, supplementId, updateGymSupplement);
+
+                if (gymSupplement == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(gymSupplement);
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = "An error occurred while updating the supplement.";
+
+                return StatusCode(500, errorMessage);
+            }
         }
+
 
         /// <summary>
         /// Removes a supplement from a gym (accessible to Admin and Employee roles).
