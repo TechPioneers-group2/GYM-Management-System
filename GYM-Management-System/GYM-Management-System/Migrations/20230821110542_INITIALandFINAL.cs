@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GYM_Management_System.Migrations
 {
     /// <inheritdoc />
-    public partial class initialsetupdatabase : Migration
+    public partial class INITIALandFINAL : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -257,9 +257,10 @@ namespace GYM_Management_System.Migrations
                 name: "Clients",
                 columns: table => new
                 {
-                    ClientID = table.Column<int>(type: "int", nullable: false),
-                    GymID = table.Column<int>(type: "int", nullable: false),
+                    ClientID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GymID = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InGym = table.Column<bool>(type: "bit", nullable: false),
                     SubscriptionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -268,7 +269,7 @@ namespace GYM_Management_System.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clients", x => new { x.GymID, x.ClientID });
+                    table.PrimaryKey("PK_Clients", x => x.ClientID);
                     table.ForeignKey(
                         name: "FK_Clients_Gyms_GymID",
                         column: x => x.GymID,
@@ -399,6 +400,11 @@ namespace GYM_Management_System.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clients_GymID",
+                table: "Clients",
+                column: "GymID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Clients_SubscriptionTierID",

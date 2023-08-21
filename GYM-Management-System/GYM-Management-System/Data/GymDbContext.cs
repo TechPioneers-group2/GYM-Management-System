@@ -16,9 +16,6 @@ namespace GYM_Management_System.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Client>().HasKey(
-                c => new { c.GymID, c.ClientID });
-
             modelBuilder.Entity<GymSupplement>().HasKey(
                 sq => new { sq.GymID, sq.SupplementID });
 
