@@ -78,8 +78,9 @@ namespace Gym_System_test
 			var employee = await employeeService.GetEmployee(3);
 
 			// Assert
-			Assert.Equal(null, employee);
+			Assert.Null(employee);
 		}
+
 		[Fact]
 		public async Task testUpdateEmployee()
 		{
@@ -152,8 +153,7 @@ namespace Gym_System_test
 			var employee = await employeeService.GetEmployee(1);
 			// Assert
 
-			Assert.Equal(null, employee);
-
-		}
+			Assert.Null(employee);
+	}
 	}
 }

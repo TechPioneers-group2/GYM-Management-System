@@ -86,6 +86,10 @@ namespace GYM_Management_System.Models.Services
         {
             var employee = await _db.Employees
                 .FirstOrDefaultAsync(em => em.EmployeeID == id);
+            if (employee == null)
+            {
+                return null;
+            }
             var employeeDTO = new EmployeeDTO()
             {
                 EmployeeID = employee.EmployeeID,
