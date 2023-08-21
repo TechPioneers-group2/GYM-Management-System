@@ -68,6 +68,7 @@ namespace GYM_Management_System.Controllers
         /// <param name="client">The updated client data.</param>
         /// <returns>The updated client data.</returns>
 
+
         [Authorize(Roles = "Admin, Employee")]
         [HttpPut("{clientid}/gym/{gymid}")]
         public async Task<IActionResult> PutClient(int clientid, int gymid, UpdateClientDTO client)
