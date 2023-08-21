@@ -48,7 +48,7 @@ namespace GYM_Management_System.Controllers
         /// </summary>
         /// <param name="Data">The admin user registration data.</param>
         /// <returns>The registered admin user's data.</returns>
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost("AdminRegister")]
         public async Task<ActionResult<UserDTO>> RegisterAdmin(RegisterAdminDTO Data)
         {
