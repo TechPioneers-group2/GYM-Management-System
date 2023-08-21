@@ -4,177 +4,213 @@ using GYM_Management_System.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using NuGet.Common;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace GYM_Management_System.Models.Services
 {
-	public class IdentityUserService : IUser
-	{
-		private readonly GymDbContext _context;
+    /// <summary>
+    /// Service for managing user-related operations using Identity.
+    /// </summary>
+    public class IdentityUserService : IUser
+    {
+        private readonly GymDbContext _context;
+        private UserManager<ApplicationUser> _userManager;
+        private jwtTokenServices _tokenServices;
+        private ISubscriptionTier _subscriptionTier;
 
-		private UserManager<ApplicationUser> _userManager;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IdentityUserService"/> class.
+        /// </summary>
+        /// <param name="context">The database context.</param>
+        /// <param name="manager">The UserManager for managing users.</param>
+        /// <param name="tokenServices">The JWT token service.</param>
+        /// <param name="subscriptionTier">The subscription tier service.</param>
+        public IdentityUserService(GymDbContext context, UserManager<ApplicationUser> manager, jwtTokenServices tokenServices, ISubscriptionTier subscriptionTier)
+        {
+            _context = context;
+            _userManager = manager;
+            _tokenServices = tokenServices;
+            _subscriptionTier = subscriptionTier;
+        }
 
-		private jwtTokenServices _tokenServices;
+        /// <summary>
+        /// Logs a user in.
+        /// </summary>
+        /// <param name="UserName">The username of the user.</param>
+        /// <param name="Password">The password of the user.</param>
+        /// <returns>The logged-in user data.</returns>
+        public async Task<UserDTO> LogIn(string UserName, string Password)
+        {
+            var user = await _userManager.FindByNameAsync(UserName);
+            bool vaildtionOfPassword = await _userManager.CheckPasswordAsync(user, Password);
+            if (vaildtionOfPassword)
+            {
+                return new UserDTO()
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15)),
+                    Roles = (List<string>)await _userManager.GetRolesAsync(user)
+                };
+            }
+            return null;
+        }
 
-		private ISubscriptionTier _subscriptionTier;
+        /// <summary>
+        /// Registers an admin user.
+        /// </summary>
+        /// <param name="registerAdminDTO">The admin user data to register.</param>
+        /// <param name="modelState">The ModelStateDictionary to store validation errors.</param>
+        /// <param name="User">The ClaimsPrincipal user.</param>
+        /// <returns>The registered admin user data.</returns>
+        public async Task<UserDTO> RegisterAdmin(RegisterAdminDTO registerAdminDTO, ModelStateDictionary modelState, ClaimsPrincipal User)
+        {
+            var user = new ApplicationUser()
+            {
+                UserName = registerAdminDTO.UserName,
+                Email = registerAdminDTO.Email,
+                PhoneNumber = registerAdminDTO.PhoneNumber,
+            };
 
+            var result = await _userManager.CreateAsync(user, registerAdminDTO.Password);
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRolesAsync(user, registerAdminDTO.Roles);
+                return new UserDTO
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15)),
+                    Roles = (List<string>)await _userManager.GetRolesAsync(user)
+                };
+            }
+            foreach (var error in result.Errors)
+            {
+                var errorKey = error.Code.Contains("Password") ? nameof(registerAdminDTO.Password) :
+                     error.Code.Contains("Email") ? nameof(registerAdminDTO.Email) :
+                      error.Code.Contains("UserName") ? nameof(registerAdminDTO.UserName) : "";
+                modelState.AddModelError(errorKey, error.Description);
 
-		public IdentityUserService(GymDbContext context, UserManager<ApplicationUser> manager, jwtTokenServices tokenServices, ISubscriptionTier subscriptionTier)
-		{
-			_context = context;
-			_userManager = manager;
-			_tokenServices = tokenServices;
-			_subscriptionTier = subscriptionTier;
-		}
+            }
+            return null;
+        }
 
-		public async Task<UserDTO> LogIn(string UserName, string Password)
-		{
-			var user = await _userManager.FindByNameAsync(UserName);
-			bool vaildtionOfPassword = await _userManager.CheckPasswordAsync(user, Password);
-			if (vaildtionOfPassword)
-			{
-				return new UserDTO()
-				{
-					Id = user.Id,
-					UserName = user.UserName,
-					Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15))
-				};
-			}
-			return null;
-		}
+        /// <summary>
+        /// Registers an employee user.
+        /// </summary>
+        /// <param name="registerEmployeeDTO">The employee user data to register.</param>
+        /// <param name="modelState">The ModelStateDictionary to store validation errors.</param>
+        /// <param name="claimsPrincipal">The ClaimsPrincipal user.</param>
+        /// <returns>The registered employee user data.</returns>
+        public async Task<UserDTO> RegisterEmployee(RegisterEmployeeDTO registerEmployeeDTO, ModelStateDictionary modelState, ClaimsPrincipal claimsPrincipal)
+        {
+            var user = new ApplicationUser()
+            {
+                UserName = registerEmployeeDTO.UserName,
+                PhoneNumber = registerEmployeeDTO.PhoneNumber,
+                Email = registerEmployeeDTO.Email,
+            };
 
-		public async Task<UserDTO> RegisterAdmin(RegisterAdminDTO registerAdminDTO, ModelStateDictionary modelState)
-		{
-			var user = new ApplicationUser()
-			{
-				UserName = registerAdminDTO.UserName,
-				Email = registerAdminDTO.Email,
-				PhoneNumber = registerAdminDTO.PhoneNumber,
-			};
+            var result = await _userManager.CreateAsync(user, registerEmployeeDTO.Password);
 
-			var result = await _userManager.CreateAsync(user, registerAdminDTO.Password);
-			if (result.Succeeded)
-			{
-				await _userManager.AddToRolesAsync(user, registerAdminDTO.Roles);
-				return new UserDTO
-				{
-					Id = user.Id,
-					UserName = user.UserName,
-					Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15)),
-					Roles = await _userManager.GetRolesAsync(user)
-				};
-			}
-			foreach (var error in result.Errors)
-			{
-				var errorKey = error.Code.Contains("Password") ? nameof(registerAdminDTO.Password) :
-					 error.Code.Contains("Email") ? nameof(registerAdminDTO.Email) :
-					  error.Code.Contains("UserName") ? nameof(registerAdminDTO.UserName) : "";
-				modelState.AddModelError(errorKey, error.Description);
+            foreach (var error in result.Errors)
+            {
+                var errorKey = error.Code.Contains("Password") ? nameof(registerEmployeeDTO.Password) :
+                     error.Code.Contains("Email") ? nameof(registerEmployeeDTO.Email) :
+                      error.Code.Contains("UserName") ? nameof(registerEmployeeDTO.UserName) : "";
+                modelState.AddModelError(errorKey, error.Description);
+            }
 
-			}
-			return null;
-		}
+            if (result.Succeeded)
+            {
+                {
+                    var newEmployee = new Employee()
+                    {
+                        UserId = user.Id,
+                        GymID = registerEmployeeDTO.GymID,
+                        Name = registerEmployeeDTO.Name,
+                        JobDescription = registerEmployeeDTO.JobDescription,
+                        IsAvailable = registerEmployeeDTO.IsAvailable,
+                        WorkingDays = registerEmployeeDTO.WorkingDays,
+                        WorkingHours = registerEmployeeDTO.WorkingHours,
+                        Salary = registerEmployeeDTO.Salary
+                    };
 
-		public async Task<UserDTO> RegisterEmployee(RegisterEmployeeDTO registerEmployeeDTO, ModelStateDictionary modelState)
-		{
-			var user = new ApplicationUser()
-			{
-				UserName = registerEmployeeDTO.UserName,
-				PhoneNumber = registerEmployeeDTO.PhoneNumber,
-				Email = registerEmployeeDTO.Email,
-			};
+                    _context.Employees.Add(newEmployee);
+                    await _context.SaveChangesAsync();
 
-			var result = await _userManager.CreateAsync(user, registerEmployeeDTO.Password);
+                }
+                await _userManager.AddToRolesAsync(user, registerEmployeeDTO.Roles);
+                return new UserDTO()
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15)),
+                    Roles = (List<string>)await _userManager.GetRolesAsync(user),
+                };
+            }
+            return null;
+        }
 
-			foreach (var error in result.Errors)
-			{
-				var errorKey = error.Code.Contains("Password") ? nameof(registerEmployeeDTO.Password) :
-					 error.Code.Contains("Email") ? nameof(registerEmployeeDTO.Email) :
-					  error.Code.Contains("UserName") ? nameof(registerEmployeeDTO.UserName) : "";
-				modelState.AddModelError(errorKey, error.Description);
-			}
+        /// <summary>
+        /// Registers a client user.
+        /// </summary>
+        /// <param name="registerClientDTO">The client user data to register.</param>
+        /// <param name="modelState">The ModelStateDictionary to store validation errors.</param>
+        /// <param name="claimsPrincipal">The ClaimsPrincipal user.</param>
+        /// <returns>The registered client user data.</returns>
+        public async Task<UserDTO> RegisterUser(RegisterClientDTO registerClientDTO, ModelStateDictionary modelState, ClaimsPrincipal claimsPrincipal)
+        {
+            var user = new ApplicationUser()
+            {
+                UserName = registerClientDTO.UserName,
+                PhoneNumber = registerClientDTO.PhoneNumber,
+                Email = registerClientDTO.Email,
+            };
 
-			if (result.Succeeded)
-			{
-				{
-					var newEmployee = new Employee()
-					{
-						UserId = user.Id,
-						GymID = registerEmployeeDTO.GymID,
-						Name = registerEmployeeDTO.Name,
-						JobDescription = registerEmployeeDTO.JobDescription,
-						IsAvailable = registerEmployeeDTO.IsAvailable,
-						WorkingDays = registerEmployeeDTO.WorkingDays,
-						WorkingHours = registerEmployeeDTO.WorkingHours,
-						Salary = registerEmployeeDTO.Salary
-					};
+            var result = await _userManager.CreateAsync(user, registerClientDTO.Password);
 
-					_context.Employees.Add(newEmployee);
-					await _context.SaveChangesAsync();
+            foreach (var error in result.Errors)
+            {
+                var errorKey = error.Code.Contains("Password") ? nameof(registerClientDTO.Password) :
+                     error.Code.Contains("Email") ? nameof(registerClientDTO.Email) :
+                      error.Code.Contains("UserName") ? nameof(registerClientDTO.UserName) : "";
+                modelState.AddModelError(errorKey, error.Description);
+            }
 
-				}
-				await _userManager.AddToRolesAsync(user, registerEmployeeDTO.Roles);
-				return new UserDTO()
-				{
-					Id = user.Id,
-					UserName = user.UserName,
-					Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15)),
-					Roles = await _userManager.GetRolesAsync(user),
-				};
-			}
-			return null;
-		}
+            if (result.Succeeded)
+            {
+                {
+                    var subscriptionTier = await _subscriptionTier.GetSubscriptionTier(registerClientDTO.SubscriptionTierID);
+                    var currentDate = DateTime.UtcNow;
+                    var subscriptionExpiry = currentDate.AddMonths(subscriptionTier.Length);
 
-		public async Task<UserDTO> RegisterUser(RegisterClientDTO registerClientDTO, ModelStateDictionary modelState)
-		{
-			var user = new ApplicationUser()
-			{
-				UserName = registerClientDTO.UserName,
-				PhoneNumber = registerClientDTO.PhoneNumber,
-				Email = registerClientDTO.Email,
-			};
+                    var newClient = new Client()
+                    {
+                        UserId = user.Id,
+                        GymID = registerClientDTO.GymID,
+                        Name = registerClientDTO.Name,
+                        SubscriptionDate = currentDate,
+                        SubscriptionExpiry = subscriptionExpiry,
+                        SubscriptionTierID = registerClientDTO.SubscriptionTierID,
+                        InGym = registerClientDTO.InGym
+                    };
 
-			var result = await _userManager.CreateAsync(user, registerClientDTO.Password);
+                    _context.Clients.Add(newClient);
+                    await _context.SaveChangesAsync();
 
-			foreach (var error in result.Errors)
-			{
-				var errorKey = error.Code.Contains("Password") ? nameof(registerClientDTO.Password) :
-					 error.Code.Contains("Email") ? nameof(registerClientDTO.Email) :
-					  error.Code.Contains("UserName") ? nameof(registerClientDTO.UserName) : "";
-				modelState.AddModelError(errorKey, error.Description);
-			}
-
-			if (result.Succeeded)
-			{
-				{
-					var subscriptionTier = await _subscriptionTier.GetSubscriptionTier(registerClientDTO.SubscriptionTierID);
-					var currentDate = DateTime.UtcNow;
-					var subscriptionExpiry = currentDate.AddMonths(subscriptionTier.Length);
-
-					var newClient = new Client()
-					{
-						UserId = user.Id,
-						GymID = registerClientDTO.GymID,
-						Name = registerClientDTO.Name,
-						SubscriptionDate = currentDate,
-						SubscriptionExpiry = subscriptionExpiry,
-						SubscriptionTierID = registerClientDTO.SubscriptionTierID,
-						InGym = registerClientDTO.InGym
-					};
-
-					_context.Clients.Add(newClient);
-					await _context.SaveChangesAsync();
-
-				}
-				await _userManager.AddToRolesAsync(user, registerClientDTO.Roles);
-				return new UserDTO()
-				{
-					Id = user.Id,
-					UserName = user.UserName,
-					Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15)),
-					Roles = await _userManager.GetRolesAsync(user),
-				};
-			}
-			return null;
-		}
-	}
+                }
+                await _userManager.AddToRolesAsync(user, registerClientDTO.Roles);
+                return new UserDTO()
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15)),
+                    Roles = (List<string>)await _userManager.GetRolesAsync(user),
+                };
+            }
+            return null;
+        }
+    }
 }
