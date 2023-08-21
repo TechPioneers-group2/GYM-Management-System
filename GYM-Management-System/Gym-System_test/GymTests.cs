@@ -94,7 +94,7 @@ namespace Gym_System_test
 
             var newGymSupplement = new UpdateGymSupplementDTO
             {
-                Quantity = 10 // Adjust the quantity as needed
+                Quantity = 10
             };
 
             // Act
