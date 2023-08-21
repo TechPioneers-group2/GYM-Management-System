@@ -46,7 +46,7 @@ namespace Gym_System_test
                 Email = "test@example.com",
                 PhoneNumber = "123456789",
                 Password = "P@ssw0rd",
-                Roles = new List<string> { "Admin" } // Adjust the roles as needed
+                Roles = new List<string> { "Admin" }
             };
 
             var expectedResult = new UserDTO
@@ -54,7 +54,7 @@ namespace Gym_System_test
                 Id = "UserId",
                 UserName = registerDto.UserName,
                 Token = "MockedToken",
-                Roles = new List<string> { "Admin" } // Adjust the roles as needed
+                Roles = new List<string> { "Admin" }
             };
 
             userMock.Setup(u => u.RegisterAdmin(It.IsAny<RegisterAdminDTO>(), It.IsAny<ModelStateDictionary>(), It.IsAny<ClaimsPrincipal>()))
@@ -98,7 +98,7 @@ namespace Gym_System_test
                 Email = "test@example.com",
                 PhoneNumber = "123456789",
                 Password = "P@ssw0rd",
-                Roles = new List<string> { "Employee" } // Adjust the roles as needed
+                Roles = new List<string> { "Employee" }
             };
 
             var expectedResult = new UserDTO
@@ -106,7 +106,7 @@ namespace Gym_System_test
                 Id = "UserId",
                 UserName = registerDto.UserName,
                 Token = "MockedToken",
-                Roles = new List<string> { "Employee" } // Adjust the roles as needed
+                Roles = new List<string> { "Employee" }
             };
 
             userMock.Setup(u => u.RegisterEmployee(It.IsAny<RegisterEmployeeDTO>(), It.IsAny<ModelStateDictionary>(), It.IsAny<ClaimsPrincipal>()))
@@ -150,7 +150,7 @@ namespace Gym_System_test
                 Email = "test@example.com",
                 PhoneNumber = "123456789",
                 Password = "P@ssw0rd",
-                Roles = new List<string> { "Client" } // Adjust the roles as needed
+                Roles = new List<string> { "Client" }
             };
 
             var expectedResult = new UserDTO
@@ -158,7 +158,7 @@ namespace Gym_System_test
                 Id = "UserId",
                 UserName = registerDto.UserName,
                 Token = "MockedToken",
-                Roles = new List<string> { "Client" } // Adjust the roles as needed
+                Roles = new List<string> { "Client" }
             };
 
             userMock.Setup(u => u.RegisterUser(It.IsAny<RegisterClientDTO>(), It.IsAny<ModelStateDictionary>(), It.IsAny<ClaimsPrincipal>()))
@@ -186,7 +186,7 @@ namespace Gym_System_test
                 Id = "UserId",
                 UserName = "TestUser",
                 Token = "MockedToken",
-                Roles = new List<string> { "Admin"}
+                Roles = new List<string> { "Admin" }
             };
 
             var userMock = SetupUserMock(expectedResult);

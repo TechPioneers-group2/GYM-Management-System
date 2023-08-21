@@ -33,7 +33,7 @@ To use the GYM Management System API, you can send HTTP requests to the provided
 
 ---
 ## ERD: 📊
-![ERD Image](./ERD.png)
+![ERD Image](./FinalERD.png)
 
 ---
 ## Endpoints
@@ -87,3 +87,4 @@ To use the GYM Management System API, you can send HTTP requests to the provided
 ----
 ## Conclusion
 The GYM Management System API provides a powerful set of tools to manage various aspects of gym operations, from client management to equipment tracking and user authentication. By utilizing this API, you can enhance the efficiency of your gym management processes.
+
