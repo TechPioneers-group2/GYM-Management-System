@@ -1,24 +1,37 @@
 ﻿using GYM_Management_System.Data;
 using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
+using GYM_Management_System.Models.Services;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GYM_Management_System.Models.Services
 {
+    /// <summary>
+    /// Service for managing client-related operations in the gym management system.
+    /// </summary>
     public class ClientService : IClient
     {
         private readonly GymDbContext _context;
-       // private readonly ISubscriptionTier _subscriptionTier;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ClientService"/> class.
+        /// </summary>
+        /// <param name="context">The database context.</param>
         public ClientService(GymDbContext context)
         {
             _context = context;
-            
         }
 
-
+        /// <summary>
+        /// Creates a new client in the gym.
+        /// </summary>
+        /// <param name="gymid">The ID of the gym.</param>
+        /// <param name="client">The client data to create.</param>
+        /// <returns>The created client data.</returns>
         public async Task<Client> CreateClient(int gymid, PostClientDTO client)
         {
             var subscriptionTier = await _context.SubscriptionTiers
@@ -48,9 +61,15 @@ namespace GYM_Management_System.Models.Services
             return newClient;
         }
 
+        /// <summary>
+        /// Deletes a client from the gym.
+        /// </summary>
+        /// <param name="clientid">The ID of the client to delete.</param>
+        /// <param name="gymid">The ID of the gym.</param>
+        /// <returns>An asynchronous task.</returns>
         public async Task DeleteClient(int clientid, int gymid)
         {
-            var DeletedClient = await _context.Clients.FindAsync(clientid,gymid);
+            var DeletedClient = await _context.Clients.FindAsync(clientid, gymid);
             if (DeletedClient != null)
             {
                 _context.Clients.Remove(DeletedClient);
@@ -58,10 +77,15 @@ namespace GYM_Management_System.Models.Services
             }
         }
 
+        /// <summary>
+        /// Retrieves a client's data by their ID and gym ID.
+        /// </summary>
+        /// <param name="clientid">The ID of the client.</param>
+        /// <param name="gymid">The ID of the gym.</param>
+        /// <returns>The client's data.</returns>
         public async Task<GetClientDTO> GetClient(int clientid, int gymid)
         {
-             
-                 var newclient=await _context.Clients
+            var newclient = await _context.Clients
                 .Select(nc => new GetClientDTO()
                 {
                     ClientID = nc.ClientID,
@@ -86,9 +110,13 @@ namespace GYM_Management_System.Models.Services
             return newclient;
         }
 
+        /// <summary>
+        /// Retrieves a list of clients for a specific gym.
+        /// </summary>
+        /// <param name="gymid">The ID of the gym.</param>
+        /// <returns>A list of clients.</returns>
         public async Task<List<GetClientDTO>> GetClients(int gymid)
         {
-
             return await _context.Clients
                 .Select(nc => new GetClientDTO()
                 {
@@ -106,6 +134,13 @@ namespace GYM_Management_System.Models.Services
                 }).Where(cl => cl.GymID == gymid).ToListAsync();
         }
 
+        /// <summary>
+        /// Updates a client's data.
+        /// </summary>
+        /// <param name="clientid">The ID of the client to update.</param>
+        /// <param name="gymid">The ID of the gym.</param>
+        /// <param name="client">The updated client data.</param>
+        /// <returns>The updated client's data.</returns>
         public async Task<GetClientDTO> UpdateClient(int clientid, int gymid, UpdateClientDTO client)
         {
             GetClientDTO returnedClient = new GetClientDTO();

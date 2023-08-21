@@ -30,6 +30,7 @@ namespace Gym_System_test
             var Gymlist = await gymservice.GetGyms();
             Assert.Equal(GymList.Count, Gymlist.Count);
         }
+
         [Fact]
         public async void TestAddNewGym()
         {
@@ -50,6 +51,7 @@ namespace Gym_System_test
 
 
         }
+
         [Fact]
         public async void TestingDeleteGym()
         {
@@ -64,6 +66,7 @@ namespace Gym_System_test
             Assert.Equal(3, gymList.Count);
 
         }
+
         [Fact]
         public async void TestForUpdatingGym()
         {
@@ -77,71 +80,14 @@ namespace Gym_System_test
             Assert.Equal("UpdatedAdress", newUpdted.Address);
             Assert.Equal("UpdatedTime", newUpdted.ActiveHours);
         }
-        /*
-        [Fact]
-        public async void TestForAddSupplements()
-        {
 
 
-            var supplement = await CreateNewGymSupplement();
-
-            var gym = await TestCreateGym();
-            var subTeir = new SubscriptionTierService(_db);
-            var clientservice = new ClientService(_db, subTeir);
-            var gymservice = new GymService(_db, subTeir, clientservice);
-            await gymservice.AddSupplementToGym(gym.GymID, supplement.SupplementID, supplement.Quantity, newoneGymSupplement);
-            var sup = gym.GymSupplements;
-            Assert.NotNull(gym.GymSupplements);
-            Assert.Equal(sup.Count, 1);
-
-
-        }
-        [Fact]
-        public async void TestForUpdatingSuppForGym()
-        {
-            var supplement = await CreateNewGymSupplement();
-
-            var gym = await TestCreateGym();
-            var subTeir = new SubscriptionTierService(_db);
-            var clientservice = new ClientService(_db, subTeir);
-            var gymservice = new GymService(_db, subTeir, clientservice);
-            await gymservice.AddSupplementToGym(gym.GymID, supplement.SupplementID, supplement.Quantity, newGymSupplement);
-            var UpdatedGmSupplement = new UpdateGymSupplementDTO()
-            {
-                Quantity = 20,
-            };
-            var updated = await gymservice.UpdateSupplementForGym(gym.GymID, supplement.SupplementID, UpdatedGmSupplement);
-            Assert.Equal(updated.Quantity, 20);
-
-        }
-        [Fact]
-        public async void TestForDeleteGymSupplement()
-        {
-
-            var supplements = await CreateNewGymSupplement();
-
-            var Gym = await TestCreateGym();
-            var subTeir = new SubscriptionTierService(_db);
-            var clientservice = new ClientService(_db, subTeir);
-            var gymservice = new GymService(_db, subTeir, clientservice);
-
-
-            await gymservice.AddSupplementToGym(Gym.GymID, supplements.SupplementID, supplements.Quantity, newGymSupplement);
-            await gymservice.RemoveSupplementFromGym(Gym.GymID, supplements.SupplementID);
-            var updatedGym = await gymservice.GetGym(Gym.GymID);
-
-
-            Assert.Empty(updatedGym.Supplements);
-
-
-        }*/
         [Fact]
         public async Task TestForAddSupplementsToGym()
         {
             // Arrange
-            var supplement = await CreateNewGymSupplement();
             var gym = await TestCreateGym();
-
+            var supplement = await CreateNewGymSupplement();
             var subTeir = new SubscriptionTierService(_db);
             var clientservice = new ClientService(_db);
             var gymservice = new GymService(_db, subTeir, clientservice);
@@ -161,13 +107,13 @@ namespace Gym_System_test
             Assert.Equal(supplement.SupplementID, updatedGym.Supplements[0].SupplementID);
             Assert.Equal(newGymSupplement.Quantity, updatedGym.Supplements[0].Quantity);
         }
+
         [Fact]
         public async Task TestForUpdatingSupplementForGym()
         {
             // Arrange
             var gym = await TestCreateGym();
             var supplement = await UpdateGymSupplement();
-
             var subTeir = new SubscriptionTierService(_db);
             var clientservice = new ClientService(_db);
             var gymservice = new GymService(_db, subTeir, clientservice);
