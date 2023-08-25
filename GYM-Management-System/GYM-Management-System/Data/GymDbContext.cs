@@ -89,7 +89,7 @@ namespace GYM_Management_System.Data
                       Address = "Irbid - Yarmouk University Street - Building 30",
                       MaxCapacity = "150",
                       CurrentCapacity = 0,
-                      Notification = "Everything ok"
+                      Notification = "Under maintenance until 9-9-2023 AD"
 
                   }
                 );
@@ -98,30 +98,30 @@ namespace GYM_Management_System.Data
 
 
             modelBuilder.Entity<Supplement>().HasData(
-    new Supplement
-    {
-        SupplementID = 1,
-        Name = "Whey Protein Powder",
-        Price = "80 JD"
-    },
-    new Supplement
-    {
-        SupplementID = 2,
-        Name = "Creatine Monohydrate",
-        Price = "40 JD"
-    },
-    new Supplement
-    {
-        SupplementID = 3,
-        Name = "Branched-Chain Amino Acids (BCAAs)",
-        Price = "30 JD"
-    },
-    new Supplement
-    {
-        SupplementID = 4,
-        Name = "Pre-Workout Blend",
-        Price = "50 JD"
-    });
+                 new Supplement
+                 {
+                     SupplementID = 1,
+                     Name = "Whey Protein Powder",
+                     Price = "80 JD"
+                 },
+                 new Supplement
+                 {
+                     SupplementID = 2,
+                     Name = "Creatine Monohydrate",
+                     Price = "40 JD"
+                 },
+                 new Supplement
+                 {
+                     SupplementID = 3,
+                     Name = "Branched-Chain Amino Acids (BCAAs)",
+                     Price = "30 JD"
+                 },
+                 new Supplement
+                 {
+                     SupplementID = 4,
+                     Name = "Pre-Workout Blend",
+                     Price = "50 JD"
+                 });
 
             modelBuilder.Entity<GymEquipment>().HasData(
                 new GymEquipment
@@ -137,15 +137,15 @@ namespace GYM_Management_System.Data
                     GymID = 1,
                     GymEquipmentID = 3,
                     Name = "treadmill",
-                    Quantity = 5,
-                    OutOfService = 1,
+                    Quantity = 10,
+                    OutOfService = 2,
                 },
                 new GymEquipment
                 {
                     GymID = 2,
                     GymEquipmentID = 4,
                     Name = "dumbbells",
-                    Quantity = 10,
+                    Quantity = 60,
                     OutOfService = 0,
                 },
                 new GymEquipment

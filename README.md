@@ -33,7 +33,7 @@ To use the GYM Management System API, you can send HTTP requests to the provided
 
 ---
 ## ERD: 📊
-![ERD Image](./FinalERD.png)
+![ERD Image](./Final_ERD_LastVersion.png)
 
 ---
 ## Endpoints
