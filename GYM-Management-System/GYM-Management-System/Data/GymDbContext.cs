@@ -95,73 +95,7 @@ namespace GYM_Management_System.Data
                 );
 
 
-            //modelBuilder.Entity<Client>().HasData
-            //    (new Client
-            //    {
-            //        ClientID = 1,
-            //        GymID = 2,
-            //        SubscriptionTierID = 1,
-            //        Name = "Ahmad Harhoosh",
-            //        InGym = true,
-            //        SubscriptionDate = new DateTime(2023, 1, 1),
-            //        SubscriptionExpiry = new DateTime(2023, 2, 1),
-            //    },
 
-            //    new Client
-            //    {
-            //        ClientID = 2,
-            //        GymID = 1,
-            //        SubscriptionTierID = 2,
-            //        Name = "Ammar Albesani",
-            //        InGym = true,
-            //        SubscriptionDate = new DateTime(2023, 1, 1),
-            //        SubscriptionExpiry = new DateTime(2023, 4, 4),
-            //    },
-
-            //    new Client
-            //    {
-            //        ClientID = 3,
-            //        GymID = 3,
-            //        SubscriptionTierID = 3,
-            //        Name = "Ala' Abusalem",
-            //        InGym = false,
-            //        SubscriptionDate = new DateTime(2023, 1, 1),
-            //        SubscriptionExpiry = new DateTime(2023, 6, 1),
-            //    }
-            //    );
-
-            //modelBuilder.Entity<Employee>().HasData(
-            //    new Employee
-            //    {
-            //        EmployeeID = 1,
-            //        GymID = 1,
-            //        Name = "Nadine Almasri",
-            //        JobDescription = "Dietitian",
-            //        IsAvailable = true,
-            //        WorkingDays = "Saturday - Friday",
-            //        WorkingHours = "9:00AM - 5:00PM",
-            //        Salary = "370 JD",
-            //    }, new Employee
-            //    {
-            //        EmployeeID = 2,
-            //        GymID = 2,
-            //        Name = "Al-Hareth Alhyari",
-            //        JobDescription = "Trainer",
-            //        IsAvailable = true,
-            //        WorkingDays = "Saturday - Thursday",
-            //        WorkingHours = "9:00AM - 5:00PM",
-            //        Salary = "400 JD",
-            //    }, new Employee
-            //    {
-            //        EmployeeID = 3,
-            //        GymID = 3,
-            //        Name = "Bashar Owainat",
-            //        JobDescription = "Trainer",
-            //        IsAvailable = true,
-            //        WorkingDays = "Monday - Friday",
-            //        WorkingHours = "4:00PM - 12:00AM",
-            //        Salary = "430 JD",
-            //    });
 
             modelBuilder.Entity<Supplement>().HasData(
     new Supplement
