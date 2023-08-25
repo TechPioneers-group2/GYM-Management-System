@@ -89,10 +89,13 @@ namespace GYM_Management_System.Migrations
 
             modelBuilder.Entity("GYM_Management_System.Models.Client", b =>
                 {
-                    b.Property<int>("GymID")
+                    b.Property<int>("ClientID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("ClientID")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClientID"));
+
+                    b.Property<int>("GymID")
                         .HasColumnType("int");
 
                     b.Property<bool>("InGym")
@@ -115,7 +118,9 @@ namespace GYM_Management_System.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("GymID", "ClientID");
+                    b.HasKey("ClientID");
+
+                    b.HasIndex("GymID");
 
                     b.HasIndex("SubscriptionTierID");
 

@@ -94,7 +94,7 @@ namespace GYM_Management_System.Controllers
         /// <param name="createEmployeeDTO">The employee data to create.</param>
         /// <returns>The created employee data.</returns>
         [Authorize(Roles = "Admin")]
-        [HttpPost]
+        [HttpPost("Deprecated")]
         public async Task<ActionResult<EmployeeDTO>> PostEmployee(CreatEmployeeDTO createEmployeeDTO)
         {
             var employee = await _employee.Create(createEmployeeDTO);
