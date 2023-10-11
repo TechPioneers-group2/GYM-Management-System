@@ -78,8 +78,9 @@ namespace Gym_System_test
 			var employee = await employeeService.GetEmployee(3);
 
 			// Assert
-			Assert.Equal(null, employee);
+			Assert.Null(employee);
 		}
+
 		[Fact]
 		public async Task testUpdateEmployee()
 		{
@@ -152,8 +153,49 @@ namespace Gym_System_test
 			var employee = await employeeService.GetEmployee(1);
 			// Assert
 
-			Assert.Equal(null, employee);
+			Assert.Null(employee);
 
 		}
+
+		[Fact]
+		public async Task testGetEmployeesByGymId()
+		{
+			// Arrange
+			await CreateAndSaveEmplyee();
+			var employeeService = new EmployeeService(_db);
+			// Act
+			var employee = await employeeService.GetEmployeesByGymId(1);
+			// Assert
+
+			Assert.Equal(2, employee.Count);
+
+		}
+		[Fact]
+		public async Task testGetEmployeesWhenGymIdNotExist()
+		{
+			// Arrange
+			await CreateAndSaveEmplyee();
+			var employeeService = new EmployeeService(_db);
+			// Act
+			var employee = await employeeService.GetEmployeesByGymId(4);
+			// Assert
+
+			Assert.Empty(employee);
+
+		}
+		[Fact]
+		public async Task testGetEmployeesByGymIdWhenTheListEmpty()
+		{
+			// Arrange
+			await CreateAndSaveEmplyee();
+			var employeeService = new EmployeeService(_db);
+			// Act
+			var employee = await employeeService.GetEmployeesByGymId(2);
+			// Assert
+
+			Assert.Empty(employee);
+
+		}
+
 	}
 }

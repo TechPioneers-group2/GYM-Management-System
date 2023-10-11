@@ -16,9 +16,6 @@ namespace GYM_Management_System.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Client>().HasKey(
-                c => new { c.GymID, c.ClientID });
-
             modelBuilder.Entity<GymSupplement>().HasKey(
                 sq => new { sq.GymID, sq.SupplementID });
 
@@ -89,105 +86,39 @@ namespace GYM_Management_System.Data
                       Address = "Irbid - Yarmouk University Street - Building 30",
                       MaxCapacity = "150",
                       CurrentCapacity = 0,
-                      Notification = "Everything ok"
+                      Notification = "Under maintenance until 9-9-2023 AD"
 
                   }
                 );
 
 
-            //modelBuilder.Entity<Client>().HasData
-            //    (new Client
-            //    {
-            //        ClientID = 1,
-            //        GymID = 2,
-            //        SubscriptionTierID = 1,
-            //        Name = "Ahmad Harhoosh",
-            //        InGym = true,
-            //        SubscriptionDate = new DateTime(2023, 1, 1),
-            //        SubscriptionExpiry = new DateTime(2023, 2, 1),
-            //    },
 
-            //    new Client
-            //    {
-            //        ClientID = 2,
-            //        GymID = 1,
-            //        SubscriptionTierID = 2,
-            //        Name = "Ammar Albesani",
-            //        InGym = true,
-            //        SubscriptionDate = new DateTime(2023, 1, 1),
-            //        SubscriptionExpiry = new DateTime(2023, 4, 4),
-            //    },
-
-            //    new Client
-            //    {
-            //        ClientID = 3,
-            //        GymID = 3,
-            //        SubscriptionTierID = 3,
-            //        Name = "Ala' Abusalem",
-            //        InGym = false,
-            //        SubscriptionDate = new DateTime(2023, 1, 1),
-            //        SubscriptionExpiry = new DateTime(2023, 6, 1),
-            //    }
-            //    );
-
-            //modelBuilder.Entity<Employee>().HasData(
-            //    new Employee
-            //    {
-            //        EmployeeID = 1,
-            //        GymID = 1,
-            //        Name = "Nadine Almasri",
-            //        JobDescription = "Dietitian",
-            //        IsAvailable = true,
-            //        WorkingDays = "Saturday - Friday",
-            //        WorkingHours = "9:00AM - 5:00PM",
-            //        Salary = "370 JD",
-            //    }, new Employee
-            //    {
-            //        EmployeeID = 2,
-            //        GymID = 2,
-            //        Name = "Al-Hareth Alhyari",
-            //        JobDescription = "Trainer",
-            //        IsAvailable = true,
-            //        WorkingDays = "Saturday - Thursday",
-            //        WorkingHours = "9:00AM - 5:00PM",
-            //        Salary = "400 JD",
-            //    }, new Employee
-            //    {
-            //        EmployeeID = 3,
-            //        GymID = 3,
-            //        Name = "Bashar Owainat",
-            //        JobDescription = "Trainer",
-            //        IsAvailable = true,
-            //        WorkingDays = "Monday - Friday",
-            //        WorkingHours = "4:00PM - 12:00AM",
-            //        Salary = "430 JD",
-            //    });
 
             modelBuilder.Entity<Supplement>().HasData(
-    new Supplement
-    {
-        SupplementID = 1,
-        Name = "Whey Protein Powder",
-        Price = "80 JD"
-    },
-    new Supplement
-    {
-        SupplementID = 2,
-        Name = "Creatine Monohydrate",
-        Price = "40 JD"
-    },
-    new Supplement
-    {
-        SupplementID = 3,
-        Name = "Branched-Chain Amino Acids (BCAAs)",
-        Price = "30 JD"
-    },
-    new Supplement
-    {
-        SupplementID = 4,
-        Name = "Pre-Workout Blend",
-        Price = "50 JD"
-    });
+                 new Supplement
+                 {
+                     SupplementID = 1,
+                     Name = "Whey Protein Powder",
+                     Price = "80 JD"
+                 },
+                 new Supplement
+                 {
+                     SupplementID = 2,
+                     Name = "Creatine Monohydrate",
+                     Price = "40 JD"
+                 },
+                 new Supplement
+                 {
+                     SupplementID = 3,
+                     Name = "Branched-Chain Amino Acids (BCAAs)",
+                     Price = "30 JD"
+                 },
+                 new Supplement
+                 {
+                     SupplementID = 4,
+                     Name = "Pre-Workout Blend",
+                     Price = "50 JD"
+                 });
 
             modelBuilder.Entity<GymEquipment>().HasData(
                 new GymEquipment
@@ -203,15 +134,15 @@ namespace GYM_Management_System.Data
                     GymID = 1,
                     GymEquipmentID = 3,
                     Name = "treadmill",
-                    Quantity = 5,
-                    OutOfService = 1,
+                    Quantity = 10,
+                    OutOfService = 2,
                 },
                 new GymEquipment
                 {
                     GymID = 2,
                     GymEquipmentID = 4,
                     Name = "dumbbells",
-                    Quantity = 10,
+                    Quantity = 60,
                     OutOfService = 0,
                 },
                 new GymEquipment

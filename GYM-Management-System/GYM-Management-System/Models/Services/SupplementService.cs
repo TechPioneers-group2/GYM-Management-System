@@ -2,17 +2,34 @@
 using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GYM_Management_System.Models.Services
 {
+    /// <summary>
+    /// Service class for managing supplements.
+    /// </summary>
     public class SupplementService : ISupplement
     {
         private readonly GymDbContext _supplement;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SupplementService"/> class.
+        /// </summary>
+        /// <param name="supplement">The database context for supplements.</param>
         public SupplementService(GymDbContext supplement)
         {
             _supplement = supplement;
         }
 
+        /// <summary>
+        /// Creates a new supplement.
+        /// </summary>
+        /// <param name="supplementDTO">The supplement data to create.</param>
+        /// <returns>The created supplement data.</returns>
         public async Task<SupplementDTO> CreateSupplement(CreatSupplementDTO supplementDTO)
         {
             try
@@ -41,7 +58,11 @@ namespace GYM_Management_System.Models.Services
             }
         }
 
-
+        /// <summary>
+        /// Deletes a supplement by ID.
+        /// </summary>
+        /// <param name="supplementId">The ID of the supplement to delete.</param>
+        /// <returns>True if the supplement was successfully deleted; otherwise, false.</returns>
         public async Task<bool> DeleteSupplement(int supplementId)
         {
             var deletedSupplement = await _supplement.Supplements.FindAsync(supplementId);
@@ -54,7 +75,10 @@ namespace GYM_Management_System.Models.Services
             return false;
         }
 
-
+        /// <summary>
+        /// Retrieves all supplements.
+        /// </summary>
+        /// <returns>A list of supplements.</returns>
         public async Task<List<SupplementDTO>> GetAllSupplements()
         {
             try
@@ -65,7 +89,6 @@ namespace GYM_Management_System.Models.Services
                         SupplementID = t.SupplementID,
                         Name = t.Name,
                         Price = t.Price,
-
                     }).ToListAsync();
 
                 return supplements;
@@ -76,7 +99,11 @@ namespace GYM_Management_System.Models.Services
             }
         }
 
-
+        /// <summary>
+        /// Retrieves a supplement by ID.
+        /// </summary>
+        /// <param name="supplementId">The ID of the supplement to retrieve.</param>
+        /// <returns>The supplement data.</returns>
         public async Task<SupplementDTO> GetSupplementById(int supplementId)
         {
             try
@@ -87,7 +114,6 @@ namespace GYM_Management_System.Models.Services
                         SupplementID = t.SupplementID,
                         Name = t.Name,
                         Price = t.Price,
-
                     }).FirstOrDefaultAsync(sp => sp.SupplementID == supplementId);
 
                 return supplement;
@@ -98,7 +124,12 @@ namespace GYM_Management_System.Models.Services
             }
         }
 
-
+        /// <summary>
+        /// Updates a supplement by ID.
+        /// </summary>
+        /// <param name="supplementId">The ID of the supplement to update.</param>
+        /// <param name="updatedSupplementDTO">The updated supplement data.</param>
+        /// <returns>The updated supplement data, or null if the supplement was not found.</returns>
         public async Task<SupplementDTO> UpdateSupplement(int supplementId, CreatSupplementDTO updatedSupplementDTO)
         {
             try
@@ -128,7 +159,5 @@ namespace GYM_Management_System.Models.Services
                 return null;
             }
         }
-
-
     }
 }

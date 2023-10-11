@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GYM_Management_System.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    [Migration("20230818222620_initialsetupdatabase")]
-    partial class initialsetupdatabase
+    [Migration("20230821110542_INITIALandFINAL")]
+    partial class INITIALandFINAL
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -92,10 +92,13 @@ namespace GYM_Management_System.Migrations
 
             modelBuilder.Entity("GYM_Management_System.Models.Client", b =>
                 {
-                    b.Property<int>("GymID")
+                    b.Property<int>("ClientID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("ClientID")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClientID"));
+
+                    b.Property<int>("GymID")
                         .HasColumnType("int");
 
                     b.Property<bool>("InGym")
@@ -118,7 +121,9 @@ namespace GYM_Management_System.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("GymID", "ClientID");
+                    b.HasKey("ClientID");
+
+                    b.HasIndex("GymID");
 
                     b.HasIndex("SubscriptionTierID");
 
