@@ -161,30 +161,30 @@ namespace GYM_Management_System.Data
             //    });
 
             modelBuilder.Entity<Supplement>().HasData(
-    new Supplement
-    {
-        SupplementID = 1,
-        Name = "Whey Protein Powder",
-        Price = "80 JD"
-    },
-    new Supplement
-    {
-        SupplementID = 2,
-        Name = "Creatine Monohydrate",
-        Price = "40 JD"
-    },
-    new Supplement
-    {
-        SupplementID = 3,
-        Name = "Branched-Chain Amino Acids (BCAAs)",
-        Price = "30 JD"
-    },
-    new Supplement
-    {
-        SupplementID = 4,
-        Name = "Pre-Workout Blend",
-        Price = "50 JD"
-    });
+                  new Supplement
+                  {
+                      SupplementID = 1,
+                      Name = "Whey Protein Powder",
+                      Price = "80 JD"
+                  },
+                  new Supplement
+                  {
+                      SupplementID = 2,
+                      Name = "Creatine Monohydrate",
+                      Price = "40 JD"
+                  },
+                  new Supplement
+                  {
+                      SupplementID = 3,
+                      Name = "Branched-Chain Amino Acids (BCAAs)",
+                      Price = "30 JD"
+                  },
+                  new Supplement
+                  {
+                      SupplementID = 4,
+                      Name = "Pre-Workout Blend",
+                      Price = "50 JD"
+                  });
 
             modelBuilder.Entity<GymEquipment>().HasData(
                 new GymEquipment
