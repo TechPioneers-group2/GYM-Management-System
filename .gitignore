@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/GYM-Management-System/GYM-Management-System/Models/ApplicationUser.cs
