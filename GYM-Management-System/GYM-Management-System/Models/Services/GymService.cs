@@ -168,6 +168,7 @@ namespace GYM_Management_System.Models.Services
                     clients = Gm.Clients.Select(cl => new PostClientDTO
                     {
                         Name = cl.Name,
+                        GymID = cl.GymID,
                         ClientID = cl.ClientID,
                         InGym = cl.InGym,
                         SubscriptionDate = cl.SubscriptionDate,

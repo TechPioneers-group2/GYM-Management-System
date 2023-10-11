@@ -158,7 +158,7 @@ namespace GYM_Management_System.Controllers
         [Authorize(Roles = "Admin, Employee")]
         [HttpPut]
         [Route("{gymId}/Supplement/{supplementId}")]
-        public async Task<ActionResult<GymSupplement>> UpdateSupplementForGym(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplement)
+        public async Task<ActionResult<string>> UpdateSupplementForGym(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplement)
         {
             try
             {
@@ -169,7 +169,7 @@ namespace GYM_Management_System.Controllers
                     return NotFound();
                 }
 
-                return Ok(gymSupplement);
+                return Ok("Updated successfully!");
             }
             catch (Exception ex)
             {
@@ -178,6 +178,7 @@ namespace GYM_Management_System.Controllers
                 return StatusCode(500, errorMessage);
             }
         }
+
 
 
         /// <summary>
