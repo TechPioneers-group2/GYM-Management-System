@@ -99,25 +99,29 @@ namespace GYM_Management_System.Data
                  {
                      SupplementID = 1,
                      Name = "Whey Protein Powder",
-                     Price = "80 JD"
+                     Price = "80 JD",
+                     Description = "Whey protein is a mixture of proteins isolated from whey, which is the liquid part of milk that separates during cheese production.\r\nMilk actually contains two main types of protein: casein (80%) and whey (20%).",
                  },
                  new Supplement
                  {
                      SupplementID = 2,
                      Name = "Creatine Monohydrate",
-                     Price = "40 JD"
+                     Price = "40 JD",
+                     Description = "Creatine is a combination of three different amino acids: glycine, arginine, and methionine.",
                  },
                  new Supplement
                  {
                      SupplementID = 3,
                      Name = "Branched-Chain Amino Acids (BCAAs)",
-                     Price = "30 JD"
+                     Price = "30 JD",
+                     Description = "Branched-Chain Amino Acids (BCAAs) are a group of three essential amino acids: leucine, isoleucine, and valine. They are called branched-chain because they are the only three amino acids to have a chain that branches off to one side.",
                  },
                  new Supplement
                  {
                      SupplementID = 4,
                      Name = "Pre-Workout Blend",
-                     Price = "50 JD"
+                     Price = "50 JD",
+                     Description = "A pre-workout blend is a class of powdered drink mixes that are consumed 20-30 minutes prior to the beginning of a rigorous workout to increase exercise performance. ",
                  });
 
             modelBuilder.Entity<GymEquipment>().HasData(

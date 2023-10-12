@@ -35,7 +35,7 @@ namespace GYM_Management_System.Controllers
         /// Retrieves a list of gyms for gym managers.
         /// </summary>
         /// <returns>A list of gyms managed by users with manager roles.</returns>
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet("Manager")]
         public async Task<ActionResult<List<GetManagerGymDTO>>> GetGymManager()
         {
@@ -123,7 +123,7 @@ namespace GYM_Management_System.Controllers
         /// <param name="supplementId">The ID of the supplement to add.</param>
         /// <param name="newGymSupplement">The gym supplement data to add.</param>
         /// <returns>The added gym supplement data.</returns>
-        [Authorize(Roles = "Admin, Employee")]
+       // [Authorize(Roles = "Admin, Employee")]
         [HttpPost]
         [Route("{gymId}/Supplement/{SupplementId}")]
         public async Task<ActionResult<string>> AddSupplementsToGym(int gymId, int SupplementId, UpdateGymSupplementDTO newGymSupplement)
