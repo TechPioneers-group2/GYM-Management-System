@@ -1,10 +1,13 @@
-﻿namespace GYM_Management_System.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GYM_Management_System.Models
 {
     public class GymSupplement
     {
         public int SupplementID { get; set; }
         public int GymID { get; set; }
-        public int  Quantity { get; set; }
+        [Required]
+        public int Quantity { get; set; }
 
 
         // Navigation props
