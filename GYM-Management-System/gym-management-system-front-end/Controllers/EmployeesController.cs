@@ -17,10 +17,10 @@ namespace gym_management_system_front_end.Controllers
 			_client.BaseAddress = baseAddress;
 			
 		}
-        public IActionResult Index()
+        public  IActionResult Index()
 		{
 			List<EmployeeViewModel> employeesList = new List<EmployeeViewModel>();
-			var response = _client.GetAsync(_client.BaseAddress + "/Employees/GetEmployees").Result;
+			var response =  _client.GetAsync(_client.BaseAddress + "/Employees/GetEmployees").Result;
 
 			if (response.IsSuccessStatusCode)
 			{
@@ -30,7 +30,7 @@ namespace gym_management_system_front_end.Controllers
 			return View(employeesList);
 		}
 
-		public IActionResult GetEmployee(int id)
+		public  IActionResult GetEmployee(int id)
 		{
 			EmployeeViewModel employee = new EmployeeViewModel();
 			var response = _client.GetAsync(_client.BaseAddress + "/Employees/GetEmployee/"+id).Result;
@@ -79,6 +79,63 @@ namespace gym_management_system_front_end.Controllers
 			
 				var response = await _client.DeleteAsync(_client.BaseAddress + "/Employees/DeleteEmployee/" + id);
 
+			return RedirectToAction("Index");
+
+		}
+
+		public  IActionResult Edit(int id)
+		{
+			var actionResult =  GetEmployee(id);
+			if (actionResult is ViewResult viewResult)
+			{
+				var employee = viewResult.Model as EmployeeViewModel;
+
+				if (employee == null)
+				{
+					return NotFound();
+				}
+				Uri baseAddress = new Uri("https://localhost:7200/api/Gyms");
+
+				List<GymViewModel> gymList = new List<GymViewModel>();
+				var response = _client.GetAsync(_client.BaseAddress + "/Gyms/GetGyms").Result;
+
+				if (response.IsSuccessStatusCode)
+				{
+					string data = response.Content.ReadAsStringAsync().Result;
+					gymList = JsonConvert.DeserializeObject<List<GymViewModel>>(data);
+				}
+				ViewBag.gymList = gymList;
+				return View(employee);
+			}
+			else
+			{
+				return NotFound();
+			}
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(EmployeeViewModel employeeViewModel)
+		{
+			UpdateEmployeeViewModel updateEmployeeViewModel = new UpdateEmployeeViewModel()
+			{
+				GymID = employeeViewModel.GymID,	
+				Name = employeeViewModel.Name,	
+				IsAvailable= employeeViewModel.IsAvailable,	
+				Salary= employeeViewModel.Salary,	
+				WorkingDays= employeeViewModel.WorkingDays,	
+				WorkingHours= employeeViewModel.WorkingHours,
+				JobDescription= employeeViewModel.JobDescription,	
+			};	
+			var json = JsonConvert.SerializeObject(updateEmployeeViewModel);
+
+			var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+			var response = await _client.PutAsync(_client.BaseAddress + "/Employees/PutEmployee/" + employeeViewModel.EmployeeID, stringContent);
+
+			if (response.IsSuccessStatusCode)
+			{
+				// Handle successful delete here
+			}
 			return RedirectToAction("Index");
 
 		}
