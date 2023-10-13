@@ -1,0 +1,41 @@
+﻿@model IEnumerable<EmployeeViewModel>
+
+@{
+    ViewData["Title"] = "Employees";
+}
+
+
+<div class="">
+	<table class="table table-dark table-hover">
+		<thead>
+			<tr>
+				<th scope="col">Employee ID</th>
+				<th scope="col">Employee Name</th>
+			
+				<th scope="col">Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var employee in Model)
+			{
+				<tr>
+					<th scope="row">
+						@employee.EmployeeID
+					</th>
+					<td>
+						@employee.Name
+					</td>
+				
+
+					<td>
+
+						<a class="" asp-controller="Employees" asp-action="GetEmployee" asp-route-orderId="@employee.EmployeeID">Details</a>
+						
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+
+

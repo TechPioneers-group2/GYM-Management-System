@@ -1,0 +1,31 @@
+﻿@model EmployeeViewModel
+
+@{
+    ViewData["Title"] = "Employee Details";
+}
+
+<h1>@Model.Name</h1>
+
+<div>
+    <h4>GymViewModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+           <label asp-for="EmployeeID"> Employee ID</label>
+        </dt>
+        <dd class="col-sm-10">
+            <label asp-for="EmployeeID"> @Model.EmployeeID</label>
+
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+     </dl>
+</div>
+<div>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.GymID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
