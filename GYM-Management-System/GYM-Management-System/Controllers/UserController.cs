@@ -12,7 +12,7 @@ namespace GYM_Management_System.Controllers
     /// <summary>
     /// API controller for user-related operations in the gym management system.
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -69,11 +69,11 @@ namespace GYM_Management_System.Controllers
         /// </summary>
         /// <param name="Data">The employee user registration data.</param>
         /// <returns>The registered employee user's data.</returns>
-        [Authorize(Roles = "Admin, Employee")]
-        [HttpPost("EmployeeRegister")]
+       // [Authorize(Roles = "Admin, Employee")]
+        [HttpPost]
         public async Task<ActionResult<UserDTO>> RegisterEmployee(RegisterEmployeeDTO Data)
         {
-            var user = await userService.RegisterEmployee(Data, this.ModelState, User);
+            var user = await userService.RegisterEmployee(Data, this.ModelState);
             if (ModelState.IsValid)
             {
                 if (user == null)

@@ -1,4 +1,4 @@
-﻿@model CreatEmployeeViewModel
+﻿@model RegisterEmployeeViewModel
 
 @{
 	ViewData["Title"] = "Creat Employee";
@@ -12,7 +12,33 @@
 	<div class="custom-form">
 	<form method="Post"  asp-controller="Employees" asp-action="Create" class="food-category-form">
 	
+
 			<div class="row">
+				<div >
+					<h3>User Account Info</h3>
+					<div class="col-md-12 form-group">
+						<label asp-for="UserName"></label>
+						<input type="text" asp-for="UserName" class="category-input">
+						<span asp-validation-for="UserName" class="text-danger"></span>
+					</div>
+					<div class="col-md-12 form-group">
+						<label asp-for="Email"></label>
+						<input type="text" asp-for="Email" class="category-input">
+						<span asp-validation-for="Email" class="text-danger"></span>
+					</div>
+					<div class="col-md-12 form-group">
+						<label asp-for="PhoneNumber"></label>
+						<input type="text" asp-for="PhoneNumber" class="category-input">
+						<span asp-validation-for="PhoneNumber" class="text-danger"></span>
+					</div>
+					<div class="col-md-12 form-group">
+						<label asp-for="Password"></label>
+						<input type="password" asp-for="Password" class="category-input">
+						<span asp-validation-for="Password" class="text-danger"></span>
+					</div>
+				</div>
+				<div >
+					<h3>Employee Info</h3>
 				<div class="col-md-12 form-group">
 					<label asp-for="Name"></label>
 					<input type="text" asp-for="Name" class="category-input">
@@ -49,7 +75,7 @@
 					<span asp-validation-for="GymID" class="text-danger"></span>
 				</div>
 			</div>
-			
+			</div>
 
 		
 	

@@ -112,7 +112,7 @@ namespace GYM_Management_System.Controllers
         /// </summary>
         /// <param name="id">The ID of the employee to delete.</param>
         /// <returns>No content if the employee was successfully deleted.</returns>
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmployee(int id)
         {

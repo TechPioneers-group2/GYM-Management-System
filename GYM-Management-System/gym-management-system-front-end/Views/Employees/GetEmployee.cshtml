@@ -4,11 +4,11 @@
     ViewData["Title"] = "Employee Details";
 }
 
-<h1>@Model.Name</h1>
+
 
 <div>
-    <h4>GymViewModel</h4>
-    <hr />
+    <h2>@Model.Name</h2>
+
     <dl class="row">
         <dt class="col-sm-2">
            <label asp-for="EmployeeID"> Employee ID</label>
@@ -18,10 +18,40 @@
 
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            <label asp-for="JobDescription"> Job Description</label>
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+            <label asp-for="EmployeeID"> @Model.JobDescription</label>
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="Salary"> Salary</label>
+        </dt>
+        <dd class="col-sm-10">
+            <label asp-for="Salary"> @Model.Salary</label>
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="GymID"> GymID</label>
+        </dt>
+        <dd class="col-sm-10">
+            <label asp-for="GymID"> @Model.GymID</label>
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="IsAvailable"> Is Available</label>
+        </dt>
+        <dd class="col-sm-10">
+            <label asp-for="IsAvailable"> @Model.IsAvailable</label>
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="WorkingDays"> Working Days </label>
+        </dt>
+        <dd class="col-sm-10">
+            <label asp-for="WorkingDays"> @Model.WorkingDays</label>
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="WorkingHours"> Working Hours </label>
+        </dt>
+        <dd class="col-sm-10">
+            <label asp-for="WorkingHours"> @Model.WorkingHours</label>
         </dd>
      </dl>
 </div>

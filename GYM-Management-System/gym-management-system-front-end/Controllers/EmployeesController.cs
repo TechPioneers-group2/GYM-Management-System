@@ -33,7 +33,7 @@ namespace gym_management_system_front_end.Controllers
 		public IActionResult GetEmployee(int id)
 		{
 			EmployeeViewModel employee = new EmployeeViewModel();
-			var response = _client.GetAsync(_client.BaseAddress + $"/Employees/GetEmployee/{id}").Result;
+			var response = _client.GetAsync(_client.BaseAddress + "/Employees/GetEmployee/"+id).Result;
 
 			if (response.IsSuccessStatusCode)
 			{
@@ -60,13 +60,27 @@ namespace gym_management_system_front_end.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CreatEmployeeViewModel creatEmployeeViewModel)
+        public IActionResult Create(RegisterEmployeeViewModel registerEmployeeViewModel)
         {
-            var jsonContent = new StringContent(JsonConvert.SerializeObject(creatEmployeeViewModel), Encoding.UTF8, "application/json");
-            var response = _client.PostAsync(_client.BaseAddress + "/Employees/PostEmployee/Create", jsonContent).Result;
+			List<string> Roles = new List<string>();
+			registerEmployeeViewModel.UserId = "string";
+			Roles.Add("Employee");
+			registerEmployeeViewModel.Roles= Roles;	
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(registerEmployeeViewModel), Encoding.UTF8, "application/json");
+            var response = _client.PostAsync(_client.BaseAddress + "/User/RegisterEmployee", jsonContent).Result;
             var data = response.Content.ReadAsStringAsync().Result;
-            var employee = JsonConvert.DeserializeObject<EmployeeViewModel>(data);
-            return RedirectToAction("GetEmployee", new {id=employee.EmployeeID});
+            var employee = JsonConvert.DeserializeObject<UserDTO>(data);
+            return RedirectToAction("Index");
         }
-    }
+
+		
+		public async Task<IActionResult> Delete(int id)
+		{
+			
+				var response = await _client.DeleteAsync(_client.BaseAddress + "/Employees/DeleteEmployee/" + id);
+
+			return RedirectToAction("Index");
+
+		}
+	}
 }

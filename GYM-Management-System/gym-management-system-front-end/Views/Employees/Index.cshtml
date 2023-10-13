@@ -11,8 +11,9 @@
 			<tr>
 				<th scope="col">Employee ID</th>
 				<th scope="col">Employee Name</th>
-			
 				<th scope="col">Details</th>
+			    <th></th>
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -29,8 +30,11 @@
 
 					<td>
 
-						<a class="" asp-controller="Employees" asp-action="GetEmployee" asp-route-orderId="@employee.EmployeeID">Details</a>
+						<a class="" asp-controller="Employees" asp-action="GetEmployee" asp-route-id="@employee.EmployeeID">Details</a>
 						
+					</td>
+					<td>
+						<a class="" asp-controller="Employees" asp-action="Delete" asp-route-id="@employee.EmployeeID" onclick="return confirm('Are You Sure that You Want To Delete The Employee @employee.Name  ?')">Delete</a>
 					</td>
 				</tr>
 			}
