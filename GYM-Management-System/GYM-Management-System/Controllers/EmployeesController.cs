@@ -127,8 +127,8 @@ namespace GYM_Management_System.Controllers
         /// <param name="gymId">The ID of the gym to retrieve employees for.</param>
         /// <returns>A list of employees.</returns>
         //[Authorize(Roles = "Admin")]
-        [Route("/api/Employees/Gym/{gymId}")]
-        [HttpGet]
+        //[Route("/api/Employees/Gym/{gymId}")]
+        [HttpGet("{gymId}")]
         public async Task<ActionResult<IEnumerable<GetEmployeesByGymId>>> GetEmployeesByGymId(int gymId)
         {
             var employees = await _employee.GetEmployeesByGymId(gymId);

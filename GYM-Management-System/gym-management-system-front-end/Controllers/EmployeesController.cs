@@ -27,6 +27,22 @@ namespace gym_management_system_front_end.Controllers
 				string data = response.Content.ReadAsStringAsync().Result;
 				employeesList = JsonConvert.DeserializeObject<List<EmployeeViewModel>>(data);
 			}
+			var gymList = GetGymsList();
+			ViewBag.gymList = gymList;
+			return View(employeesList);
+		}
+		[HttpPost]
+		public IActionResult GetEmployeesByGymId(int gymId)
+		{
+			List<GetEmployeesByGymId> employeesList = new List<GetEmployeesByGymId>();
+			var response = _client.GetAsync(_client.BaseAddress + "/Employees/GetEmployeesByGymId/" + gymId).Result;
+
+			if (response.IsSuccessStatusCode)
+			{
+				string data = response.Content.ReadAsStringAsync().Result;
+				employeesList = JsonConvert.DeserializeObject<List<GetEmployeesByGymId>>(data);
+			}
+			
 			return View(employeesList);
 		}
 
@@ -43,18 +59,10 @@ namespace gym_management_system_front_end.Controllers
 			return View(employee);
 		}
 
+	
         public IActionResult Create()
         {
-			Uri baseAddress = new Uri("https://localhost:7200/api/Gyms");
-
-			List<GymViewModel> gymList = new List<GymViewModel>();
-			var response = _client.GetAsync(_client.BaseAddress+ "/Gyms/GetGyms").Result;
-
-			if (response.IsSuccessStatusCode)
-			{
-				string data = response.Content.ReadAsStringAsync().Result;
-				gymList = JsonConvert.DeserializeObject<List<GymViewModel>>(data);
-			}
+			var gymList = GetGymsList();
 			ViewBag.gymList= gymList;	
 			return View();
         }
@@ -94,16 +102,7 @@ namespace gym_management_system_front_end.Controllers
 				{
 					return NotFound();
 				}
-				Uri baseAddress = new Uri("https://localhost:7200/api/Gyms");
-
-				List<GymViewModel> gymList = new List<GymViewModel>();
-				var response = _client.GetAsync(_client.BaseAddress + "/Gyms/GetGyms").Result;
-
-				if (response.IsSuccessStatusCode)
-				{
-					string data = response.Content.ReadAsStringAsync().Result;
-					gymList = JsonConvert.DeserializeObject<List<GymViewModel>>(data);
-				}
+				var gymList = GetGymsList();
 				ViewBag.gymList = gymList;
 				return View(employee);
 			}
@@ -116,16 +115,8 @@ namespace gym_management_system_front_end.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Edit(EmployeeViewModel employeeViewModel)
 		{
-			UpdateEmployeeViewModel updateEmployeeViewModel = new UpdateEmployeeViewModel()
-			{
-				GymID = employeeViewModel.GymID,	
-				Name = employeeViewModel.Name,	
-				IsAvailable= employeeViewModel.IsAvailable,	
-				Salary= employeeViewModel.Salary,	
-				WorkingDays= employeeViewModel.WorkingDays,	
-				WorkingHours= employeeViewModel.WorkingHours,
-				JobDescription= employeeViewModel.JobDescription,	
-			};	
+			UpdateEmployeeViewModel updateEmployeeViewModel = (UpdateEmployeeViewModel)employeeViewModel;
+			
 			var json = JsonConvert.SerializeObject(updateEmployeeViewModel);
 
 			var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
@@ -138,6 +129,20 @@ namespace gym_management_system_front_end.Controllers
 			}
 			return RedirectToAction("Index");
 
+		}
+		public List<GymViewModel> GetGymsList()
+		{
+			Uri baseAddress = new Uri("https://localhost:7200/api/Gyms");
+
+			List<GymViewModel> gymList = new List<GymViewModel>();
+			var response = _client.GetAsync(_client.BaseAddress + "/Gyms/GetGyms").Result;
+
+			if (response.IsSuccessStatusCode)
+			{
+				string data = response.Content.ReadAsStringAsync().Result;
+				gymList = JsonConvert.DeserializeObject<List<GymViewModel>>(data);
+			}
+			return gymList;
 		}
 	}
 }
