@@ -115,7 +115,9 @@ namespace GYM_Management_System.Controllers
         /// <param name="supplementId">The ID of the supplement to add.</param>
         /// <param name="newGymSupplement">The gym supplement data to add.</param>
         /// <returns>The added gym supplement data.</returns>
-        [Authorize(Roles = "Admin, Employee")]
+        /// 
+
+        //[Authorize(Roles = "Admin, Employee")]
         [HttpPost]
         [Route("{gymId}/Supplement/{SupplementId}")]
         public async Task<ActionResult<GymSupplement>> AddSupplementsToGym(int gymId, int SupplementId, UpdateGymSupplementDTO newGymSupplement)
