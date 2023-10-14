@@ -1,5 +1,4 @@
-﻿
-namespace gym_management_system_front_end.Models
+﻿namespace gym_management_system_front_end.Models
 {
     public class GymViewModel
     {
@@ -151,6 +150,23 @@ namespace gym_management_system_front_end.Models
         public string WorkingHours { get; set; }
 
         public string Salary { get; set; }
+    }
+
+    public class GetUserGymDTO
+    {
+        public int GymID { get; set; }
+        public string? Name { get; set; }
+        public string? Address { get; set; }
+        public string? MaxCapacity { get; set; }
+        public int CurrentCapacity { get; set; }
+        public string? ActiveHours { get; set; }
+        public string? Notification { get; set; }
+
+        //NP
+
+        public List<EquipmentDTOPut>? Equipments { get; set; }
+        public List<GymGetSubscriptionTierDTO>? SubscriptionTier { get; set; }
+        public List<GymSupplementDTO>? Supplements { get; set; }
     }
 }
 
