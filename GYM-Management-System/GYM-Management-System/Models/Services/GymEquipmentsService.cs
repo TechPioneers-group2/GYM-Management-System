@@ -36,7 +36,8 @@ namespace GYM_Management_System.Models.Services
                 Quantity = equipmentDTO.Quantity,
                 Name = equipmentDTO.Name,
                 OutOfService = equipmentDTO.OutOfService,
-                GymID = equipmentDTO.GymID
+                GymID = equipmentDTO.GymID,
+                img=equipmentDTO.img 
             };
 
             await _gymDbContext.GymEquipments.AddAsync(newEquipment);
@@ -82,7 +83,8 @@ namespace GYM_Management_System.Models.Services
                 Quantity = E.Quantity,
                 Name = E.Name,
                 OutOfService = E.OutOfService,
-                GymID = E.GymID
+                GymID = E.GymID ,
+                img=E.img
             }).FirstOrDefaultAsync(e => e.GymEquipmentID == GymEquipmentID);
 
             return Equipment;
@@ -100,7 +102,8 @@ namespace GYM_Management_System.Models.Services
                 Quantity = E.Quantity,
                 Name = E.Name,
                 OutOfService = E.OutOfService,
-                GymID = E.GymID
+                GymID = E.GymID,
+                img=E.img,
             }).ToListAsync();
 
             return allEquipment;
@@ -119,6 +122,7 @@ namespace GYM_Management_System.Models.Services
             {
                 Selected.Quantity = equipmentDTO.Quantity;
                 Selected.OutOfService = equipmentDTO.OutOfService;
+                Selected.img = equipmentDTO.img;
 
                 _gymDbContext.Entry(Selected).State = EntityState.Modified;
                 await _gymDbContext.SaveChangesAsync();
@@ -129,7 +133,9 @@ namespace GYM_Management_System.Models.Services
                     Quantity = Selected.Quantity,
                     Name = Selected.Name,
                     OutOfService = Selected.OutOfService,
-                    GymID = Selected.GymID
+                    GymID = Selected.GymID,
+                    img=Selected.img,
+
                 };
 
                 return equipmentDtoResult;
