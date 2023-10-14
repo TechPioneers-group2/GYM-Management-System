@@ -91,8 +91,7 @@ namespace GYM_Management_System.Models.Services
                     Supplements = new GetGymSupplementDTO
                     {
                         Name = x.Supplements.Name,
-                        Price = x.Supplements.Price,
-                        Description = x.Supplements.Description,
+                        Price = x.Supplements.Price
                     }
                 })
                 .ToList();
@@ -193,8 +192,7 @@ namespace GYM_Management_System.Models.Services
                         Supplements = new GetGymSupplementDTO
                         {
                             Name = x.Supplements.Name,
-                            Price = x.Supplements.Price,
-                            Description= x.Supplements.Description,
+                            Price = x.Supplements.Price
                         }
                     }).ToList(),
                     subscriptiontiers = supptierDTO
@@ -234,8 +232,7 @@ namespace GYM_Management_System.Models.Services
                         Supplements = new GetGymSupplementDTO
                         {
                             Name = GS.Supplements.Name,
-                            Price = GS.Supplements.Price,
-                            Description = GS.Supplements.Description,
+                            Price = GS.Supplements.Price
                         }
                     }).ToList(),
                     CurrentCapacity = _gymDbContext.Clients.Count(x => x.GymID == Gm.GymID && x.InGym == true),
