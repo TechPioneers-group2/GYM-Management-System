@@ -287,8 +287,10 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             Name = "treadmill",
                             OutOfService = 2,
+
                             Quantity = 10,
                             img = "https://shop.lifefitness.com/cdn/shop/products/clubseries-plus-treadmill-titanium-storm-se3hd-1000x1000_1800x1800.jpg?v=1678726811"
+
                         },
                         new
                         {
@@ -296,8 +298,9 @@ namespace GYM_Management_System.Migrations
                             GymID = 2,
                             Name = "dumbbells",
                             OutOfService = 0,
+
                             Quantity = 60,
-                            img = "https://www.bowflex.com/dw/image/v2/AAYW_PRD/on/demandware.static/-/Sites-nautilus-master-catalog/default/dwf21fb1cf/images/bfx/weights/100131/bowflex-selecttech-552-dumbbell-weights-hero.jpg?sw=2600&sh=1464&sm=fit"
+
                         },
                         new
                         {
@@ -390,6 +393,10 @@ namespace GYM_Management_System.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SupplementID"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -406,24 +413,28 @@ namespace GYM_Management_System.Migrations
                         new
                         {
                             SupplementID = 1,
+                            Description = "Whey protein is a mixture of proteins isolated from whey, which is the liquid part of milk that separates during cheese production.\r\nMilk actually contains two main types of protein: casein (80%) and whey (20%).",
                             Name = "Whey Protein Powder",
                             Price = "80 JD"
                         },
                         new
                         {
                             SupplementID = 2,
+                            Description = "Creatine is a combination of three different amino acids: glycine, arginine, and methionine.",
                             Name = "Creatine Monohydrate",
                             Price = "40 JD"
                         },
                         new
                         {
                             SupplementID = 3,
+                            Description = "Branched-Chain Amino Acids (BCAAs) are a group of three essential amino acids: leucine, isoleucine, and valine. They are called branched-chain because they are the only three amino acids to have a chain that branches off to one side.",
                             Name = "Branched-Chain Amino Acids (BCAAs)",
                             Price = "30 JD"
                         },
                         new
                         {
                             SupplementID = 4,
+                            Description = "A pre-workout blend is a class of powdered drink mixes that are consumed 20-30 minutes prior to the beginning of a rigorous workout to increase exercise performance. ",
                             Name = "Pre-Workout Blend",
                             Price = "50 JD"
                         });

@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GYM_Management_System.Data;
-using GYM_Management_System.Models;
-using GYM_Management_System.Models.Interfaces;
+﻿using GYM_Management_System.Models;
 using GYM_Management_System.Models.DTOs;
+using GYM_Management_System.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GYM_Management_System.Controllers
 {
     /// <summary>
     /// API controller for managing gyms in the gym management system.
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class GymsController : ControllerBase
     {
@@ -35,7 +28,7 @@ namespace GYM_Management_System.Controllers
         /// Retrieves a list of gyms for gym managers.
         /// </summary>
         /// <returns>A list of gyms managed by users with manager roles.</returns>
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet("Manager")]
         public async Task<ActionResult<List<GetManagerGymDTO>>> GetGymManager()
         {
@@ -78,7 +71,7 @@ namespace GYM_Management_System.Controllers
         /// <param name="id">The ID of the gym to update.</param>
         /// <param name="gym">The updated gym data.</param>
         /// <returns>The updated gym data.</returns>
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGym(int id, PutGymDTO gym)
         {
@@ -91,7 +84,7 @@ namespace GYM_Management_System.Controllers
         /// </summary>
         /// <param name="gym">The gym data to create.</param>
         /// <returns>The created gym data.</returns>
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<PostGymDTO>> PostGym(PostGymDTO gym)
         {
@@ -108,7 +101,7 @@ namespace GYM_Management_System.Controllers
         /// </summary>
         /// <param name="id">The ID of the gym to delete.</param>
         /// <returns>No content if the gym was successfully deleted.</returns>
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGym(int id)
         {
@@ -123,7 +116,7 @@ namespace GYM_Management_System.Controllers
         /// <param name="supplementId">The ID of the supplement to add.</param>
         /// <param name="newGymSupplement">The gym supplement data to add.</param>
         /// <returns>The added gym supplement data.</returns>
-        [Authorize(Roles = "Admin, Employee")]
+       // [Authorize(Roles = "Admin, Employee")]
         [HttpPost]
         [Route("{gymId}/Supplement/{SupplementId}")]
         public async Task<ActionResult<string>> AddSupplementsToGym(int gymId, int SupplementId, UpdateGymSupplementDTO newGymSupplement)
