@@ -128,6 +128,7 @@ namespace GYM_Management_System.Data
                     Name = "bench press",
                     Quantity = 2,
                     OutOfService = 0,
+                    img = "https://m.media-amazon.com/images/I/61cGWhpz3ZL._AC_UF1000,1000_QL80_.jpg",
                 },
                 new GymEquipment
                 {
@@ -144,6 +145,7 @@ namespace GYM_Management_System.Data
                     Name = "dumbbells",
                     Quantity = 60,
                     OutOfService = 0,
+                    img = "https://www.bowflex.com/dw/image/v2/AAYW_PRD/on/demandware.static/-/Sites-nautilus-master-catalog/default/dwf21fb1cf/images/bfx/weights/100131/bowflex-selecttech-552-dumbbell-weights-hero.jpg?sw=2600&sh=1464&sm=fit",
                 },
                 new GymEquipment
                 {
@@ -152,6 +154,7 @@ namespace GYM_Management_System.Data
                     Name = "elliptical machine",
                     Quantity = 3,
                     OutOfService = 0,
+                    img = "https://www.precorhomefitness.com/cdn/shop/products/precor-efx-635-elliptical_5000x.jpg?v=1686422733",
                 });
 
             modelBuilder.Entity<Employee>().HasData(

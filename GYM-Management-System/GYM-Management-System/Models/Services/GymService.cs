@@ -187,7 +187,8 @@ namespace GYM_Management_System.Models.Services
                         Supplements = new GetGymSupplementDTO
                         {
                             Name = x.Supplements.Name,
-                            Price = x.Supplements.Price
+                            Price = x.Supplements.Price,
+                            Description = x.Supplements.Description,
                         }
                     }).ToList(),
                     subscriptiontiers = supptierDTO
