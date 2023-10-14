@@ -1,5 +1,4 @@
-﻿using GYM_Management_System.Models;
-using GYM_Management_System.Models.DTOs;
+﻿using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,8 +27,10 @@ namespace GYM_Management_System.Controllers
         /// Retrieves a list of gyms for gym managers.
         /// </summary>
         /// <returns>A list of gyms managed by users with manager roles.</returns>
+        /// 
+
         //[Authorize(Roles = "Admin")]
-        [HttpGet("Manager")]
+        [HttpGet]
         public async Task<ActionResult<List<GetManagerGymDTO>>> GetGymManager()
         {
             return Ok(await _gym.GetGymManger());
@@ -84,7 +85,8 @@ namespace GYM_Management_System.Controllers
         /// </summary>
         /// <param name="gym">The gym data to create.</param>
         /// <returns>The created gym data.</returns>
-        //[Authorize(Roles = "Admin")]
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<PostGymDTO>> PostGym(PostGymDTO gym)
         {

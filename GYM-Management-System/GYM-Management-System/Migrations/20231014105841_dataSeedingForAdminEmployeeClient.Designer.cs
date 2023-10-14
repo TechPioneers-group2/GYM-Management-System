@@ -4,6 +4,7 @@ using GYM_Management_System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GYM_Management_System.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    partial class GymDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231014105841_dataSeedingForAdminEmployeeClient")]
+    partial class dataSeedingForAdminEmployeeClient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -341,10 +344,6 @@ namespace GYM_Management_System.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("img")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("GymEquipmentID");
 
                     b.HasIndex("GymID");
@@ -358,8 +357,7 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             Name = "bench press",
                             OutOfService = 0,
-                            Quantity = 2,
-                            img = "https://m.media-amazon.com/images/I/61cGWhpz3ZL._AC_UF1000,1000_QL80_.jpg"
+                            Quantity = 2
                         },
                         new
                         {
@@ -367,10 +365,7 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             Name = "treadmill",
                             OutOfService = 2,
-
-                            Quantity = 10,
-                            img = "https://shop.lifefitness.com/cdn/shop/products/clubseries-plus-treadmill-titanium-storm-se3hd-1000x1000_1800x1800.jpg?v=1678726811"
-
+                            Quantity = 10
                         },
                         new
                         {
@@ -378,9 +373,7 @@ namespace GYM_Management_System.Migrations
                             GymID = 2,
                             Name = "dumbbells",
                             OutOfService = 0,
-
-                            Quantity = 60,
-
+                            Quantity = 60
                         },
                         new
                         {
@@ -388,8 +381,7 @@ namespace GYM_Management_System.Migrations
                             GymID = 2,
                             Name = "elliptical machine",
                             OutOfService = 0,
-                            Quantity = 3,
-                            img = "https://www.precorhomefitness.com/cdn/shop/products/precor-efx-635-elliptical_5000x.jpg?v=1686422733"
+                            Quantity = 3
                         });
                 });
 
@@ -473,10 +465,6 @@ namespace GYM_Management_System.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SupplementID"));
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -493,28 +481,24 @@ namespace GYM_Management_System.Migrations
                         new
                         {
                             SupplementID = 1,
-                            Description = "Whey protein is a mixture of proteins isolated from whey, which is the liquid part of milk that separates during cheese production.\r\nMilk actually contains two main types of protein: casein (80%) and whey (20%).",
                             Name = "Whey Protein Powder",
                             Price = "80 JD"
                         },
                         new
                         {
                             SupplementID = 2,
-                            Description = "Creatine is a combination of three different amino acids: glycine, arginine, and methionine.",
                             Name = "Creatine Monohydrate",
                             Price = "40 JD"
                         },
                         new
                         {
                             SupplementID = 3,
-                            Description = "Branched-Chain Amino Acids (BCAAs) are a group of three essential amino acids: leucine, isoleucine, and valine. They are called branched-chain because they are the only three amino acids to have a chain that branches off to one side.",
                             Name = "Branched-Chain Amino Acids (BCAAs)",
                             Price = "30 JD"
                         },
                         new
                         {
                             SupplementID = 4,
-                            Description = "A pre-workout blend is a class of powdered drink mixes that are consumed 20-30 minutes prior to the beginning of a rigorous workout to increase exercise performance. ",
                             Name = "Pre-Workout Blend",
                             Price = "50 JD"
                         });
