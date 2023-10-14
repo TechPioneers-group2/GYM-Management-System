@@ -124,22 +124,16 @@ namespace GYM_Management_System.Controllers
             try
             {
                 await _gym.AddSupplementToGym(gymId, SupplementId, newGymSupplement);
-
-
                 string successMessage = "Supplement was added successfully.";
 
                 return Ok(successMessage);
             }
             catch (Exception ex)
             {
-
                 string errorMessage = "An error occurred while adding the supplement.";
-
                 return StatusCode(500, errorMessage);
             }
         }
-
-
 
         /// <summary>
         /// Updates gym supplement details (accessible to Admin and Employee roles).
