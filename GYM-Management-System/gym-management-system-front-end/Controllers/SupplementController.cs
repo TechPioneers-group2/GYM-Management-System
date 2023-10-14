@@ -60,6 +60,7 @@ namespace gym_management_system_front_end.Controllers
                 supplementViewModel = JsonConvert.DeserializeObject<SupplementViewModel>(data);
                 if (response.IsSuccessStatusCode)
                 {
+                    TempData["success"] = "Supplement Created successfully";
                     return RedirectToAction("Index", "Supplement");
                 }
             }
@@ -98,7 +99,8 @@ namespace gym_management_system_front_end.Controllers
             var response = await _client.PutAsync(_client.BaseAddress + "/PutSupplement/" + supplementViewModel.SupplementID, stringContent);
             if (response.IsSuccessStatusCode)
             {
-                // Handle successful delete here
+                TempData["success"] = "Supplement Updated successfully";
+                return RedirectToAction("Index", "Supplement");
             }
             return RedirectToAction("Index", "Supplement");
         }
@@ -138,14 +140,31 @@ namespace gym_management_system_front_end.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
-                    // Handle successful delete here
+                    TempData["success"] = "Supplement Deleted successfully";
+                    return RedirectToAction("Index", "Supplement");
                 }
                 return RedirectToAction("Index", "Supplement");
             }
             else
             {
+                TempData["error"] = "Delete Process failed";
                 return NotFound();
             }
         }
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<SupplementViewModel> supplementList = new List<SupplementViewModel>();
+            var response = _client.GetAsync(_client.BaseAddress + "/GetSupplements").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                supplementList = JsonConvert.DeserializeObject<List<SupplementViewModel>>(data);
+            }
+            return Json(new { data = supplementList });
+        }
+
+        #endregion
     }
 }
