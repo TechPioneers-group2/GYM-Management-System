@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace gym_management_system_front_end.Models
 {
     public class GymSupplementViewModel
     {
+        [DisplayName("Supplement ID ")]
         public int SupplementID { get; set; }
         public int GymID { get; set; }
         [Required]

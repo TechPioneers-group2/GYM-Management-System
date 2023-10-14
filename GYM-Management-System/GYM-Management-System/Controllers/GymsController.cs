@@ -109,6 +109,12 @@ namespace GYM_Management_System.Controllers
             return NoContent();
         }
 
+        public class ApiResponse
+        {
+            public string Message { get; set; }
+            public bool Success { get; set; }
+        }
+
         /// <summary>
         /// Adds supplements to a gym (accessible to Admin and Employee roles).
         /// </summary>
@@ -119,21 +125,22 @@ namespace GYM_Management_System.Controllers
        // [Authorize(Roles = "Admin, Employee")]
         [HttpPost]
         [Route("{gymId}/Supplement/{SupplementId}")]
-        public async Task<ActionResult<string>> AddSupplementsToGym(int gymId, int SupplementId, UpdateGymSupplementDTO newGymSupplement)
+        public async Task<ActionResult<ApiResponse>> AddSupplementsToGym(int gymId, int SupplementId, UpdateGymSupplementDTO newGymSupplement)
         {
             try
             {
                 await _gym.AddSupplementToGym(gymId, SupplementId, newGymSupplement);
                 string successMessage = "Supplement was added successfully.";
 
-                return Ok(successMessage);
+                return Ok(new ApiResponse { Message = successMessage, Success = true });
             }
             catch (Exception ex)
             {
                 string errorMessage = "An error occurred while adding the supplement.";
-                return StatusCode(500, errorMessage);
+                return StatusCode(500, new ApiResponse { Message = errorMessage, Success = false });
             }
         }
+
 
         /// <summary>
         /// Updates gym supplement details (accessible to Admin and Employee roles).
@@ -142,10 +149,10 @@ namespace GYM_Management_System.Controllers
         /// <param name="supplementId">The ID of the supplement to update.</param>
         /// <param name="updateGymSupplemen">The updated gym supplement data.</param>
         /// <returns>The updated gym supplement data.</returns>
-        [Authorize(Roles = "Admin, Employee")]
+       // [Authorize(Roles = "Admin, Employee")]
         [HttpPut]
         [Route("{gymId}/Supplement/{supplementId}")]
-        public async Task<ActionResult<string>> UpdateSupplementForGym(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplement)
+        public async Task<ActionResult<ApiResponse>> UpdateSupplementForGym(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplement)
         {
             try
             {
@@ -153,18 +160,18 @@ namespace GYM_Management_System.Controllers
 
                 if (gymSupplement == null)
                 {
-                    return NotFound();
+                    return NotFound(new ApiResponse { Message = "Supplement not found.", Success = false });
                 }
 
-                return Ok("Updated successfully!");
+                return Ok(new ApiResponse { Message = "Updated successfully!", Success = true });
             }
             catch (Exception ex)
             {
                 string errorMessage = "An error occurred while updating the supplement.";
-
-                return StatusCode(500, errorMessage);
+                return StatusCode(500, new ApiResponse { Message = errorMessage, Success = false });
             }
         }
+
 
 
 
@@ -174,7 +181,7 @@ namespace GYM_Management_System.Controllers
         /// <param name="gymId">The ID of the gym.</param>
         /// <param name="supplementId">The ID of the supplement to remove.</param>
         /// <returns>No content if the supplement was successfully removed.</returns>
-        [Authorize(Roles = "Admin, Employee")]
+       // [Authorize(Roles = "Admin, Employee")]
         [HttpDelete]
         [Route("{gymId}/Supplement/{supplementId}")]
         public async Task<IActionResult> RemoveSupplementFromGym(int gymId, int supplementId)
