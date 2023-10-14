@@ -4,6 +4,7 @@ using GYM_Management_System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GYM_Management_System.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    partial class GymDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231011181031_updateEqu")]
+    partial class updateEqu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -306,7 +309,7 @@ namespace GYM_Management_System.Migrations
                             Name = "elliptical machine",
                             OutOfService = 0,
                             Quantity = 3,
-                            img = "https://www.precorhomefitness.com/cdn/shop/products/precor-efx-635-elliptical_5000x.jpg?v=1686422733"
+                            img = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnsPmSNYmymbPYugmtEjpmA3e_vdCya4td2Q&usqp=CAU"
                         });
                 });
 
