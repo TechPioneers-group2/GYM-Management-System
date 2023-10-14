@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GYM_Management_System.Models
+namespace gym_management_system_front_end.Models.Models
 {
     public class Client
     {

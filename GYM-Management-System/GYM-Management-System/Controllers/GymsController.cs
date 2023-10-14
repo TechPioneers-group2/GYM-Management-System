@@ -1,10 +1,10 @@
-﻿using GYM_Management_System.Models;
-using GYM_Management_System.Models.DTOs;
-using GYM_Management_System.Models.Interfaces;
+﻿using gym_management_system_front_end.Models.Models;
+using gym_management_system_front_end.Models.Models.DTOs;
+using gym_management_system_front_end.Models.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GYM_Management_System.Controllers
+namespace gym_management_system_front_end.Models.Controllers
 {
     /// <summary>
     /// API controller for managing gyms in the gym management system.

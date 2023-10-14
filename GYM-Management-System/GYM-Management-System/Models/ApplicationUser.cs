@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GYM_Management_System.Models
+namespace gym_management_system_front_end.Models.Models
 {
     public class ApplicationUser:IdentityUser 
     {

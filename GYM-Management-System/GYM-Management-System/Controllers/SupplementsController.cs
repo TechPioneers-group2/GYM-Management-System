@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using GYM_Management_System.Data;
-using GYM_Management_System.Models;
-using GYM_Management_System.Models.Interfaces;
-using GYM_Management_System.Models.DTOs;
+using gym_management_system_front_end.Models.Data;
+using gym_management_system_front_end.Models.Models;
+using gym_management_system_front_end.Models.Models.Interfaces;
+using gym_management_system_front_end.Models.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 
-namespace GYM_Management_System.Controllers
+namespace gym_management_system_front_end.Models.Controllers
 {
     /// <summary>
     /// API controller for managing supplements in the gym management system.
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class SupplementsController : ControllerBase
     {

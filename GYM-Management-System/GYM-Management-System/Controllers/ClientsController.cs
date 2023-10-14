@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using GYM_Management_System.Data;
-using GYM_Management_System.Models;
-using GYM_Management_System.Models.Interfaces;
-using GYM_Management_System.Models.DTOs;
+using gym_management_system_front_end.Models.Data;
+using gym_management_system_front_end.Models.Models;
+using gym_management_system_front_end.Models.Models.Interfaces;
+using gym_management_system_front_end.Models.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 
-namespace GYM_Management_System.Controllers
+namespace gym_management_system_front_end.Models.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ClientsController : ControllerBase
     {
@@ -36,7 +36,7 @@ namespace GYM_Management_System.Controllers
         /// <param name="gymid">The ID of the gym to retrieve clients for.</param>
         /// <returns>A list of clients.</returns>
 
-        [Authorize(Roles = "Admin, Employee")]
+//[Authorize(Roles = "Admin, Employee")]
         [HttpGet("gym/{gymid}")]
         public async Task<ActionResult<IEnumerable<GetClientDTO>>> GetClients(int gymid)
         {
@@ -51,7 +51,7 @@ namespace GYM_Management_System.Controllers
         /// <param name="gymid">The ID of the gym the client is associated with.</param>
         /// <returns>The client's details.</returns>
 
-        [Authorize(Roles = "Admin, Employee")]
+        //[Authorize(Roles = "Admin, Employee")]
         [HttpGet("{clientid}/gym/{gymid}")]
         public async Task<ActionResult<GetClientDTO>> GetClient(int clientid, int gymid)
         {
@@ -70,7 +70,7 @@ namespace GYM_Management_System.Controllers
 
         
         
-        [Authorize(Roles = "Admin, Employee")]
+       // [Authorize(Roles = "Admin, Employee")]
         [HttpPut("{clientid}/gym/{gymid}")]
         public async Task<IActionResult> PutClient(int clientid, int gymid, UpdateClientDTO client)
         {
@@ -123,7 +123,7 @@ public async Task<ActionResult<Client>> PostClient(int gymid, PostClientDTO clie
 /// <param name="gymid">The ID of the gym the client is associated with.</param>
 /// <returns>No content if the client was successfully deleted.</returns>
 
-[Authorize(Roles = "Admin, Employee")]
+//[Authorize(Roles = "Admin, Employee")]
 [HttpDelete("{clientid}/gym/{gymid}")]
 public async Task<IActionResult> DeleteClient(int clientid, int gymid)
 {

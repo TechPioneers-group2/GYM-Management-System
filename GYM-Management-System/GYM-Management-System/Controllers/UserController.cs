@@ -1,13 +1,13 @@
-﻿using GYM_Management_System.Models.DTOs;
-using GYM_Management_System.Models.Interfaces;
-using GYM_Management_System.Models.Services;
+﻿using gym_management_system_front_end.Models.Models.DTOs;
+using gym_management_system_front_end.Models.Models.Interfaces;
+using gym_management_system_front_end.Models.Models.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Threading.Tasks;
 
-namespace GYM_Management_System.Controllers
+namespace gym_management_system_front_end.Models.Controllers
 {
     /// <summary>
     /// API controller for user-related operations in the gym management system.
@@ -90,7 +90,7 @@ namespace GYM_Management_System.Controllers
         /// </summary>
         /// <param name="Data">The client user registration data.</param>
         /// <returns>The registered client user's data.</returns>
-        [AllowAnonymous]
+       // [AllowAnonymous]
         [HttpPost("ClientRegister")]
         public async Task<ActionResult<UserDTO>> ClientRegister(RegisterClientDTO Data)
         {
