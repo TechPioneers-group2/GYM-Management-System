@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc;
+﻿using GYM_Management_System.Models.DTOs;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Security.Claims;
-using GYM_Management_System.Models.DTOs;
 
 namespace GYM_Management_System.Models.Interfaces
 {

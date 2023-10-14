@@ -154,6 +154,101 @@ namespace GYM_Management_System.Data
                     OutOfService = 0,
                 });
 
+            modelBuilder.Entity<Employee>().HasData(
+                new Employee
+                {
+                    UserId = "2",
+                    EmployeeID = 1,
+                    GymID = 1,
+                    Name = "Employee",
+                    JobDescription = "Demo",
+                    IsAvailable = true,
+                    WorkingDays = "S M T W T F S",
+                    WorkingHours = "9AM - 5PM",
+                    Salary = "$300"
+
+                });
+
+            modelBuilder.Entity<Client>().HasData(
+                new Client
+                {
+                    UserId = "3",
+                    ClientID = 1,
+                    GymID = 1,
+                    Name = "Client",
+                    InGym = true,
+                    SubscriptionTierID = 1,
+                    SubscriptionDate = DateTime.Now,
+                    SubscriptionExpiry = DateTime.Now.AddMonths(6),
+                });
+
+            var hasher = new PasswordHasher<ApplicationUser>();
+            var Admin = new ApplicationUser
+            {
+                Id = "1",
+                UserName = "Admin",
+                NormalizedUserName = "ADMIN",
+                Email = "adminUser@example.com",
+                PhoneNumber = "1234567890",
+                NormalizedEmail = "ADMINUSER@EXAMPLE.COM",
+                EmailConfirmed = true,
+                LockoutEnabled = false
+            };
+            Admin.PasswordHash = hasher.HashPassword(Admin, "Admin@123");
+
+            modelBuilder.Entity<ApplicationUser>().HasData(Admin);
+
+            var adminRoleId = "Admin";
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                UserId = Admin.Id,
+                RoleId = adminRoleId
+            });
+
+            var Employee = new ApplicationUser
+            {
+                Id = "2",
+                UserName = "Employee",
+                NormalizedUserName = "EMPLOYEE",
+                Email = "employeeUser@example.com",
+                PhoneNumber = "1234567890",
+                NormalizedEmail = "EMPLOYEEUSER@EXAMPLE.COM",
+                EmailConfirmed = true,
+                LockoutEnabled = false,
+
+            };
+            Employee.PasswordHash = hasher.HashPassword(Employee, "Employee@123");
+
+            modelBuilder.Entity<ApplicationUser>().HasData(Employee);
+
+            var employeeRoleId = "Employee";
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                UserId = Employee.Id,
+                RoleId = employeeRoleId
+            });
+
+            var Client = new ApplicationUser
+            {
+                Id = "3",
+                UserName = "Client",
+                NormalizedUserName = "CLIENT",
+                Email = "ClientUser@example.com",
+                PhoneNumber = "1234567890",
+                NormalizedEmail = "CLIENTUSER@EXAMPLE.COM",
+                EmailConfirmed = true,
+                LockoutEnabled = false
+            };
+            Client.PasswordHash = hasher.HashPassword(Client, "Client@123");
+
+            modelBuilder.Entity<ApplicationUser>().HasData(Client);
+
+            var ClientRoleId = "Client";
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                UserId = Client.Id,
+                RoleId = ClientRoleId
+            });
 
             SeedRole(modelBuilder, "Admin", "createAdmin", "updateAdmin", "deleteAdmin", "readAdmin");
             SeedRole(modelBuilder, "Employee", "createEmployee", "updateEmployee", "readEmployee");

@@ -100,5 +100,57 @@ namespace gym_management_system_front_end.Models
         }
 
     }
+
+    public class GetManagerGymDTO
+    {
+        public int GymID { get; set; }
+        public string? Name { get; set; }
+        public string? Address { get; set; }
+        public string? MaxCapacity { get; set; }
+        public int CurrentCapacity { get; set; }
+        public string? ActiveHours { get; set; }
+        public string? Notification { get; set; }
+
+        //NP
+
+        public List<GymSupplementDTO>? Supplements { get; set; }
+        public List<EquipmentDTOPut> Equipments { get; set; }
+        public List<PostClientDTO> clients { get; set; }
+        public List<GetEmployeesByGymId> employees { get; set; }
+        public List<GymGetSubscriptionTierDTO> subscriptiontiers { get; set; }
+    }
+
+    public class PostClientDTO
+    {
+        public int ClientID { get; set; }
+        // Forgein Key
+        public int GymID { get; set; }
+        // Forgein Key
+        public int SubscriptionTierID { get; set; }
+        public string Name { get; set; }
+        public bool InGym { get; set; }
+        public DateTime SubscriptionDate { get; set; }
+        public DateTime SubscriptionExpiry { get; set; }
+
+        //N.P
+
+    }
+
+    public class GetEmployeesByGymId
+    {
+        public int EmployeeID { get; set; }
+
+        public string Name { get; set; }
+
+        public string JobDescription { get; set; }
+
+        public bool IsAvailable { get; set; }
+
+        public string WorkingDays { get; set; }
+
+        public string WorkingHours { get; set; }
+
+        public string Salary { get; set; }
+    }
 }
 
