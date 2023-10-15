@@ -1,7 +1,7 @@
-﻿using GYM_Management_System.Models.DTOs;
-using GYM_Management_System.Models;
+﻿using gym_management_system_front_end.Models.Models.DTOs;
+using gym_management_system_front_end.Models.Models;
 
-namespace GYM_Management_System.Models.Interfaces
+namespace gym_management_system_front_end.Models.Models.Interfaces
 {
     public interface IClient
     {

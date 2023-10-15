@@ -1,13 +1,13 @@
-using GYM_Management_System.Data;
-using GYM_Management_System.Models;
-using GYM_Management_System.Models.Interfaces;
-using GYM_Management_System.Models.Services;
+using gym_management_system_front_end.Models.Data;
+using gym_management_system_front_end.Models.Models;
+using gym_management_system_front_end.Models.Models.Interfaces;
+using gym_management_system_front_end.Models.Models.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
 
-namespace GYM_Management_System
+namespace gym_management_system_front_end.Models
 {
 	public class Program
 	{

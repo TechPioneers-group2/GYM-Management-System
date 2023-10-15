@@ -39,11 +39,11 @@ namespace gym_management_system_front_end.Models
 
     }
 
-    public class GymGetSubscriptionTierDTO
-    {
-        public string Name { get; set; }
-        public string Price { get; set; }
-    }
+    //public class GymGetSubscriptionTierDTO
+    //{
+    //    public string Name { get; set; }
+    //    public string Price { get; set; }
+    //}
 
     public class GetGymSupplementDTO
     {
