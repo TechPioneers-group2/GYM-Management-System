@@ -2,11 +2,10 @@
 using gym_management_system_front_end.Models.Models.DTOs;
 using gym_management_system_front_end.Models.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+﻿using GYM_Management_System.Data;
+using GYM_Management_System.Models.DTOs;
+using GYM_Management_System.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Net;
-using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace gym_management_system_front_end.Models.Models.Services
 {
@@ -194,7 +193,8 @@ namespace gym_management_system_front_end.Models.Models.Services
                         {
                             Name = x.Supplements.Name,
                             Price = x.Supplements.Price,
-                            Description= x.Supplements.Description,
+                            Description = x.Supplements.Description,
+
                         }
                     }).ToList(),
                     subscriptiontiers = supptierDTO

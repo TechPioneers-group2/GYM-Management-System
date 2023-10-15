@@ -29,7 +29,7 @@ namespace gym_management_system_front_end.Models.Models.Interfaces
 
 
         // Add a supplement to a Gym
-        Task <GymSupplement> AddSupplementToGym(int gymId, int supplementId, UpdateGymSupplementDTO newGymSupplement);
+        Task<GymSupplement> AddSupplementToGym(int gymId, int supplementId, UpdateGymSupplementDTO newGymSupplement);
 
         // Delete all supplements in a Gym
         Task RemoveSupplementFromGym(int gymId, int supplementId);

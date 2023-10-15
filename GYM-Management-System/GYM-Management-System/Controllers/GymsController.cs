@@ -1,6 +1,13 @@
+
 ﻿using gym_management_system_front_end.Models.Models;
 using gym_management_system_front_end.Models.Models.DTOs;
 using gym_management_system_front_end.Models.Models.Interfaces;
+
+
+﻿using GYM_Management_System.Models;
+using GYM_Management_System.Models.DTOs;
+using GYM_Management_System.Models.Interfaces;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,8 +35,10 @@ namespace gym_management_system_front_end.Models.Controllers
         /// Retrieves a list of gyms for gym managers.
         /// </summary>
         /// <returns>A list of gyms managed by users with manager roles.</returns>
+        /// 
+
         //[Authorize(Roles = "Admin")]
-        [HttpGet("Manager")]
+        [HttpGet]
         public async Task<ActionResult<List<GetManagerGymDTO>>> GetGymManager()
         {
             return Ok(await _gym.GetGymManger());
@@ -84,6 +93,7 @@ namespace gym_management_system_front_end.Models.Controllers
         /// </summary>
         /// <param name="gym">The gym data to create.</param>
         /// <returns>The created gym data.</returns>
+
         //[Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<PostGymDTO>> PostGym(PostGymDTO gym)
@@ -116,7 +126,10 @@ namespace gym_management_system_front_end.Models.Controllers
         /// <param name="supplementId">The ID of the supplement to add.</param>
         /// <param name="newGymSupplement">The gym supplement data to add.</param>
         /// <returns>The added gym supplement data.</returns>
-       // [Authorize(Roles = "Admin, Employee")]
+        /// 
+
+        //[Authorize(Roles = "Admin, Employee")]
+
         [HttpPost]
         [Route("{gymId}/Supplement/{SupplementId}")]
         public async Task<ActionResult<string>> AddSupplementsToGym(int gymId, int SupplementId, UpdateGymSupplementDTO newGymSupplement)

@@ -16,7 +16,7 @@ namespace gym_management_system_front_end.Models.Controllers
     /// <summary>
     /// API controller for managing gym equipment in the gym management system.
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class GymEquipmentsController : ControllerBase
     {
@@ -37,7 +37,7 @@ namespace gym_management_system_front_end.Models.Controllers
         /// <returns>A list of gym equipment.</returns>
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EquipmentDTO>>> GetGymEquipments()
+        public async Task<ActionResult<IEnumerable<EquipmentDTO>>> Get()
         {
             var equipmentDTOs = await _equipment.GetGymEquipments();
             return Ok(equipmentDTOs);
@@ -62,7 +62,7 @@ namespace gym_management_system_front_end.Models.Controllers
         /// <param name="id">The ID of the gym equipment to update.</param>
         /// <param name="gymEquipment">The updated gym equipment data.</param>
         /// <returns>The updated gym equipment data.</returns>
-        [Authorize(Roles = "Admin, Employee")]
+       // [Authorize(Roles = "Admin, Employee")]
         [HttpPut("{id}")]
         public async Task<ActionResult<EquipmentDTO>> PutGymEquipment(int id, EquipmentDTOPutservice gymEquipment)
         {
@@ -81,7 +81,7 @@ namespace gym_management_system_front_end.Models.Controllers
         /// </summary>
         /// <param name="gymEquipment">The gym equipment data to create.</param>
         /// <returns>The created gym equipment data.</returns>
-        [Authorize(Roles = "Admin, Employee")]
+        //[Authorize(Roles = "Admin, Employee")]
         [HttpPost]
         public async Task<ActionResult<EquipmentDTO>> PostGymEquipment(CreatEquipmentDTO gymEquipment)
         {
@@ -95,7 +95,7 @@ namespace gym_management_system_front_end.Models.Controllers
         /// </summary>
         /// <param name="id">The ID of the gym equipment to delete.</param>
         /// <returns>No content if the gym equipment was successfully deleted.</returns>
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGymEquipment(int id)
         {

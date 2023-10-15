@@ -1,18 +1,20 @@
+
 ﻿using gym_management_system_front_end.Models.Models.DTOs;
 using gym_management_system_front_end.Models.Models.Interfaces;
 using gym_management_system_front_end.Models.Models.Services;
+
+﻿using GYM_Management_System.Models.DTOs;
+using GYM_Management_System.Models.Interfaces;
+
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System.Threading.Tasks;
 
 namespace gym_management_system_front_end.Models.Controllers
 {
     /// <summary>
     /// API controller for user-related operations in the gym management system.
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -32,7 +34,7 @@ namespace gym_management_system_front_end.Models.Controllers
         /// </summary>
         /// <param name="loginDto">The login data.</param>
         /// <returns>The user's data or Unauthorized if login fails.</returns>
-        [HttpPost("Login")]
+        [HttpPost]
         public async Task<ActionResult<UserDTO>> Login(LogInDTO loginDto)
         {
             var user = await userService.LogIn(loginDto.UserName, loginDto.Password);
@@ -49,7 +51,8 @@ namespace gym_management_system_front_end.Models.Controllers
         /// <param name="Data">The admin user registration data.</param>
         /// <returns>The registered admin user's data.</returns>
         //[Authorize(Roles = "Admin")]
-        [HttpPost("AdminRegister")]
+
+        [HttpPost]
         public async Task<ActionResult<UserDTO>> RegisterAdmin(RegisterAdminDTO Data)
         {
             var user = await userService.RegisterAdmin(Data, this.ModelState, User);
@@ -69,11 +72,12 @@ namespace gym_management_system_front_end.Models.Controllers
         /// </summary>
         /// <param name="Data">The employee user registration data.</param>
         /// <returns>The registered employee user's data.</returns>
-        [Authorize(Roles = "Admin, Employee")]
-        [HttpPost("EmployeeRegister")]
+        //[Authorize(Roles = "Admin, Employee")]
+
+        [HttpPost]
         public async Task<ActionResult<UserDTO>> RegisterEmployee(RegisterEmployeeDTO Data)
         {
-            var user = await userService.RegisterEmployee(Data, this.ModelState, User);
+            var user = await userService.RegisterEmployee(Data, this.ModelState);
             if (ModelState.IsValid)
             {
                 if (user == null)
@@ -90,8 +94,10 @@ namespace gym_management_system_front_end.Models.Controllers
         /// </summary>
         /// <param name="Data">The client user registration data.</param>
         /// <returns>The registered client user's data.</returns>
-       // [AllowAnonymous]
-        [HttpPost("ClientRegister")]
+
+        [AllowAnonymous]
+        [HttpPost]
+
         public async Task<ActionResult<UserDTO>> ClientRegister(RegisterClientDTO Data)
         {
             var user = await userService.RegisterUser(Data, this.ModelState, User);

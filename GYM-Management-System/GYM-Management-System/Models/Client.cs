@@ -2,6 +2,8 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace gym_management_system_front_end.Models.Models
+
+﻿namespace GYM_Management_System.Models
 {
     public class Client
     {
@@ -19,9 +21,9 @@ namespace gym_management_system_front_end.Models.Models
         public int SubscriptionTierID { get; set; }
 
         //N.P
-       //[ForeignKey("GymID")]
+        //[ForeignKey("GymID")]
         public Gym? Gym { get; set; }
-        
+
         public SubscriptionTier SubscriptionTierOBJ { get; set; }
     }
 }

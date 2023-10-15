@@ -3,9 +3,7 @@ using gym_management_system_front_end.Models.Models.DTOs;
 using gym_management_system_front_end.Models.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using NuGet.Common;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace gym_management_system_front_end.Models.Models.Services
 {
@@ -64,7 +62,7 @@ namespace gym_management_system_front_end.Models.Models.Services
         /// <param name="modelState">The ModelStateDictionary to store validation errors.</param>
         /// <param name="User">The ClaimsPrincipal user.</param>
         /// <returns>The registered admin user data.</returns>
-        public async Task<UserDTO> RegisterAdmin(RegisterAdminDTO registerAdminDTO, ModelStateDictionary modelState, ClaimsPrincipal User)
+        public async Task<UserDTO> RegisterAdmin(RegisterAdminDTO registerAdminDTO, ModelStateDictionary modelState, ClaimsPrincipal claimsPrincipal)
         {
             var user = new ApplicationUser()
             {
@@ -103,7 +101,7 @@ namespace gym_management_system_front_end.Models.Models.Services
         /// <param name="modelState">The ModelStateDictionary to store validation errors.</param>
         /// <param name="claimsPrincipal">The ClaimsPrincipal user.</param>
         /// <returns>The registered employee user data.</returns>
-        public async Task<UserDTO> RegisterEmployee(RegisterEmployeeDTO registerEmployeeDTO, ModelStateDictionary modelState, ClaimsPrincipal claimsPrincipal)
+        public async Task<UserDTO> RegisterEmployee(RegisterEmployeeDTO registerEmployeeDTO, ModelStateDictionary modelState)
         {
             var user = new ApplicationUser()
             {
