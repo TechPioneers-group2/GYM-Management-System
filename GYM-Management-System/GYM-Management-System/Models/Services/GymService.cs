@@ -1,12 +1,7 @@
 ﻿using GYM_Management_System.Data;
 using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Net;
-using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace GYM_Management_System.Models.Services
 {
@@ -194,7 +189,8 @@ namespace GYM_Management_System.Models.Services
                         {
                             Name = x.Supplements.Name,
                             Price = x.Supplements.Price,
-                            Description= x.Supplements.Description,
+                            Description = x.Supplements.Description,
+
                         }
                     }).ToList(),
                     subscriptiontiers = supptierDTO

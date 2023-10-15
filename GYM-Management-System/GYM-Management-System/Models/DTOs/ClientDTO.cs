@@ -11,7 +11,7 @@
         public bool InGym { get; set; }
         public DateTime SubscriptionDate { get; set; }
         public DateTime SubscriptionExpiry { get; set; }
-        
+
         //N.P
 
     }
@@ -41,5 +41,5 @@
         public DateTime SubscriptionDate { get; set; }
         public DateTime SubscriptionExpiry { get; set; }
     }
-    
+
 }

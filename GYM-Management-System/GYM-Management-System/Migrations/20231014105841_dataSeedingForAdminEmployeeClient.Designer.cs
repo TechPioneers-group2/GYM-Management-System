@@ -4,6 +4,7 @@ using GYM_Management_System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GYM_Management_System.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    partial class GymDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231014105841_dataSeedingForAdminEmployeeClient")]
+    partial class dataSeedingForAdminEmployeeClient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,16 +94,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2496ec85-dbe9-40e5-bdf9-8ab1dd978183",
+                            ConcurrencyStamp = "5a0b4455-2f58-4777-a919-b7c710332938",
                             Email = "adminUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMINUSER@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAELMTZ81F/I5UeThoeedZNBZPD8LMprcwnYpVIvyux+cX0qDppR0p+i+QpzBBEfWtSg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECTyAS/oMp0mH7AeThUuP0iNUBd5a+KhYMOF1YwVsxINlCbZI3Ct20uhzDEeqrUsPQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "788ff29d-8171-445b-b880-2ffbe8e94126",
+                            SecurityStamp = "1f2a9f5d-0247-4fc2-96b8-a054328b8877",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
@@ -108,16 +111,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "69d429ab-27d4-4f19-8caf-c0eebdaad0d5",
+                            ConcurrencyStamp = "63cf1300-13ce-40d3-a8ea-0a0105b3589f",
                             Email = "employeeUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "EMPLOYEEUSER@EXAMPLE.COM",
                             NormalizedUserName = "EMPLOYEE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPPbHW1iGLEVRmJVXJsE3Ze4hZ81OkTamoQoJTQmlPx3Qy0LLmJ+HvDJOcyfsYc5cg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKV+7tj6Pmc0kJTmknpzZT3Azl7/eNQk+gIVhrR4I82SOr3qM7UoDPJMKkQ5vkZLBw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "be50d559-4a89-4873-a042-53940f03b750",
+                            SecurityStamp = "fd2f7db5-8839-4a1f-b7cf-3b447eefa407",
                             TwoFactorEnabled = false,
                             UserName = "Employee"
                         },
@@ -125,16 +128,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "10dde043-55df-4cab-bf53-b46e1b8a28e1",
+                            ConcurrencyStamp = "b75196b6-2a17-4c13-82dd-5b2ca83c381a",
                             Email = "ClientUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENTUSER@EXAMPLE.COM",
                             NormalizedUserName = "CLIENT",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL1zPL0ATpeh+A49RFc6FvK60PLjGt9kczDSyX3BKUiccW56zJS+YeUdz8hICsm1Cg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAED1LP34E0AtQ+mPv8k7dCkOurKfRk7IHQIiQBb+YeIN4jbzV2nCzQFUdT09oOWoISw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fcc069fb-fa92-41e7-a618-4df511ce891f",
+                            SecurityStamp = "f9b97d9b-d2df-4da8-9be5-b65f89698e1e",
                             TwoFactorEnabled = false,
                             UserName = "Client"
                         });
@@ -186,8 +189,8 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             InGym = true,
                             Name = "Client",
-                            SubscriptionDate = new DateTime(2023, 10, 14, 21, 38, 58, 641, DateTimeKind.Local).AddTicks(8057),
-                            SubscriptionExpiry = new DateTime(2024, 4, 14, 21, 38, 58, 641, DateTimeKind.Local).AddTicks(8066),
+                            SubscriptionDate = new DateTime(2023, 10, 14, 13, 58, 41, 317, DateTimeKind.Local).AddTicks(1292),
+                            SubscriptionExpiry = new DateTime(2024, 4, 14, 13, 58, 41, 317, DateTimeKind.Local).AddTicks(1304),
                             SubscriptionTierID = 1,
                             UserId = "3"
                         });
@@ -341,10 +344,6 @@ namespace GYM_Management_System.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("img")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("GymEquipmentID");
 
                     b.HasIndex("GymID");
@@ -358,8 +357,7 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             Name = "bench press",
                             OutOfService = 0,
-                            Quantity = 2,
-                            img = "https://m.media-amazon.com/images/I/61cGWhpz3ZL._AC_UF1000,1000_QL80_.jpg"
+                            Quantity = 2
                         },
                         new
                         {
@@ -367,10 +365,7 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             Name = "treadmill",
                             OutOfService = 2,
-
-                            Quantity = 10,
-                            img = "https://shop.lifefitness.com/cdn/shop/products/clubseries-plus-treadmill-titanium-storm-se3hd-1000x1000_1800x1800.jpg?v=1678726811"
-
+                            Quantity = 10
                         },
                         new
                         {
@@ -378,17 +373,15 @@ namespace GYM_Management_System.Migrations
                             GymID = 2,
                             Name = "dumbbells",
                             OutOfService = 0,
-                            Quantity = 60,
-                            img = "https://www.bowflex.com/dw/image/v2/AAYW_PRD/on/demandware.static/-/Sites-nautilus-master-catalog/default/dwf21fb1cf/images/bfx/weights/100131/bowflex-selecttech-552-dumbbell-weights-hero.jpg?sw=2600&sh=1464&sm=fit"
-     },
+                            Quantity = 60
+                        },
                         new
                         {
                             GymEquipmentID = 5,
                             GymID = 2,
                             Name = "elliptical machine",
                             OutOfService = 0,
-                            Quantity = 3,
-                            img = "https://www.precorhomefitness.com/cdn/shop/products/precor-efx-635-elliptical_5000x.jpg?v=1686422733"
+                            Quantity = 3
                         });
                 });
 
@@ -472,10 +465,6 @@ namespace GYM_Management_System.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SupplementID"));
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -492,28 +481,24 @@ namespace GYM_Management_System.Migrations
                         new
                         {
                             SupplementID = 1,
-                            Description = "Whey protein is a mixture of proteins isolated from whey, which is the liquid part of milk that separates during cheese production.\r\nMilk actually contains two main types of protein: casein (80%) and whey (20%).",
                             Name = "Whey Protein Powder",
                             Price = "80 JD"
                         },
                         new
                         {
                             SupplementID = 2,
-                            Description = "Creatine is a combination of three different amino acids: glycine, arginine, and methionine.",
                             Name = "Creatine Monohydrate",
                             Price = "40 JD"
                         },
                         new
                         {
                             SupplementID = 3,
-                            Description = "Branched-Chain Amino Acids (BCAAs) are a group of three essential amino acids: leucine, isoleucine, and valine. They are called branched-chain because they are the only three amino acids to have a chain that branches off to one side.",
                             Name = "Branched-Chain Amino Acids (BCAAs)",
                             Price = "30 JD"
                         },
                         new
                         {
                             SupplementID = 4,
-                            Description = "A pre-workout blend is a class of powdered drink mixes that are consumed 20-30 minutes prior to the beginning of a rigorous workout to increase exercise performance. ",
                             Name = "Pre-Workout Blend",
                             Price = "50 JD"
                         });

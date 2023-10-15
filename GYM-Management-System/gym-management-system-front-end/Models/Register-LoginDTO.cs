@@ -1,4 +1,4 @@
-﻿namespace GYM_Management_System.Models.DTOs
+﻿namespace gym_management_system_front_end.Models
 {
     public class RegisterAdminDTO
     {
@@ -9,7 +9,6 @@
         public List<string> Roles { get; set; }
 
     }
-
     public class RegisterEmployeeDTO
     {
         public string UserName { get; set; }
@@ -26,7 +25,6 @@
         public string WorkingHours { get; set; }
         public string Salary { get; set; }
     }
-
     public class RegisterClientDTO
     {
         public string UserName { get; set; }
@@ -42,12 +40,17 @@
         public DateTime SubscriptionDate { get; set; }
         public DateTime SubscriptionExpiry { get; set; }
     }
-
     public class UserDTO
     {
         public string Id { get; set; }
         public string UserName { get; set; }
         public string Token { get; set; }
         public List<string> Roles { get; set; }
+    }
+
+    public class LogInDTO
+    {
+        public string UserName { get; set; }
+        public string Password { get; set; }
     }
 }

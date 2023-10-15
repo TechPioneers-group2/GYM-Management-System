@@ -1,15 +1,15 @@
-﻿namespace GYM_Management_System.Models
+﻿namespace gym_management_system_front_end
 {
-    public class GymEquipment
+    public class EquipmentViewModel
     {
         public int GymEquipmentID { get; set; }
         public int GymID { get; set; }
         public string Name { get; set; }
         public int OutOfService { get; set; }
         public int Quantity { get; set; }
-        public string img  { get; set; }
+        public string img { get; set; }
 
         //N.P
-        public Gym Gym { get; set; }
+      //  public Gym Gym { get; set; }
     }
 }
