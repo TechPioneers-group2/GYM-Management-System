@@ -1,5 +1,3 @@
-
-﻿using GYM_Management_System.Models;
 using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
