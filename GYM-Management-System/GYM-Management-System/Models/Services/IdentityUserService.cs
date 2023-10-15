@@ -3,9 +3,7 @@ using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using NuGet.Common;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace GYM_Management_System.Models.Services
 {
