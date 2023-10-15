@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Security.Claims;
 
 namespace GYM_Management_System.Models.Services
+
 {
     /// <summary>
     /// Service for managing user-related operations using Identity.

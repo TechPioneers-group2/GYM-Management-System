@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GYM_Management_System.Data;
-using GYM_Management_System.Models;
+﻿using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
-using GYM_Management_System.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GYM_Management_System.Controllers
 {
     /// <summary>
     /// API controller for managing supplements in the gym management system.
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class SupplementsController : ControllerBase
     {
@@ -72,7 +64,7 @@ namespace GYM_Management_System.Controllers
         /// <param name="id">The ID of the supplement to update.</param>
         /// <param name="supplement">The updated supplement data.</param>
         /// <returns>The updated supplement data.</returns>
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<ActionResult<SupplementDTO>> PutSupplement(int id, CreatSupplementDTO supplement)
         {
@@ -91,7 +83,7 @@ namespace GYM_Management_System.Controllers
         /// </summary>
         /// <param name="supplement">The supplement data to create.</param>
         /// <returns>The created supplement data.</returns>
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<SupplementDTO>> PostSupplement(CreatSupplementDTO supplement)
         {
@@ -111,7 +103,7 @@ namespace GYM_Management_System.Controllers
         /// </summary>
         /// <param name="id">The ID of the supplement to delete.</param>
         /// <returns>A message indicating the deletion status.</returns>
-        [Authorize(Policy = "deleteAdmin")]
+       // [Authorize(Policy = "deleteAdmin")]
         [HttpDelete("{id}")]
         public async Task<string> DeleteSupplement(int id)
         {

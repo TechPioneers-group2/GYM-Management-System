@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Security.Claims;
 
+
 namespace GYM_Management_System.Models.Interfaces
 {
     public interface IUser

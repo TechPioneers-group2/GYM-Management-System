@@ -2,12 +2,9 @@
 using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GYM_Management_System.Models.Services
+
 {
     /// <summary>
     /// Service class for managing supplements.
@@ -144,6 +141,7 @@ namespace GYM_Management_System.Models.Services
                 {
                     updatedSupplement.Name = updatedSupplementDTO.Name;
                     updatedSupplement.Price = updatedSupplementDTO.Price;
+                    updatedSupplement.Description = updatedSupplementDTO.Description;
                     _supplement.Entry(updatedSupplement).State = EntityState.Modified;
                     await _supplement.SaveChangesAsync();
 

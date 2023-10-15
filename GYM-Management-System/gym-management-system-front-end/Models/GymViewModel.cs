@@ -1,5 +1,3 @@
-
-﻿
 namespace gym_management_system_front_end.Models
 {
     public class GymViewModel
@@ -39,17 +37,17 @@ namespace gym_management_system_front_end.Models
 
     }
 
-    public class GymGetSubscriptionTierDTO
-    {
-        public string Name { get; set; }
-        public string Price { get; set; }
-    }
+    //public class GymGetSubscriptionTierDTO
+    //{
+    //    public string Name { get; set; }
+    //    public string Price { get; set; }
+    //}
 
     public class GetGymSupplementDTO
     {
         public string Name { get; set; }
         public string Price { get; set; }
-
+        public string Description { get; set; }
     }
 
     public class PostGymDTO
@@ -121,23 +119,8 @@ namespace gym_management_system_front_end.Models
         public List<GymGetSubscriptionTierDTO> subscriptiontiers { get; set; }
     }
 
-    public class PostClientDTO
-    {
-        public int ClientID { get; set; }
-        // Forgein Key
-        public int GymID { get; set; }
-        // Forgein Key
-        public int SubscriptionTierID { get; set; }
-        public string Name { get; set; }
-        public bool InGym { get; set; }
-        public DateTime SubscriptionDate { get; set; }
-        public DateTime SubscriptionExpiry { get; set; }
 
-        //N.P
 
-    }
-
-   
 
     public class GetUserGymDTO
     {
@@ -155,6 +138,5 @@ namespace gym_management_system_front_end.Models
         public List<GymGetSubscriptionTierDTO>? SubscriptionTier { get; set; }
         public List<GymSupplementDTO>? Supplements { get; set; }
     }
-
 }
 
