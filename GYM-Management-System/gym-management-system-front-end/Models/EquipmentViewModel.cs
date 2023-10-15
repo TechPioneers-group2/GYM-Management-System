@@ -1,4 +1,4 @@
-﻿namespace Gym_Mangement_systemMVC.Models
+﻿namespace gym_management_system_front_end
 {
     public class EquipmentViewModel
     {

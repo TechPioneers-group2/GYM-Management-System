@@ -1,10 +1,10 @@
-﻿using Gym_Mangement_systemMVC.Models;
+﻿using gym_management_system_front_end;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace Gym_Mangement_systemMVC.Controllers
+namespace gym_management_system_front_end.Controllers
 {
     public class EquipmentController : Controller
     {
