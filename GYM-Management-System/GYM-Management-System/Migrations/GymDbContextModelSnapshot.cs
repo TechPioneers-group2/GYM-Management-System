@@ -378,7 +378,7 @@ namespace GYM_Management_System.Migrations
                             OutOfService = 0,
                             Quantity = 60,
                             img = "https://www.bowflex.com/dw/image/v2/AAYW_PRD/on/demandware.static/-/Sites-nautilus-master-catalog/default/dwf21fb1cf/images/bfx/weights/100131/bowflex-selecttech-552-dumbbell-weights-hero.jpg?sw=2600&sh=1464&sm=fit"
-                        },
+     },
                         new
                         {
                             GymEquipmentID = 5,

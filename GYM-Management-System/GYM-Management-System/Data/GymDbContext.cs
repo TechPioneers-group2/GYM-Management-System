@@ -236,27 +236,6 @@ namespace GYM_Management_System.Data
                 RoleId = employeeRoleId
             });
 
-            var Client = new ApplicationUser
-            {
-                Id = "3",
-                UserName = "Client",
-                NormalizedUserName = "CLIENT",
-                Email = "ClientUser@example.com",
-                PhoneNumber = "1234567890",
-                NormalizedEmail = "CLIENTUSER@EXAMPLE.COM",
-                EmailConfirmed = true,
-                LockoutEnabled = false
-            };
-            Client.PasswordHash = hasher.HashPassword(Client, "Client@123");
-
-            modelBuilder.Entity<ApplicationUser>().HasData(Client);
-
-            var ClientRoleId = "Client";
-            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
-            {
-                UserId = Client.Id,
-                RoleId = ClientRoleId
-            });
 
             SeedRole(modelBuilder, "Admin", "createAdmin", "updateAdmin", "deleteAdmin", "readAdmin");
             SeedRole(modelBuilder, "Employee", "createEmployee", "updateEmployee", "readEmployee");
