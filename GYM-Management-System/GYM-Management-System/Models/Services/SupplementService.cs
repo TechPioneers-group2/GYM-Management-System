@@ -141,6 +141,7 @@ namespace GYM_Management_System.Models.Services
                 {
                     updatedSupplement.Name = updatedSupplementDTO.Name;
                     updatedSupplement.Price = updatedSupplementDTO.Price;
+                    updatedSupplement.Description = updatedSupplementDTO.Description;
                     _supplement.Entry(updatedSupplement).State = EntityState.Modified;
                     await _supplement.SaveChangesAsync();
 
