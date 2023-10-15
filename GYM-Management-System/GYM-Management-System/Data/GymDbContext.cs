@@ -99,25 +99,29 @@ namespace GYM_Management_System.Data
                  {
                      SupplementID = 1,
                      Name = "Whey Protein Powder",
-                     Price = "80 JD"
+                     Price = "80 JD",
+                     Description = "Whey protein is a mixture of proteins isolated from whey, which is the liquid part of milk that separates during cheese production.\r\nMilk actually contains two main types of protein: casein (80%) and whey (20%).",
                  },
                  new Supplement
                  {
                      SupplementID = 2,
                      Name = "Creatine Monohydrate",
-                     Price = "40 JD"
+                     Price = "40 JD",
+                     Description = "Creatine is a combination of three different amino acids: glycine, arginine, and methionine.",
                  },
                  new Supplement
                  {
                      SupplementID = 3,
                      Name = "Branched-Chain Amino Acids (BCAAs)",
-                     Price = "30 JD"
+                     Price = "30 JD",
+                     Description = "Branched-Chain Amino Acids (BCAAs) are a group of three essential amino acids: leucine, isoleucine, and valine. They are called branched-chain because they are the only three amino acids to have a chain that branches off to one side.",
                  },
                  new Supplement
                  {
                      SupplementID = 4,
                      Name = "Pre-Workout Blend",
-                     Price = "50 JD"
+                     Price = "50 JD",
+                     Description = "A pre-workout blend is a class of powdered drink mixes that are consumed 20-30 minutes prior to the beginning of a rigorous workout to increase exercise performance. ",
                  });
 
             modelBuilder.Entity<GymEquipment>().HasData(
@@ -128,7 +132,8 @@ namespace GYM_Management_System.Data
                     Name = "bench press",
                     Quantity = 2,
                     OutOfService = 0,
-                    img = "https://m.media-amazon.com/images/I/61cGWhpz3ZL._AC_UF1000,1000_QL80_.jpg",
+
+                    img="https://m.media-amazon.com/images/I/61cGWhpz3ZL._AC_UF1000,1000_QL80_.jpg", 
                 },
                 new GymEquipment
                 {
@@ -137,6 +142,7 @@ namespace GYM_Management_System.Data
                     Name = "treadmill",
                     Quantity = 10,
                     OutOfService = 2,
+                    img = "https://shop.lifefitness.com/cdn/shop/products/clubseries-plus-treadmill-titanium-storm-se3hd-1000x1000_1800x1800.jpg?v=1678726811",
                 },
                 new GymEquipment
                 {
@@ -145,7 +151,8 @@ namespace GYM_Management_System.Data
                     Name = "dumbbells",
                     Quantity = 60,
                     OutOfService = 0,
-                    img = "https://www.bowflex.com/dw/image/v2/AAYW_PRD/on/demandware.static/-/Sites-nautilus-master-catalog/default/dwf21fb1cf/images/bfx/weights/100131/bowflex-selecttech-552-dumbbell-weights-hero.jpg?sw=2600&sh=1464&sm=fit",
+
+                    img= "https://www.bowflex.com/dw/image/v2/AAYW_PRD/on/demandware.static/-/Sites-nautilus-master-catalog/default/dwf21fb1cf/images/bfx/weights/100131/bowflex-selecttech-552-dumbbell-weights-hero.jpg?sw=2600&sh=1464&sm=fit",
                 },
                 new GymEquipment
                 {
@@ -154,7 +161,8 @@ namespace GYM_Management_System.Data
                     Name = "elliptical machine",
                     Quantity = 3,
                     OutOfService = 0,
-                    img = "https://www.precorhomefitness.com/cdn/shop/products/precor-efx-635-elliptical_5000x.jpg?v=1686422733",
+
+                    img= "https://www.precorhomefitness.com/cdn/shop/products/precor-efx-635-elliptical_5000x.jpg?v=1686422733",
                 });
 
             modelBuilder.Entity<Employee>().HasData(

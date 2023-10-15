@@ -1,4 +1,6 @@
-﻿using GYM_Management_System.Models.DTOs;
+
+﻿using GYM_Management_System.Models;
+using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -86,7 +88,7 @@ namespace GYM_Management_System.Controllers
         /// <param name="gym">The gym data to create.</param>
         /// <returns>The created gym data.</returns>
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<PostGymDTO>> PostGym(PostGymDTO gym)
         {
@@ -121,6 +123,7 @@ namespace GYM_Management_System.Controllers
         /// 
 
         //[Authorize(Roles = "Admin, Employee")]
+
         [HttpPost]
         [Route("{gymId}/Supplement/{SupplementId}")]
         public async Task<ActionResult<string>> AddSupplementsToGym(int gymId, int SupplementId, UpdateGymSupplementDTO newGymSupplement)

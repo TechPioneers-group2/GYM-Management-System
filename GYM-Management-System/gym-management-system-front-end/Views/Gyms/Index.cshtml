@@ -62,9 +62,9 @@
                     @Html.DisplayFor(modelItem => item.Notification)
                 </td>
                 <td>
-                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.GymID">Edit</a> |
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.GymID">Edit</a> |
                     <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.GymID">Details</a> |
-                    <a class="btn btn-primary" href="@Url.Action("Delete", new {id = item.GymID}) ">Delete</a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", new {id = item.GymID}) ">Delete</a>
                 </td>
             </tr>
         }

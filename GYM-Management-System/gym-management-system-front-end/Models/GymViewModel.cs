@@ -1,4 +1,6 @@
-﻿namespace gym_management_system_front_end.Models
+
+﻿
+namespace gym_management_system_front_end.Models
 {
     public class GymViewModel
     {
@@ -168,5 +170,6 @@
         public List<GymGetSubscriptionTierDTO>? SubscriptionTier { get; set; }
         public List<GymSupplementDTO>? Supplements { get; set; }
     }
+
 }
 

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
+
 using System.Text;
 
 namespace gym_management_system_front_end.Controllers
@@ -16,7 +17,6 @@ namespace gym_management_system_front_end.Controllers
             _client = new HttpClient();
             _client.BaseAddress = baseAddress;
         }
-
         public IActionResult Index()
         {
             List<GymViewModel> gymList = new List<GymViewModel>();
@@ -150,6 +150,7 @@ namespace gym_management_system_front_end.Controllers
             string jwtToken = Request.Cookies["JWTToken"];
 
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken);
+
 
             var response = _client.PostAsync(_client.BaseAddress + "/PostGym", jsonContent).Result;
             var data = response.Content.ReadAsStringAsync().Result;
