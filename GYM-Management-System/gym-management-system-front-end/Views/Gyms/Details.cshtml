@@ -82,17 +82,27 @@
                     <li>
                         @supplement.Supplements.Name
                         @supplement.Supplements.Price
-
+                        @supplement.Quantity
                         <a asp-action="RemoveSupplementFromGym"
                            asp-route-gymId="@Model.GymID"
                            asp-route-supplementId="@supplement.SupplementID">
                             Remove
                         </a>
+                        <a asp-action="UpdateSupplementForGym" asp-controller="Gyms"
+                           asp-route-gymId="@Model.GymID"
+                           asp-route-supplementId="@supplement.SupplementID"
+                           asp-route-quantity="@supplement.Quantity">
+                            
+                            Update
+                        </a>
+
+
                     </li>
                 }
             </ul>
         }
     </div>
+
 </div>
 
 

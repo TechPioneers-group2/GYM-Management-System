@@ -176,13 +176,33 @@ namespace gym_management_system_front_end.Controllers
         }
 
         [HttpGet]
-        public IActionResult UpdateSupplementForGym(int gymId, int supplementId)
+        public IActionResult UpdateSupplementForGym(int gymId, int supplementId, int quantity)
         {
-            return View();
+            var gymSupplement = new GymSupplementViewModel
+            {
+                GymID = gymId,
+                SupplementID = supplementId,
+                Quantity = quantity
+            };
+
+            // Make a call to your API to get supplement info
+            var supplementResponse = _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplement/" + supplementId).Result;
+
+            if (supplementResponse.IsSuccessStatusCode)
+            {
+                string supplementData = supplementResponse.Content.ReadAsStringAsync().Result;
+                gymSupplement.Supplement = JsonConvert.DeserializeObject<SupplementViewModel>(supplementData);
+            }
+            else
+            {
+                TempData["error"] = "Update Process failed";
+            }
+
+            return View(gymSupplement);
         }
 
         [HttpPost]
-        public IActionResult UpdateSupplementForGym(GymSupplementViewModel updatedGymSupplement)
+        public IActionResult ConfirmUpdateSupplementForGym(GymSupplementViewModel updatedGymSupplement)
         {
             var supplementResponse = _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplement/" + updatedGymSupplement.SupplementID).Result;
 
@@ -191,7 +211,7 @@ namespace gym_management_system_front_end.Controllers
                 string supplementData = supplementResponse.Content.ReadAsStringAsync().Result;
                 updatedGymSupplement.Supplement = JsonConvert.DeserializeObject<SupplementViewModel>(supplementData);
 
-                var jsonContent = new StringContent(JsonConvert.SerializeObject(updatedGymSupplement), Encoding.UTF8, "application/json");
+                var jsonContent = new StringContent(JsonConvert.SerializeObject((UpdateGymSupplementDTO)updatedGymSupplement), Encoding.UTF8, "application/json");
                 var response = _client.PutAsync(_client.BaseAddress + "/UpdateSupplementForGym/" + updatedGymSupplement.GymID + "/Supplement/" + updatedGymSupplement.SupplementID, jsonContent).Result;
 
                 if (response.IsSuccessStatusCode)
@@ -210,6 +230,7 @@ namespace gym_management_system_front_end.Controllers
             }
             return RedirectToAction("Index", "Gyms");
         }
+
 
 
         [HttpGet]
