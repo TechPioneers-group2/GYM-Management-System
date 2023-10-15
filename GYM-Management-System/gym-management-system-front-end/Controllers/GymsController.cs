@@ -207,9 +207,7 @@ namespace gym_management_system_front_end.Controllers
             {
                 ModelState.AddModelError("", "Failed to retrieve supplement details. Please try again.");
                 TempData["error"] = "Update Process failed";
-                return View(updatedGymSupplement);
             }
-
             return RedirectToAction("Index", "Gyms");
         }
 
