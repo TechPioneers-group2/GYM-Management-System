@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GYM_Management_System.Data;
-using GYM_Management_System.Models;
+﻿using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
-using GYM_Management_System.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GYM_Management_System.Controllers
 {

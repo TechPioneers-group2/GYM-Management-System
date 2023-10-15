@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -8,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GYM_Management_System.Migrations
 {
     /// <inheritdoc />
-    public partial class INITIALandFINAL : Migration
+    public partial class seeddata : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -92,7 +91,8 @@ namespace GYM_Management_System.Migrations
                     SupplementID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -314,9 +314,20 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "admin", "00000000-0000-0000-0000-000000000000", "Admin", "ADMIN" },
-                    { "client", "00000000-0000-0000-0000-000000000000", "Client", "CLIENT" },
-                    { "employee", "00000000-0000-0000-0000-000000000000", "Employee", "EMPLOYEE" }
+                    { "021f08c5-7a73-487e-8cf2-aa9bc7380629", "00000000-0000-0000-0000-000000000000", "Client", "CLIENT" },
+                    { "03ada377-c8b1-4f00-af42-5ce2a160f78f", "00000000-0000-0000-0000-000000000000", "Employee", "EMPLOYEE" },
+                    { "7e7dbc95-e860-42c6-81f2-f0cb42d97352", "00000000-0000-0000-0000-000000000000", "Admin", "ADMIN" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "1", 0, "1887ee94-cfb2-4467-87e4-4ab27fb0efed", "adminUser@example.com", true, false, null, "ADMINUSER@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAEGR/NTOFqUQRCgSf8BE0aT8SyVFMMVmLFnhJcwRY5PxcbSdHLHf2XtbT2g7k+L7jCQ==", "1234567890", false, "ef0bb341-fc6b-454e-9094-ec7840a36e06", false, "Admin" },
+                    { "2", 0, "a8fcc4ee-7d6d-4a90-87e4-dce69c81130c", "employeeUser@example.com", true, false, null, "EMPLOYEEUSER@EXAMPLE.COM", "EMPLOYEE", "AQAAAAIAAYagAAAAEJXaC6AjsFkv2v6msTkDnjCRQLQpPBl/HSXNYD4t8F+k2OYT7Y3PHN3j7fUln00w9g==", "1234567890", false, "92fbd94c-0102-4a74-a98e-bfec0ba8e5bc", false, "Employee" },
+                    { "3", 0, "f2412089-4a4c-4cb4-83b9-c175652186dd", "ClientUser@example.com", true, false, null, "CLIENTUSER@EXAMPLE.COM", "CLIENT", "AQAAAAIAAYagAAAAEI5HKXshEHpN4vxCBVXCAgSDf8p5zvIH9iOE3talsTv8ZV6ukU1ahwpRDEky1Byxpg==", "1234567890", false, "071d0df4-396d-4948-977d-76e9110047cf", false, "Client" },
+                    { "4", 0, "1a4a10fb-d3e3-45f9-825b-49d1bc054d0d", "Client2User@example.com", true, false, null, "CLIENT2USER@EXAMPLE.COM", "CLIENT2", "AQAAAAIAAYagAAAAEL/EYZJPxmt517Bzx2e6dI8P7U0Hmm3gNJFn1qWg+/8U0zqYg7SWqNqP3lDd8pfv+g==", "1234567890", false, "23814a43-5e60-4231-8d89-71b670611053", false, "Client2" }
                 });
 
             migrationBuilder.InsertData(
@@ -326,7 +337,7 @@ namespace GYM_Management_System.Migrations
                 {
                     { 1, "5AM-12PM", "Amman - University Street - Building 25", 1, "125", "WillPower - Amman", "Everything ok" },
                     { 2, "6AM-12PM", "Zarqa - 36th Street - Building 20", 1, "100", "WillPower - Zarqa", "Everything ok" },
-                    { 3, "6AM-12PM", "Irbid - Yarmouk University Street - Building 30", 0, "150", "WillPower - Irbid", "Everything ok" }
+                    { 3, "6AM-12PM", "Irbid - Yarmouk University Street - Building 30", 0, "150", "WillPower - Irbid", "Under maintenance until 9-9-2023 AD" }
                 });
 
             migrationBuilder.InsertData(
@@ -342,14 +353,40 @@ namespace GYM_Management_System.Migrations
 
             migrationBuilder.InsertData(
                 table: "Supplements",
-                columns: new[] { "SupplementID", "Name", "Price" },
+                columns: new[] { "SupplementID", "Description", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1, "Whey Protein Powder", "80 JD" },
-                    { 2, "Creatine Monohydrate", "40 JD" },
-                    { 3, "Branched-Chain Amino Acids (BCAAs)", "30 JD" },
-                    { 4, "Pre-Workout Blend", "50 JD" }
+                    { 1, "Whey protein is a mixture of proteins isolated from whey, which is the liquid part of milk that separates during cheese production.\r\nMilk actually contains two main types of protein: casein (80%) and whey (20%).", "Whey Protein Powder", "80 JD" },
+                    { 2, "Creatine is a combination of three different amino acids: glycine, arginine, and methionine.", "Creatine Monohydrate", "40 JD" },
+                    { 3, "Branched-Chain Amino Acids (BCAAs) are a group of three essential amino acids: leucine, isoleucine, and valine. They are called branched-chain because they are the only three amino acids to have a chain that branches off to one side.", "Branched-Chain Amino Acids (BCAAs)", "30 JD" },
+                    { 4, "A pre-workout blend is a class of powdered drink mixes that are consumed 20-30 minutes prior to the beginning of a rigorous workout to increase exercise performance.", "Pre-Workout Blend", "50 JD" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoleClaims",
+                columns: new[] { "Id", "ClaimType", "ClaimValue", "RoleId" },
+                values: new object[,]
+                {
+                    { 10, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createAdmin", "7e7dbc95-e860-42c6-81f2-f0cb42d97352" },
+                    { 11, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateAdmin", "7e7dbc95-e860-42c6-81f2-f0cb42d97352" },
+                    { 12, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "deleteAdmin", "7e7dbc95-e860-42c6-81f2-f0cb42d97352" },
+                    { 13, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readAdmin", "7e7dbc95-e860-42c6-81f2-f0cb42d97352" },
+                    { 14, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createEmployee", "03ada377-c8b1-4f00-af42-5ce2a160f78f" },
+                    { 15, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateEmployee", "03ada377-c8b1-4f00-af42-5ce2a160f78f" },
+                    { 16, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readEmployee", "03ada377-c8b1-4f00-af42-5ce2a160f78f" },
+                    { 17, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateClient", "021f08c5-7a73-487e-8cf2-aa9bc7380629" },
+                    { 18, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readClient", "021f08c5-7a73-487e-8cf2-aa9bc7380629" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Clients",
+                columns: new[] { "ClientID", "GymID", "InGym", "Name", "SubscriptionDate", "SubscriptionExpiry", "SubscriptionTierID", "UserId" },
+                values: new object[] { 1, 1, true, "Client", new DateTime(2023, 10, 14, 14, 29, 26, 159, DateTimeKind.Local).AddTicks(9004), new DateTime(2024, 4, 14, 14, 29, 26, 159, DateTimeKind.Local).AddTicks(9025), 1, "3" });
+
+            migrationBuilder.InsertData(
+                table: "Employees",
+                columns: new[] { "EmployeeID", "GymID", "IsAvailable", "JobDescription", "Name", "Salary", "UserId", "WorkingDays", "WorkingHours" },
+                values: new object[] { 1, 1, true, "Demo", "Employee", "$300", "2", "S M T W T F S", "9AM - 5PM" });
 
             migrationBuilder.InsertData(
                 table: "GymEquipments",
@@ -357,8 +394,8 @@ namespace GYM_Management_System.Migrations
                 values: new object[,]
                 {
                     { 2, 1, "bench press", 0, 2 },
-                    { 3, 1, "treadmill", 1, 5 },
-                    { 4, 2, "dumbbells", 0, 10 },
+                    { 3, 1, "treadmill", 2, 10 },
+                    { 4, 2, "dumbbells", 0, 60 },
                     { 5, 2, "elliptical machine", 0, 3 }
                 });
 

@@ -1,12 +1,11 @@
 ﻿using GYM_Management_System.Models.DTOs;
-using GYM_Management_System.Models;
 
 namespace GYM_Management_System.Models.Interfaces
 {
     public interface IClient
     {
         // Create a Client
-        Task<Client> CreateClient(int gymid,PostClientDTO client);
+        Task<Client> CreateClient(int gymid, PostClientDTO client);
 
         // GET All Clients
         Task<List<GetClientDTO>> GetClients(int gymid);

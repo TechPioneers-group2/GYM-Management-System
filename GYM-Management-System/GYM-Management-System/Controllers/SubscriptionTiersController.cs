@@ -1,22 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using GYM_Management_System.Data;
-using GYM_Management_System.Models;
+﻿using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
-using GYM_Management_System.Models.DTOs;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GYM_Management_System.Controllers
 {
     /// <summary>
     /// API controller for managing subscription tiers in the gym management system.
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class SubscriptionTiersController : ControllerBase
     {
@@ -35,7 +26,7 @@ namespace GYM_Management_System.Controllers
         /// Retrieves a list of subscription tiers (accessible to all users).
         /// </summary>
         /// <returns>A list of subscription tiers.</returns>
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetSubscriptionTierDTO>>> GetSubscriptionTiers()
         {
@@ -47,7 +38,7 @@ namespace GYM_Management_System.Controllers
         /// </summary>
         /// <param name="id">The ID of the subscription tier.</param>
         /// <returns>The subscription tier details.</returns>
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<GetSubscriptionTierDTO>> GetSubscriptionTier(int id)
         {
@@ -60,7 +51,7 @@ namespace GYM_Management_System.Controllers
         /// <param name="id">The ID of the subscription tier to update.</param>
         /// <param name="subscriptionTier">The updated subscription tier data.</param>
         /// <returns>The updated subscription tier data.</returns>
-        [Authorize(Roles = "Admin, Employee")]
+       // [Authorize(Roles = "Admin, Employee")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSubscriptionTier(int id, UpdateSubscriptionTierDTO subscriptionTier)
         {
@@ -73,7 +64,7 @@ namespace GYM_Management_System.Controllers
         /// </summary>
         /// <param name="subscriptionTier">The subscription tier data to create.</param>
         /// <returns>The created subscription tier data.</returns>
-        [Authorize(Roles = "Admin")]
+      //  [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<PostSubscriptionTierDTO>> PostSubscriptionTier(CreatSubscriptionTierDTO subscriptionTier)
         {
@@ -87,7 +78,7 @@ namespace GYM_Management_System.Controllers
         /// </summary>
         /// <param name="id">The ID of the subscription tier to delete.</param>
         /// <returns>No content if the subscription tier was successfully deleted.</returns>
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSubscriptionTier(int id)
         {

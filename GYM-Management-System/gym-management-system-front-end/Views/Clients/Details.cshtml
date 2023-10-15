@@ -1,0 +1,78 @@
+﻿@model gym_management_system_front_end.Models.ClientViewModel
+@*@{
+    // Access properties from GetClientDTO using ViewBag
+    var getDto = ViewBag.GetClientDTO as gym_management_system_front_end.Models.GetClientDTO;
+}*@
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ClientViewModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ClientID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ClientID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GymID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GymID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.InGym)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.InGym)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SubscriptionDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SubscriptionDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SubscriptionExpiry)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SubscriptionExpiry)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SubscriptionTierID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SubscriptionTierID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a  asp-action="Edit" class="btn btn-warning" asp-route-clientId="@Model.ClientID" asp-route-gymId="@Model.GymID">
+        Edit
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+        </svg>
+    </a>
+    <a  class="btn btn-outline-danger" asp-action="Index" asp-route-gymid="@Model.GymID">Back to List</a>
+
+
+</div>

@@ -2,12 +2,9 @@
 using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GYM_Management_System.Models.Services
+
 {
     /// <summary>
     /// Service class for managing supplements.
