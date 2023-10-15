@@ -15,7 +15,7 @@ namespace GYM_Management_System.Models.DTOs
 
         //NP
 
-        public List<EquipmentDTOPut>? Equipments { get; set; }
+        public List<EquipmentDTO>? Equipments { get; set; }
         public List<GymGetSubscriptionTierDTO>? SubscriptionTier { get; set; }
         public List<GymSupplementDTO>? Supplements { get; set; }
     }
@@ -33,7 +33,7 @@ namespace GYM_Management_System.Models.DTOs
         //NP
 
         public List<GymSupplementDTO>? Supplements { get; set; }
-        public List<EquipmentDTOPut> Equipments { get; set; }
+        public List<EquipmentDTO> Equipments { get; set; }
         public List<PostClientDTO> clients { get; set; }
         public List<GetEmployeesByGymId> employees { get; set; }
         public List<GymGetSubscriptionTierDTO> subscriptiontiers { get; set; }
