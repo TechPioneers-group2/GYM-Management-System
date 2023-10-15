@@ -1,6 +1,4 @@
-﻿using gym_management_system_front_end.Models.Models;
-
-namespace gym_management_system_front_end.Models
+﻿namespace gym_management_system_front_end.Models
 {
     public class SubscriptionTiersViewModel
     {
@@ -8,7 +6,7 @@ namespace gym_management_system_front_end.Models
         public string Name { get; set; }
         public string Price { get; set; }
         public int Length { get; set; }
-        public List<Client>? Clients { get; set; }
+        public List<GetClientDTO>? Clients { get; set; }
     }
     public class GetSubscriptionTierDTO
     {

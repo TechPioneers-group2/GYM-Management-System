@@ -1,12 +1,9 @@
-﻿using gym_management_system_front_end.Models.Data;
-using gym_management_system_front_end.Models.Models.DTOs;
-using gym_management_system_front_end.Models.Models.Interfaces;
+﻿using gym_management_system.Models.Data;
+using gym_management_system.Models.Models.DTOs;
+using gym_management_system.Models.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
-namespace gym_management_system_front_end.Models.Models.Services
+namespace gym_management_system.Models.Models.Services
 {
     /// <summary>
     /// Service for managing employee-related operations in the gym management system.
@@ -188,21 +185,21 @@ namespace gym_management_system_front_end.Models.Models.Services
                 _db.Entry(employee).State = EntityState.Modified;
                 await _db.SaveChangesAsync();
 
-				EmployeeDTO employeeDTO = new EmployeeDTO()
-				{
-					EmployeeID = employeeId,
-					GymID = updateEmployeeDTO.GymID,
-					Name = updateEmployeeDTO.Name,
-					JobDescription = updateEmployeeDTO.JobDescription,
-					IsAvailable = updateEmployeeDTO.IsAvailable,
-					WorkingDays = updateEmployeeDTO.WorkingDays,
-					WorkingHours = updateEmployeeDTO.WorkingHours,
-					Salary = updateEmployeeDTO.Salary,
-				};
+                EmployeeDTO employeeDTO = new EmployeeDTO()
+                {
+                    EmployeeID = employeeId,
+                    GymID = updateEmployeeDTO.GymID,
+                    Name = updateEmployeeDTO.Name,
+                    JobDescription = updateEmployeeDTO.JobDescription,
+                    IsAvailable = updateEmployeeDTO.IsAvailable,
+                    WorkingDays = updateEmployeeDTO.WorkingDays,
+                    WorkingHours = updateEmployeeDTO.WorkingHours,
+                    Salary = updateEmployeeDTO.Salary,
+                };
 
-				return employeeDTO;
-			}
-			return null;
-		}
-	}
+                return employeeDTO;
+            }
+            return null;
+        }
+    }
 }

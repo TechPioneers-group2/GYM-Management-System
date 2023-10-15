@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using gym_management_system.Models.Models.DTOs;
+using gym_management_system.Models.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using gym_management_system_front_end.Models.Data;
-using gym_management_system_front_end.Models.Models;
-using gym_management_system_front_end.Models.Models.Interfaces;
-using gym_management_system_front_end.Models.Models.DTOs;
-using Microsoft.AspNetCore.Authorization;
 
-namespace gym_management_system_front_end.Models.Controllers
+namespace gym_management_system.Models.Controllers
 {
     /// <summary>
     /// API controller for managing subscription tiers in the gym management system.

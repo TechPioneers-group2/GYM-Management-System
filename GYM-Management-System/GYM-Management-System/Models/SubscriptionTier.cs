@@ -1,4 +1,6 @@
-﻿namespace gym_management_system_front_end.Models.Models
+﻿using GYM_Management_System.Models;
+
+namespace gym_management_system.Models
 {
     public class SubscriptionTier
     {

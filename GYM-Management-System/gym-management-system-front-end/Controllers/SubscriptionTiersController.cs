@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
-using gym_management_system_front_end.Models;
-using gym_management_system_front_end.Models.Models;
-using gym_management_system_front_end.Models.Models.Interfaces;
+﻿using gym_management_system_front_end.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Text;
 
 public class SubscriptionTiersController : Controller
 {
@@ -79,7 +72,7 @@ public class SubscriptionTiersController : Controller
 
             // Send the HTTP DELETE request
             HttpResponseMessage response = await _client.DeleteAsync(deleteUrl);
-            
+
 
             // Check if the request was successful
             if (response.IsSuccessStatusCode)
@@ -104,10 +97,10 @@ public class SubscriptionTiersController : Controller
 
 
     [HttpGet]
-    public  IActionResult Edit(int id)
+    public IActionResult Edit(int id)
     {
         CreatSubscriptionTierDTO model = new CreatSubscriptionTierDTO();
-        HttpResponseMessage response = _client.GetAsync( _client.BaseAddress + "/GetSubscriptionTier" + id).Result;
+        HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/GetSubscriptionTier" + id).Result;
         if (response.IsSuccessStatusCode)
         {
             string Data = response.Content.ReadAsStringAsync().Result;

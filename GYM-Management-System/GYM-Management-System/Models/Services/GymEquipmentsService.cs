@@ -1,12 +1,9 @@
-﻿using gym_management_system_front_end.Models.Data;
-using gym_management_system_front_end.Models.Models.DTOs;
-using gym_management_system_front_end.Models.Models.Interfaces;
+﻿using gym_management_system.Models.Data;
+using gym_management_system.Models.Models.DTOs;
+using gym_management_system.Models.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace gym_management_system_front_end.Models.Models.Services
+namespace gym_management_system.Models.Models.Services
 {
     /// <summary>
     /// Service for managing gym equipment-related operations in the gym management system.
@@ -37,7 +34,7 @@ namespace gym_management_system_front_end.Models.Models.Services
                 Name = equipmentDTO.Name,
                 OutOfService = equipmentDTO.OutOfService,
                 GymID = equipmentDTO.GymID,
-                img=equipmentDTO.img 
+                img = equipmentDTO.img
             };
 
             await _gymDbContext.GymEquipments.AddAsync(newEquipment);
@@ -83,8 +80,8 @@ namespace gym_management_system_front_end.Models.Models.Services
                 Quantity = E.Quantity,
                 Name = E.Name,
                 OutOfService = E.OutOfService,
-                GymID = E.GymID ,
-                img=E.img
+                GymID = E.GymID,
+                img = E.img
             }).FirstOrDefaultAsync(e => e.GymEquipmentID == GymEquipmentID);
 
             return Equipment;
@@ -103,7 +100,7 @@ namespace gym_management_system_front_end.Models.Models.Services
                 Name = E.Name,
                 OutOfService = E.OutOfService,
                 GymID = E.GymID,
-                img=E.img,
+                img = E.img,
             }).ToListAsync();
 
             return allEquipment;
@@ -134,7 +131,7 @@ namespace gym_management_system_front_end.Models.Models.Services
                     Name = Selected.Name,
                     OutOfService = Selected.OutOfService,
                     GymID = Selected.GymID,
-                    img=Selected.img,
+                    img = Selected.img,
 
                 };
 

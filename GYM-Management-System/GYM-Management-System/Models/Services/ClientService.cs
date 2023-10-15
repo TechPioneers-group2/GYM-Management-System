@@ -1,14 +1,10 @@
-﻿using gym_management_system_front_end.Models.Data;
-using gym_management_system_front_end.Models.Models.DTOs;
-using gym_management_system_front_end.Models.Models.Interfaces;
-using gym_management_system_front_end.Models.Models.Services;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using gym_management_system.Models.Data;
+using gym_management_system.Models.Models.DTOs;
+using gym_management_system.Models.Models.Interfaces;
+using GYM_Management_System.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
-namespace gym_management_system_front_end.Models.Models.Services
+namespace gym_management_system.Models.Models.Services
 {
     /// <summary>
     /// Service for managing client-related operations in the gym management system.
@@ -142,12 +138,12 @@ namespace gym_management_system_front_end.Models.Models.Services
         /// <returns>The updated client's data.</returns>
         public async Task<GetClientDTO> UpdateClient(int clientid, int gymid, UpdateClientDTO client)
         {
-                var subscriptionTier = await _context.SubscriptionTiers
-                .FirstOrDefaultAsync(tr => tr.SubscriptionTierID == client.SubscriptionTierID);
+            var subscriptionTier = await _context.SubscriptionTiers
+            .FirstOrDefaultAsync(tr => tr.SubscriptionTierID == client.SubscriptionTierID);
 
-                var currentTime = DateTime.UtcNow;
+            var currentTime = DateTime.UtcNow;
 
-                var updateExpiry = DateTime.UtcNow.AddMonths(subscriptionTier.Length);
+            var updateExpiry = DateTime.UtcNow.AddMonths(subscriptionTier.Length);
 
             GetClientDTO returnedClient = new GetClientDTO();
             var currentClient = await _context.Clients.FirstOrDefaultAsync(c => c.ClientID == clientid && c.GymID == gymid);

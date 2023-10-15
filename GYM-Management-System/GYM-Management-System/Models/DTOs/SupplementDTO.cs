@@ -1,4 +1,4 @@
-﻿namespace gym_management_system_front_end.Models.Models.DTOs
+﻿namespace gym_management_system.Models.Models.DTOs
 {
     public class SupplementDTO
     {

@@ -1,8 +1,6 @@
-﻿using gym_management_system_front_end;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
-using System.Text.Json.Serialization;
 
 namespace gym_management_system_front_end.Controllers
 {
@@ -119,11 +117,11 @@ namespace gym_management_system_front_end.Controllers
             return View(equipment);
         }
         [HttpPost]
-        public IActionResult Delete(int id )
+        public IActionResult Delete(int id)
         {
             if (ModelState.IsValid)
             {
-               
+
                 var response = _httpClient.DeleteAsync($"{_httpClient.BaseAddress}/GymEquipments/DeleteGymEquipment/{id}").Result;
 
                 if (response.IsSuccessStatusCode)

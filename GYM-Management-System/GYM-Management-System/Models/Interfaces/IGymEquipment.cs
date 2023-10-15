@@ -1,6 +1,6 @@
-﻿using gym_management_system_front_end.Models.Models.DTOs;
+﻿using gym_management_system.Models.Models.DTOs;
 
-namespace gym_management_system_front_end.Models.Models.Interfaces
+namespace gym_management_system.Models.Models.Interfaces
 {
     public interface IGymEquipment
     {

@@ -1,4 +1,4 @@
-﻿namespace gym_management_system_front_end.Models.Models
+﻿namespace gym_management_system.Models
 {
     public class Employee
     {

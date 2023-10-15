@@ -1,22 +1,10 @@
-
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using gym_management_system_front_end.Models.Data;
-using gym_management_system_front_end.Models.Models;
-using gym_management_system_front_end.Models.Models.Interfaces;
-using gym_management_system_front_end.Models.Models.DTOs;
-﻿using GYM_Management_System.Models;
-using GYM_Management_System.Models.DTOs;
-using GYM_Management_System.Models.Interfaces;
+using gym_management_system.Models.Models.DTOs;
+using gym_management_system.Models.Models.Interfaces;
+using GYM_Management_System.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace gym_management_system_front_end.Models.Controllers
+namespace gym_management_system.Models.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
@@ -74,9 +62,9 @@ namespace gym_management_system_front_end.Models.Controllers
         /// <returns>The updated client data.</returns>
 
 
-        
-        
-       // [Authorize(Roles = "Admin, Employee")]
+
+
+        // [Authorize(Roles = "Admin, Employee")]
 
         [HttpPut("{clientid}/gym/{gymid}")]
         public async Task<IActionResult> PutClient(int clientid, int gymid, UpdateClientDTO client)

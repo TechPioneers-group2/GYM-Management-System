@@ -56,7 +56,7 @@ namespace gym_management_system_front_end.Models
         public DateTime SubscriptionExpiry { get; set; }
 
         //N.P
-       // public ClientGetSubscriptionTierDTO subscriptionTier { get; set; }
+        // public ClientGetSubscriptionTierDTO subscriptionTier { get; set; }
     }
 
 

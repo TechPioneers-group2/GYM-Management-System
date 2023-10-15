@@ -1,11 +1,9 @@
-﻿using GYM_Management_System.Models.DTOs;
+﻿using gym_management_system.Models.Models.DTOs;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Security.Claims;
 
-using gym_management_system_front_end.Models.Models.DTOs;
 
-
-namespace gym_management_system_front_end.Models.Models.Interfaces
+namespace gym_management_system.Models.Models.Interfaces
 {
     public interface IUser
     {

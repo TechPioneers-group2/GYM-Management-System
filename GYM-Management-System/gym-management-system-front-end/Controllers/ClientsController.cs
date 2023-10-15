@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using gym_management_system_front_end.Models.Models;
-using gym_management_system_front_end.Models;
+﻿using gym_management_system_front_end.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Microsoft.AspNetCore.Identity;
-using gym_management_system_front_end.Models.Models.Interfaces;
-using gym_management_system_front_end.Models.Models.DTOs;
-using UpdateClientDTO = gym_management_system_front_end.Models.Models.DTOs.UpdateClientDTO;
+using System.Text;
 
 namespace gym_management_system_front_end.Controllers
 {
@@ -19,14 +10,12 @@ namespace gym_management_system_front_end.Controllers
         private Uri baseAddress = new Uri("https://localhost:7200/api/Clients");
 
         private readonly HttpClient _client;
-        
+
 
         public ClientsController()
         {
             _client = new HttpClient();
             _client.BaseAddress = baseAddress;
-            
-           
         }
 
         [HttpGet]
@@ -90,10 +79,10 @@ namespace gym_management_system_front_end.Controllers
             return View(model);
         }
 
-       
+
 
         [HttpPost]
-        
+
         public async Task<IActionResult> Edit(int clientID, int gymID, UpdateClientDTO clientDTO)
         {
             string data = JsonConvert.SerializeObject(clientDTO);

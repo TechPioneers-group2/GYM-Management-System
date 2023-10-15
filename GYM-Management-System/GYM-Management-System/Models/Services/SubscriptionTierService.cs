@@ -1,11 +1,9 @@
-﻿using gym_management_system_front_end.Models.Data;
-using gym_management_system_front_end.Models.Models.DTOs;
-using gym_management_system_front_end.Models.Models.Interfaces;
+﻿using gym_management_system.Models.Data;
+using gym_management_system.Models.Models.DTOs;
+using gym_management_system.Models.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
-namespace gym_management_system_front_end.Models.Models.Services
+namespace gym_management_system.Models.Models.Services
 {
     /// <summary>
     /// Service class for managing subscription tiers.

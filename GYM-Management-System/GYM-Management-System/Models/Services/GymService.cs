@@ -1,13 +1,9 @@
-﻿using gym_management_system_front_end.Models.Data;
-using gym_management_system_front_end.Models.Models.DTOs;
-using gym_management_system_front_end.Models.Models.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-﻿using GYM_Management_System.Data;
-using GYM_Management_System.Models.DTOs;
-using GYM_Management_System.Models.Interfaces;
+﻿using gym_management_system.Models.Data;
+using gym_management_system.Models.Models.DTOs;
+using gym_management_system.Models.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace gym_management_system_front_end.Models.Models.Services
+namespace gym_management_system.Models.Models.Services
 {
     /// <summary>
     /// Service class for managing Gym operations.
@@ -254,7 +250,7 @@ namespace gym_management_system_front_end.Models.Models.Services
                         }).ToList(),
                         CurrentCapacity = _gymDbContext.Clients.Count(x => x.GymID == Gm.GymID && x.InGym == true),
                         SubscriptionTier = suppTierList
-                            .Select(suppTier => new GymGetSubscriptionTierDTO
+                            .Select(suppTier => new GymGetSubscriptionTierDTO()
                             {
                                 Name = suppTier.Name,
                                 Price = suppTier.Price
