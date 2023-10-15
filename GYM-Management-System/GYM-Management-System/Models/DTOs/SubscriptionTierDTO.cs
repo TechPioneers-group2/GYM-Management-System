@@ -1,4 +1,4 @@
-﻿namespace GYM_Management_System.Models.DTOs
+﻿namespace gym_management_system_front_end.Models.Models.DTOs
 {
     public class GetSubscriptionTierDTO
     {

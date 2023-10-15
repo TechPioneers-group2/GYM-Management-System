@@ -1,14 +1,14 @@
-﻿using GYM_Management_System.Models.DTOs;
-using GYM_Management_System.Models;
-using GYM_Management_System.Models.Services;
+﻿using gym_management_system_front_end.Models.Models.DTOs;
+using gym_management_system_front_end.Models.Models;
+using gym_management_system_front_end.Models.Models.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GYM_Management_System.Data;
+using gym_management_system_front_end.Models.Data;
 
-using GYM_Management_System.Models.Interfaces;
+using gym_management_system_front_end.Models.Models.Interfaces;
 using Moq;
 using System.Net;
 using System.Runtime.Intrinsics.Arm;

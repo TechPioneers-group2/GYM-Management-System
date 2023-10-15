@@ -1,3 +1,8 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace gym_management_system_front_end.Models.Models
+
 ﻿namespace GYM_Management_System.Models
 {
     public class Client

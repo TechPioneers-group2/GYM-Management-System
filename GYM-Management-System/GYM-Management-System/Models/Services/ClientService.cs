@@ -1,14 +1,14 @@
-﻿using GYM_Management_System.Data;
-using GYM_Management_System.Models.DTOs;
-using GYM_Management_System.Models.Interfaces;
-using GYM_Management_System.Models.Services;
+﻿using gym_management_system_front_end.Models.Data;
+using gym_management_system_front_end.Models.Models.DTOs;
+using gym_management_system_front_end.Models.Models.Interfaces;
+using gym_management_system_front_end.Models.Models.Services;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace GYM_Management_System.Models.Services
+namespace gym_management_system_front_end.Models.Models.Services
 {
     /// <summary>
     /// Service for managing client-related operations in the gym management system.

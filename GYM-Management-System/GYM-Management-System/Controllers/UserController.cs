@@ -1,9 +1,15 @@
+
+﻿using gym_management_system_front_end.Models.Models.DTOs;
+using gym_management_system_front_end.Models.Models.Interfaces;
+using gym_management_system_front_end.Models.Models.Services;
+
 ﻿using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GYM_Management_System.Controllers
+namespace gym_management_system_front_end.Models.Controllers
 {
     /// <summary>
     /// API controller for user-related operations in the gym management system.
@@ -66,14 +72,12 @@ namespace GYM_Management_System.Controllers
         /// </summary>
         /// <param name="Data">The employee user registration data.</param>
         /// <returns>The registered employee user's data.</returns>
-        /// 
-
         //[Authorize(Roles = "Admin, Employee")]
 
         [HttpPost]
         public async Task<ActionResult<UserDTO>> RegisterEmployee(RegisterEmployeeDTO Data)
         {
-            var user = await userService.RegisterEmployee(Data, this.ModelState, User);
+            var user = await userService.RegisterEmployee(Data, this.ModelState);
             if (ModelState.IsValid)
             {
                 if (user == null)
@@ -90,8 +94,10 @@ namespace GYM_Management_System.Controllers
         /// </summary>
         /// <param name="Data">The client user registration data.</param>
         /// <returns>The registered client user's data.</returns>
+
         [AllowAnonymous]
         [HttpPost]
+
         public async Task<ActionResult<UserDTO>> ClientRegister(RegisterClientDTO Data)
         {
             var user = await userService.RegisterUser(Data, this.ModelState, User);

@@ -1,0 +1,54 @@
+﻿@model gym_management_system_front_end.Models.ClientViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>UpdateClientDTO</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-controller="Clients" asp-route-clientID="@Model.ClientID" asp-route-gymID="@Model.GymID">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SubscriptionTierID" class="control-label"></label>
+                <input asp-for="SubscriptionTierID" class="form-control" />
+                <span asp-validation-for="SubscriptionTierID" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="InGym" /> @Html.DisplayNameFor(model => model.InGym)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubscriptionDate" class="control-label"></label>
+                <input asp-for="SubscriptionDate" class="form-control" />
+                <span asp-validation-for="SubscriptionDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubscriptionExpiry" class="control-label"></label>
+                <input asp-for="SubscriptionExpiry" class="form-control" />
+                <span asp-validation-for="SubscriptionExpiry" class="text-danger"></span>
+            </div>
+            <div class="form-group my-2">
+                <button type="submit" value="Save" class="btn btn-primary"> 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-square" viewBox="0 0 16 16">
+                        <path d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z" />
+                        <path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z" />
+                    </svg>
+                    save
+                </button>
+
+                <a class="btn btn-outline-danger" asp-action="Index" asp-route-gymid="@Model.GymID">Back to List</a>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
