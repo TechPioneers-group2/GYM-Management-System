@@ -4,7 +4,6 @@
     ViewData["Title"] = "UpdateSupplementForGym";
 }
 
-<h1>Update Supplement For Gym</h1>
 
 <div>
     <h4>GymSupplementViewModel</h4>
@@ -23,15 +22,6 @@
         <dd class="col-sm-10">
             @Model.Supplement?.Name
         </dd>
-        <!-- Display Gym ID -->
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.GymID)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.GymID)
-        </dd>
-        <!-- Allow user to input Quantity -->
-        
     </dl>
 
     <form asp-action="ConfirmUpdateSupplementForGym" asp-controller="Gyms">
