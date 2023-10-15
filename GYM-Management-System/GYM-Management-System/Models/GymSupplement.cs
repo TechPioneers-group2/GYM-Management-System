@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace gym_management_system.Models
+namespace GYM_Management_System.Models
 {
     public class GymSupplement
     {

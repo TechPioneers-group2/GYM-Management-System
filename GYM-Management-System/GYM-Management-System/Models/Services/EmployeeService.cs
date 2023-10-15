@@ -1,9 +1,9 @@
-﻿using gym_management_system.Models.Data;
-using gym_management_system.Models.Models.DTOs;
-using gym_management_system.Models.Models.Interfaces;
+﻿using GYM_Management_System.Data;
+using GYM_Management_System.Models.DTOs;
+using GYM_Management_System.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace gym_management_system.Models.Models.Services
+namespace GYM_Management_System.Models.Services
 {
     /// <summary>
     /// Service for managing employee-related operations in the gym management system.

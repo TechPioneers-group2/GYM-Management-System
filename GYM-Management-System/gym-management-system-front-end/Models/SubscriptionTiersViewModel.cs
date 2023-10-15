@@ -6,8 +6,8 @@
         public string Name { get; set; }
         public string Price { get; set; }
         public int Length { get; set; }
-        public List<GetClientDTO>? Clients { get; set; }
     }
+
     public class GetSubscriptionTierDTO
     {
         public int SubscriptionTierID { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace gym_management_system.Models.Models.DTOs
+﻿namespace GYM_Management_System.Models.DTOs
 {
     public class UpdateEmployeeDTO
     {

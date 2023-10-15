@@ -1,12 +1,12 @@
-﻿using gym_management_system.Models.Data;
-using gym_management_system.Models.Models.DTOs;
-using gym_management_system.Models.Models.Interfaces;
-using GYM_Management_System.Models;
+﻿using GYM_Management_System.Data;
+using GYM_Management_System.Models.DTOs;
+using GYM_Management_System.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Security.Claims;
 
-namespace gym_management_system.Models.Models.Services
+namespace GYM_Management_System.Models.Services
+
 {
     /// <summary>
     /// Service for managing user-related operations using Identity.

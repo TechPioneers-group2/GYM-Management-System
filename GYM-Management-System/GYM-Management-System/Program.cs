@@ -1,7 +1,7 @@
-using gym_management_system.Models;
-using gym_management_system.Models.Data;
-using gym_management_system.Models.Models.Interfaces;
-using gym_management_system.Models.Models.Services;
+using GYM_Management_System.Data;
+using GYM_Management_System.Models;
+using GYM_Management_System.Models.Interfaces;
+using GYM_Management_System.Models.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

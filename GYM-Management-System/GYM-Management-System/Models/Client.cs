@@ -1,6 +1,4 @@
-﻿using gym_management_system.Models;
-
-namespace GYM_Management_System.Models
+﻿namespace GYM_Management_System.Models
 {
     public class Client
     {

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace gym_management_system_front_end.Models
+﻿namespace gym_management_system_front_end.Models
 {
     public class ClientViewModel
     {
@@ -17,14 +15,7 @@ namespace gym_management_system_front_end.Models
         public DateTime SubscriptionExpiry { get; set; }
         public int SubscriptionTierID { get; set; }
 
-        //N.P
-        [ForeignKey("GymID")]
-        public GymViewModel? Gym { get; set; }
-
-        // public SubscriptionTier SubscriptionTierOBJ { get; set; }
     }
-
-
 
     public class PostClientDTO
     {

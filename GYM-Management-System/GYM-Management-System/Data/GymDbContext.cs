@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace gym_management_system.Models.Data
+namespace GYM_Management_System.Data
 {
     public class GymDbContext : IdentityDbContext<ApplicationUser>
     {

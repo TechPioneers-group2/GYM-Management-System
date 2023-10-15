@@ -3,7 +3,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
-namespace gym_management_system.Models.Models.Services
+namespace GYM_Management_System.Models.Services
+
 {
     /// <summary>
     /// Service for generating JWT tokens for user authentication.
