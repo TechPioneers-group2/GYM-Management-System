@@ -156,5 +156,147 @@ namespace gym_management_system_front_end.Controllers
             gym = JsonConvert.DeserializeObject<PostGymDTO>(data);
             return RedirectToAction("Index", "Gyms");
         }
+
+        [HttpGet]
+        public IActionResult AddSupplementToGym()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddSupplementToGym(GymSupplementViewModel newGymSupplement)
+        {
+            var supplementResponse = _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplement/" + newGymSupplement.SupplementID).Result;
+
+            if (supplementResponse.IsSuccessStatusCode)
+            {
+                string supplementData = supplementResponse.Content.ReadAsStringAsync().Result;
+                newGymSupplement.Supplement = JsonConvert.DeserializeObject<SupplementViewModel>(supplementData);
+
+                var jsonContent = new StringContent(JsonConvert.SerializeObject(newGymSupplement), Encoding.UTF8, "application/json");
+                var response = _client.PostAsync(_client.BaseAddress + "/AddSupplementsToGym/" + newGymSupplement.GymID + "/Supplement/" + newGymSupplement.SupplementID, jsonContent).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["success"] = "Supplement Created successfully";
+                }
+                else
+                {
+                    TempData["error"] = "Add Process failed";
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Failed to retrieve supplement details. Please try again.");
+                TempData["error"] = "Add Process failed";
+                return View(newGymSupplement);
+            }
+
+            return RedirectToAction("Index", "Gyms");
+        }
+
+        [HttpGet]
+        public IActionResult UpdateSupplementForGym(int gymId, int supplementId, int quantity)
+        {
+            var gymSupplement = new GymSupplementViewModel
+            {
+                GymID = gymId,
+                SupplementID = supplementId,
+                Quantity = quantity
+            };
+
+            // Make a call to your API to get supplement info
+            var supplementResponse = _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplement/" + supplementId).Result;
+
+            if (supplementResponse.IsSuccessStatusCode)
+            {
+                string supplementData = supplementResponse.Content.ReadAsStringAsync().Result;
+                gymSupplement.Supplement = JsonConvert.DeserializeObject<SupplementViewModel>(supplementData);
+            }
+            else
+            {
+                TempData["error"] = "Update Process failed";
+            }
+
+            return View(gymSupplement);
+        }
+
+        [HttpPost]
+        public IActionResult ConfirmUpdateSupplementForGym(GymSupplementViewModel updatedGymSupplement)
+        {
+            var supplementResponse = _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplement/" + updatedGymSupplement.SupplementID).Result;
+
+            if (supplementResponse.IsSuccessStatusCode)
+            {
+                string supplementData = supplementResponse.Content.ReadAsStringAsync().Result;
+                updatedGymSupplement.Supplement = JsonConvert.DeserializeObject<SupplementViewModel>(supplementData);
+
+                var jsonContent = new StringContent(JsonConvert.SerializeObject((UpdateGymSupplementDTO)updatedGymSupplement), Encoding.UTF8, "application/json");
+                var response = _client.PutAsync(_client.BaseAddress + "/UpdateSupplementForGym/" + updatedGymSupplement.GymID + "/Supplement/" + updatedGymSupplement.SupplementID, jsonContent).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["success"] = "Supplement Updated successfully";
+                }
+                else
+                {
+                    TempData["error"] = "Update Process failed";
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Failed to retrieve supplement details. Please try again.");
+                TempData["error"] = "Update Process failed";
+            }
+            return RedirectToAction("Index", "Gyms");
+        }
+
+
+
+        [HttpGet]
+        public IActionResult RemoveSupplementFromGym(int gymId, int supplementId)
+        {
+            var gymSupplement = new GymSupplementViewModel
+            {
+                GymID = gymId,
+                SupplementID = supplementId
+            };
+
+            // Make a call to your API to get supplement info
+            var supplementResponse = _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplement/" + supplementId).Result;
+
+            if (supplementResponse.IsSuccessStatusCode)
+            {
+                string supplementData = supplementResponse.Content.ReadAsStringAsync().Result;
+                gymSupplement.Supplement = JsonConvert.DeserializeObject<SupplementViewModel>(supplementData);
+            }
+            else
+            {
+                TempData["error"] = "Update Process failed";
+            }
+
+            return View(gymSupplement);
+        }
+
+
+
+        [HttpPost]
+        public IActionResult ConfirmRemoveSupplementFromGym(GymSupplementViewModel updatedGymSupplement)
+        {
+            var response = _client.DeleteAsync(_client.BaseAddress + "/RemoveSupplementFromGym/" + updatedGymSupplement.GymID + "/Supplement/" + updatedGymSupplement.SupplementID).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["success"] = "Supplement removed successfully";
+            }
+            else
+            {
+                TempData["error"] = "Failed to remove supplement. Please try again.";
+            }
+
+            return RedirectToAction("Index", "Gyms");
+        }
+
+
     }
 }
