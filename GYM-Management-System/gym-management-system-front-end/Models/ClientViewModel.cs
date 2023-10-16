@@ -5,14 +5,9 @@
         // Primary Key
         public string UserId { get; set; }
         public int ClientID { get; set; }
-
-        // Forgein Key
-        //both are composite key
         public int GymID { get; set; }
         public string Name { get; set; }
         public bool InGym { get; set; }
-        public DateTime SubscriptionDate { get; set; }
-        public DateTime SubscriptionExpiry { get; set; }
         public int SubscriptionTierID { get; set; }
 
     }
