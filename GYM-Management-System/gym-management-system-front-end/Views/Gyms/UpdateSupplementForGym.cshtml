@@ -5,8 +5,9 @@
 }
 
 
+
 <div>
-    <h4>GymSupplementViewModel</h4>
+    <h4>Update Supplement For Gym</h4>
     <hr />
     <dl class="row">
         <!-- Display Supplement ID and Name -->
@@ -32,6 +33,7 @@
             <input asp-for="Quantity" class="form-control" />
             <span asp-validation-for="Quantity" class="text-danger"></span>
         </div>
-        <input type="submit" value="Save" class="btn btn-primary" />
+        <input type="submit" value="Save" class="btn btn-success" />
+        <a href="#" class="btn btn-secondary" onclick="history.back()">Back</a>
     </form>
 </div>
