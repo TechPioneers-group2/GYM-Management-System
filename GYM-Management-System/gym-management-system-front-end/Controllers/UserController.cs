@@ -57,6 +57,7 @@ namespace gym_management_system_front_end.Controllers
             {
                 "Admin"
             };
+
             var json = JsonConvert.SerializeObject(adminDTO);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await _client.PostAsync(baseAddress + "RegisterAdmin", data);
@@ -138,10 +139,7 @@ namespace gym_management_system_front_end.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterClient(RegisterClientDTO clientDTO)
         {
-            clientDTO.Roles = new List<string>
-            {
-                "Client"
-            };
+
             var json = JsonConvert.SerializeObject(clientDTO);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await _client.PostAsync(baseAddress + "ClientRegister", data);
