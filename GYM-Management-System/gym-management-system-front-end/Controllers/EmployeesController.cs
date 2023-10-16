@@ -29,21 +29,30 @@ namespace gym_management_system_front_end.Controllers
             }
             var gymList = GetGymsList();
             ViewBag.gymList = gymList;
-            return View(employeesList);
+			ViewBag.Employees = "All";
+			return View(employeesList);
         }
         [HttpPost]
         public IActionResult GetEmployeesByGymId(int gymId)
         {
-            List<GetEmployeesByGymId> employeesList = new List<GetEmployeesByGymId>();
+            List<EmployeeViewModel> employeesList = new List<EmployeeViewModel>();
             var response = _client.GetAsync(_client.BaseAddress + "/Employees/GetEmployeesByGymId/" + gymId).Result;
 
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
-                employeesList = JsonConvert.DeserializeObject<List<GetEmployeesByGymId>>(data);
+                employeesList = JsonConvert.DeserializeObject<List<EmployeeViewModel>>(data);
             }
-
-            return View(employeesList);
+			var gymList = GetGymsList();
+			ViewBag.gymList = gymList;
+            foreach(var gym in gymList)
+            {
+                if(gym.GymID== gymId)
+                {
+					ViewBag.gymName = gym.Name;
+				}
+            }
+			return View(employeesList);
         }
 
         public IActionResult GetEmployee(int id)

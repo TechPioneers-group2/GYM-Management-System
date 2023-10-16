@@ -120,7 +120,7 @@ namespace GYM_Management_System.Controllers
         //[Authorize(Roles = "Admin")]
         //[Route("/api/Employees/Gym/{gymId}")]
         [HttpGet("{gymId}")]
-        public async Task<ActionResult<IEnumerable<GetEmployeesByGymId>>> GetEmployeesByGymId(int gymId)
+        public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetEmployeesByGymId(int gymId)
         {
             var employees = await _employee.GetEmployeesByGymId(gymId);
 
