@@ -1,15 +1,9 @@
-﻿using gym_management_system_front_end.Models.Models.DTOs;
-using gym_management_system_front_end.Models.Models.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
+﻿using GYM_Management_System.Models.DTOs;
+using GYM_Management_System.Models.Services;
 
 namespace Gym_System_test
 {
-	public class GymEquipmentsTests : Mock
+    public class GymEquipmentsTests : Mock
 	{
 		[Fact]
 		public async Task CanCreateAndDeleteGymEquipment()
@@ -24,6 +18,7 @@ namespace Gym_System_test
 				Quantity = 10,
 				OutOfService = 0,
 				GymID = 1
+
 			});
 
 			// Assert

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace gym_management_system_front_end.Controllers
@@ -8,7 +9,9 @@ namespace gym_management_system_front_end.Controllers
     {
         Uri BaseAdress = new Uri("https://localhost:7200/api");
         private readonly HttpClient _httpClient;
-        public EquipmentController()
+        
+
+        public EquipmentController( )
         {
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = BaseAdress;
@@ -33,30 +36,41 @@ namespace gym_management_system_front_end.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(EquipmentViewModel equipment)
+        public async Task<IActionResult> CreateAsync(EquipmentViewModel equipment, IFormFile file)
+
         {
-            if (ModelState.IsValid)
+            using(var content = new MultipartFormDataContent())
             {
-                // Serialize the equipment object to JSON
-                var equipmentJson = JsonConvert.SerializeObject(equipment);
+                
+                    // Serialize the equipment object to JSON
+                    var equipmentJson = JsonConvert.SerializeObject(equipment);
 
-                // Create a StringContent object with JSON data
-                var content = new StringContent(equipmentJson, Encoding.UTF8, "application/json");
+                    // Create a StringContent object with JSON data
+                     content.Add(new StringContent(equipmentJson, Encoding.UTF8, "application/json"));
 
-                // Send a POST request to the API to create a new equipment
-                var response = _httpClient.PostAsync(_httpClient.BaseAddress + "/GymEquipments/PostGymEquipment", content).Result;
-
-                if (response.IsSuccessStatusCode)
+                if (file != null)
                 {
-                    // Equipment created successfully, you can redirect to the equipment list or a success page.
-                    return RedirectToAction("Index");
+                    var streamcontent = new StreamContent(file.OpenReadStream());
+                    streamcontent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+                    content.Add(streamcontent, "file" ,file.FileName) ;
                 }
-                else
-                {
-                    // Handle the case where creating the equipment was not successful.
-                    ModelState.AddModelError(string.Empty, "Error creating equipment.");
-                }
-            }
+
+                    // Send a POST request to the API to create a new equipment
+                    var response = _httpClient.PostAsync(_httpClient.BaseAddress + "/GymEquipments/PostGymEquipment", content).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Equipment created successfully, you can redirect to the equipment list or a success page.
+                        return RedirectToAction("Index", "Equipment");
+                    }
+                    else
+                    {
+                        // Handle the case where creating the equipment was not successful.
+                        throw new Exception(response.StatusCode.ToString());
+                    }
+             }
+            
+
 
             return View(equipment);
         }

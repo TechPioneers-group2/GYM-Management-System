@@ -7,7 +7,8 @@
         public string Name { get; set; }
         public int OutOfService { get; set; }
         public int Quantity { get; set; }
-        public string img { get; set; }
+        //public string img { get; set; }
+        public string PhotoUrl { get; set; }
 
         //N.P
         public Gym Gym { get; set; }

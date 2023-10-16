@@ -13,6 +13,7 @@ namespace GYM_Management_System.Controllers
     {
         private readonly IEmployee _employee;
 
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeesController"/> class.
         /// </summary>

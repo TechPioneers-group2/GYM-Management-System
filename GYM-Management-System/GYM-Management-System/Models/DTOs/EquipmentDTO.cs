@@ -7,7 +7,9 @@
         public string Name { get; set; }
         public int OutOfService { get; set; }
         public int Quantity { get; set; }
-        public string img { get; set; }
+        // public string img { get; set; }
+        public string PhotoUrl { get; set; }
+
 
     }
     public class CreatEquipmentDTO
@@ -17,7 +19,34 @@
         public int OutOfService { get; set; }
         public int Quantity { get; set; }
 
-        public string img { get; set; }
+        // public string img { get; set; }
+        public string? PhotoUrl { get; set; }
+
+        public static explicit operator EquipmentDTOPutservice(CreatEquipmentDTO creatEquipmentDTO)
+        {
+
+            return new EquipmentDTOPutservice
+            {
+                OutOfService = creatEquipmentDTO.OutOfService,
+                PhotoUrl = creatEquipmentDTO.PhotoUrl,
+                Quantity = creatEquipmentDTO.Quantity,
+            };
+
+        }
+        public static explicit operator CreatEquipmentDTO(EquipmentDTOPutservice creatEquipmentDTO)
+        {
+
+            return new CreatEquipmentDTO
+            {
+                GymID=0,
+                Name="",
+                OutOfService = creatEquipmentDTO.OutOfService,
+                PhotoUrl = creatEquipmentDTO.PhotoUrl,
+                Quantity = creatEquipmentDTO.Quantity,
+            };
+
+        }
+
 
     }
 
@@ -27,13 +56,17 @@
         public string Name { get; set; }
         public int OutOfService { get; set; }
         public int Quantity { get; set; }
-        public string img { get; set; }
+        // public string img { get; set; }
+        public string? PhotoUrl { get; set; }
+
 
     }
     public class EquipmentDTOPutservice
     {
         public int OutOfService { get; set; }
         public int Quantity { get; set; }
-        public string img { get; set; }
+        // public string img { get; set; }
+        public string? PhotoUrl { get; set; }
+
     }
 }
