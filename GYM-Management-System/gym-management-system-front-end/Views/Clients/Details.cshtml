@@ -45,18 +45,6 @@
             @Html.DisplayFor(model => model.InGym)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SubscriptionDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SubscriptionDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SubscriptionExpiry)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SubscriptionExpiry)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.SubscriptionTierID)
         </dt>
         <dd class = "col-sm-10">
@@ -73,6 +61,5 @@
         </svg>
     </a>
     <a  class="btn btn-outline-danger" asp-action="Index" asp-route-gymid="@Model.GymID">Back to List</a>
-
 
 </div>

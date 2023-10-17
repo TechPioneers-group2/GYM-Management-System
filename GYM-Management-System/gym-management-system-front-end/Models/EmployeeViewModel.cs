@@ -1,5 +1,6 @@
 ﻿namespace gym_management_system_front_end.Models
 {
+
 	public class EmployeeViewModel
 	{
 		public int EmployeeID { get; set; }

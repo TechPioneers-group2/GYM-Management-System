@@ -49,7 +49,7 @@ namespace GYM_Management_System.Controllers
         [HttpPost]
         public async Task<ActionResult<UserDTO>> RegisterAdmin(RegisterAdminDTO Data)
         {
-            var user = await userService.RegisterAdmin(Data, this.ModelState, User);
+            var user = await userService.RegisterAdmin(Data, this.ModelState);
             if (ModelState.IsValid)
             {
                 if (user == null)
@@ -94,7 +94,7 @@ namespace GYM_Management_System.Controllers
 
         public async Task<ActionResult<UserDTO>> ClientRegister(RegisterClientDTO Data)
         {
-            var user = await userService.RegisterUser(Data, this.ModelState, User);
+            var user = await userService.RegisterUser(Data, this.ModelState);
             if (ModelState.IsValid)
             {
                 if (user == null)

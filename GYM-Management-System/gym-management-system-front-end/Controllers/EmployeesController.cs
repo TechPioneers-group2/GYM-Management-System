@@ -79,10 +79,6 @@ namespace gym_management_system_front_end.Controllers
         [HttpPost]
         public IActionResult Create(RegisterEmployeeViewModel registerEmployeeViewModel)
         {
-            List<string> Roles = new List<string>();
-            registerEmployeeViewModel.UserId = "string";
-            Roles.Add("Employee");
-            registerEmployeeViewModel.Roles = Roles;
             var jsonContent = new StringContent(JsonConvert.SerializeObject(registerEmployeeViewModel), Encoding.UTF8, "application/json");
             var response = _client.PostAsync(_client.BaseAddress + "/User/RegisterEmployee", jsonContent).Result;
             var data = response.Content.ReadAsStringAsync().Result;
