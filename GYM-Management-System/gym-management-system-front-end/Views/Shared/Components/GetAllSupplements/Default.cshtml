@@ -1,8 +1,4 @@
-﻿@model IEnumerable<gym_management_system_front_end.Models.GymViewModel>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+﻿@model IEnumerable<gym_management_system_front_end.Models.SupplementViewModel>
 
 <div class="row">
     @foreach (var item in Model)
@@ -12,7 +8,8 @@
                 <img src="https://cdn.pixabay.com/photo/2015/01/10/18/45/gym-595597_1280.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text">@item.Address</p>
+                    <p class="card-text">@item.Price</p>
+                    <p class="card-text">@item.Description</p>
                 </div>
             </div>
         </div>
