@@ -1,4 +1,5 @@
 ﻿using gym_management_system_front_end.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -16,13 +17,13 @@ namespace gym_management_system_front_end.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             List<SupplementViewModel> supplementList = new List<SupplementViewModel>();
-            var response = await _client.GetAsync(_client.BaseAddress + "/GetSupplements");
+            var response = _client.GetAsync(_client.BaseAddress + "/GetSupplements").Result;
             if (response.IsSuccessStatusCode)
             {
-                string data = await response.Content.ReadAsStringAsync();
+                string data = response.Content.ReadAsStringAsync().Result;
                 supplementList = JsonConvert.DeserializeObject<List<SupplementViewModel>>(data);
             }
             return View(supplementList);

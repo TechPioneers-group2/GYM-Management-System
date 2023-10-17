@@ -15,5 +15,6 @@
         public string WorkingHours { get; set; }
 
         public string Salary { get; set; }
-    }
+
+	}
 }

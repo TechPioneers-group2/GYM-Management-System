@@ -17,16 +17,14 @@ namespace gym_management_system_front_end.Controllers
             _client.BaseAddress = baseAddress;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             List<GymViewModel> gymList = new List<GymViewModel>();
-
-            var response = await _client.GetAsync(_client.BaseAddress + "/GetGyms");
+            var response = _client.GetAsync(_client.BaseAddress + "/GetGyms").Result;
 
             if (response.IsSuccessStatusCode)
             {
-                string data = await response.Content.ReadAsStringAsync();
-
+                string data = response.Content.ReadAsStringAsync().Result;
                 gymList = JsonConvert.DeserializeObject<List<GymViewModel>>(data);
             }
             return View(gymList);

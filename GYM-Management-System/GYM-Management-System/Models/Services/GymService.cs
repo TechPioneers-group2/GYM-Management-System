@@ -13,15 +13,18 @@ namespace GYM_Management_System.Models.Services
     {
         private readonly GymDbContext _gymDbContext;
 
+        private readonly IEmail _email;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="GymService"/> class.
         /// </summary>
         /// <param name="gymDbContext">The Gym Database context.</param>
         /// <param name="supTier">The subscription tier.</param>
         /// <param name="client">The client.</param>
-        public GymService(GymDbContext gymDbContext, ISubscriptionTier supTier, IClient client)
+        public GymService(GymDbContext gymDbContext, ISubscriptionTier supTier, IClient client, IEmail email)
         {
             _gymDbContext = gymDbContext;
+            _email = email;
         }
 
         /// <summary>
@@ -276,7 +279,32 @@ namespace GYM_Management_System.Models.Services
         /// <returns>The updated Gym data.</returns>
         public async Task<PutGymDTO> UpdateGym(int gymid, PutGymDTO updatedGym)
         {
+            var notificationStatus = updatedGym.Notification;
+
             Gym currentGym = await _gymDbContext.Gyms.FindAsync(gymid);
+
+            if (currentGym.Notification != notificationStatus)
+            {
+                var clients = _gymDbContext.Clients
+                    .Where(gym => gym.GymID == gymid)
+                    .Select(client => client.UserId)
+                    .ToList();
+
+                var employees = _gymDbContext.Employees
+                    .Where(gym => gym.GymID == gymid)
+                    .Select(client => client.UserId)
+                    .ToList();
+
+                var users = _gymDbContext.Users
+                    .Where(user => employees.Contains(user.Id) || clients.Contains(user.Id))
+                    .ToList();
+
+
+                foreach (var user in users)
+                {
+                    await _email.SendEmail(user.Email, user.UserName, "Notification From " + currentGym, updatedGym.Notification);
+                }
+            }
 
             if (currentGym != null)
             {
@@ -296,6 +324,7 @@ namespace GYM_Management_System.Models.Services
                     ActiveHours = updatedGym.ActiveHours,
                     Notification = updatedGym.Notification,
                 };
+
                 return getGymDTO;
             }
             return null;
