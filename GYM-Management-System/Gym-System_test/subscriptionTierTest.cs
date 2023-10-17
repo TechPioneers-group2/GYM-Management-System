@@ -1,7 +1,5 @@
-﻿using gym_management_system_front_end.Models.Models.DTOs;
-using gym_management_system_front_end.Models.Models.Services;
-using System.Threading.Tasks;
-using Xunit;
+﻿using GYM_Management_System.Models.DTOs;
+using GYM_Management_System.Models.Services;
 
 namespace Gym_System_test
 {
