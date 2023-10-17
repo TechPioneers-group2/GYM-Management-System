@@ -13,7 +13,7 @@ namespace GYM_Management_System.Models.Interfaces
         Task<EmployeeDTO> GetEmployee(int id);
 
         // Get Employees by GymId
-        Task<List<GetEmployeesByGymId>> GetEmployeesByGymId(int gymId);
+        Task<List<EmployeeDTO>> GetEmployeesByGymId(int gymId);
         // Update Employee Data
         Task<EmployeeDTO> Update(UpdateEmployeeDTO updateEmployeeDTO, int employeeId);
 

@@ -110,7 +110,43 @@ namespace GYM_Management_System.Data
                     Name = "Pre-Workout Blend",
                     Price = "50 JD",
                     Description = "A pre-workout blend is a class of powdered drink mixes that are consumed 20-30 minutes prior to the beginning of a rigorous workout to increase exercise performance.",
+                },
+                new Supplement
+                {
+                    SupplementID = 5,
+                    Name = "BCAA Energy Drink",
+                    Price = "35 JD",
+                    Description = "BCAA Energy Drink is a powerful blend of Branched-Chain Amino Acids (BCAAs), providing energy and supporting muscle recovery during workouts.",
+                },
+                new Supplement
+                {
+                    SupplementID = 6,
+                    Name = "Pre-Workout Nitric Oxide Booster",
+                    Price = "60 JD",
+                    Description = "This Pre-Workout Nitric Oxide Booster is designed to enhance focus, increase energy levels, and improve blood flow for optimal workout performance.",
+                },
+                new Supplement
+                {
+                    SupplementID = 7,
+                    Name = "Glutamine Capsules",
+                    Price = "25 JD",
+                    Description = "Glutamine Capsules provide essential amino acids that aid in muscle recovery, immune system support, and reducing muscle soreness after intense workouts.",
+                },
+                new Supplement
+                {
+                    SupplementID = 8,
+                    Name = "Omega-3 Fish Oil",
+                    Price = "45 JD",
+                    Description = "Omega-3 Fish Oil supplements are rich in essential fatty acids that support cardiovascular health, joint function, and muscle recovery.",
+                },
+                new Supplement
+                {
+                    SupplementID = 9,
+                    Name = "L-Carnitine Fat Burner",
+                    Price = "55 JD",
+                    Description = "L-Carnitine Fat Burner helps convert stored body fat into energy, making it an effective supplement for those looking to manage weight and increase endurance.",
                 }
+
             );
 
             modelBuilder.Entity<GymEquipment>().HasData(
