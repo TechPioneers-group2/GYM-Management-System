@@ -19,7 +19,7 @@ namespace GYM_Management_System.Models.Services
         /// Initializes a new instance of the <see cref="GymEquipmentsService"/> class.
         /// </summary>
         /// <param name="gymDbContext">The database context.</param>
-        public GymEquipmentsService(GymDbContext gymDbContext, IAzureBlobStorageService photo )
+        public GymEquipmentsService(GymDbContext gymDbContext, IAzureBlobStorageService photo)
         {
             _gymDbContext = gymDbContext;
             _blobStorageService = photo;
@@ -51,7 +51,7 @@ namespace GYM_Management_System.Models.Services
                 Name = newEquipment.Name,
                 OutOfService = newEquipment.OutOfService,
                 GymID = newEquipment.GymID,
-                PhotoUrl= newEquipment.PhotoUrl,
+                PhotoUrl = newEquipment.PhotoUrl,
             };
 
             return equipmentDtoResult;
@@ -86,7 +86,7 @@ namespace GYM_Management_System.Models.Services
                 Name = E.Name,
                 OutOfService = E.OutOfService,
                 GymID = E.GymID,
-                PhotoUrl=E.PhotoUrl
+                PhotoUrl = E.PhotoUrl
             }).FirstOrDefaultAsync(e => e.GymEquipmentID == GymEquipmentID);
 
             return Equipment;
@@ -105,7 +105,7 @@ namespace GYM_Management_System.Models.Services
                 Name = E.Name,
                 OutOfService = E.OutOfService,
                 GymID = E.GymID,
-                 PhotoUrl=E.PhotoUrl
+                PhotoUrl = E.PhotoUrl
             }).ToListAsync();
 
             return allEquipment;

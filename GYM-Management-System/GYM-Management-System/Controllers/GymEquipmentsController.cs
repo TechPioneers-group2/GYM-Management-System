@@ -23,7 +23,7 @@ namespace GYM_Management_System.Controllers
         public GymEquipmentsController(IGymEquipment context, IAzureBlobStorageService azureBlobStorageService)
         {
             _equipment = context;
-            _azureBlobStorageService = azureBlobStorageService; 
+            _azureBlobStorageService = azureBlobStorageService;
         }
 
         /// <summary>
@@ -59,13 +59,8 @@ namespace GYM_Management_System.Controllers
         /// <returns>The updated gym equipment data.</returns>
        // [Authorize(Roles = "Admin, Employee")]
         [HttpPut("{id}")]
-        public async Task<ActionResult<EquipmentDTO>> PutGymEquipment(int id, EquipmentDTOPutservice gymEquipment,IFormFile file)
+        public async Task<ActionResult<EquipmentDTO>> PutGymEquipment(int id, EquipmentDTOPutservice gymEquipment)
         {
-
-            if (file != null)
-            {
-               gymEquipment = await _azureBlobStorageService.UploadAsync(file, gymEquipment);
-            }
             var updatedEquipment = await _equipment.UpdateGymEquipment(id, gymEquipment);
 
             if (updatedEquipment == null)
@@ -83,13 +78,8 @@ namespace GYM_Management_System.Controllers
         /// <returns>The created gym equipment data.</returns>
         //[Authorize(Roles = "Admin, Employee")]
         [HttpPost]
-        public async Task<ActionResult<EquipmentDTO>> PostGymEquipment(CreatEquipmentDTO gymEquipment , IFormFile file)
+        public async Task<ActionResult<EquipmentDTO>> PostGymEquipment(CreatEquipmentDTO gymEquipment)
         {
-            if (file != null)
-            {
-                gymEquipment = await _azureBlobStorageService.UploadAsync(file , gymEquipment);
-            }
-
             var createdEquipment = await _equipment.Create(gymEquipment);
 
             return Ok(createdEquipment);

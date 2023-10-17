@@ -9,9 +9,9 @@ namespace gym_management_system_front_end.Controllers
     {
         Uri BaseAdress = new Uri("https://localhost:7200/api");
         private readonly HttpClient _httpClient;
-        
 
-        public EquipmentController( )
+
+        public EquipmentController()
         {
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = BaseAdress;
@@ -26,7 +26,6 @@ namespace gym_management_system_front_end.Controllers
                 string data = response.Content.ReadAsStringAsync().Result;
                 equipments = JsonConvert.DeserializeObject<List<EquipmentViewModel>>(data);
 
-
             }
             return View(equipments);
         }
@@ -35,44 +34,39 @@ namespace gym_management_system_front_end.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> CreateAsync(EquipmentViewModel equipment, IFormFile file)
-
         {
-            using(var content = new MultipartFormDataContent())
+            if (file != null)
             {
-                
-                    // Serialize the equipment object to JSON
-                    var equipmentJson = JsonConvert.SerializeObject(equipment);
+                var streamcontent = new StreamContent(file.OpenReadStream());
+                streamcontent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
 
-                    // Create a StringContent object with JSON data
-                     content.Add(new StringContent(equipmentJson, Encoding.UTF8, "application/json"));
-
-                if (file != null)
+                var content = new MultipartFormDataContent
                 {
-                    var streamcontent = new StreamContent(file.OpenReadStream());
-                    streamcontent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
-                    content.Add(streamcontent, "file" ,file.FileName) ;
-                }
+                    { streamcontent, "file", file.FileName }
+                };
 
-                    // Send a POST request to the API to create a new equipment
-                    var response = _httpClient.PostAsync(_httpClient.BaseAddress + "/GymEquipments/PostGymEquipment", content).Result;
+                var response = _httpClient.PostAsync(_httpClient.BaseAddress + "/Home/AddImageToCloud", content).Result;
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        // Equipment created successfully, you can redirect to the equipment list or a success page.
-                        return RedirectToAction("Index", "Equipment");
-                    }
-                    else
-                    {
-                        // Handle the case where creating the equipment was not successful.
-                        throw new Exception(response.StatusCode.ToString());
-                    }
-             }
-            
+                equipment.PhotoUrl = response.Content.ReadAsStringAsync().Result;
+            }
 
+            var equipmentJson = JsonConvert.SerializeObject(equipment);
 
-            return View(equipment);
+            var content2 = (new StringContent(equipmentJson, Encoding.UTF8, "application/json"));
+
+            var response2 = _httpClient.PostAsync(_httpClient.BaseAddress + "/GymEquipments/PostGymEquipment", content2).Result;
+
+            if (response2.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", "Equipment");
+            }
+            else
+            {
+                throw new Exception(response2.StatusCode.ToString());
+            }
         }
         [HttpGet]
         public IActionResult Edit(int id)
@@ -115,6 +109,7 @@ namespace gym_management_system_front_end.Controllers
             }
             return View(equipment);
         }
+
         [HttpGet]
         [ActionName("Delete")]
         public IActionResult DeleteGet(int id)
@@ -125,11 +120,10 @@ namespace gym_management_system_front_end.Controllers
             {
                 string data = response.Content.ReadAsStringAsync().Result;
                 equipment = JsonConvert.DeserializeObject<EquipmentViewModel>(data);
-
-
             }
             return View(equipment);
         }
+
         [HttpPost]
         public IActionResult Delete(int id)
         {
