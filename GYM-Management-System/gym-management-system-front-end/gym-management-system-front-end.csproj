@@ -16,4 +16,8 @@
     <Folder Include="Views\Shared\Partial\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GYM-Management-System\GYM-Management-System.csproj" />
+  </ItemGroup>
+
 </Project>

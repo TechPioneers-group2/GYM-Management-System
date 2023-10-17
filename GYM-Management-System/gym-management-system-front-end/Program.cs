@@ -1,3 +1,6 @@
+using GYM_Management_System.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace gym_management_system_front_end
 {
     public class Program
@@ -10,7 +13,7 @@ namespace gym_management_system_front_end
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddHttpClient();
-
+           
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -3,93 +3,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create Gym Equipment</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #03030b;
-            color: white;
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
+	<title>Create Gym Equipment</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+		body {
+			background-color: #03030b;
+			color: white;
+			font-family: Arial, sans-serif;
+			padding: 20px;
+		}
 
-        h2 {
-            color: #fb7208;
-        }
+		h2 {
+			color: #fb7208;
+		}
 
-        .card {
-            background-color: #233242;
-            color: white;
-            margin: 10px;
-            border: none;
-        }
+		.card {
+			background-color: #233242;
+			color: white;
+			margin: 10px;
+			border: none;
+		}
 
-            .card img {
-                max-width: 100%;
-            }
+			.card img {
+				max-width: 100%;
+			}
 
-        .card-title {
-            font-size: 20px;
-            font-weight: bold;
-            color: #fb7208;
-        }
+		.card-title {
+			font-size: 20px;
+			font-weight: bold;
+			color: #fb7208;
+		}
 
-        .card-text {
-            font-size: 16px;
-        }
+		.card-text {
+			font-size: 16px;
+		}
 
-        .btn {
-            background-color: #fb7208;
-            color: white;
-        }
+		.btn {
+			background-color: #fb7208;
+			color: white;
+		}
 
-        /* Additional styling for the form */
-        .form-group label {
-            color: white;
-            font-weight: bold;
-        }
-    </style>
+		/* Additional styling for the form */
+		.form-group label {
+			color: white;
+			font-weight: bold;
+		}
+	</style>
 </head>
 <body>
-    <div class="container">
-        <h2>Create Gym Equipment</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        @using (Html.BeginForm("Create", "Equipment", FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Name)
-                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Quantity)
-                                @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.OutOfService)
-                                @Html.TextBoxFor(model => model.OutOfService, new { @class = "form-control" })
-                            </div>
-                           
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.GymID)
-                                @Html.TextBoxFor(model => model.GymID, new { @class = "form-control" })
-                            </div>
+	<div class="container">
+		<h2>Create Gym Equipment</h2>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-body">
+						<form method="post" asp-action="Create" asp-controller="Equipment" enctype="multipart/form-data">
+							@Html.AntiForgeryToken()
+							<div class="form-group">
+								<label asp-for="@Model.Name"></label>
+								<input asp-for="@Model.Name" class="form-control" />
+							</div>
+							<div class="form-group">
+								<label asp-for="@Model.Quantity"></label>
+								<input asp-for="@Model.Quantity" class="form-control" />
+							</div>
+							<div class="form-group">
+								<label asp-for="@Model.OutOfService"></label>
+								<input asp-for="@Model.OutOfService" class="form-control" />
+							</div>
+							<div class="form-group">
+								<label asp-for="@Model.GymID"></label>
+								<input asp-for="@Model.GymID" class="form-control" />
+							</div>
+							@*<div class="form-group">
+								<label asp-for="@Model.img"></label>
+								<input asp-for="@Model.img" type="file" name="file" class="form-control" />
+							</div>*@
+							<button type="submit" class="btn btn-primary">Create</button>
+						</form>
+					</div>
+				</div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.img)
-                                @Html.TextBoxFor(model => model.img, new { @class = "form-control" })
-                            </div>
-                            <button type="submit" class="btn btn-primary">Create</button>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
