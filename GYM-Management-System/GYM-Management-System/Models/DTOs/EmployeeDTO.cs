@@ -10,5 +10,7 @@
         public string WorkingDays { get; set; }
         public string WorkingHours { get; set; }
         public string Salary { get; set; }
-    }
+		public GymBaseDto gymBaseDto { get; set; }
+
+	}
 }

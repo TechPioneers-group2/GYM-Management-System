@@ -61,5 +61,11 @@ namespace GYM_Management_System.Models.DTOs
 
     }
 
+	public class GymBaseDto
+	{
+		public int GymID { get; set; }
+		public string? Name { get; set; }
 
+
+	}
 }

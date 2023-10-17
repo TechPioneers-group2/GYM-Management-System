@@ -41,6 +41,7 @@ namespace gym_management_system_front_end.Models
             builder.Services.AddTransient<IGymEquipment, GymEquipmentsService>();
             builder.Services.AddTransient<IEmployee, EmployeeService>();
             builder.Services.AddTransient<ISupplement, SupplementService>();
+            builder.Services.AddTransient<IEmail, EmailService>();
 
             builder.Services.AddScoped<jwtTokenServices>();
 
