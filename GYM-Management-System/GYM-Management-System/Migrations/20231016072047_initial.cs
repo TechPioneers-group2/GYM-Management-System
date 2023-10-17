@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -7,7 +8,7 @@
 namespace GYM_Management_System.Migrations
 {
     /// <inheritdoc />
-    public partial class seeddata : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -240,7 +241,8 @@ namespace GYM_Management_System.Migrations
                     GymID = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OutOfService = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    img = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -314,9 +316,9 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "021f08c5-7a73-487e-8cf2-aa9bc7380629", "00000000-0000-0000-0000-000000000000", "Client", "CLIENT" },
-                    { "03ada377-c8b1-4f00-af42-5ce2a160f78f", "00000000-0000-0000-0000-000000000000", "Employee", "EMPLOYEE" },
-                    { "7e7dbc95-e860-42c6-81f2-f0cb42d97352", "00000000-0000-0000-0000-000000000000", "Admin", "ADMIN" }
+                    { "335683c4-15f5-44fc-a090-8c397857f616", "00000000-0000-0000-0000-000000000000", "Employee", "EMPLOYEE" },
+                    { "7cf079d3-f3d9-489b-ae49-b853ea003a49", "00000000-0000-0000-0000-000000000000", "Client", "CLIENT" },
+                    { "e77ad224-d7fe-4562-8ca7-f2255537ba57", "00000000-0000-0000-0000-000000000000", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -324,10 +326,10 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1", 0, "1887ee94-cfb2-4467-87e4-4ab27fb0efed", "adminUser@example.com", true, false, null, "ADMINUSER@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAEGR/NTOFqUQRCgSf8BE0aT8SyVFMMVmLFnhJcwRY5PxcbSdHLHf2XtbT2g7k+L7jCQ==", "1234567890", false, "ef0bb341-fc6b-454e-9094-ec7840a36e06", false, "Admin" },
-                    { "2", 0, "a8fcc4ee-7d6d-4a90-87e4-dce69c81130c", "employeeUser@example.com", true, false, null, "EMPLOYEEUSER@EXAMPLE.COM", "EMPLOYEE", "AQAAAAIAAYagAAAAEJXaC6AjsFkv2v6msTkDnjCRQLQpPBl/HSXNYD4t8F+k2OYT7Y3PHN3j7fUln00w9g==", "1234567890", false, "92fbd94c-0102-4a74-a98e-bfec0ba8e5bc", false, "Employee" },
-                    { "3", 0, "f2412089-4a4c-4cb4-83b9-c175652186dd", "ClientUser@example.com", true, false, null, "CLIENTUSER@EXAMPLE.COM", "CLIENT", "AQAAAAIAAYagAAAAEI5HKXshEHpN4vxCBVXCAgSDf8p5zvIH9iOE3talsTv8ZV6ukU1ahwpRDEky1Byxpg==", "1234567890", false, "071d0df4-396d-4948-977d-76e9110047cf", false, "Client" },
-                    { "4", 0, "1a4a10fb-d3e3-45f9-825b-49d1bc054d0d", "Client2User@example.com", true, false, null, "CLIENT2USER@EXAMPLE.COM", "CLIENT2", "AQAAAAIAAYagAAAAEL/EYZJPxmt517Bzx2e6dI8P7U0Hmm3gNJFn1qWg+/8U0zqYg7SWqNqP3lDd8pfv+g==", "1234567890", false, "23814a43-5e60-4231-8d89-71b670611053", false, "Client2" }
+                    { "1", 0, "459f11a8-2725-42fc-aec3-094fe06d2081", "adminUser@example.com", true, false, null, "ADMINUSER@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAEEVoQQMAYvmEENFbC3Q5MLvpRq73wiHIqdo1wy2OQ2EVopUsH+PFs1NH5tcA/pEF1A==", "1234567890", false, "5f3deec2-3463-4733-a6b5-6cdf6bad1407", false, "Admin" },
+                    { "2", 0, "c9128827-9b9d-47f7-84d5-885d9407f966", "employeeUser@example.com", true, false, null, "EMPLOYEEUSER@EXAMPLE.COM", "EMPLOYEE", "AQAAAAIAAYagAAAAEBNjhmcIUCmp+zdKLimR9LRbj1MudWFay1GxG3XUbLAqrEnbtH2k7IxXlhs7whEXUA==", "1234567890", false, "802a8417-e830-4c66-8b53-5d7bdc0d7c4a", false, "Employee" },
+                    { "3", 0, "d03e9639-4381-43d5-a56a-af98c9b6743b", "ClientUser@example.com", true, false, null, "CLIENTUSER@EXAMPLE.COM", "CLIENT", "AQAAAAIAAYagAAAAEMEmEavHnAZb9AFWy6PhfgStKa2sdH0zA25oi2JZLbpyYuUkK/5otguStz0Vr5kHzw==", "1234567890", false, "e13116f2-fb6f-4d5e-9f6f-d0588f388cca", false, "Client" },
+                    { "4", 0, "034b3b94-a1de-4809-b0a4-d484455cbe0e", "Client2User@example.com", true, false, null, "CLIENT2USER@EXAMPLE.COM", "CLIENT2", "AQAAAAIAAYagAAAAEG0D7vIN974Mg1Il33+pmpn+TNOn/5pSXLEagi6HmFQ+Urmpi1pnmazsum6UDxnLDw==", "1234567890", false, "3cce63da-3ce3-487d-a279-ff33ceda1645", false, "Client2" }
                 });
 
             migrationBuilder.InsertData(
@@ -367,21 +369,25 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "Id", "ClaimType", "ClaimValue", "RoleId" },
                 values: new object[,]
                 {
-                    { 10, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createAdmin", "7e7dbc95-e860-42c6-81f2-f0cb42d97352" },
-                    { 11, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateAdmin", "7e7dbc95-e860-42c6-81f2-f0cb42d97352" },
-                    { 12, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "deleteAdmin", "7e7dbc95-e860-42c6-81f2-f0cb42d97352" },
-                    { 13, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readAdmin", "7e7dbc95-e860-42c6-81f2-f0cb42d97352" },
-                    { 14, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createEmployee", "03ada377-c8b1-4f00-af42-5ce2a160f78f" },
-                    { 15, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateEmployee", "03ada377-c8b1-4f00-af42-5ce2a160f78f" },
-                    { 16, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readEmployee", "03ada377-c8b1-4f00-af42-5ce2a160f78f" },
-                    { 17, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateClient", "021f08c5-7a73-487e-8cf2-aa9bc7380629" },
-                    { 18, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readClient", "021f08c5-7a73-487e-8cf2-aa9bc7380629" }
+                    { 10, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createAdmin", "e77ad224-d7fe-4562-8ca7-f2255537ba57" },
+                    { 11, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateAdmin", "e77ad224-d7fe-4562-8ca7-f2255537ba57" },
+                    { 12, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "deleteAdmin", "e77ad224-d7fe-4562-8ca7-f2255537ba57" },
+                    { 13, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readAdmin", "e77ad224-d7fe-4562-8ca7-f2255537ba57" },
+                    { 14, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createEmployee", "335683c4-15f5-44fc-a090-8c397857f616" },
+                    { 15, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateEmployee", "335683c4-15f5-44fc-a090-8c397857f616" },
+                    { 16, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readEmployee", "335683c4-15f5-44fc-a090-8c397857f616" },
+                    { 17, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateClient", "7cf079d3-f3d9-489b-ae49-b853ea003a49" },
+                    { 18, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readClient", "7cf079d3-f3d9-489b-ae49-b853ea003a49" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Clients",
                 columns: new[] { "ClientID", "GymID", "InGym", "Name", "SubscriptionDate", "SubscriptionExpiry", "SubscriptionTierID", "UserId" },
-                values: new object[] { 1, 1, true, "Client", new DateTime(2023, 10, 14, 14, 29, 26, 159, DateTimeKind.Local).AddTicks(9004), new DateTime(2024, 4, 14, 14, 29, 26, 159, DateTimeKind.Local).AddTicks(9025), 1, "3" });
+                values: new object[,]
+                {
+                    { 1, 1, true, "Client", new DateTime(2023, 10, 16, 10, 20, 46, 104, DateTimeKind.Local).AddTicks(1174), new DateTime(2024, 4, 16, 10, 20, 46, 104, DateTimeKind.Local).AddTicks(1194), 1, "3" },
+                    { 2, 1, true, "Client2", new DateTime(2023, 10, 16, 10, 20, 46, 104, DateTimeKind.Local).AddTicks(1206), new DateTime(2024, 4, 16, 10, 20, 46, 104, DateTimeKind.Local).AddTicks(1207), 1, "4" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Employees",
@@ -390,13 +396,13 @@ namespace GYM_Management_System.Migrations
 
             migrationBuilder.InsertData(
                 table: "GymEquipments",
-                columns: new[] { "GymEquipmentID", "GymID", "Name", "OutOfService", "Quantity" },
+                columns: new[] { "GymEquipmentID", "GymID", "Name", "OutOfService", "Quantity", "img" },
                 values: new object[,]
                 {
-                    { 2, 1, "bench press", 0, 2 },
-                    { 3, 1, "treadmill", 2, 10 },
-                    { 4, 2, "dumbbells", 0, 60 },
-                    { 5, 2, "elliptical machine", 0, 3 }
+                    { 2, 1, "bench press", 0, 2, "https://m.media-amazon.com/images/I/61cGWhpz3ZL._AC_UF1000,1000_QL80_.jpg" },
+                    { 3, 1, "treadmill", 2, 10, "https://shop.lifefitness.com/cdn/shop/products/clubseries-plus-treadmill-titanium-storm-se3hd-1000x1000_1800x1800.jpg?v=1678726811" },
+                    { 4, 2, "dumbbells", 0, 60, "https://www.bowflex.com/dw/image/v2/AAYW_PRD/on/demandware.static/-/Sites-nautilus-master-catalog/default/dwf21fb1cf/images/bfx/weights/100131/bowflex-selecttech-552-dumbbell-weights-hero.jpg?sw=2600&sh=1464&sm=fit" },
+                    { 5, 2, "elliptical machine", 0, 3, "https://www.precorhomefitness.com/cdn/shop/products/precor-efx-635-elliptical_5000x.jpg?v=1686422733" }
                 });
 
             migrationBuilder.CreateIndex(

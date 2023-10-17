@@ -1,3 +1,8 @@
+using GYM_Management_System.Data;
+using GYM_Management_System.Models.Interfaces;
+using GYM_Management_System.Models.Services;
+using Microsoft.EntityFrameworkCore;
+
 using gym_management_system_front_end.Controllers;
 
 namespace gym_management_system_front_end

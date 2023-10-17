@@ -1,24 +1,14 @@
-using gym_management_system_front_end.Models.Controllers;
-using gym_management_system_front_end.Models.Data;
-using gym_management_system_front_end.Models.Models;
-using gym_management_system_front_end.Models.Models.DTOs;
-using gym_management_system_front_end.Models.Models.Interfaces;
-using gym_management_system_front_end.Models.Models.Services;
-using Microsoft.AspNetCore.Http;
+using GYM_Management_System.Data;
+using GYM_Management_System.Models;
+using GYM_Management_System.Models.DTOs;
+using GYM_Management_System.Models.Interfaces;
+using GYM_Management_System.Models.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Identity;
-using gym_management_system_front_end.Models.Models.DTOs;
-using gym_management_system_front_end.Models.Models.Interfaces;
 using Moq;
-using System;
-using System.Runtime.InteropServices;
-using System.Security.Claims;
 
 namespace Gym_System_test
 {
