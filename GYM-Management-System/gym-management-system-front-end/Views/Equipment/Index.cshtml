@@ -1,0 +1,82 @@
+﻿@model List<EquipmentViewModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gym Equipment List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #03030b;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #fb7208;
+        }
+
+        .card {
+            background-color: #233242;
+            color: white;
+            margin: 10px;
+            border: none;
+            height: 100%;
+        }
+
+            .card img {
+                max-width: 100%;
+                height:300px ;
+              
+            }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #fb7208; /* Change the font color for the title */
+        }
+
+        .card-text {
+            font-size: 16px;
+        }
+
+        .btn {
+            background-color: #fb7208;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        <a asp-action="Create"  class="btn btn-primary">Create New</a>
+    </p>
+    <div class="container">
+        <h2>Equipment List</h2>
+        <div class="row">
+            @foreach (var equipment in Model)
+            {
+                <div class="col-md-4 col-sm-6 col-12">
+                    <div class="card">
+                        <img src="@equipment.img" alt="@equipment.Name" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">@equipment.Name</h5>
+                            <p class="card-text">
+                                Equipment ID: @equipment.GymEquipmentID<br>
+                                Gym ID: @equipment.GymID<br>
+                                Out of Service: @equipment.OutOfService<br>
+                                Quantity: @equipment.Quantity
+                            </p>
+                            <a asp-action="Details" asp-route-id="@equipment.GymEquipmentID" class="btn btn-primary">Details</a>
+                            <a asp-action="Edit" asp-route-id="@equipment.GymEquipmentID" class="btn btn-primary">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@equipment.GymEquipmentID" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

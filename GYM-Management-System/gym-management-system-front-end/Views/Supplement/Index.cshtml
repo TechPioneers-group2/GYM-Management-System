@@ -1,0 +1,32 @@
+﻿@model IEnumerable<gym_management_system_front_end.Models.SupplementViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success"><i class="bi bi-plus-circle me-1"></i>Create New</a>
+</p>
+<table id="tblData" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                
+            </th>
+        </tr>
+    </thead>
+</table>
+@section Scripts{
+    <script src="~/js/supplement.js"></script>
+}

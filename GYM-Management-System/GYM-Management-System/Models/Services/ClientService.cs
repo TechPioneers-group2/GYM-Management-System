@@ -1,12 +1,7 @@
 ﻿using GYM_Management_System.Data;
 using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
-using GYM_Management_System.Models.Services;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace GYM_Management_System.Models.Services
 {
@@ -142,12 +137,12 @@ namespace GYM_Management_System.Models.Services
         /// <returns>The updated client's data.</returns>
         public async Task<GetClientDTO> UpdateClient(int clientid, int gymid, UpdateClientDTO client)
         {
-                var subscriptionTier = await _context.SubscriptionTiers
-                .FirstOrDefaultAsync(tr => tr.SubscriptionTierID == client.SubscriptionTierID);
+            var subscriptionTier = await _context.SubscriptionTiers
+            .FirstOrDefaultAsync(tr => tr.SubscriptionTierID == client.SubscriptionTierID);
 
-                var currentTime = DateTime.UtcNow;
+            var currentTime = DateTime.UtcNow;
 
-                var updateExpiry = DateTime.UtcNow.AddMonths(subscriptionTier.Length);
+            var updateExpiry = DateTime.UtcNow.AddMonths(subscriptionTier.Length);
 
             GetClientDTO returnedClient = new GetClientDTO();
             var currentClient = await _context.Clients.FirstOrDefaultAsync(c => c.ClientID == clientid && c.GymID == gymid);

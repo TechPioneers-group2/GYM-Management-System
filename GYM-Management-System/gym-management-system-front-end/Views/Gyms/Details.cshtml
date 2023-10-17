@@ -1,0 +1,116 @@
+﻿@model gym_management_system_front_end.Models.GymViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>GymViewModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GymID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GymID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MaxCapacity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MaxCapacity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CurrentCapacity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CurrentCapacity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ActiveHours)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ActiveHours)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Notification)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Notification)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Equipments)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var equipment in Model.Equipments)
+            {
+                <p>@equipment.Name</p>
+            }
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SubscriptionTier)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var tier in Model.SubscriptionTier)
+            {
+                <p>@tier.Name</p>
+            }
+        </dd>
+    </dl>
+    <div>
+        @if (Model.Supplements.Any())
+        {
+            <h4>Supplements</h4>
+            <ul>
+                @foreach (var supplement in Model.Supplements)
+                {
+                    <li>
+                        @supplement.Supplements.Name
+                        @supplement.Supplements.Price
+                        @supplement.Quantity
+                        <a asp-action="RemoveSupplementFromGym"
+                           asp-route-gymId="@Model.GymID"
+                           asp-route-supplementId="@supplement.SupplementID">
+                            Remove
+                        </a>
+                        <a asp-action="UpdateSupplementForGym" asp-controller="Gyms"
+                           asp-route-gymId="@Model.GymID"
+                           asp-route-supplementId="@supplement.SupplementID"
+                           asp-route-quantity="@supplement.Quantity">
+                            
+                            Update
+                        </a>
+
+
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+
+</div>
+
+<div>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.GymID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-primary" asp-action="Index" asp-controller="Clients" asp-route-gymid="@Model.GymID">Get Clients</a> |
+
+</div>
+
+
+

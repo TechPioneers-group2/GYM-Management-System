@@ -3,11 +3,9 @@ using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using NuGet.Common;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace GYM_Management_System.Models.Services
+
 {
     /// <summary>
     /// Service for managing user-related operations using Identity.
@@ -64,7 +62,7 @@ namespace GYM_Management_System.Models.Services
         /// <param name="modelState">The ModelStateDictionary to store validation errors.</param>
         /// <param name="User">The ClaimsPrincipal user.</param>
         /// <returns>The registered admin user data.</returns>
-        public async Task<UserDTO> RegisterAdmin(RegisterAdminDTO registerAdminDTO, ModelStateDictionary modelState, ClaimsPrincipal User)
+        public async Task<UserDTO> RegisterAdmin(RegisterAdminDTO registerAdminDTO, ModelStateDictionary modelState)
         {
             var user = new ApplicationUser()
             {
@@ -76,7 +74,13 @@ namespace GYM_Management_System.Models.Services
             var result = await _userManager.CreateAsync(user, registerAdminDTO.Password);
             if (result.Succeeded)
             {
-                await _userManager.AddToRolesAsync(user, registerAdminDTO.Roles);
+
+                var Roles = new List<string>
+            {
+                "Admin"
+            };
+
+                await _userManager.AddToRolesAsync(user, Roles);
                 return new UserDTO
                 {
                     Id = user.Id,
@@ -103,13 +107,15 @@ namespace GYM_Management_System.Models.Services
         /// <param name="modelState">The ModelStateDictionary to store validation errors.</param>
         /// <param name="claimsPrincipal">The ClaimsPrincipal user.</param>
         /// <returns>The registered employee user data.</returns>
-        public async Task<UserDTO> RegisterEmployee(RegisterEmployeeDTO registerEmployeeDTO, ModelStateDictionary modelState, ClaimsPrincipal claimsPrincipal)
+        public async Task<UserDTO> RegisterEmployee(RegisterEmployeeDTO registerEmployeeDTO, ModelStateDictionary modelState)
         {
+
             var user = new ApplicationUser()
             {
                 UserName = registerEmployeeDTO.UserName,
                 PhoneNumber = registerEmployeeDTO.PhoneNumber,
                 Email = registerEmployeeDTO.Email,
+
             };
 
             var result = await _userManager.CreateAsync(user, registerEmployeeDTO.Password);
@@ -141,7 +147,13 @@ namespace GYM_Management_System.Models.Services
                     await _context.SaveChangesAsync();
 
                 }
-                await _userManager.AddToRolesAsync(user, registerEmployeeDTO.Roles);
+
+                List<string> Roles = new List<string>
+                {
+                    "Employee"
+                };
+
+                await _userManager.AddToRolesAsync(user, Roles);
                 return new UserDTO()
                 {
                     Id = user.Id,
@@ -160,7 +172,7 @@ namespace GYM_Management_System.Models.Services
         /// <param name="modelState">The ModelStateDictionary to store validation errors.</param>
         /// <param name="claimsPrincipal">The ClaimsPrincipal user.</param>
         /// <returns>The registered client user data.</returns>
-        public async Task<UserDTO> RegisterUser(RegisterClientDTO registerClientDTO, ModelStateDictionary modelState, ClaimsPrincipal claimsPrincipal)
+        public async Task<UserDTO> RegisterUser(RegisterClientDTO registerClientDTO, ModelStateDictionary modelState)
         {
             var user = new ApplicationUser()
             {
@@ -201,7 +213,13 @@ namespace GYM_Management_System.Models.Services
                     await _context.SaveChangesAsync();
 
                 }
-                await _userManager.AddToRolesAsync(user, registerClientDTO.Roles);
+
+                var Roles = new List<string>
+            {
+                "Client"
+            };
+
+                await _userManager.AddToRolesAsync(user, Roles);
                 return new UserDTO()
                 {
                     Id = user.Id,
