@@ -7,8 +7,16 @@
         <div class="text-center">
             <h2 class="section-heading text-uppercase">Our Branshes</h2>
             <h3 class="section-subheading text-muted">Check the Branches</h3>
-           
-
+            @await Component.InvokeAsync("GetAllGyms")
+        </div>
+    </div>
+</section>
+<section class="page-section bg-dark" id="Supplements">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Our Supplements</h2>
+            <h3 class="section-subheading text-muted">Check the Supplements</h3>
+            @await Component.InvokeAsync("GetAllSupplements")
         </div>
     </div>
 </section>
