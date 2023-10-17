@@ -12,6 +12,7 @@ namespace GYM_Management_System.Models.DTOs
         public int CurrentCapacity { get; set; }
         public string? ActiveHours { get; set; }
         public string? Notification { get; set; }
+        public string? imageURL { get; set; }
 
         //NP
 
@@ -29,6 +30,7 @@ namespace GYM_Management_System.Models.DTOs
         public int CurrentCapacity { get; set; }
         public string? ActiveHours { get; set; }
         public string? Notification { get; set; }
+        public string? imageURL { get; set; }
 
         //NP
 
@@ -47,6 +49,7 @@ namespace GYM_Management_System.Models.DTOs
         public int CurrentCapacity { get; set; }
         public string? ActiveHours { get; set; }
         public string? Notification { get; set; }
+        public string? imageURL { get; set; }
     }
 
 
@@ -57,15 +60,16 @@ namespace GYM_Management_System.Models.DTOs
         public int CurrentCapacity { get; set; }
         public string? ActiveHours { get; set; }
         public string? Notification { get; set; }
+        public string? imageURL { get; set; }
 
 
     }
 
-	public class GymBaseDto
-	{
-		public int GymID { get; set; }
-		public string? Name { get; set; }
+    public class GymBaseDto
+    {
+        public int GymID { get; set; }
+        public string? Name { get; set; }
 
 
-	}
+    }
 }
