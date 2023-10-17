@@ -16,6 +16,7 @@ namespace gym_management_system_front_end.Controllers
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = BaseAdress;
         }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -27,8 +28,10 @@ namespace gym_management_system_front_end.Controllers
                 equipments = JsonConvert.DeserializeObject<List<EquipmentViewModel>>(data);
 
             }
+
             return View(equipments);
         }
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -41,72 +44,92 @@ namespace gym_management_system_front_end.Controllers
             if (file != null)
             {
                 var streamcontent = new StreamContent(file.OpenReadStream());
+
                 streamcontent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
 
-                var content = new MultipartFormDataContent
+                var imageContent = new MultipartFormDataContent
                 {
                     { streamcontent, "file", file.FileName }
                 };
 
-                var response = _httpClient.PostAsync(_httpClient.BaseAddress + "/Home/AddImageToCloud", content).Result;
+                var imageResponse = await _httpClient.PostAsync(_httpClient.BaseAddress + "/Methods/AddImageToCloud", imageContent);
 
-                equipment.PhotoUrl = response.Content.ReadAsStringAsync().Result;
+                equipment.PhotoUrl = await imageResponse.Content.ReadAsStringAsync();
             }
 
             var equipmentJson = JsonConvert.SerializeObject(equipment);
 
-            var content2 = (new StringContent(equipmentJson, Encoding.UTF8, "application/json"));
+            var jsonContent = (new StringContent(equipmentJson, Encoding.UTF8, "application/json"));
 
-            var response2 = _httpClient.PostAsync(_httpClient.BaseAddress + "/GymEquipments/PostGymEquipment", content2).Result;
+            var jsonResponse = _httpClient.PostAsync(_httpClient.BaseAddress + "/GymEquipments/PostGymEquipment", jsonContent).Result;
 
-            if (response2.IsSuccessStatusCode)
+            if (jsonResponse.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index", "Equipment");
             }
+
             else
             {
-                throw new Exception(response2.StatusCode.ToString());
+                throw new Exception(jsonResponse.StatusCode.ToString());
             }
         }
+
         [HttpGet]
         public IActionResult Edit(int id)
         {
             EquipmentViewModel equipment = new EquipmentViewModel();
             HttpResponseMessage response = _httpClient.GetAsync($"{_httpClient.BaseAddress}/GymEquipments/GetGymEquipment/{id}").Result;
+
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
                 equipment = JsonConvert.DeserializeObject<EquipmentViewModel>(data);
-
-
             }
+
             return View(equipment);
         }
+
         [HttpPost]
-        public IActionResult Edit(int id, EquipmentViewModel equipment)
+        public async Task<IActionResult> Edit(int id, EquipmentViewModel equipment, IFormFile file)
         {
-            if (ModelState.IsValid)
+
+            if (file != null)
             {
-                // Serialize the equipment object to JSON
-                var equipmentJson = JsonConvert.SerializeObject(equipment);
+                var streamcontent = new StreamContent(file.OpenReadStream());
 
-                // Create a StringContent object with JSON data
-                var content = new StringContent(equipmentJson, Encoding.UTF8, "application/json");
+                streamcontent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
 
-                // Send a POST request to the API to create a new equipment
-                var response = _httpClient.PutAsync($"{_httpClient.BaseAddress}/GymEquipments/PutGymEquipment/{id}", content).Result;
-
-                if (response.IsSuccessStatusCode)
+                var imageContent = new MultipartFormDataContent
                 {
-                    // Equipment created successfully, you can redirect to the equipment list or a success page.
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    // Handle the case where creating the equipment was not successful.
-                    ModelState.AddModelError(string.Empty, "Error Editing equipment.");
-                }
+                    { streamcontent, "file", file.FileName }
+                };
+
+                var imageResponse = await _httpClient.PostAsync(_httpClient.BaseAddress + "/Methods/AddImageToCloud", imageContent);
+
+                equipment.PhotoUrl = await imageResponse.Content.ReadAsStringAsync();
             }
+
+            // Serialize the equipment object to JSON
+            var equipmentJson = JsonConvert.SerializeObject(equipment);
+
+            // Create a StringContent object with JSON data
+            var jsonContent = new StringContent(equipmentJson, Encoding.UTF8, "application/json");
+
+            // Send a POST request to the API to create a new equipment
+            var jsonResponse = _httpClient.PutAsync($"{_httpClient.BaseAddress}/GymEquipments/PutGymEquipment/{id}", jsonContent).Result;
+
+            if (jsonResponse.IsSuccessStatusCode)
+            {
+                // Equipment created successfully, you can redirect to the equipment list or a success page.
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                // Handle the case where creating the equipment was not successful.
+                ModelState.AddModelError(string.Empty, "Error Editing equipment.");
+            }
+
+
             return View(equipment);
         }
 
@@ -121,6 +144,7 @@ namespace gym_management_system_front_end.Controllers
                 string data = response.Content.ReadAsStringAsync().Result;
                 equipment = JsonConvert.DeserializeObject<EquipmentViewModel>(data);
             }
+
             return View(equipment);
         }
 
@@ -143,7 +167,8 @@ namespace gym_management_system_front_end.Controllers
                     ModelState.AddModelError(string.Empty, "Error Deleting equipment.");
                 }
             }
-            return View(Index);
+
+            return View("Index", "Equipment");
         }
     }
 }

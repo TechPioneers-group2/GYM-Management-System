@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GYM_Management_System.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    public class HomeController : ControllerBase
+    public class MethodsController : ControllerBase
     {
         private readonly IAzureBlobStorageService _azureBlobStorageService;
 
-        public HomeController(IAzureBlobStorageService azure)
+        public MethodsController(IAzureBlobStorageService azure)
         {
             _azureBlobStorageService = azure;
         }

@@ -98,5 +98,12 @@ namespace GYM_Management_System.Controllers
 
             return NoContent();
         }
+
+        public async Task<string> AddImageToCloud(IFormFile file)
+        {
+            var x = await _azureBlobStorageService.UploadAsync(file);
+
+            return x;
+        }
     }
 }

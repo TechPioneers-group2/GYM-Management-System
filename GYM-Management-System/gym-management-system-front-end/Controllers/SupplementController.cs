@@ -1,5 +1,4 @@
 ﻿using gym_management_system_front_end.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
