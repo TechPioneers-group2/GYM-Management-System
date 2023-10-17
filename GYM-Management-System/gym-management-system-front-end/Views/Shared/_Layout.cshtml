@@ -29,7 +29,10 @@
         <div class="navbar-collapse d-md-inline-flex  collapse fw-bold fs-4 w-100">
             <ul class="navbar-nav flex-grow-1">
                 <li class="nav-item">
-                    <a class="nav-link text-white text-center text-nowrap" asp-area="" asp-controller="Gyms" asp-action="Index">Gyms</a>
+                    <a class="nav-link text-white text-center text-nowrap" href="#Gyms">Gyms</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white text-center text-nowrap" href="#Supplements">Supplements</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white text-center text-nowrap" asp-area="" asp-controller="User" asp-action="Login">Login</a>
@@ -43,19 +46,19 @@
             </ul>
         </div>
     </nav>
-    <header class="masthead">
+    <header class="masthead vh-100 min-vh-100 ">
         <div class="container">
             <div class="masthead-subheading">Welcome To Our Gym!</div>
             <div class="masthead-heading text-uppercase">Are you ready?</div>
             <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
         </div>
     </header>
-    <div class="container">
+
         <main role="main" class="pb-3">
             <partial name="_Notification" />
             @RenderBody()
         </main>
-    </div>
+
 
     <footer class="footer py-4">
         <div class="container">
