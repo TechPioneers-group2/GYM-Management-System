@@ -5,20 +5,65 @@
 	var gymList = new SelectList(ViewBag.gymList, "GymID", "Name");
 }
 
+<style>
+	.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
 
+.form-group {
+    margin-right: 10px; /* Adjust the margin as needed for spacing */
+}
+
+label {
+    display: flex;
+    align-items: center;
+}
+
+/* Style the custom button */
+.custom-button {
+    background-color: #FF771C;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Change button color on hover */
+.custom-button:hover {
+    background-color: #FF9900;
+}
+select{
+		color: white;
+}
+	select:hover {
+		border-color: #FF771C;
+		
+	}
+
+</style>
 <div class="">
-	<div>
-		<a class="" asp-controller="Employees" asp-action="Create">Register Employee </a>
-		<form method="Post" asp-controller="Employees" asp-action="GetEmployeesByGymId">
+	
+		<div>
+			<form method="Post" asp-controller="Employees" asp-action="GetEmployeesByGymId">
+				<div class="form-row">
+					<div class="form-group">
+						<label for="gymId">Gym</label>
+						<select class="form-select" asp-items="@gymList" id="gymId" name="gymId"></select>
+					</div>
+					<div class="form-group">
+						<input type="submit" value="Search" class="custom-button" />
+					</div>
+				</div>
+			</form>
 
-			<div class="col-md-12 form-group">
-				<label> Gym</label>
-				<select asp-items="@gymList" id="gymId" name="gymId"></select>
-			</div>
-			<div class="form-group form-group-margin form-header-3">
-				<input type="submit" value="Search" />
-			</div>
-		</form>
+
+
+
 	</div>
 	@if (ViewBag.Employees == "All")
 	{
@@ -80,3 +125,5 @@
 		</tbody>
 	</table>
 </div>
+
+
