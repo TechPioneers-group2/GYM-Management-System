@@ -82,6 +82,21 @@ namespace GYM_Management_System.Models.Services
         public async Task<EmployeeDTO> GetEmployee(int id)
         {
             var employee = await _db.Employees
+               .Select(emp=> new EmployeeDTO
+               {
+				   EmployeeID = emp.EmployeeID,
+				   GymID = emp.GymID,
+				   Name = emp.Name,
+				   JobDescription = emp.JobDescription,
+				   IsAvailable = emp.IsAvailable,
+				   WorkingDays = emp.WorkingDays,
+				   WorkingHours = emp.WorkingHours,
+				   Salary = emp.Salary,
+                   gymBaseDto= new GymBaseDto() { 
+                   GymID=emp.GymID,
+                   Name=emp.Name
+                   }
+			   })
                 .FirstOrDefaultAsync(em => em.EmployeeID == id);
             if (employee == null)
             {
@@ -98,7 +113,7 @@ namespace GYM_Management_System.Models.Services
                 WorkingHours = employee.WorkingHours,
                 Salary = employee.Salary,
             };
-            return employeeDTO;
+            return employee;
         }
 
         /// <summary>
@@ -107,27 +122,43 @@ namespace GYM_Management_System.Models.Services
         /// <returns>A list of employees.</returns>
         public async Task<List<EmployeeDTO>> GetEmployees()
         {
-            List<Employee> employees = await _db.Employees
-                .Include(em => em.Gym).ToListAsync();
+            var employees = await _db.Employees
+                .Select(emp => new EmployeeDTO
+                {
+                    EmployeeID = emp.EmployeeID,
+                    GymID = emp.GymID,
+                    Name = emp.Name,
+                    JobDescription = emp.JobDescription,
+                    IsAvailable = emp.IsAvailable,
+                    WorkingDays = emp.WorkingDays,
+                    WorkingHours = emp.WorkingHours,
+                    Salary = emp.Salary,
+                    gymBaseDto = new GymBaseDto()
+                    {
+                        GymID = emp.Gym.GymID,
+                        Name = emp.Gym.Name
+                    }
+                })
+                .ToListAsync();
             if (employees != null)
             {
-                List<EmployeeDTO> employeeDTOs = new List<EmployeeDTO>();
-                foreach (Employee employee in employees)
-                {
-                    EmployeeDTO employeeDTO = new EmployeeDTO()
-                    {
-                        EmployeeID = employee.EmployeeID,
-                        GymID = employee.GymID,
-                        Name = employee.Name,
-                        JobDescription = employee.JobDescription,
-                        WorkingDays = employee.WorkingDays,
-                        WorkingHours = employee.WorkingHours,
-                        Salary = employee.Salary,
-                        IsAvailable = employee.IsAvailable
-                    };
-                    employeeDTOs.Add(employeeDTO);
-                }
-                return employeeDTOs;
+                //List<EmployeeDTO> employeeDTOs = new List<EmployeeDTO>();
+                //foreach (Employee employee in employees)
+               // {
+                 //   EmployeeDTO employeeDTO = new EmployeeDTO()
+                 //   {
+                      //  EmployeeID = employee.EmployeeID,
+                      //  GymID = employee.GymID,
+                      //  Name = employee.Name,
+                      ////  JobDescription = employee.JobDescription,
+                      ///  WorkingDays = employee.WorkingDays,
+                      //  WorkingHours = employee.WorkingHours,
+                     //   Salary = employee.Salary,
+                     //   IsAvailable = employee.IsAvailable
+                    ///};
+                   // employeeDTOs.Add(employeeDTO);
+              //  }
+                return employees;
             }
             return null;
         }
@@ -137,29 +168,45 @@ namespace GYM_Management_System.Models.Services
         /// </summary>
         /// <param name="gymId">The ID of the gym.</param>
         /// <returns>A list of employees in the specified gym.</returns>
-        public async Task<List<GetEmployeesByGymId>> GetEmployeesByGymId(int gymId)
+        public async Task<List<EmployeeDTO>> GetEmployeesByGymId(int gymId)
         {
-            List<Employee> employees = await _db.Employees
-                .Where(em => em.GymID == gymId)
+            var employees = await _db.Employees
+				 .Select(emp => new EmployeeDTO
+				{
+					EmployeeID = emp.EmployeeID,
+					GymID = emp.GymID,
+					Name = emp.Name,
+					JobDescription = emp.JobDescription,
+					IsAvailable = emp.IsAvailable,
+					WorkingDays = emp.WorkingDays,
+					WorkingHours = emp.WorkingHours,
+					Salary = emp.Salary,
+					gymBaseDto = new GymBaseDto()
+					{
+						GymID = emp.Gym.GymID,
+						Name = emp.Gym.Name
+					}
+				})
+				.Where(em => em.GymID == gymId)
                 .ToListAsync();
             if (employees != null)
             {
-                List<GetEmployeesByGymId> employeesByIds = new List<GetEmployeesByGymId>();
-                foreach (Employee employee in employees)
-                {
-                    GetEmployeesByGymId em = new GetEmployeesByGymId()
-                    {
-                        EmployeeID = employee.EmployeeID,
-                        Name = employee.Name,
-                        JobDescription = employee.JobDescription,
-                        IsAvailable = employee.IsAvailable,
-                        WorkingDays = employee.WorkingDays,
-                        WorkingHours = employee.WorkingHours,
-                        Salary = employee.Salary,
-                    };
-                    employeesByIds.Add(em);
-                }
-                return employeesByIds;
+                //List<GetEmployeesByGymId> employeesByIds = new List<GetEmployeesByGymId>();
+                //foreach (Employee employee in employees)
+               // {
+                   // GetEmployeesByGymId em = new GetEmployeesByGymId()
+                   // {
+                        //EmployeeID = employee.EmployeeID,
+                       // Name = employee.Name,
+                       // JobDescription = employee.JobDescription,
+                       // IsAvailable = employee.IsAvailable,
+                       // WorkingDays = employee.WorkingDays,
+                      //  WorkingHours = employee.WorkingHours,
+                      //  Salary = employee.Salary,
+                  //  };
+                  //  employeesByIds.Add(em);
+               // }
+                return employees;
             }
             return null;
         }

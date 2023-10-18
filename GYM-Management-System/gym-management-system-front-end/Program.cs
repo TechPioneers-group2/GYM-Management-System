@@ -1,5 +1,4 @@
-using GYM_Management_System.Data;
-using Microsoft.EntityFrameworkCore;
+using gym_management_system_front_end.Controllers;
 
 namespace gym_management_system_front_end
 {
@@ -13,7 +12,10 @@ namespace gym_management_system_front_end
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddHttpClient();
-           
+
+            builder.Services.AddTransient<GymsController>();
+            builder.Services.AddTransient<SupplementController>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

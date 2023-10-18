@@ -1,48 +1,7 @@
-﻿@model IEnumerable<GetEmployeesByGymId>
+﻿
+<div>
+    
 
-@{
-	ViewData["Title"] = "Register Employees";
-}
-
-
-<div class="">
-
-	<table class="table table-dark table-hover">
-		<thead>
-			<tr>
-				<th scope="col">Employee ID</th>
-				<th scope="col">Employee Name</th>
-				<th scope="col">Details</th>
-				<th></th>
-				<th></th>
-
-			</tr>
-		</thead>
-		<tbody>
-			@foreach (var employee in Model)
-			{
-				<tr>
-					<th scope="row">
-						@employee.EmployeeID
-					</th>
-					<td>
-						@employee.Name
-					</td>
-
-
-					<td>
-
-						<a class="" asp-controller="Employees" asp-action="GetEmployee" asp-route-id="@employee.EmployeeID">Details</a>
-
-					</td>
-					<td>
-						<a class="" asp-controller="Employees" asp-action="Edit" asp-route-id="@employee.EmployeeID">Edit</a>
-					</td>
-					<td>
-						<a class="" asp-controller="Employees" asp-action="Delete" asp-route-id="@employee.EmployeeID" onclick="return confirm('Are You Sure that You Want To Delete The Employee @employee.Name  ?')">Delete</a>
-					</td>
-				</tr>
-			}
-		</tbody>
-	</table>
+<partial name="_EmployeesTable" />
+    <a asp-action="Index">Back to List</a>
 </div>
