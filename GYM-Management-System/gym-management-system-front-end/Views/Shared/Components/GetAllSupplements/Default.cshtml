@@ -1,29 +1,33 @@
-﻿
 @model IEnumerable<gym_management_system_front_end.Models.SupplementViewModel>
-@using Microsoft.AspNetCore.Mvc
-@using Microsoft.AspNetCore.Html
-@using Newtonsoft.Json
-@using System.Net.Http
-@using System.Web
 
 <div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col-md-4 mb-4 supplementscard">
-            <div class="card">
-                <img src="@item.imageURL" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title text-dark fw-bold">@item.Name</h5>
-                    <p class="text-dark fw-bold">SEE MORE</p>
+    @{
+        int counter = 0;
+        foreach (var item in Model)
+        {
+            if (counter < 6)
+            {
+                <div class="col-md-4 mb-4 supplementscard">
+                    <div class="card">
+                        <img src="@item.imageURL" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title text-dark fw-bold">@item.Name</h5>
+                            <p class="text-info fw-bold">SEE MORE</p>
+                        </div>
+                    </div>
                 </div>
-               
-            </div>
-        </div>
+                counter++;
+            }
+            else
+            {
+                break;
+            }
+        }
     }
 </div>
+<div class="d-grid gap-2">
+    <button class="btn btn-lg btn-outline-info seeMoreBtn" type="button">SEE MORE<i class="bi bi-arrow-right ms-3 fw-bold"></i></button>
+</div>
 
-
-
-@*Commint*@
 
 <link rel="stylesheet" href="./css/site.css">
