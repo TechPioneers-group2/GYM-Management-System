@@ -78,7 +78,7 @@ namespace Gym_System_test
             var supplement = new Supplement()
             {
                 Name = "Test",
-                Price = "Test",
+                Price = 60,
                 Description = "Test",
             };
             _db.Supplements.Add(supplement);
@@ -97,7 +97,7 @@ namespace Gym_System_test
             }
         }
 
-        protected async Task UpdateSupplementForTest(int supplementId, string newName, string newPrice, string newDescription)
+        protected async Task UpdateSupplementForTest(int supplementId, string newName, double newPrice, string newDescription)
         {
             var supplementToUpdate = await _db.Supplements.FindAsync(supplementId);
             if (supplementToUpdate != null)

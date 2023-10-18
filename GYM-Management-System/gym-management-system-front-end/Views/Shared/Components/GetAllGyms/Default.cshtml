@@ -6,7 +6,7 @@
             <a href="@Url.Action("Details", "Gyms", new { id = item.GymID })">
                 <div class="card-inner">
                     <div class="card-front">
-                        <img src="https://img.freepik.com/premium-photo/dark-gym-with-red-light-wall-bar-with-weights-it_911201-3356.jpg?w=740" class="card-img-top" alt="...">
+                        <img src="@item.imageURL" class="card-img-top" alt="...">
                     </div>
                     <div class="card-back">
                         <h5 class="card-title mb-2 fw-bold text-warning">@item.Name</h5>

@@ -45,13 +45,13 @@ namespace Gym_System_test
             var supplementService = new SupplementService(_db);
 
             // Act
-            await supplementService.UpdateSupplement(supplement.SupplementID, new CreatSupplementDTO { Name = "New Name", Price = "New Price" });
+            await supplementService.UpdateSupplement(supplement.SupplementID, new CreatSupplementDTO { Name = "New Name", Price = 60 });
 
             // Assert
             var updatedSupplement = await supplementService.GetSupplementById(supplement.SupplementID);
             Assert.NotNull(updatedSupplement);
             Assert.Equal("New Name", updatedSupplement.Name);
-            Assert.Equal("New Price", updatedSupplement.Price);
+            Assert.Equal(60, updatedSupplement.Price);
         }
     }
 }

@@ -58,7 +58,8 @@ namespace GYM_Management_System.Data
                     Address = "Amman - University Street - Building 25",
                     MaxCapacity = "125",
                     CurrentCapacity = 1,
-                    Notification = "Everything ok"
+                    Notification = "Everything ok",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/AmmanGym.png"
                 },
                 new Gym
                 {
@@ -68,7 +69,8 @@ namespace GYM_Management_System.Data
                     Address = "Zarqa - 36th Street - Building 20",
                     MaxCapacity = "100",
                     CurrentCapacity = 1,
-                    Notification = "Everything ok"
+                    Notification = "Everything ok",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/ZarqaGym.png"
                 },
                 new Gym
                 {
@@ -78,7 +80,8 @@ namespace GYM_Management_System.Data
                     Address = "Irbid - Yarmouk University Street - Building 30",
                     MaxCapacity = "150",
                     CurrentCapacity = 0,
-                    Notification = "Under maintenance until 9-9-2023 AD"
+                    Notification = "Under maintenance until 9-9-2023 AD",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/IrbidGym.png"
                 }
             );
 
@@ -87,64 +90,73 @@ namespace GYM_Management_System.Data
                 {
                     SupplementID = 1,
                     Name = "Whey Protein Powder",
-                    Price = "80 JD",
+                    Price = 100,
                     Description = "Whey protein is a mixture of proteins isolated from whey, which is the liquid part of milk that separates during cheese production.\r\nMilk actually contains two main types of protein: casein (80%) and whey (20%).",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/WheyProteinPowder.png",
                 },
                 new Supplement
                 {
                     SupplementID = 2,
                     Name = "Creatine Monohydrate",
-                    Price = "40 JD",
+                    Price = 90,
                     Description = "Creatine is a combination of three different amino acids: glycine, arginine, and methionine.",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/CreatineMonohydrate.png",
                 },
                 new Supplement
                 {
                     SupplementID = 3,
                     Name = "Branched-Chain Amino Acids (BCAAs)",
-                    Price = "30 JD",
+                    Price = 45,
                     Description = "Branched-Chain Amino Acids (BCAAs) are a group of three essential amino acids: leucine, isoleucine, and valine. They are called branched-chain because they are the only three amino acids to have a chain that branches off to one side.",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/Branched-ChainAminoAcidsBCAAs.png",
                 },
                 new Supplement
                 {
                     SupplementID = 4,
                     Name = "Pre-Workout Blend",
-                    Price = "50 JD",
+                    Price = 60,
                     Description = "A pre-workout blend is a class of powdered drink mixes that are consumed 20-30 minutes prior to the beginning of a rigorous workout to increase exercise performance.",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/Pre-WorkoutBlend.png",
                 },
                 new Supplement
                 {
                     SupplementID = 5,
                     Name = "BCAA Energy Drink",
-                    Price = "35 JD",
+                    Price = 5,
                     Description = "BCAA Energy Drink is a powerful blend of Branched-Chain Amino Acids (BCAAs), providing energy and supporting muscle recovery during workouts.",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/BCAAEnergyDrink.png",
                 },
                 new Supplement
                 {
                     SupplementID = 6,
                     Name = "Pre-Workout Nitric Oxide Booster",
-                    Price = "60 JD",
+                    Price = 60,
                     Description = "This Pre-Workout Nitric Oxide Booster is designed to enhance focus, increase energy levels, and improve blood flow for optimal workout performance.",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/Pre-WorkoutNitricOxideBooster.png",
                 },
                 new Supplement
                 {
                     SupplementID = 7,
                     Name = "Glutamine Capsules",
-                    Price = "25 JD",
+                    Price = 25,
                     Description = "Glutamine Capsules provide essential amino acids that aid in muscle recovery, immune system support, and reducing muscle soreness after intense workouts.",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/GlutamineCapsules.png",
                 },
                 new Supplement
                 {
                     SupplementID = 8,
                     Name = "Omega-3 Fish Oil",
-                    Price = "45 JD",
+                    Price = 17,
                     Description = "Omega-3 Fish Oil supplements are rich in essential fatty acids that support cardiovascular health, joint function, and muscle recovery.",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/Omega-3FishOil.png",
                 },
                 new Supplement
                 {
                     SupplementID = 9,
                     Name = "L-Carnitine Fat Burner",
-                    Price = "55 JD",
+                    Price = 17,
                     Description = "L-Carnitine Fat Burner helps convert stored body fat into energy, making it an effective supplement for those looking to manage weight and increase endurance.",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/LCarnitineFatBurner.png",
                 }
 
             );

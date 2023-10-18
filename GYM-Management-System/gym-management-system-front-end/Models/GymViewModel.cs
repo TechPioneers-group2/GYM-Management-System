@@ -48,7 +48,7 @@ namespace gym_management_system_front_end.Models
     public class GetGymSupplementDTO
     {
         public string Name { get; set; }
-        public string Price { get; set; }
+        public double Price { get; set; }
         public string Description { get; set; }
         public string? imageURL { get; set; }
     }
@@ -86,6 +86,7 @@ namespace gym_management_system_front_end.Models
                 CurrentCapacity = gym.CurrentCapacity,
                 ActiveHours = gym.ActiveHours,
                 Notification = gym.Notification,
+                imageURL = gym.imageURL,
             };
         }
 
@@ -100,6 +101,7 @@ namespace gym_management_system_front_end.Models
                 CurrentCapacity = gym.CurrentCapacity,
                 ActiveHours = gym.ActiveHours,
                 Notification = gym.Notification,
+                imageURL = gym.imageURL,
             };
         }
 

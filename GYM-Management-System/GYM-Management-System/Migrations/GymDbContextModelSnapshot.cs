@@ -91,16 +91,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "65b5ec71-64eb-4c2a-9ae7-4734b81ca1a8",
+                            ConcurrencyStamp = "66b7f3d1-7635-48ff-8842-a02ff1696aa1",
                             Email = "adminUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMINUSER@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJSG2hX+CNAJylJqf8bNffOofIF7lLR8sNYadSkJC7oP+qU8RGJpTNmg3Zyuw4cSjw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEM36vw45qRPqyRId/OU2IRRKJ/A3fLnJ9zW/mUV4wwFWeAQEvLD2LaSHJumK0ugUpg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "93cc485d-7bfa-4240-b58b-cdda6d9bbc24",
+                            SecurityStamp = "6a218e37-c083-429c-9369-775bd757676f",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
@@ -108,16 +108,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7a7f1dbf-311d-40a9-b405-56076c52775a",
+                            ConcurrencyStamp = "e5f1e8ec-9801-4f8e-8557-78a8f8a9c392",
                             Email = "employeeUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "EMPLOYEEUSER@EXAMPLE.COM",
                             NormalizedUserName = "EMPLOYEE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGOFH2/Gnh7pw8l/JMFRuzdT04NUOpq+RNEeN9LN1dNsDw/uewsBS0Bj5y0rQ0x4AQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENFCzX2CCfwCFLfeg+bXZcnJJoORchxp+I/gu6PoZbsBEoVGtpRo+74ap9rUwByvSA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7cd68f51-434d-4ff5-9fde-1a18ac7a4f2c",
+                            SecurityStamp = "9c2230a4-1c82-4cd0-8785-68f53364edbe",
                             TwoFactorEnabled = false,
                             UserName = "Employee"
                         },
@@ -125,16 +125,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "71880366-5124-4966-9c9d-32fa37cff955",
+                            ConcurrencyStamp = "43ddc116-d59a-4cf0-bf29-a96832ce020f",
                             Email = "ClientUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENTUSER@EXAMPLE.COM",
                             NormalizedUserName = "CLIENT",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIjgJVxTJs9l0VTLmJhxHnEQbpZITpzqWtHoOGXcTjRAeqkLTCwt3wczOp1RupcKVQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELWhjh7HGYvN0rBCYAnRRQ7oErX5g6twzeH1Ot+CRY6b43sQDygIzdJu4ly92K06Zw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9a02a880-541e-410c-8dc4-d02b0f6ec2ef",
+                            SecurityStamp = "14ebb60a-7bd0-4745-8fd4-cc69778ea5ed",
                             TwoFactorEnabled = false,
                             UserName = "Client"
                         },
@@ -142,16 +142,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "768a5934-71ac-4e9d-abac-dd05c8e14aa8",
+                            ConcurrencyStamp = "ca66eb53-ff9d-49d2-b3e6-36b0f2ba8cb5",
                             Email = "Client2User@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENT2USER@EXAMPLE.COM",
                             NormalizedUserName = "CLIENT2",
-                            PasswordHash = "AQAAAAIAAYagAAAAEChBnawMX1dlIN9MkVAjcVd09cqoigdxvHL4Rq3IZhBD+8x+Pa6eI3QFdaqxSwhWOw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEsKw0FsZjX+WYIxhPA6SNsWWwpqgGUZJMbf97CrUJ75okDj8L9XjS3T24KmHCkqtQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "46346f8a-c628-4148-a033-d5f0efc883e9",
+                            SecurityStamp = "1d4dcde0-c806-4c3c-90ae-a763d10d37e9",
                             TwoFactorEnabled = false,
                             UserName = "Client2"
                         });
@@ -203,8 +203,8 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             InGym = true,
                             Name = "Client",
-                            SubscriptionDate = new DateTime(2023, 10, 17, 19, 48, 51, 271, DateTimeKind.Local).AddTicks(8198),
-                            SubscriptionExpiry = new DateTime(2024, 4, 17, 19, 48, 51, 271, DateTimeKind.Local).AddTicks(8208),
+                            SubscriptionDate = new DateTime(2023, 10, 18, 18, 14, 40, 276, DateTimeKind.Local).AddTicks(8389),
+                            SubscriptionExpiry = new DateTime(2024, 4, 18, 18, 14, 40, 276, DateTimeKind.Local).AddTicks(8402),
                             SubscriptionTierID = 1,
                             UserId = "3"
                         },
@@ -214,8 +214,8 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             InGym = true,
                             Name = "Client2",
-                            SubscriptionDate = new DateTime(2023, 10, 17, 19, 48, 51, 271, DateTimeKind.Local).AddTicks(8214),
-                            SubscriptionExpiry = new DateTime(2024, 4, 17, 19, 48, 51, 271, DateTimeKind.Local).AddTicks(8214),
+                            SubscriptionDate = new DateTime(2023, 10, 18, 18, 14, 40, 276, DateTimeKind.Local).AddTicks(8409),
+                            SubscriptionExpiry = new DateTime(2024, 4, 18, 18, 14, 40, 276, DateTimeKind.Local).AddTicks(8409),
                             SubscriptionTierID = 1,
                             UserId = "4"
                         });
@@ -327,7 +327,8 @@ namespace GYM_Management_System.Migrations
                             CurrentCapacity = 1,
                             MaxCapacity = "125",
                             Name = "WillPower - Amman",
-                            Notification = "Everything ok"
+                            Notification = "Everything ok",
+                            imageURL = "https://techpioneers.blob.core.windows.net/images/AmmanGym.png"
                         },
                         new
                         {
@@ -337,7 +338,8 @@ namespace GYM_Management_System.Migrations
                             CurrentCapacity = 1,
                             MaxCapacity = "100",
                             Name = "WillPower - Zarqa",
-                            Notification = "Everything ok"
+                            Notification = "Everything ok",
+                            imageURL = "https://techpioneers.blob.core.windows.net/images/ZarqaGym.png"
                         },
                         new
                         {
@@ -347,7 +349,8 @@ namespace GYM_Management_System.Migrations
                             CurrentCapacity = 0,
                             MaxCapacity = "150",
                             Name = "WillPower - Irbid",
-                            Notification = "Under maintenance until 9-9-2023 AD"
+                            Notification = "Under maintenance until 9-9-2023 AD",
+                            imageURL = "https://techpioneers.blob.core.windows.net/images/IrbidGym.png"
                         });
                 });
 
@@ -509,9 +512,8 @@ namespace GYM_Management_System.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Price")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<string>("imageURL")
                         .HasColumnType("nvarchar(max)");
@@ -526,63 +528,72 @@ namespace GYM_Management_System.Migrations
                             SupplementID = 1,
                             Description = "Whey protein is a mixture of proteins isolated from whey, which is the liquid part of milk that separates during cheese production.\r\nMilk actually contains two main types of protein: casein (80%) and whey (20%).",
                             Name = "Whey Protein Powder",
-                            Price = "80 JD"
+                            Price = 100.0,
+                            imageURL = "https://techpioneers.blob.core.windows.net/images/WheyProteinPowder.png"
                         },
                         new
                         {
                             SupplementID = 2,
                             Description = "Creatine is a combination of three different amino acids: glycine, arginine, and methionine.",
                             Name = "Creatine Monohydrate",
-                            Price = "40 JD"
+                            Price = 90.0,
+                            imageURL = "https://techpioneers.blob.core.windows.net/images/CreatineMonohydrate.png"
                         },
                         new
                         {
                             SupplementID = 3,
                             Description = "Branched-Chain Amino Acids (BCAAs) are a group of three essential amino acids: leucine, isoleucine, and valine. They are called branched-chain because they are the only three amino acids to have a chain that branches off to one side.",
                             Name = "Branched-Chain Amino Acids (BCAAs)",
-                            Price = "30 JD"
+                            Price = 45.0,
+                            imageURL = "https://techpioneers.blob.core.windows.net/images/Branched-ChainAminoAcidsBCAAs.png"
                         },
                         new
                         {
                             SupplementID = 4,
                             Description = "A pre-workout blend is a class of powdered drink mixes that are consumed 20-30 minutes prior to the beginning of a rigorous workout to increase exercise performance.",
                             Name = "Pre-Workout Blend",
-                            Price = "50 JD"
+                            Price = 60.0,
+                            imageURL = "https://techpioneers.blob.core.windows.net/images/Pre-WorkoutBlend.png"
                         },
                         new
                         {
                             SupplementID = 5,
                             Description = "BCAA Energy Drink is a powerful blend of Branched-Chain Amino Acids (BCAAs), providing energy and supporting muscle recovery during workouts.",
                             Name = "BCAA Energy Drink",
-                            Price = "35 JD"
+                            Price = 5.0,
+                            imageURL = "https://techpioneers.blob.core.windows.net/images/BCAAEnergyDrink.png"
                         },
                         new
                         {
                             SupplementID = 6,
                             Description = "This Pre-Workout Nitric Oxide Booster is designed to enhance focus, increase energy levels, and improve blood flow for optimal workout performance.",
                             Name = "Pre-Workout Nitric Oxide Booster",
-                            Price = "60 JD"
+                            Price = 60.0,
+                            imageURL = "https://techpioneers.blob.core.windows.net/images/Pre-WorkoutNitricOxideBooster.png"
                         },
                         new
                         {
                             SupplementID = 7,
                             Description = "Glutamine Capsules provide essential amino acids that aid in muscle recovery, immune system support, and reducing muscle soreness after intense workouts.",
                             Name = "Glutamine Capsules",
-                            Price = "25 JD"
+                            Price = 25.0,
+                            imageURL = "https://techpioneers.blob.core.windows.net/images/GlutamineCapsules.png"
                         },
                         new
                         {
                             SupplementID = 8,
                             Description = "Omega-3 Fish Oil supplements are rich in essential fatty acids that support cardiovascular health, joint function, and muscle recovery.",
                             Name = "Omega-3 Fish Oil",
-                            Price = "45 JD"
+                            Price = 17.0,
+                            imageURL = "https://techpioneers.blob.core.windows.net/images/Omega-3FishOil.png"
                         },
                         new
                         {
                             SupplementID = 9,
                             Description = "L-Carnitine Fat Burner helps convert stored body fat into energy, making it an effective supplement for those looking to manage weight and increase endurance.",
                             Name = "L-Carnitine Fat Burner",
-                            Price = "55 JD"
+                            Price = 17.0,
+                            imageURL = "https://techpioneers.blob.core.windows.net/images/LCarnitineFatBurner.png"
                         });
                 });
 
@@ -615,21 +626,21 @@ namespace GYM_Management_System.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c8299033-7c40-4f8e-8088-c46ba6e42ddc",
+                            Id = "02fb8c79-6382-433b-832e-65b3cd03f60b",
                             ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "69bdf35b-af27-421a-aa17-0c3cb3b8fa64",
+                            Id = "3affa93d-c151-4b97-a8af-abf4dd71fd64",
                             ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
-                            Id = "7bb5804a-c312-493e-b8c0-92cea40dbb94",
+                            Id = "34d5330d-3500-470f-8d6b-50efe1d5cb02",
                             ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
                             Name = "Client",
                             NormalizedName = "CLIENT"
@@ -666,63 +677,63 @@ namespace GYM_Management_System.Migrations
                             Id = 10,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "createAdmin",
-                            RoleId = "c8299033-7c40-4f8e-8088-c46ba6e42ddc"
+                            RoleId = "02fb8c79-6382-433b-832e-65b3cd03f60b"
                         },
                         new
                         {
                             Id = 11,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "updateAdmin",
-                            RoleId = "c8299033-7c40-4f8e-8088-c46ba6e42ddc"
+                            RoleId = "02fb8c79-6382-433b-832e-65b3cd03f60b"
                         },
                         new
                         {
                             Id = 12,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "deleteAdmin",
-                            RoleId = "c8299033-7c40-4f8e-8088-c46ba6e42ddc"
+                            RoleId = "02fb8c79-6382-433b-832e-65b3cd03f60b"
                         },
                         new
                         {
                             Id = 13,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "readAdmin",
-                            RoleId = "c8299033-7c40-4f8e-8088-c46ba6e42ddc"
+                            RoleId = "02fb8c79-6382-433b-832e-65b3cd03f60b"
                         },
                         new
                         {
                             Id = 14,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "createEmployee",
-                            RoleId = "69bdf35b-af27-421a-aa17-0c3cb3b8fa64"
+                            RoleId = "3affa93d-c151-4b97-a8af-abf4dd71fd64"
                         },
                         new
                         {
                             Id = 15,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "updateEmployee",
-                            RoleId = "69bdf35b-af27-421a-aa17-0c3cb3b8fa64"
+                            RoleId = "3affa93d-c151-4b97-a8af-abf4dd71fd64"
                         },
                         new
                         {
                             Id = 16,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "readEmployee",
-                            RoleId = "69bdf35b-af27-421a-aa17-0c3cb3b8fa64"
+                            RoleId = "3affa93d-c151-4b97-a8af-abf4dd71fd64"
                         },
                         new
                         {
                             Id = 17,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "updateClient",
-                            RoleId = "7bb5804a-c312-493e-b8c0-92cea40dbb94"
+                            RoleId = "34d5330d-3500-470f-8d6b-50efe1d5cb02"
                         },
                         new
                         {
                             Id = 18,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "readClient",
-                            RoleId = "7bb5804a-c312-493e-b8c0-92cea40dbb94"
+                            RoleId = "34d5330d-3500-470f-8d6b-50efe1d5cb02"
                         });
                 });
 
