@@ -1,23 +1,16 @@
-﻿using Azure;
-using GYM_Management_System.Models;
-using gym_management_system_front_end.Models;
+﻿using gym_management_system_front_end.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
-using System.Linq;
-using System.Text;
-using System.Web;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using CartViewModel = GYM_Management_System.Models.CartViewModel;
 
 namespace gym_management_system_front_end.Controllers
 {
     public class CartController : Controller
     {
 
-        private Uri baseAddress = new Uri("https://localhost:7200/api/Supplements");
+        private Uri baseAddress = new Uri("https://localhost:7200/api/");
 
         private readonly HttpClient _client;
-
 
         public CartController()
         {
@@ -30,27 +23,27 @@ namespace gym_management_system_front_end.Controllers
             var dicCart = JsonConvert.DeserializeObject<Dictionary<int, int>>(cart);
             var cartItems = new List<CartViewModel>();
 
-            foreach(var item in dicCart)
+            foreach (var item in dicCart)
             {
-                var res = await _client.GetAsync(_client.BaseAddress + "/GetSupplement/" + item.Key);
+                var res = await _client.GetAsync(_client.BaseAddress + "Supplements/GetSupplement/" + item.Key);
                 var jsondata = await res.Content.ReadAsStringAsync();
                 var product = JsonConvert.DeserializeObject<SupplementViewModel>(jsondata);
                 int y;
-                dicCart.TryGetValue(product.SupplementID,out y);
+                dicCart.TryGetValue(product.SupplementID, out y);
                 var x = new CartViewModel
                 {
                     SupplementID = product.SupplementID,
-                    imageURL=product.imageURL,
-                    Description=product.Description,
-                    Price=product.Price,
-                    Name=product.Name,
-                    Quantity=y
+                    imageURL = product.imageURL,
+                    Description = product.Description,
+                    Price = product.Price,
+                    Name = product.Name,
+                    Quantity = y
                 };
                 cartItems.Add(x);
             }
 
             return View(cartItems);
-            
+
         }
 
         [HttpPost]
@@ -87,7 +80,7 @@ namespace gym_management_system_front_end.Controllers
                 Expires = DateTime.Now.AddDays(7)
 
             };
-            HttpContext.Response.Cookies.Append("SupplementCart", JsonConvert.SerializeObject(supplement),option) ;
+            HttpContext.Response.Cookies.Append("SupplementCart", JsonConvert.SerializeObject(supplement), option);
 
             string refURL = Request.Headers["Referer"].ToString();
 

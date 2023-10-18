@@ -43,6 +43,7 @@ namespace gym_management_system_front_end.Models
             builder.Services.AddTransient<ISupplement, SupplementService>();
             builder.Services.AddTransient<IEmail, EmailService>();
             builder.Services.AddTransient<IAzureBlobStorageService, AzureBlobStorageService>();
+            builder.Services.AddTransient<IPaymentService, PaymentService>();
 
             builder.Services.AddScoped<jwtTokenServices>();
 

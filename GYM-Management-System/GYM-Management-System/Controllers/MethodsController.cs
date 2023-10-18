@@ -1,4 +1,5 @@
-﻿using GYM_Management_System.Models.Interfaces;
+﻿using GYM_Management_System.Models;
+using GYM_Management_System.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GYM_Management_System.Controllers
@@ -9,9 +10,12 @@ namespace GYM_Management_System.Controllers
     {
         private readonly IAzureBlobStorageService _azureBlobStorageService;
 
-        public MethodsController(IAzureBlobStorageService azure)
+        private readonly IPaymentService _payment;
+
+        public MethodsController(IAzureBlobStorageService azure, IPaymentService payment)
         {
             _azureBlobStorageService = azure;
+            _payment = payment;
         }
 
         public async Task<string> AddImageToCloud(IFormFile file)
@@ -19,6 +23,15 @@ namespace GYM_Management_System.Controllers
             var x = await _azureBlobStorageService.UploadAsync(file);
 
             return x;
+        }
+
+        public async Task<IActionResult> Payment(List<CartViewModel> carts)
+        {
+            var session = await _payment.PaymentProcess(carts);
+
+            Response.Headers.Add("Location", session.Url);
+
+            return new StatusCodeResult(303);
         }
     }
 }
