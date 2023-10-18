@@ -1,0 +1,72 @@
+﻿@model IEnumerable<gym_management_system_front_end.Models.CartViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Your item</h1>
+
+<div class="row">
+    @if (!Model.Any())
+    {
+        <h1>
+            no product added
+        </h1>
+    }
+   
+    @foreach (var item in Model)
+    {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Description</p>
+                        <p class="card-text">Price: $@item.Price</p>
+                    <form method="post" asp-controller="Cart" asp-action="AddToCart" asp-route-supplementID="@item.SupplementID">
+                        <button type="submit" class="btn btn-danger delete-button">
+                              +
+                        </button>
+                    </form>
+                        <p class="card-text">Quantity:@item.Quantity</p>
+                    <form method="post" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-supplementID="@item.SupplementID">
+                        <button type="submit" class="btn btn-danger delete-button">
+                            -
+                        </button>
+                    </form>
+                    </div>
+                   
+                </div>
+            </div>
+    }
+   
+</div>
+
+<form>
+    <button>
+        Purchase
+    </button>
+</form>
+
+<script>
+    document.querySelectorAll(".delete-button").forEach(function (button) {
+        button.addEventListener("click", function () {
+            var x = parseInt(this.getAttribute("data-x"));
+
+            if (x > 1) {
+                x--; // Decrease x
+            } else {
+                // Send the POST request
+                var form = this.closest("form");
+                if (form) {
+                    form.submit();
+                }
+            }
+        });
+    });
+</script>
+
+
+
+
+
+
