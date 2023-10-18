@@ -29,9 +29,7 @@ table-div {
     justify-content: center;
     align-items: center;
 }
-/* Form background and button color */
 
-/* Container for the form */
 .form-container {
     display: flex;
     justify-content: center;
@@ -40,7 +38,6 @@ table-div {
     margin-top: 20px;
 }
 
-/* Form background and styling */
 .form-box {
     background-color:#233242;
     
@@ -50,7 +47,7 @@ table-div {
     max-width: 500px;
 }
 
-/* Input and label styles */
+
 .form-group {
     margin-bottom: 15px;
 }
@@ -60,7 +57,7 @@ table-div {
         margin-bottom: 5px;
     }
 
-    /* Target username, password, and select elements */
+
     .form-group select {
         width: 100%;
         padding: 10px;
@@ -68,7 +65,7 @@ table-div {
         border: 1px solid #FF771C;
         color: white;
     }
-/* Custom select style */
+
 .custom-select {
     position: relative;
 }
@@ -79,11 +76,11 @@ table-div {
         background-color: #0F2537;
         border: 1px solid #FF771C;
         color: white;
-        appearance: none; /* Remove default dropdown arrow on some browsers */
+        appearance: none; 
     }
 
     .custom-select::after {
-        content: "\25BC"; /* Unicode for down arrow */
+        content: "\25BC"; 
         position: absolute;
         top: 12px;
         right: 10px;
@@ -101,7 +98,7 @@ table-div {
     color: white !important;
 }
 
-/* Button style */
+
 .form-group input[type="submit"] {
     background-color: #FF771C !important;
     color: white;
@@ -163,13 +160,13 @@ table-cont {
     margin-bottom: 10px !important;
 }
 
-    /* Add some margin to labels to create space between them */
+  
     .detail-row label {
         margin-right: 10px !important;
         color: white;
     }
 
-    /* Style for labels on the left side */
+ 
     .detail-row label {
         font-weight: bold;
     }
