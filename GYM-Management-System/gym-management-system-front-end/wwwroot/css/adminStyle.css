@@ -1,0 +1,91 @@
+﻿a {
+    color: #FF771C !important;
+}
+
+    a:hover {
+        color: white !important;
+    }
+/* Form background and button color */
+
+/* Container for the form */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+/* Form background and styling */
+.form-box {
+    background-color: #0F2537;
+    padding: 20px;
+    border: 1px solid #FF771C;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Input and label styles */
+.form-group {
+    margin-bottom: 15px;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    /* Target username, password, and select elements */
+    .form-group select {
+        width: 100%;
+        padding: 10px;
+        background-color: #0F2537;
+        border: 1px solid #FF771C;
+        color: white;
+    }
+/* Custom select style */
+.custom-select {
+    position: relative;
+}
+
+    .custom-select select {
+        width: 100%;
+        padding: 10px;
+        background-color: #0F2537;
+        border: 1px solid #FF771C;
+        color: white;
+        appearance: none; /* Remove default dropdown arrow on some browsers */
+    }
+
+    .custom-select::after {
+        content: "\25BC"; /* Unicode for down arrow */
+        position: absolute;
+        top: 12px;
+        right: 10px;
+        color: #FF771C;
+        pointer-events: none;
+    }
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    background-color: #0F2537 !important;
+    border: 1px solid #FF771C !important;
+    color: white !important;
+}
+
+/* Button style */
+.form-group input[type="submit"] {
+    background-color: #FF771C !important;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.text-danger {
+    color: #FF771C !important;
+}
