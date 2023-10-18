@@ -4,70 +4,91 @@
     ViewData["Title"] = "RegisterClient";
 }
 
-<h1>RegisterClient</h1>
-
-<h4>RegisterClientDTO</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="RegisterClient">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
+<div class="container-fluid">
+    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+            <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                <div class="d-flex align-items-center justify-content-center text-center mb-3">
+                    <h3>Register Client</h3>
+                </div>
+
+                <form asp-action="RegisterClient" asp-controller="User">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="UserName" class="form-control" id="floatingInput" placeholder="Username" />
+                        <label asp-for="UserName" for="floatingInput" class="control-label"></label>
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Password" type="password" class="form-control" id="floatingPassword" placeholder="Password" />
+                        <label asp-for="Password" for="floatingPassword" class="control-label"></label>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Email" type="email" class="form-control" id="floatingEmail" placeholder="Email" />
+                        <label asp-for="Email" for="floatingEmail" class="control-label"></label>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="PhoneNumber" type="tel" class="form-control" id="floatingPhone" placeholder="(123) 456-7890" />
+                        <label asp-for="PhoneNumber" for="floatingPhone" class="control-label"></label>
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+
+                    <!-- UserId -->
+                    <div class="form-floating mb-3">
+                        <input asp-for="UserId" class="form-control" id="floatingUserId" />
+                        <label asp-for="UserId" class="control-label"></label>
+                        <span asp-validation-for="UserId" class="text-danger"></span>
+                    </div>
+
+                    <!-- GymID -->
+                    <div class="form-floating mb-3">
+                        <input asp-for="GymID" class="form-control" id="floatingGymId" />
+                        <label asp-for="GymID" class="control-label"></label>
+                        <span asp-validation-for="GymID" class="text-danger"></span>
+                    </div>
+
+                    <!-- Name -->
+                    <div class="form-floating mb-3">
+                        <input asp-for="Name" class="form-control" id="floatingName" />
+                        <label asp-for="Name" class="control-label"></label>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <!-- InGym -->
+                    <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" id="checkInGym" asp-for="InGym" />
+                        <label for="checkInGym" class="form-check-label">@Html.DisplayNameFor(model => model.InGym)</label>
+                    </div>
+
+                    <!-- SubscriptionTierID -->
+                    <div class="form-floating mb-3">
+                        <input asp-for="SubscriptionTierID" type="number" class="form-control" id="floatingSubscriptionTierId" />
+                        <label for="floatingSubscriptionTierId" class="control-label">@Html.DisplayNameFor(model => model.SubscriptionTierID)</label>
+                        <span asp-validation-for="SubscriptionTierID" class="text-danger"></span>
+                    </div>
+
+                    <!-- Submit button -->
+                    <div class="form-group">
+                        <input type="submit" value="Create Account" class="btn btn-primary py-3 w-100 mb-4" />
+                        Already have an Account?
+                        <!-- Link to login page -->
+                        @Html.ActionLink("Sign In", "Login", new { controller = "User"})
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" class="form-control" />
-                <span asp-validation-for="UserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GymID" class="control-label"></label>
-                <input asp-for="GymID" class="form-control" />
-                <span asp-validation-for="GymID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="InGym" /> @Html.DisplayNameFor(model => model.InGym)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="SubscriptionTierID" class="control-label"></label>
-                <input asp-for="SubscriptionTierID" class="form-control" />
-                <span asp-validation-for="SubscriptionTierID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
