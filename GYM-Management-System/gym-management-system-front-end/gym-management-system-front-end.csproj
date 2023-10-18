@@ -19,4 +19,12 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\Admin\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GYM-Management-System\GYM-Management-System.csproj" />
+  </ItemGroup>
+
 </Project>

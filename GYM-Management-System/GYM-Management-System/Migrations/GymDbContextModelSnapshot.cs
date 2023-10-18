@@ -100,7 +100,8 @@ namespace GYM_Management_System.Migrations
                             PasswordHash = "AQAAAAIAAYagAAAAEM36vw45qRPqyRId/OU2IRRKJ/A3fLnJ9zW/mUV4wwFWeAQEvLD2LaSHJumK0ugUpg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6a218e37-c083-429c-9369-775bd757676f",
+                            SecurityStamp = "788ff29d-8171-445b-b880-2ffbe8e94126",
+
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
@@ -108,16 +109,20 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e5f1e8ec-9801-4f8e-8557-78a8f8a9c392",
+
+                            ConcurrencyStamp = "69d429ab-27d4-4f19-8caf-c0eebdaad0d5",
+
                             Email = "employeeUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "EMPLOYEEUSER@EXAMPLE.COM",
                             NormalizedUserName = "EMPLOYEE",
-                            PasswordHash = "AQAAAAIAAYagAAAAENFCzX2CCfwCFLfeg+bXZcnJJoORchxp+I/gu6PoZbsBEoVGtpRo+74ap9rUwByvSA==",
+
+                            PasswordHash = "AQAAAAIAAYagAAAAEPPbHW1iGLEVRmJVXJsE3Ze4hZ81OkTamoQoJTQmlPx3Qy0LLmJ+HvDJOcyfsYc5cg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9c2230a4-1c82-4cd0-8785-68f53364edbe",
+                            SecurityStamp = "be50d559-4a89-4873-a042-53940f03b750",
+
                             TwoFactorEnabled = false,
                             UserName = "Employee"
                         },
@@ -125,35 +130,22 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "43ddc116-d59a-4cf0-bf29-a96832ce020f",
+
+                            ConcurrencyStamp = "10dde043-55df-4cab-bf53-b46e1b8a28e1",
+
                             Email = "ClientUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENTUSER@EXAMPLE.COM",
                             NormalizedUserName = "CLIENT",
-                            PasswordHash = "AQAAAAIAAYagAAAAELWhjh7HGYvN0rBCYAnRRQ7oErX5g6twzeH1Ot+CRY6b43sQDygIzdJu4ly92K06Zw==",
+
+                            PasswordHash = "AQAAAAIAAYagAAAAEL1zPL0ATpeh+A49RFc6FvK60PLjGt9kczDSyX3BKUiccW56zJS+YeUdz8hICsm1Cg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "14ebb60a-7bd0-4745-8fd4-cc69778ea5ed",
+                            SecurityStamp = "fcc069fb-fa92-41e7-a618-4df511ce891f",
                             TwoFactorEnabled = false,
                             UserName = "Client"
-                        },
-                        new
-                        {
-                            Id = "4",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "ca66eb53-ff9d-49d2-b3e6-36b0f2ba8cb5",
-                            Email = "Client2User@example.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "CLIENT2USER@EXAMPLE.COM",
-                            NormalizedUserName = "CLIENT2",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEsKw0FsZjX+WYIxhPA6SNsWWwpqgGUZJMbf97CrUJ75okDj8L9XjS3T24KmHCkqtQ==",
-                            PhoneNumber = "1234567890",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "1d4dcde0-c806-4c3c-90ae-a763d10d37e9",
-                            TwoFactorEnabled = false,
-                            UserName = "Client2"
+
                         });
                 });
 
@@ -203,21 +195,10 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             InGym = true,
                             Name = "Client",
-                            SubscriptionDate = new DateTime(2023, 10, 18, 18, 14, 40, 276, DateTimeKind.Local).AddTicks(8389),
-                            SubscriptionExpiry = new DateTime(2024, 4, 18, 18, 14, 40, 276, DateTimeKind.Local).AddTicks(8402),
+                            SubscriptionDate = new DateTime(2023, 10, 14, 21, 38, 58, 641, DateTimeKind.Local).AddTicks(8057),
+                            SubscriptionExpiry = new DateTime(2024, 4, 14, 21, 38, 58, 641, DateTimeKind.Local).AddTicks(8066),
                             SubscriptionTierID = 1,
                             UserId = "3"
-                        },
-                        new
-                        {
-                            ClientID = 2,
-                            GymID = 1,
-                            InGym = true,
-                            Name = "Client2",
-                            SubscriptionDate = new DateTime(2023, 10, 18, 18, 14, 40, 276, DateTimeKind.Local).AddTicks(8409),
-                            SubscriptionExpiry = new DateTime(2024, 4, 18, 18, 14, 40, 276, DateTimeKind.Local).AddTicks(8409),
-                            SubscriptionTierID = 1,
-                            UserId = "4"
                         });
                 });
 
@@ -410,9 +391,9 @@ namespace GYM_Management_System.Migrations
                             GymID = 2,
                             Name = "dumbbells",
                             OutOfService = 0,
-                            PhotoUrl = "https://www.bowflex.com/dw/image/v2/AAYW_PRD/on/demandware.static/-/Sites-nautilus-master-catalog/default/dwf21fb1cf/images/bfx/weights/100131/bowflex-selecttech-552-dumbbell-weights-hero.jpg?sw=2600&sh=1464&sm=fit",
-                            Quantity = 60
-                        },
+                            Quantity = 60,
+                            img = "https://www.bowflex.com/dw/image/v2/AAYW_PRD/on/demandware.static/-/Sites-nautilus-master-catalog/default/dwf21fb1cf/images/bfx/weights/100131/bowflex-selecttech-552-dumbbell-weights-hero.jpg?sw=2600&sh=1464&sm=fit"
+     },
                         new
                         {
                             GymEquipmentID = 5,
@@ -623,28 +604,13 @@ namespace GYM_Management_System.Migrations
 
                     b.ToTable("AspNetRoles", (string)null);
 
-                    b.HasData(
-                        new
-                        {
-                            Id = "02fb8c79-6382-433b-832e-65b3cd03f60b",
-                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "3affa93d-c151-4b97-a8af-abf4dd71fd64",
-                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
-                            Name = "Employee",
-                            NormalizedName = "EMPLOYEE"
-                        },
-                        new
-                        {
-                            Id = "34d5330d-3500-470f-8d6b-50efe1d5cb02",
-                            ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
-                            Name = "Client",
-                            NormalizedName = "CLIENT"
-                        });
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("gym_management_system_front_end.Models.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -674,115 +640,19 @@ namespace GYM_Management_System.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 10,
-                            ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
-                            ClaimValue = "createAdmin",
-                            RoleId = "02fb8c79-6382-433b-832e-65b3cd03f60b"
+                            UserId = "1",
+                            RoleId = "Admin"
                         },
                         new
                         {
-                            Id = 11,
-                            ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
-                            ClaimValue = "updateAdmin",
-                            RoleId = "02fb8c79-6382-433b-832e-65b3cd03f60b"
+                            UserId = "2",
+                            RoleId = "Employee"
                         },
                         new
                         {
-                            Id = 12,
-                            ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
-                            ClaimValue = "deleteAdmin",
-                            RoleId = "02fb8c79-6382-433b-832e-65b3cd03f60b"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
-                            ClaimValue = "readAdmin",
-                            RoleId = "02fb8c79-6382-433b-832e-65b3cd03f60b"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
-                            ClaimValue = "createEmployee",
-                            RoleId = "3affa93d-c151-4b97-a8af-abf4dd71fd64"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
-                            ClaimValue = "updateEmployee",
-                            RoleId = "3affa93d-c151-4b97-a8af-abf4dd71fd64"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
-                            ClaimValue = "readEmployee",
-                            RoleId = "3affa93d-c151-4b97-a8af-abf4dd71fd64"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
-                            ClaimValue = "updateClient",
-                            RoleId = "34d5330d-3500-470f-8d6b-50efe1d5cb02"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
-                            ClaimValue = "readClient",
-                            RoleId = "34d5330d-3500-470f-8d6b-50efe1d5cb02"
+                            UserId = "3",
+                            RoleId = "Client"
                         });
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserLogins", (string)null);
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {

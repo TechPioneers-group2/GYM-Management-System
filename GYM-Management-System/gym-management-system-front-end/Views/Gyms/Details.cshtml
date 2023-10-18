@@ -98,7 +98,11 @@
                            asp-route-quantity="@supplement.Quantity">
                             Update
                         </a>
-
+                        <form method="post" asp-action="AddToCart" asp-controller="Cart" asp-route-supplementID="@supplement.SupplementID">
+                            <button type="submit">
+                                add
+                            </button>
+                        </form>
 
                     </li>
                 }

@@ -1,4 +1,10 @@
-﻿@model IEnumerable<gym_management_system_front_end.Models.SupplementViewModel>
+﻿
+@model IEnumerable<gym_management_system_front_end.Models.SupplementViewModel>
+@using Microsoft.AspNetCore.Mvc
+@using Microsoft.AspNetCore.Html
+@using Newtonsoft.Json
+@using System.Net.Http
+@using System.Web
 
 <div class="row">
     @foreach (var item in Model)
@@ -10,6 +16,7 @@
                     <h5 class="card-title text-dark fw-bold">@item.Name</h5>
                     <p class="text-dark fw-bold">SEE MORE</p>
                 </div>
+               
             </div>
         </div>
     }

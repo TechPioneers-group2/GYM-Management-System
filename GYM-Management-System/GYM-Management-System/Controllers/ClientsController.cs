@@ -120,7 +120,7 @@ namespace GYM_Management_System.Controllers
         /// <param name="gymid">The ID of the gym the client is associated with.</param>
         /// <returns>No content if the client was successfully deleted.</returns>
 
-        [Authorize(Roles = "Admin, Employee")]
+       // [Authorize(Roles = "Admin, Employee")]
         [HttpDelete("{clientid}/gym/{gymid}")]
         public async Task<IActionResult> DeleteClient(int clientid, int gymid)
         {
