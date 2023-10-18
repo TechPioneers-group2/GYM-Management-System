@@ -12,64 +12,47 @@
 <p>
     <a asp-action="Create" asp-controller="Gyms">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.GymID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxCapacity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CurrentCapacity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ActiveHours)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Notification)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="table-cont">
+    <table class="table table-striped table-hover">
+    
+        
+    
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GymID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MaxCapacity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CurrentCapacity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ActiveHours)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Notification)
-                </td>
-                <td>
-                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.GymID">Edit</a> |
-                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.GymID">Details</a> |
-                    <a class="btn btn-danger" href="@Url.Action("Delete", new {id = item.GymID}) ">Delete</a>
-                </td>
+                <th scope="col">Gym ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Details</th>
+                <th></th>
+                <th></th>
+
             </tr>
-        }
-    </tbody>
+        </thead>
+        <tbody>
+                @foreach (var gym in Model)
+                {
+                <tr>
+                    <th scope="row">
+                            @gym.GymID
+                    </th>
+                    <td>
+                            @gym.Name
+                    </td>
+
+
+                    <td>
+
+                        <a class="" asp-controller="Gyms" asp-action="Details" asp-route-id="@gym.GymID">Details</a>
+
+                    </td>
+                    <td>
+                        <a class="" asp-controller="Gyms" asp-action="Edit" asp-route-id="@gym.GymID">Edit</a>
+                    </td>
+                    <td>
+                        <a class="Delete" asp-controller="Gyms" asp-action="Delete" asp-route-id="@gym.GymID">Delete</a>
+                    </td>
+                </tr>
+                }
+        </tbody>
+  
 </table>
+</div>
