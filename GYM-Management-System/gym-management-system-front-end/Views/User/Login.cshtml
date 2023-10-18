@@ -4,33 +4,38 @@
     ViewData["Title"] = "LogIn";
 }
 
-<h1>LogIn</h1>
-
-<h4>LogInDTO</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Login" asp-controller="User">
+<div class="container-fluid">
+    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+            <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                <div class="d-flex align-items-center justify-content-center text-center mb-3">
+                    <h3>Sign In</h3>
+                </div>
+
+            <form asp-action="Login" asp-controller="User">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
+
+            <div class="form-floating mb-3">
+                <input asp-for="UserName" class="form-control" id="floatingInput"  placeholder="name@example.com"/>
+                <label asp-for="UserName" for="floatingInput" class="control-label"></label>
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" type="password" class="form-control" />
+
+                    <div class="form-floating mb-3">
+                <input asp-for="Password" type="password" class="form-control" id="floatingPassword" placeholder="Password" />
+                <label asp-for="Password" for="floatingPassword" class="control-label"></label>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
 
-<div>
-    <a asp-action="">Back to List</a>
+                    <div class="form-floating mb-3">
+                        <input type="submit" value="Login" class="btn btn-primary py-3 w-100 mb-4" />
+                        <p class="text-center mb-0">Don't have an Account? <a asp-action="RegisterClient" asp-controller="User">Sign Up</a></p>
+                </div>
+             </form>
+             </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {

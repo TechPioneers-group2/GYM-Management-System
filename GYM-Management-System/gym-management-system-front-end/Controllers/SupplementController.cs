@@ -1,6 +1,7 @@
 ﻿using gym_management_system_front_end.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace gym_management_system_front_end.Controllers
@@ -49,13 +50,27 @@ namespace gym_management_system_front_end.Controllers
 
 
         [HttpPost]
-        public IActionResult Create(SupplementViewModel supplementViewModel)
+        public async Task<IActionResult> Create(SupplementViewModel supplementViewModel, IFormFile file)
         {
             try
             {
+                if (file != null)
+                {
+                    var streamcontent = new StreamContent(file.OpenReadStream());
+
+                    streamcontent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+
+                    var imageContent = new MultipartFormDataContent
+                {
+                    { streamcontent, "file", file.FileName }
+                    };
+                    var imageResponse = await _client.PostAsync("https://localhost:7200/api/Methods/AddImageToCloud", imageContent);
+                    supplementViewModel.imageURL = await imageResponse.Content.ReadAsStringAsync();
+                }
+
                 var jsonContent = new StringContent(JsonConvert.SerializeObject(supplementViewModel), Encoding.UTF8, "application/json");
-                var response = _client.PostAsync(_client.BaseAddress + "/PostSupplement", jsonContent).Result;
-                var data = response.Content.ReadAsStringAsync().Result;
+                var response = await _client.PostAsync(_client.BaseAddress + "/PostSupplement", jsonContent);
+                var data = await response.Content.ReadAsStringAsync();
                 supplementViewModel = JsonConvert.DeserializeObject<SupplementViewModel>(data);
                 if (response.IsSuccessStatusCode)
                 {
@@ -91,17 +106,39 @@ namespace gym_management_system_front_end.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SupplementViewModel supplementViewModel)
+        public async Task<IActionResult> Edit(SupplementViewModel supplementViewModel, IFormFile file)
         {
-            var json = JsonConvert.SerializeObject(supplementViewModel);
-            var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _client.PutAsync(_client.BaseAddress + "/PutSupplement/" + supplementViewModel.SupplementID, stringContent);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                TempData["success"] = "Supplement Updated successfully";
+                if (file != null)
+                {
+                    var streamcontent = new StreamContent(file.OpenReadStream());
+
+                    streamcontent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+
+                    var imageContent = new MultipartFormDataContent
+                {
+                    { streamcontent, "file", file.FileName }
+                    };
+                    var imageResponse = await _client.PostAsync("https://localhost:7200/Methods/AddImageToCloud", imageContent);
+                    supplementViewModel.imageURL = await imageResponse.Content.ReadAsStringAsync();
+                }
+
+
+                var json = JsonConvert.SerializeObject(supplementViewModel);
+                var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await _client.PutAsync(_client.BaseAddress + "/PutSupplement/" + supplementViewModel.SupplementID, stringContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["success"] = "Supplement Updated successfully";
+                    return RedirectToAction("Index", "Supplement");
+                }
                 return RedirectToAction("Index", "Supplement");
             }
-            return RedirectToAction("Index", "Supplement");
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         // GET: SupplementController/Delete/5
@@ -152,13 +189,13 @@ namespace gym_management_system_front_end.Controllers
         }
         #region API CALLS
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
             List<SupplementViewModel> supplementList = new List<SupplementViewModel>();
-            var response = _client.GetAsync(_client.BaseAddress + "/GetSupplements").Result;
+            var response = await _client.GetAsync(_client.BaseAddress + "/GetSupplements");
             if (response.IsSuccessStatusCode)
             {
-                string data = response.Content.ReadAsStringAsync().Result;
+                string data = await response.Content.ReadAsStringAsync();
                 supplementList = JsonConvert.DeserializeObject<List<SupplementViewModel>>(data);
             }
             return Json(new { data = supplementList });

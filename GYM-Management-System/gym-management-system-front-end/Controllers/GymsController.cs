@@ -181,8 +181,8 @@ namespace gym_management_system_front_end.Controllers
 
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken);
 
-            var response = _client.PostAsync(_client.BaseAddress + "/PostGym", jsonContent).Result;
-            var data = response.Content.ReadAsStringAsync().Result;
+            var response = await _client.PostAsync(_client.BaseAddress + "/PostGym", jsonContent);
+            var data = await response.Content.ReadAsStringAsync();
             gym = JsonConvert.DeserializeObject<PostGymDTO>(data);
             return RedirectToAction("Index", "Gyms");
         }
