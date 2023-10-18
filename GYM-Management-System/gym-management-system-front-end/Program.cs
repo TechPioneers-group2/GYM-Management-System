@@ -33,6 +33,7 @@ namespace gym_management_system_front_end
 
             app.UseAuthorization();
 
+
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

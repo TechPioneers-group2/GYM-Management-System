@@ -8,6 +8,7 @@ namespace gym_management_system_front_end.Models
         public int SupplementID { get; set; }
         public string Name { get; set; }
         public string Price { get; set; }
+        public int Quntity { get; set; }
         public string Description { get; set; }
 
     }

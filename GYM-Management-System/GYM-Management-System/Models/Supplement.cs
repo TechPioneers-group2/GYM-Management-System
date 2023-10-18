@@ -11,6 +11,8 @@ namespace GYM_Management_System.Models
         public string Price { get; set; }
         [Required]
         public string Description { get; set; }
+
+
         // Navigation props
         public List<GymSupplement>? GymSupplements { get; set; }
 

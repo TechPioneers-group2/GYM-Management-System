@@ -1,7 +1,9 @@
 ﻿using gym_management_system_front_end.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace gym_management_system_front_end.Controllers
@@ -27,25 +29,35 @@ namespace gym_management_system_front_end.Controllers
             return View(sup);
         }
 
-        public async Task<ActionResult> AddToCartAsync(SupplementViewModel supplementViewModel)
+        [HttpPost]
+        public async Task<ActionResult> AddToCart(int supplementID)
         {
 
             // Retrieve cart items from cookies
-            var cart = GetCartFromCookies();
+            var cart = GetCartFromCookies(); 
+          
             var supplement = new SupplementViewModel();
-            var response = await _client.GetAsync(_client.BaseAddress + "/GetSupplement/" + supplement.SupplementID);
+            var response = await _client.GetAsync(_client.BaseAddress + "/GetSupplement/" + supplementID);
+            
             if (response.IsSuccessStatusCode)
             {
                 string data = await response.Content.ReadAsStringAsync();
                 supplement = JsonConvert.DeserializeObject<SupplementViewModel>(data);
             }
 
-            cart.Add(supplement);
+            
+                cart.Add(supplement);
 
-            // Add the new item to the cart
-            SaveCartToCookies(cart);
+                // Add the new item to the cart
+                SaveCartToCookies(cart);
 
-            return RedirectToAction("Index","Supplement");
+            
+            
+
+               
+            
+
+            return Redirect("/#Supplements");
         }
         private List<SupplementViewModel> GetCartFromCookies()
         {
@@ -58,13 +70,13 @@ namespace gym_management_system_front_end.Controllers
             return new List<SupplementViewModel>();
         }
 
-        public ActionResult RemoveFromCart(SupplementViewModel supplement)
+        public ActionResult RemoveFromCart(int supplementID)
         {
             // Retrieve cart items from cookies
             var cart = GetCartFromCookies();
 
             // Remove the item from the cart
-            var itemToRemove = cart.SingleOrDefault(item => item.SupplementID == supplement.SupplementID);
+            var itemToRemove = cart.FirstOrDefault(x=>x.SupplementID== supplementID);
             if (itemToRemove != null)
             {
                 cart.Remove(itemToRemove);
