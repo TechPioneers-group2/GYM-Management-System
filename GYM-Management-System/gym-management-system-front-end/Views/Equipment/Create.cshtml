@@ -10,43 +10,49 @@
    
 </head>
 <body>
-	<div class="container">
-		<h2>Create Gym Equipment</h2>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="card">
-					<div class="card-body">
-						<form method="post" asp-action="Create" asp-controller="Equipment" enctype="multipart/form-data">
-							@Html.AntiForgeryToken()
-							<div class="form-group">
-								<label asp-for="@Model.Name"></label>
-								<input asp-for="@Model.Name" class="form-control" />
-							</div>
-							<div class="form-group">
-								<label asp-for="@Model.Quantity"></label>
-								<input asp-for="@Model.Quantity" class="form-control" />
-							</div>
-							<div class="form-group">
-								<label asp-for="@Model.OutOfService"></label>
-								<input asp-for="@Model.OutOfService" class="form-control" />
-							</div>
-							<div class="form-group">
-								<label asp-for="@Model.GymID"></label>
-								<input asp-for="@Model.GymID" class="form-control" />
-							</div>
-							@*<div class="form-group">
-								<label asp-for="@Model.img"></label>
-								<input asp-for="@Model.img" type="file" name="file" class="form-control" />
-							</div>*@
-							<button type="submit" class="btn btn-primary">Create</button>
-						</form>
-					</div>
-				</div>
+    <div class="container">
+        <h2>Create Gym Equipment</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <form asp-action="Create"  method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="__RequestVerificationToken" value="your-antiforgery-token-here" />
 
-			</div>
-		</div>
-	</div>
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                            <div class="form-group">
+                                <label for="Name">Name</label>
+                                <input type="text" name="Name" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Quantity">Quantity</label>
+                                <input type="text" name="Quantity" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="OutOfService">Out of Service</label>
+                                <input type="text" name="OutOfService" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="GymID">Gym ID</label>
+                                <input type="text" name="GymID" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="formFile">Image</label>
+                                <input type="file" name="file" class="form-control" />
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

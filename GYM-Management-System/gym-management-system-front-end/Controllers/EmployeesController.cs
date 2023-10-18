@@ -29,8 +29,8 @@ namespace gym_management_system_front_end.Controllers
             }
             var gymList = GetGymsList();
             ViewBag.gymList = gymList;
-			ViewBag.Employees = "All";
-			return View(employeesList);
+            ViewBag.Employees = "All";
+            return View(employeesList);
         }
         [HttpPost]
         public IActionResult GetEmployeesByGymId(int gymId)
@@ -43,16 +43,16 @@ namespace gym_management_system_front_end.Controllers
                 string data = response.Content.ReadAsStringAsync().Result;
                 employeesList = JsonConvert.DeserializeObject<List<EmployeeViewModel>>(data);
             }
-			var gymList = GetGymsList();
-			ViewBag.gymList = gymList;
-            foreach(var gym in gymList)
+            var gymList = GetGymsList();
+            ViewBag.gymList = gymList;
+            foreach (var gym in gymList)
             {
-                if(gym.GymID== gymId)
+                if (gym.GymID == gymId)
                 {
-					ViewBag.gymName = gym.Name;
-				}
+                    ViewBag.gymName = gym.Name;
+                }
             }
-			return View(employeesList);
+            return View(employeesList);
         }
 
         public IActionResult GetEmployee(int id)

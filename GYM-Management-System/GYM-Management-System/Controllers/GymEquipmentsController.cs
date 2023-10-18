@@ -14,13 +14,16 @@ namespace GYM_Management_System.Controllers
     {
         private readonly IGymEquipment _equipment;
 
+        private readonly IAzureBlobStorageService _azureBlobStorageService;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="GymEquipmentsController"/> class.
         /// </summary>
         /// <param name="context">The gym equipment data access context.</param>
-        public GymEquipmentsController(IGymEquipment context)
+        public GymEquipmentsController(IGymEquipment context, IAzureBlobStorageService azureBlobStorageService)
         {
             _equipment = context;
+            _azureBlobStorageService = azureBlobStorageService;
         }
 
         /// <summary>
@@ -94,6 +97,13 @@ namespace GYM_Management_System.Controllers
             await _equipment.DeleteGymEquipment(id);
 
             return NoContent();
+        }
+
+        public async Task<string> AddImageToCloud(IFormFile file)
+        {
+            var x = await _azureBlobStorageService.UploadAsync(file);
+
+            return x;
         }
     }
 }

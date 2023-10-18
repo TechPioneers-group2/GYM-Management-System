@@ -7,20 +7,20 @@
 
 .navbar.custom-navbar.navbar-shrink {
     height: 7%; /* Set the shrunk height */
-    background-color: #222 !important;
+    background-color: #4E5D6C !important;
     padding-top: 1rem !important;
     padding-bottom: 1rem !important;
 }
 
 @media (max-width: 991.98px) {
     .navbar.custom-navbar.navbar-expanded {
-        background-color: #222 !important;
+        background-color: #4E5D6C !important;
+    }
 
-         }
     .navbar.custom-navbar.navbar-shrink {
         height: 10% !important;
     }
-    }
+}
 
 .navbar.custom-navbar {
     background-color: transparent !important;
@@ -30,10 +30,8 @@
 @media (max-width: 991.98px) {
     .navbar.custom-navbar.navbar-expanded,
     .navbar-collapse {
-        background-color: #222 !important;
-      
+        background-color: #4E5D6C !important;
     }
-  
 }
 
 .navbar-toggler:focus,
@@ -137,18 +135,77 @@ header.masthead {
         font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         margin-bottom: 4rem;
     }
+
 .gymscard {
-    transition: transform 0.2s;
+    width: 300px;
+    height: 300px;
+    perspective: 1000px;
+    margin: 0 auto;
 }
 
-    .gymscard:hover {
+    .gymscard .card-inner {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.999s;
+    }
+
+    .gymscard:hover .card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .gymscard .card-front,
+    .gymscard .card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+    }
+
+    .gymscard .card-front {
+        background-color: #FF771C;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        border: 6px solid #FF771C;
+        border-radius: 6px;
+        justify-content: center;
+        font-size: 24px;
+        transform: rotateY(0deg);
+    }
+
+        .gymscard .card-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .gymscard .card-back {
+        background-color: #4E5D6C;
+        color: #fff;
+        border: 6px solid #4E5D6C;
+        border-radius: 6px;
+        justify-content: center;
+        font-size: 24px;
+        transform: rotateY(180deg);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+        .gymscard .card-back h5,
+        .gymscard .card-back p {
+            margin: 0;
+        }
+
+.team-card {
+    transition: transform 0.5s;
+}
+
+    .team-card:hover {
         transform: scale(1.05);
-    }
-
-    .gymscard img {
-        transition: filter 0.2s;
-    }
-
-    .gymscard:hover img {
-        filter: blur(1px);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }

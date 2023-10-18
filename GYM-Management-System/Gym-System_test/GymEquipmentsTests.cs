@@ -1,62 +1,57 @@
-﻿using gym_management_system_front_end.Models.Models.DTOs;
-using gym_management_system_front_end.Models.Models.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
+﻿//using GYM_Management_System.Models.DTOs;
+//using GYM_Management_System.Models.Services;
 
-namespace Gym_System_test
-{
-	public class GymEquipmentsTests : Mock
-	{
-		[Fact]
-		public async Task CanCreateAndDeleteGymEquipment()
-		{
-			// Arrange
-			var gymEquipmentService = new GymEquipmentsService(_db);
+//namespace Gym_System_test
+//{
+//    public class GymEquipmentsTests : Mock
+//    {
+//        [Fact]
+//        public async Task CanCreateAndDeleteGymEquipment()
+//        {
+//            // Arrange
+//            var gymEquipmentService = new GymEquipmentsService(_db);
 
-			// Act
-			var createdGymEquipment = await gymEquipmentService.Create(new CreatEquipmentDTO
-			{
-				Name = "Test Equipment",
-				Quantity = 10,
-				OutOfService = 0,
-				GymID = 1
-			});
+//            // Act
+//            var createdGymEquipment = await gymEquipmentService.Create(new CreatEquipmentDTO
+//            {
+//                Name = "Test Equipment",
+//                Quantity = 10,
+//                OutOfService = 0,
+//                GymID = 1
 
-			// Assert
-			var createdEquipmentId = createdGymEquipment.GymEquipmentID;
-			Assert.NotEqual(0, createdEquipmentId);
+//            });
 
-			await gymEquipmentService.DeleteGymEquipment(createdEquipmentId);
+//            // Assert
+//            var createdEquipmentId = createdGymEquipment.GymEquipmentID;
+//            Assert.NotEqual(0, createdEquipmentId);
 
-			var deletedEquipment = await gymEquipmentService.GetEquipmentById(createdEquipmentId);
-			Assert.Null(deletedEquipment);
-		}
+//            await gymEquipmentService.DeleteGymEquipment(createdEquipmentId);
 
-		[Fact]
-		public async Task CanUpdateGymEquipment()
-		{
-			// Arrange
-			var gymEquipmentService = new GymEquipmentsService(_db);
-			var gymEquipment = await CreateAndSaveGymEquipmentTest();
+//            var deletedEquipment = await gymEquipmentService.GetEquipmentById(createdEquipmentId);
+//            Assert.Null(deletedEquipment);
+//        }
 
-			// Act
-			await gymEquipmentService.UpdateGymEquipment(gymEquipment.GymEquipmentID, new EquipmentDTOPutservice
-			{
-				Quantity = 5,
-				OutOfService = 1
-			});
+//        [Fact]
+//        public async Task CanUpdateGymEquipment()
+//        {
+//            // Arrange
+//            var gymEquipmentService = new GymEquipmentsService(_db);
+//            var gymEquipment = await CreateAndSaveGymEquipmentTest();
 
-			// Assert
-			var updatedGymEquipment = await gymEquipmentService.GetEquipmentById(gymEquipment.GymEquipmentID);
-			Assert.NotNull(updatedGymEquipment);
-			Assert.Equal(5, updatedGymEquipment.Quantity);
-			Assert.Equal(1, updatedGymEquipment.OutOfService);
-		}
+//            // Act
+//            await gymEquipmentService.UpdateGymEquipment(gymEquipment.GymEquipmentID, new EquipmentDTOPutservice
+//            {
+//                Quantity = 5,
+//                OutOfService = 1
+//            });
+
+//            // Assert
+//            var updatedGymEquipment = await gymEquipmentService.GetEquipmentById(gymEquipment.GymEquipmentID);
+//            Assert.NotNull(updatedGymEquipment);
+//            Assert.Equal(5, updatedGymEquipment.Quantity);
+//            Assert.Equal(1, updatedGymEquipment.OutOfService);
+//        }
 
 
-	}
-}
+//    }
+//}

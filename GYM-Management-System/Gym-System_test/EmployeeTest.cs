@@ -1,4 +1,6 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using GYM_Management_System.Models.DTOs;
+using GYM_Management_System.Models.Services;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Gym_System_test
 {
