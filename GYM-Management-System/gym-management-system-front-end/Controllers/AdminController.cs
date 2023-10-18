@@ -8,7 +8,7 @@ namespace gym_management_system_front_end.Controllers
         // GET: AdminController
         public ActionResult Index()
         {
-            return View("_Admin");
+            return View();
         }
 
         // GET: AdminController/Details/5

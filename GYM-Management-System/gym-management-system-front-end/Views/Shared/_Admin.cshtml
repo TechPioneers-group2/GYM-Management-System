@@ -1,7 +1,4 @@
-﻿@{
-    Layout = null; 
-}
-
+﻿
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,8 +27,8 @@
     <link href="~/assets/admin/css/style.css" rel="stylesheet" />
 </head>
 <body>
-    <div>
-        <div class="container-fluid position-relative d-flex p-0">
+    
+    <div class="container-fluid position-relative d-flex p-0">
         <!-- Spinner Start -->
         <!-- Spinner End -->
         <!-- Sidebar Start -->
@@ -65,7 +62,9 @@
                                     <a class="dropdown-item" asp-controller="Clients" asp-action="Index">All Clients</a>
                                     <a class="dropdown-item" asp-controller="User" asp-action="RegisterClient">Add New Clients</a>
 
+
                                 </div>
+                            </div>
                     </div>
                     <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Clients</a>
                     <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
@@ -173,12 +172,14 @@
                         </div>
                     </div>
                 </div>
+                
             </nav>
-            <!-- Navbar End -->
+           
 
+            <!-- Navbar End -->
+                @RenderBody()
         </div>
         </div>
-    </div>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
