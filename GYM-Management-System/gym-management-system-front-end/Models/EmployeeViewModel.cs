@@ -13,7 +13,6 @@
         public string Salary { get; set; }
         public GymBaseViewModel gymBaseDto { get; set; }
 
-
     }
     public class GymBaseViewModel
     {
