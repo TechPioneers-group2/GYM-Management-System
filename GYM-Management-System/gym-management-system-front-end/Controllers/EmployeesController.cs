@@ -20,7 +20,7 @@ namespace gym_management_system_front_end.Controllers
         public IActionResult Index()
         {
             List<EmployeeViewModel> employeesList = new List<EmployeeViewModel>();
-            var response = _client.GetAsync(_client.BaseAddress + "/Employees/GetEmployees").Result;
+            var response = _client.GetAsync(_client.BaseAddress + "/Employees/GetEmployeesBackEnd").Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -36,7 +36,7 @@ namespace gym_management_system_front_end.Controllers
         public IActionResult GetEmployeesByGymId(int gymId)
         {
             List<EmployeeViewModel> employeesList = new List<EmployeeViewModel>();
-            var response = _client.GetAsync(_client.BaseAddress + "/Employees/GetEmployeesByGymId/" + gymId).Result;
+            var response = _client.GetAsync(_client.BaseAddress + "/Employees/GetEmployeesByGymIdBackEnd/" + gymId).Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -58,7 +58,7 @@ namespace gym_management_system_front_end.Controllers
         public IActionResult GetEmployee(int id)
         {
             EmployeeViewModel employee = new EmployeeViewModel();
-            var response = _client.GetAsync(_client.BaseAddress + "/Employees/GetEmployee/" + id).Result;
+            var response = _client.GetAsync(_client.BaseAddress + "/Employees/GetEmployeeBackEnd/" + id).Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -90,7 +90,7 @@ namespace gym_management_system_front_end.Controllers
         public async Task<IActionResult> Delete(int id)
         {
 
-            var response = await _client.DeleteAsync(_client.BaseAddress + "/Employees/DeleteEmployee/" + id);
+            var response = await _client.DeleteAsync(_client.BaseAddress + "/Employees/DeleteEmployeeBackEnd/" + id);
 
             return RedirectToAction("Index");
 
@@ -126,7 +126,7 @@ namespace gym_management_system_front_end.Controllers
 
             var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _client.PutAsync(_client.BaseAddress + "/Employees/PutEmployee/" + employeeViewModel.EmployeeID, stringContent);
+            var response = await _client.PutAsync(_client.BaseAddress + "/Employees/PutEmployeeBackEnd/" + employeeViewModel.EmployeeID, stringContent);
 
             if (response.IsSuccessStatusCode)
             {
@@ -140,7 +140,7 @@ namespace gym_management_system_front_end.Controllers
             Uri baseAddress = new Uri("https://localhost:7200/api/Gyms");
 
             List<GymViewModel> gymList = new List<GymViewModel>();
-            var response = _client.GetAsync(_client.BaseAddress + "/Gyms/GetGyms").Result;
+            var response = _client.GetAsync(_client.BaseAddress + "/Gyms/GetGymsBackEnd").Result;
 
             if (response.IsSuccessStatusCode)
             {

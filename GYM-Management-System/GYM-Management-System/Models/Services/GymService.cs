@@ -393,5 +393,13 @@ namespace GYM_Management_System.Models.Services
                 await _gymDbContext.SaveChangesAsync();
             }
         }
+
+        //public async Task<GetSupplementFromGymDTO> GetSupplementFromGym(int supplemendid, int gymid)
+        //{
+        //    var sup = await _gymDbContext.Gyms.Select(x => new GetSupplementFromGymDTO()
+        //    {
+        //        Qantity=x.Q
+        //    });
+        //}
     }
 }

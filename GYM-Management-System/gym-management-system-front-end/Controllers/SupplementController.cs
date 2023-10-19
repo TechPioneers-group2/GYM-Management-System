@@ -20,7 +20,7 @@ namespace gym_management_system_front_end.Controllers
         public async Task<IActionResult> Index()
         {
             List<SupplementViewModel> supplementList = new List<SupplementViewModel>();
-            var response = await _client.GetAsync(_client.BaseAddress + "/GetSupplements");
+            var response = await _client.GetAsync(_client.BaseAddress + "/GetSupplementsBackEnd");
             if (response.IsSuccessStatusCode)
             {
                 string data = await response.Content.ReadAsStringAsync();
@@ -33,7 +33,7 @@ namespace gym_management_system_front_end.Controllers
         public async Task<IActionResult> ClientIndex()
         {
             List<SupplementViewModel> supplementList = new List<SupplementViewModel>();
-            var response = await _client.GetAsync(_client.BaseAddress + "/GetSupplements");
+            var response = await _client.GetAsync(_client.BaseAddress + "/GetSupplementsBackEnd");
             if (response.IsSuccessStatusCode)
             {
                 string data = await response.Content.ReadAsStringAsync();
@@ -42,11 +42,10 @@ namespace gym_management_system_front_end.Controllers
             return View(supplementList);
         }
 
-        // GET: SupplementController/Details/5
         public async Task<ActionResult<SupplementViewModel>> Details(int id)
         {
             var supplementViewModel = new SupplementViewModel();
-            var response = await _client.GetAsync(_client.BaseAddress + "/GetSupplement/" + id);
+            var response = await _client.GetAsync(_client.BaseAddress + "/GetSupplementBackEnd/" + id);
             if (response.IsSuccessStatusCode)
             {
                 string data = await response.Content.ReadAsStringAsync();
@@ -60,7 +59,6 @@ namespace gym_management_system_front_end.Controllers
         {
             return View();
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Create(SupplementViewModel supplementViewModel, IFormFile file)
@@ -82,7 +80,7 @@ namespace gym_management_system_front_end.Controllers
                 }
 
                 var jsonContent = new StringContent(JsonConvert.SerializeObject(supplementViewModel), Encoding.UTF8, "application/json");
-                var response = await _client.PostAsync(_client.BaseAddress + "/PostSupplement", jsonContent);
+                var response = await _client.PostAsync(_client.BaseAddress + "/PostSupplementBackEnd", jsonContent);
                 var data = await response.Content.ReadAsStringAsync();
                 supplementViewModel = JsonConvert.DeserializeObject<SupplementViewModel>(data);
                 if (response.IsSuccessStatusCode)
@@ -140,7 +138,7 @@ namespace gym_management_system_front_end.Controllers
 
                 var json = JsonConvert.SerializeObject(supplementViewModel);
                 var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await _client.PutAsync(_client.BaseAddress + "/PutSupplement/" + supplementViewModel.SupplementID, stringContent);
+                var response = await _client.PutAsync(_client.BaseAddress + "/PutSupplementBackEnd/" + supplementViewModel.SupplementID, stringContent);
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["success"] = "Supplement Updated successfully";
@@ -185,7 +183,7 @@ namespace gym_management_system_front_end.Controllers
                 {
                     return NotFound();
                 }
-                var response = await _client.DeleteAsync(_client.BaseAddress + "/DeleteSupplement/" + SupplementID);
+                var response = await _client.DeleteAsync(_client.BaseAddress + "/DeleteSupplementBackEnd/" + SupplementID);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -205,7 +203,7 @@ namespace gym_management_system_front_end.Controllers
         public async Task<IActionResult> GetAll()
         {
             List<SupplementViewModel> supplementList = new List<SupplementViewModel>();
-            var response = await _client.GetAsync(_client.BaseAddress + "/GetSupplements");
+            var response = await _client.GetAsync(_client.BaseAddress + "/GetSupplementsBackEnd");
             if (response.IsSuccessStatusCode)
             {
                 string data = await response.Content.ReadAsStringAsync();

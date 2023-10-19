@@ -29,7 +29,7 @@ namespace GYM_Management_System.Controllers
         /// <param name="loginDto">The login data.</param>
         /// <returns>The user's data or Unauthorized if login fails.</returns>
         [HttpPost]
-        public async Task<ActionResult<UserDTO>> Login(LogInDTO loginDto)
+        public async Task<ActionResult<UserDTO>> LoginBackEnd(LogInDTO loginDto)
         {
             var user = await userService.LogIn(loginDto.UserName, loginDto.Password);
             if (user == null)
@@ -47,7 +47,7 @@ namespace GYM_Management_System.Controllers
         //[Authorize(Roles = "Admin")]
 
         [HttpPost]
-        public async Task<ActionResult<UserDTO>> RegisterAdmin(RegisterAdminDTO Data)
+        public async Task<ActionResult<UserDTO>> RegisterAdminBackEnd(RegisterAdminDTO Data)
         {
             var user = await userService.RegisterAdmin(Data, this.ModelState);
             if (ModelState.IsValid)
@@ -69,7 +69,7 @@ namespace GYM_Management_System.Controllers
         //[Authorize(Roles = "Admin, Employee")]
 
         [HttpPost]
-        public async Task<ActionResult<UserDTO>> RegisterEmployee(RegisterEmployeeDTO Data)
+        public async Task<ActionResult<UserDTO>> RegisterEmployeeBackEnd(RegisterEmployeeDTO Data)
         {
             var user = await userService.RegisterEmployee(Data, this.ModelState);
             if (ModelState.IsValid)
@@ -92,7 +92,7 @@ namespace GYM_Management_System.Controllers
         [AllowAnonymous]
         [HttpPost]
 
-        public async Task<ActionResult<UserDTO>> ClientRegister(RegisterClientDTO Data)
+        public async Task<ActionResult<UserDTO>> ClientRegisterBackEnd(RegisterClientDTO Data)
         {
             var user = await userService.RegisterUser(Data, this.ModelState);
             if (ModelState.IsValid)

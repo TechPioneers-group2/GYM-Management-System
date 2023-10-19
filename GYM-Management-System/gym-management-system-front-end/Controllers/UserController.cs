@@ -28,7 +28,7 @@ namespace gym_management_system_front_end.Controllers
         {
             var json = JsonConvert.SerializeObject(logInDTO);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _client.PostAsync(baseAddress + "Login", data);
+            var response = await _client.PostAsync(baseAddress + "LoginBackEnd", data);
 
             if (response.IsSuccessStatusCode)
             {
@@ -60,7 +60,7 @@ namespace gym_management_system_front_end.Controllers
 
             var json = JsonConvert.SerializeObject(adminDTO);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _client.PostAsync(baseAddress + "RegisterAdmin", data);
+            var response = await _client.PostAsync(baseAddress + "RegisterAdminBackEnd", data);
 
             if (response.IsSuccessStatusCode)
             {
@@ -102,7 +102,7 @@ namespace gym_management_system_front_end.Controllers
             };
             var json = JsonConvert.SerializeObject(employeeDTO);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _client.PostAsync(baseAddress + "RegisterEmployee", data);
+            var response = await _client.PostAsync(baseAddress + "RegisterEmployeeBackEnd", data);
 
             if (response.IsSuccessStatusCode)
             {
@@ -142,7 +142,7 @@ namespace gym_management_system_front_end.Controllers
 
             var json = JsonConvert.SerializeObject(clientDTO);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _client.PostAsync(baseAddress + "ClientRegister", data);
+            var response = await _client.PostAsync(baseAddress + "ClientRegisterBackEnd", data);
 
             if (response.IsSuccessStatusCode)
             {
