@@ -21,7 +21,7 @@ namespace gym_management_system_front_end.Controllers
         public IActionResult TableView()
         {
             List<EquipmentViewModel> equipments = new List<EquipmentViewModel>();
-            HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/GymEquipments/Get").Result;
+            HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/GymEquipments/GetBackEnd").Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
@@ -35,7 +35,7 @@ namespace gym_management_system_front_end.Controllers
         public IActionResult Index()
         {
             List<EquipmentViewModel> equipments = new List<EquipmentViewModel>();
-            HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/GymEquipments/Get").Result;
+            HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/GymEquipments/GetBackEnd").Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
@@ -66,7 +66,7 @@ namespace gym_management_system_front_end.Controllers
                     { streamcontent, "file", file.FileName }
                 };
 
-                var imageResponse = await _httpClient.PostAsync(_httpClient.BaseAddress + "/Methods/AddImageToCloud", imageContent);
+                var imageResponse = await _httpClient.PostAsync(_httpClient.BaseAddress + "/Methods/AddImageToCloudBackEnd", imageContent);
 
                 equipment.PhotoUrl = await imageResponse.Content.ReadAsStringAsync();
             }
@@ -75,7 +75,7 @@ namespace gym_management_system_front_end.Controllers
 
             var jsonContent = (new StringContent(equipmentJson, Encoding.UTF8, "application/json"));
 
-            var jsonResponse = _httpClient.PostAsync(_httpClient.BaseAddress + "/GymEquipments/PostGymEquipment", jsonContent).Result;
+            var jsonResponse = _httpClient.PostAsync(_httpClient.BaseAddress + "/GymEquipments/PostGymEquipmentBackEnd", jsonContent).Result;
 
             if (jsonResponse.IsSuccessStatusCode)
             {
@@ -92,7 +92,7 @@ namespace gym_management_system_front_end.Controllers
         public IActionResult Edit(int id)
         {
             EquipmentViewModel equipment = new EquipmentViewModel();
-            HttpResponseMessage response = _httpClient.GetAsync($"{_httpClient.BaseAddress}/GymEquipments/GetGymEquipment/{id}").Result;
+            HttpResponseMessage response = _httpClient.GetAsync($"{_httpClient.BaseAddress}/GymEquipments/GetGymEquipmentBackEnd/{id}").Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -118,7 +118,7 @@ namespace gym_management_system_front_end.Controllers
                     { streamcontent, "file", file.FileName }
                 };
 
-                var imageResponse = await _httpClient.PostAsync(_httpClient.BaseAddress + "/Methods/AddImageToCloud", imageContent);
+                var imageResponse = await _httpClient.PostAsync(_httpClient.BaseAddress + "/Methods/AddImageToCloudBackEnd", imageContent);
 
                 equipment.PhotoUrl = await imageResponse.Content.ReadAsStringAsync();
             }
@@ -130,7 +130,7 @@ namespace gym_management_system_front_end.Controllers
             var jsonContent = new StringContent(equipmentJson, Encoding.UTF8, "application/json");
 
             // Send a POST request to the API to create a new equipment
-            var jsonResponse = _httpClient.PutAsync($"{_httpClient.BaseAddress}/GymEquipments/PutGymEquipment/{id}", jsonContent).Result;
+            var jsonResponse = _httpClient.PutAsync($"{_httpClient.BaseAddress}/GymEquipments/PutGymEquipmentBackEnd/{id}", jsonContent).Result;
 
             if (jsonResponse.IsSuccessStatusCode)
             {
@@ -152,7 +152,7 @@ namespace gym_management_system_front_end.Controllers
         public IActionResult DeleteGet(int id)
         {
             EquipmentViewModel equipment = new EquipmentViewModel();
-            HttpResponseMessage response = _httpClient.GetAsync($"{_httpClient.BaseAddress}/GymEquipments/GetGymEquipment/{id}").Result;
+            HttpResponseMessage response = _httpClient.GetAsync($"{_httpClient.BaseAddress}/GymEquipments/GetGymEquipmentBackEnd/{id}").Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
@@ -168,7 +168,7 @@ namespace gym_management_system_front_end.Controllers
             if (ModelState.IsValid)
             {
 
-                var response = _httpClient.DeleteAsync($"{_httpClient.BaseAddress}/GymEquipments/DeleteGymEquipment/{id}").Result;
+                var response = _httpClient.DeleteAsync($"{_httpClient.BaseAddress}/GymEquipments/DeleteGymEquipmentBackEnd/{id}").Result;
 
                 if (response.IsSuccessStatusCode)
                 {

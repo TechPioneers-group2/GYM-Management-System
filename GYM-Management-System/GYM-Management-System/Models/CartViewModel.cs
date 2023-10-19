@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel;
 
-namespace gym_management_system_front_end.Models
+namespace GYM_Management_System.Models
 {
     public class CartViewModel
     {
-
         [DisplayName("Supplement ID ")]
         public int SupplementID { get; set; }
         public string Name { get; set; }
@@ -12,5 +11,7 @@ namespace gym_management_system_front_end.Models
         public string Description { get; set; }
         public int Quantity { get; set; }
         public string? imageURL { get; set; }
+
     }
+
 }
