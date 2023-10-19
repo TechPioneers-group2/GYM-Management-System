@@ -5,12 +5,21 @@
     Layout = "_Admin";
 }
 
-<h1>Edit</h1>
 
-<h4>PutGymDTO</h4>
+<div class="col-6 offset-5 mt-3 d-flex justify-content-between align-items-center">
+    <h1 class="text-danger m-0 p-0 text-center">Edit</h1>
+    <div class="">
+        <a class="btn btn-warning m-0 py-2" asp-action="Index">Back to List</a>
+
+    </div>
+</div>
+
+
+
+
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 offset-4">
         <form asp-action="Edit" asp-controller="Gyms" asp-route-id="@Model.GymID">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="GymID" />
@@ -47,9 +56,7 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{
