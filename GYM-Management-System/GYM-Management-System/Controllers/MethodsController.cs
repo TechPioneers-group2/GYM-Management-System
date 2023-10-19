@@ -13,8 +13,11 @@ namespace GYM_Management_System.Controllers
 
         private readonly IPaymentService _payment;
 
-        public MethodsController(IAzureBlobStorageService azure, IPaymentService payment)
+        private readonly SubscriptionTiersController _subscriptionTiersController;
+
+        public MethodsController(IAzureBlobStorageService azure, IPaymentService payment, SubscriptionTiersController c)
         {
+            _subscriptionTiersController = c;
             _azureBlobStorageService = azure;
             _payment = payment;
         }
@@ -30,12 +33,21 @@ namespace GYM_Management_System.Controllers
         {
             var session = await _payment.PaymentProcess(carts);
 
-           
-
-   
             return session;
 
-            
+        }
+
+        public async Task<Session> SubTierPaymentBackEnd(int subTierID)
+        {
+
+            // i need to use the controller action "GetSubscriptionTierBackEnd" from the controller "SubscriptionTiers" and pass subTierID to it
+
+            var subTier = await _subscriptionTiersController.GetSubscriptionTierBackEnd(subTierID);
+
+            var session = await _payment.SubTierPaymentProcess(subTier.Value);
+
+            return session;
+
         }
 
         // implement a behind the scene method to query the clients if any of them is close

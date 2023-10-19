@@ -127,7 +127,7 @@ namespace gym_management_system_front_end.Controllers
             // Use an HttpClient to send a POST request to your API
             using (HttpClient client = new HttpClient())
             {
-                 // Set your API base URL here
+                // Set your API base URL here
 
                 // Serialize the cart items to JSON
                 string jsonCartItems = JsonConvert.SerializeObject(cartItems);
@@ -140,11 +140,11 @@ namespace gym_management_system_front_end.Controllers
                 {
 
                     var jsondata = await response.Content.ReadAsStringAsync();
-                     var se = JsonConvert.DeserializeObject<Session>(jsondata);
+                    var se = JsonConvert.DeserializeObject<Session>(jsondata);
                     Response.Headers.Add("Location", se.Url);
                     //Response.Headers.Add("Location", jsondata);
                     return new StatusCodeResult(303);
-                     
+
                 }
                 else
                 {
