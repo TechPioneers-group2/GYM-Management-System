@@ -1,7 +1,6 @@
 ﻿using gym_management_system_front_end.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using CartViewModel = GYM_Management_System.Models.CartViewModel;
 
 namespace gym_management_system_front_end.Controllers
 {
@@ -46,24 +45,21 @@ namespace gym_management_system_front_end.Controllers
 
         }
 
-        [HttpPost]
-        public async Task<ActionResult> AddToCart(int supplementID)
+        public async Task<ActionResult> AddToCart(int id)
         {
-
             var cartCookie = HttpContext.Request.Cookies["SupplementCart"];
             Dictionary<int, int> supplement;
             if (cartCookie != null)
             {
                 supplement = JsonConvert.DeserializeObject<Dictionary<int, int>>(cartCookie);
 
-
-                if (supplement.ContainsKey(supplementID))
+                if (supplement.ContainsKey(id))
                 {
-                    supplement[supplementID] += 1;
+                    supplement[id] += 1;
                 }
                 else
                 {
-                    supplement[supplementID] = 1;
+                    supplement[id] = 1;
                 }
 
             }
@@ -71,7 +67,7 @@ namespace gym_management_system_front_end.Controllers
             {
                 supplement = new Dictionary<int, int>
                    {
-                       { supplementID, 1 }
+                       { id, 1 }
                    };
             }
 
@@ -88,7 +84,7 @@ namespace gym_management_system_front_end.Controllers
         }
 
 
-        public ActionResult RemoveFromCart(int supplementID)
+        public ActionResult RemoveFromCart(int id)
         {
             var removed = HttpContext.Request.Cookies["SupplementCart"];
             Dictionary<int, int> supplement;
@@ -97,13 +93,13 @@ namespace gym_management_system_front_end.Controllers
                 supplement = JsonConvert.DeserializeObject<Dictionary<int, int>>(removed);
 
 
-                if (supplement.ContainsKey(supplementID))
+                if (supplement.ContainsKey(id))
                 {
-                    supplement[supplementID] -= 1;
+                    supplement[id] -= 1;
                 }
-                if (supplement[supplementID] <= 0)
+                if (supplement[id] <= 0)
                 {
-                    supplement.Remove(supplementID);
+                    supplement.Remove(id);
                 }
 
                 var option = new CookieOptions

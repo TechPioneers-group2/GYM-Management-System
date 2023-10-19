@@ -19,9 +19,8 @@
                         <p class="clientsupplementcard-text">@item.Description</p>
                         <div class="d-flex justify-content-between">
                             <a class="btn btn-primary" asp-controller="Supplement" asp-action="Details" asp-route-id="@item.SupplementID">Details</a>
-                            <a class="btn btn-primary" asp-controller="Supplement" asp-action="Details" asp-route-id="@item.SupplementID">Details</a>
+                            <a class="btn btn-primary" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.SupplementID"> Add To Cart</a>
                         </div>
-                        
                     </div>
                 </div>
             </div>
