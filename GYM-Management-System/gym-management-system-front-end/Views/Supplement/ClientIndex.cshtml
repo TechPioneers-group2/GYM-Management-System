@@ -4,24 +4,27 @@
     ViewData["Title"] = "ClientIndex";
 }
 
-<section calss="bg-danger p-5" >
-    <div class="row  p-5 mt-5">
+
+
+<section class="p-5 d-flex justify-content-center">
+    <div class="row mt-5 d-flex justify-content-center">
         @foreach (var item in Model)
         {
             <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="@item.imageURL" class="card-img-top" alt="@item.Name">
-                    <div class="card-body">
-                        <h5 class="card-title">@item.Name</h5>
-                        <p class="card-text"><br>Price: @item.Price.ToString("0.00") JD<br /></p>
-                        <p class="card-text">@item.Description</p>
-                        @Html.ActionLink("Details", "Details", new { id=item.SupplementID }, new { @class = "btn btn-primary" })
+                <div class=" card clientsupplementcard" >
+                    <img src="@item.imageURL" class="clientsupplementcard-img-top" alt="Product image">
+                    <div class="clientsupplementcard-body p-4">
+                        <h5 class="clientsupplementcard-title">@item.Name</h5>
+                        <p class="card-text"><br><strong>Price:</strong> @item.Price.ToString("0.00") JD<br /></p>
+                        <p class="clientsupplementcard-text">@item.Description</p>
+                        <div class="d-flex justify-content-between">
+                            <a class="btn btn-primary" asp-controller="Supplement" asp-action="Details" asp-route-id="@item.SupplementID">Details</a>
+                            <a class="btn btn-primary" asp-controller="Supplement" asp-action="Details" asp-route-id="@item.SupplementID">Details</a>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
         }
     </div>
 </section>
-
-
-
