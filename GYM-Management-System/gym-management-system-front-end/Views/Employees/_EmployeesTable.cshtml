@@ -11,7 +11,7 @@
 </style>
 <div class="">
 	
-	<div class="form-div">
+	<div class="form-div mt-3">
 		<form method="Post" asp-controller="Employees" asp-action="GetEmployeesByGymId" class="form-emp-T">
 			<div class="flex-form-div">
 				<div class="form-group ">
@@ -34,7 +34,7 @@
 	</div>
 	@if (ViewBag.Employees == "All")
 	{
-		<h3>
+		<h3 class="text-center">
 
          All Employees
 
@@ -52,7 +52,7 @@
 		<h3 style=" margin-left:20px;">@ViewBag.gymName</h3>
 	}
 		
-	<div class="table-cont">
+	<div class="table-cont col-8 offset-2">
 	<table class="table table-striped table-hover">
 		<thead>
 			<tr>
