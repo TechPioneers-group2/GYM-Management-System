@@ -1,6 +1,7 @@
 ﻿using GYM_Management_System.Models;
 using GYM_Management_System.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Stripe.Checkout;
 
 namespace GYM_Management_System.Controllers
 {
@@ -25,13 +26,16 @@ namespace GYM_Management_System.Controllers
             return x;
         }
 
-        public async Task<IActionResult> PaymentBackEnd(List<CartViewModel> carts)
+        public async Task<Session> PaymentBackEnd(List<CartViewModel> carts)
         {
             var session = await _payment.PaymentProcess(carts);
 
-            Response.Headers.Add("Location", session.Url);
+           
 
-            return new StatusCodeResult(303);
+   
+            return session;
+
+            
         }
 
         // implement a behind the scene method to query the clients if any of them is close

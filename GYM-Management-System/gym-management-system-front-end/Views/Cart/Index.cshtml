@@ -1,4 +1,5 @@
-﻿@model IEnumerable<gym_management_system_front_end.Models.CartViewModel>
+﻿@using Newtonsoft.Json
+@model IEnumerable<gym_management_system_front_end.Models.CartViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -37,27 +38,10 @@
         }
     </div>
 
-    <form method="post">
-        <button type="submit">
-            Purchase
-        </button>
+    <form method="post" asp-action="CheckOut">
+        <input type="hidden" name="carts" value='@JsonConvert.SerializeObject(Model)'>
+        <button type="submit">Proceed to Payment</button>
     </form>
 
-    <script>
-        document.querySelectorAll(".delete-button").forEach(function (button) {
-            button.addEventListener("click", function () {
-                var x = parseInt(this.getAttribute("data-x"));
-
-                if (x > 1) {
-                    x--; // Decrease x
-                } else {
-                    // Send the POST request
-                    var form = this.closest("form");
-                    if (form) {
-                        form.submit();
-                    }
-                }
-            });
-        });
-    </script>
+   
 </section>
