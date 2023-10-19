@@ -4,6 +4,7 @@ using GYM_Management_System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GYM_Management_System.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    partial class GymDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231019003727_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,20 +94,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-
                             ConcurrencyStamp = "acc77232-3327-47cb-8cee-8cdc654c407f",
-
                             Email = "adminUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMINUSER@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-
-                            PasswordHash = "AQAAAAIAAYagAAAAEGnQ0CR7aJXOwxYkFx+ORZhBsRLg19NP10kAxgWEMqcrCK/lKKz3HO4nj+Nw99R5hA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEM2qkJgc/nLbIRA/QwQMnEyzBbw4EStOsWGlOAmAuo5RZF2T2IDnlNNrqgBgoVwHPw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c009deb0-bbc5-45d7-9952-eed86b2c2b7e",
-
+                            SecurityStamp = "7b2789ae-cc57-416d-951e-a563a91e991f",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
@@ -112,20 +111,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-
-                            ConcurrencyStamp = "92356380-9a7d-4e09-8316-0097f5a9f932",
-
+                            ConcurrencyStamp = "cb25507e-8a64-469d-808e-35526c492dc4",
                             Email = "employeeUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "EMPLOYEEUSER@EXAMPLE.COM",
                             NormalizedUserName = "EMPLOYEE",
-
-                            PasswordHash = "AQAAAAIAAYagAAAAEIkfbXdU2giYQLqLUXX1wWtCMPO6X5f3j27xFsbxeuXevAkw/687I4rA+0/GYINfNQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAGN2Oa0jbITWJccpJKXn7sep8JFKKa2DxO8bYcmCxLTwrrbOoQj+h7DvxxZFA/9Iw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "270b965a-1e14-4e51-916b-5024ee30e6bd",
-
+                            SecurityStamp = "a9092a56-1343-4623-af45-7f760ca8f7e3",
                             TwoFactorEnabled = false,
                             UserName = "Employee"
                         },
@@ -133,20 +128,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-
                             ConcurrencyStamp = "adac8858-4812-4fab-893d-999941557244",
-
                             Email = "ClientUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENTUSER@EXAMPLE.COM",
                             NormalizedUserName = "CLIENT",
-
-                            PasswordHash = "AQAAAAIAAYagAAAAEGU3keyb3rmINXiVSleJspSSewVfYqULpGDEI1nC68hRtQKdwVLL8lhmXYM1ZLgWFA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGNkFhuk+B1gXjZUiii46mEjnhqURWaX/jAF61Y3VRzs+4X7/q7QRFDo40RlQFUS4w==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f9a7d309-55ea-4b8b-a00d-d0bb9a999252",
-
+                            SecurityStamp = "85a595e9-c13a-4c27-8ff5-34dfaa028f80",
                             TwoFactorEnabled = false,
                             UserName = "Client"
                         },
@@ -154,19 +145,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "4",
                             AccessFailedCount = 0,
-
-                            ConcurrencyStamp = "1fe43e46-dcc4-4ef7-9750-b8502537ce14",
-
+                            ConcurrencyStamp = "185d9086-0927-40a6-845a-0f6d71a68ddc",
                             Email = "Client2User@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENT2USER@EXAMPLE.COM",
                             NormalizedUserName = "CLIENT2",
-                       PasswordHash = "AQAAAAIAAYagAAAAEGyToDgO5ufyA8IWF7i3OIvEbVcrN22aWM5UPIqMGF3dyQZvadXldKcpsloc9EkD1A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECi66s/qfklUIqnrN8vnuFhcV73oQT0tuLC3IXwbZOOO6JfH35z+teDw2Ni/H/WGJA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "75801924-15e7-4265-9e93-20a02e108f6b",
-
+                            SecurityStamp = "e6e46088-3041-4ea1-b198-e5207b506fcc",
                             TwoFactorEnabled = false,
                             UserName = "Client2"
                         });
@@ -218,10 +206,8 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             InGym = true,
                             Name = "Client",
-
-                            SubscriptionDate = new DateTime(2023, 10, 18, 23, 51, 56, 462, DateTimeKind.Local).AddTicks(2841),
-                            SubscriptionExpiry = new DateTime(2024, 4, 18, 23, 51, 56, 462, DateTimeKind.Local).AddTicks(2851),
-
+                            SubscriptionDate = new DateTime(2023, 10, 19, 3, 37, 27, 455, DateTimeKind.Local).AddTicks(6943),
+                            SubscriptionExpiry = new DateTime(2024, 4, 19, 3, 37, 27, 455, DateTimeKind.Local).AddTicks(6956),
                             SubscriptionTierID = 1,
                             UserId = "3"
                         },
@@ -231,9 +217,8 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             InGym = true,
                             Name = "Client2",
-                    SubscriptionDate = new DateTime(2023, 10, 18, 23, 51, 56, 462, DateTimeKind.Local).AddTicks(2857),
-                            SubscriptionExpiry = new DateTime(2024, 4, 18, 23, 51, 56, 462, DateTimeKind.Local).AddTicks(2857),
-
+                            SubscriptionDate = new DateTime(2023, 10, 19, 3, 37, 27, 455, DateTimeKind.Local).AddTicks(6965),
+                            SubscriptionExpiry = new DateTime(2024, 4, 19, 3, 37, 27, 455, DateTimeKind.Local).AddTicks(6966),
                             SubscriptionTierID = 1,
                             UserId = "4"
                         });
@@ -329,9 +314,6 @@ namespace GYM_Management_System.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("imageURL")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("GymID");
 
                     b.ToTable("Gyms");
@@ -345,8 +327,7 @@ namespace GYM_Management_System.Migrations
                             CurrentCapacity = 1,
                             MaxCapacity = "125",
                             Name = "WillPower - Amman",
-                            Notification = "Everything ok",
-                            imageURL = "https://techpioneers.blob.core.windows.net/images/AmmanGym.png"
+                            Notification = "Everything ok"
                         },
                         new
                         {
@@ -356,8 +337,7 @@ namespace GYM_Management_System.Migrations
                             CurrentCapacity = 1,
                             MaxCapacity = "100",
                             Name = "WillPower - Zarqa",
-                            Notification = "Everything ok",
-                            imageURL = "https://techpioneers.blob.core.windows.net/images/ZarqaGym.png"
+                            Notification = "Everything ok"
                         },
                         new
                         {
@@ -367,8 +347,7 @@ namespace GYM_Management_System.Migrations
                             CurrentCapacity = 0,
                             MaxCapacity = "150",
                             Name = "WillPower - Irbid",
-                            Notification = "Under maintenance until 9-9-2023 AD",
-                            imageURL = "https://techpioneers.blob.core.windows.net/images/IrbidGym.png"
+                            Notification = "Under maintenance until 9-9-2023 AD"
                         });
                 });
 
@@ -390,12 +369,12 @@ namespace GYM_Management_System.Migrations
                     b.Property<int>("OutOfService")
                         .HasColumnType("int");
 
-                    b.Property<string>("PhotoUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
+
+                    b.Property<string>("img")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("GymEquipmentID");
 
@@ -410,8 +389,8 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             Name = "bench press",
                             OutOfService = 0,
-                            PhotoUrl = "https://m.media-amazon.com/images/I/61cGWhpz3ZL._AC_UF1000,1000_QL80_.jpg",
-                            Quantity = 2
+                            Quantity = 2,
+                            img = "https://m.media-amazon.com/images/I/61cGWhpz3ZL._AC_UF1000,1000_QL80_.jpg"
                         },
                         new
                         {
@@ -419,8 +398,8 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             Name = "treadmill",
                             OutOfService = 2,
-                            PhotoUrl = "https://shop.lifefitness.com/cdn/shop/products/clubseries-plus-treadmill-titanium-storm-se3hd-1000x1000_1800x1800.jpg?v=1678726811",
-                            Quantity = 10
+                            Quantity = 10,
+                            img = "https://shop.lifefitness.com/cdn/shop/products/clubseries-plus-treadmill-titanium-storm-se3hd-1000x1000_1800x1800.jpg?v=1678726811"
                         },
                         new
                         {
@@ -428,10 +407,8 @@ namespace GYM_Management_System.Migrations
                             GymID = 2,
                             Name = "dumbbells",
                             OutOfService = 0,
-
-                            PhotoUrl = "https://www.bowflex.com/dw/image/v2/AAYW_PRD/on/demandware.static/-/Sites-nautilus-master-catalog/default/dwf21fb1cf/images/bfx/weights/100131/bowflex-selecttech-552-dumbbell-weights-hero.jpg?sw=2600&sh=1464&sm=fit",
-                            Quantity = 60
-
+                            Quantity = 60,
+                            img = "https://www.bowflex.com/dw/image/v2/AAYW_PRD/on/demandware.static/-/Sites-nautilus-master-catalog/default/dwf21fb1cf/images/bfx/weights/100131/bowflex-selecttech-552-dumbbell-weights-hero.jpg?sw=2600&sh=1464&sm=fit"
                         },
                         new
                         {
@@ -439,8 +416,8 @@ namespace GYM_Management_System.Migrations
                             GymID = 2,
                             Name = "elliptical machine",
                             OutOfService = 0,
-                            PhotoUrl = "https://www.precorhomefitness.com/cdn/shop/products/precor-efx-635-elliptical_5000x.jpg?v=1686422733",
-                            Quantity = 3
+                            Quantity = 3,
+                            img = "https://www.precorhomefitness.com/cdn/shop/products/precor-efx-635-elliptical_5000x.jpg?v=1686422733"
                         });
                 });
 
@@ -532,10 +509,8 @@ namespace GYM_Management_System.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<string>("imageURL")
+                    b.Property<string>("Price")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SupplementID");
@@ -548,73 +523,28 @@ namespace GYM_Management_System.Migrations
                             SupplementID = 1,
                             Description = "Whey protein is a mixture of proteins isolated from whey, which is the liquid part of milk that separates during cheese production.\r\nMilk actually contains two main types of protein: casein (80%) and whey (20%).",
                             Name = "Whey Protein Powder",
-                            Price = 100.0,
-                            imageURL = "https://techpioneers.blob.core.windows.net/images/WheyProteinPowder.png"
+                            Price = "80 JD"
                         },
                         new
                         {
                             SupplementID = 2,
                             Description = "Creatine is a combination of three different amino acids: glycine, arginine, and methionine.",
                             Name = "Creatine Monohydrate",
-                            Price = 90.0,
-                            imageURL = "https://techpioneers.blob.core.windows.net/images/CreatineMonohydrate.png"
+                            Price = "40 JD"
                         },
                         new
                         {
                             SupplementID = 3,
                             Description = "Branched-Chain Amino Acids (BCAAs) are a group of three essential amino acids: leucine, isoleucine, and valine. They are called branched-chain because they are the only three amino acids to have a chain that branches off to one side.",
                             Name = "Branched-Chain Amino Acids (BCAAs)",
-                            Price = 45.0,
-                            imageURL = "https://techpioneers.blob.core.windows.net/images/Branched-ChainAminoAcidsBCAAs.png"
+                            Price = "30 JD"
                         },
                         new
                         {
                             SupplementID = 4,
                             Description = "A pre-workout blend is a class of powdered drink mixes that are consumed 20-30 minutes prior to the beginning of a rigorous workout to increase exercise performance.",
                             Name = "Pre-Workout Blend",
-
-                            Price = 60.0,
-                            imageURL = "https://techpioneers.blob.core.windows.net/images/Pre-WorkoutBlend.png"
-                        },
-                        new
-                        {
-                            SupplementID = 5,
-                            Description = "BCAA Energy Drink is a powerful blend of Branched-Chain Amino Acids (BCAAs), providing energy and supporting muscle recovery during workouts.",
-                            Name = "BCAA Energy Drink",
-                            Price = 5.0,
-                            imageURL = "https://techpioneers.blob.core.windows.net/images/BCAAEnergyDrink.png"
-                        },
-                        new
-                        {
-                            SupplementID = 6,
-                            Description = "This Pre-Workout Nitric Oxide Booster is designed to enhance focus, increase energy levels, and improve blood flow for optimal workout performance.",
-                            Name = "Pre-Workout Nitric Oxide Booster",
-                            Price = 60.0,
-                            imageURL = "https://techpioneers.blob.core.windows.net/images/Pre-WorkoutNitricOxideBooster.png"
-                        },
-                        new
-                        {
-                            SupplementID = 7,
-                            Description = "Glutamine Capsules provide essential amino acids that aid in muscle recovery, immune system support, and reducing muscle soreness after intense workouts.",
-                            Name = "Glutamine Capsules",
-                            Price = 25.0,
-                            imageURL = "https://techpioneers.blob.core.windows.net/images/GlutamineCapsules.png"
-                        },
-                        new
-                        {
-                            SupplementID = 8,
-                            Description = "Omega-3 Fish Oil supplements are rich in essential fatty acids that support cardiovascular health, joint function, and muscle recovery.",
-                            Name = "Omega-3 Fish Oil",
-                            Price = 17.0,
-                            imageURL = "https://techpioneers.blob.core.windows.net/images/Omega-3FishOil.png"
-                        },
-                        new
-                        {
-                            SupplementID = 9,
-                            Description = "L-Carnitine Fat Burner helps convert stored body fat into energy, making it an effective supplement for those looking to manage weight and increase endurance.",
-                            Name = "L-Carnitine Fat Burner",
-                            Price = 17.0,
-                            imageURL = "https://techpioneers.blob.core.windows.net/images/LCarnitineFatBurner.png"
+                            Price = "50 JD"
                         });
                 });
 
@@ -626,7 +556,6 @@ namespace GYM_Management_System.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
-
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
@@ -648,24 +577,21 @@ namespace GYM_Management_System.Migrations
                     b.HasData(
                         new
                         {
-
-                            Id = "2ba0e8f3-78cd-4b34-a20d-e4e06ca516a4",
+                            Id = "708944b6-ab5a-4684-8f13-5c2e915c1b43",
                             ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-
-                            Id = "c32ccdb0-d756-4101-b460-4fb94934249c",
-
+                            Id = "38a22286-71a8-4b41-991c-b4685997d8bc",
                             ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
-               Id = "acd4352c-4c4f-47af-a273-ae7ef7892e69",
+                            Id = "6f6794b0-fc47-4db3-a481-ed1ae165ecc1",
                             ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
                             Name = "Client",
                             NormalizedName = "CLIENT"
@@ -702,71 +628,63 @@ namespace GYM_Management_System.Migrations
                             Id = 10,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "createAdmin",
-              RoleId = "2ba0e8f3-78cd-4b34-a20d-e4e06ca516a4"
+                            RoleId = "708944b6-ab5a-4684-8f13-5c2e915c1b43"
                         },
                         new
                         {
                             Id = 11,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "updateAdmin",
-
-                            RoleId = "2ba0e8f3-78cd-4b34-a20d-e4e06ca516a4"
+                            RoleId = "708944b6-ab5a-4684-8f13-5c2e915c1b43"
                         },
                         new
                         {
                             Id = 12,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "deleteAdmin",
-
-                            RoleId = "2ba0e8f3-78cd-4b34-a20d-e4e06ca516a4"
+                            RoleId = "708944b6-ab5a-4684-8f13-5c2e915c1b43"
                         },
                         new
                         {
                             Id = 13,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "readAdmin",
-
-                            RoleId = "2ba0e8f3-78cd-4b34-a20d-e4e06ca516a4"
+                            RoleId = "708944b6-ab5a-4684-8f13-5c2e915c1b43"
                         },
                         new
                         {
                             Id = 14,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "createEmployee",
-
-
-                            RoleId = "c32ccdb0-d756-4101-b460-4fb94934249c"
+                            RoleId = "38a22286-71a8-4b41-991c-b4685997d8bc"
                         },
                         new
                         {
                             Id = 15,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "updateEmployee",
-                            RoleId = "c32ccdb0-d756-4101-b460-4fb94934249c"
+                            RoleId = "38a22286-71a8-4b41-991c-b4685997d8bc"
                         },
                         new
                         {
                             Id = 16,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "readEmployee",
-                            RoleId = "c32ccdb0-d756-4101-b460-4fb94934249c"
+                            RoleId = "38a22286-71a8-4b41-991c-b4685997d8bc"
                         },
                         new
                         {
                             Id = 17,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "updateClient",
-                            RoleId = "acd4352c-4c4f-47af-a273-ae7ef7892e69"
-
+                            RoleId = "6f6794b0-fc47-4db3-a481-ed1ae165ecc1"
                         },
                         new
                         {
                             Id = 18,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "readClient",
-
-                            RoleId = "acd4352c-4c4f-47af-a273-ae7ef7892e69"
-
+                            RoleId = "6f6794b0-fc47-4db3-a481-ed1ae165ecc1"
                         });
                 });
 
@@ -791,9 +709,6 @@ namespace GYM_Management_System.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
-
-
-
 
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
@@ -829,7 +744,6 @@ namespace GYM_Management_System.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("UserId", "RoleId");
-
 
                     b.HasIndex("RoleId");
 

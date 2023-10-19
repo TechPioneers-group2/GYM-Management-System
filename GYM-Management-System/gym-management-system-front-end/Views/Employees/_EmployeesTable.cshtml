@@ -4,25 +4,37 @@
 	ViewData["Title"] = "Employees";
 	var gymList = new SelectList(ViewBag.gymList, "GymID", "Name");
 }
-
-
+<style>
+	.Delete:hover{
+		color:red;
+	}
+</style>
 <div class="">
-	<div>
-		<a class="" asp-controller="Employees" asp-action="Create">Register Employee </a>
-		<form method="Post" asp-controller="Employees" asp-action="GetEmployeesByGymId">
-
-			<div class="col-md-12 form-group">
-				<label> Gym</label>
-				<select asp-items="@gymList" id="gymId" name="gymId"></select>
-			</div>
-			<div class="form-group form-group-margin form-header-3">
-				<input type="submit" value="Search" />
+	
+	<div class="form-div mt-3">
+		<form method="Post" asp-controller="Employees" asp-action="GetEmployeesByGymId" class="form-emp-T">
+			<div class="flex-form-div">
+				<div class="form-group ">
+					<label for="gymId" class="control-label">Choose A Gym</label>
+				</div>
+				<div class="form-group ">
+					<select class="form-select" asp-items="@gymList" id="gymId" name="gymId">
+						<i class="bi bi-caret-down" style="color: #FF771C; width:10px;"></i>
+					</select>
+				</div>
+				<div class="form-group btn-sub">
+					<input type="submit" value="Search" class="custom-button" />
+				</div>
 			</div>
 		</form>
+
+
+
+
 	</div>
 	@if (ViewBag.Employees == "All")
 	{
-		<h3>
+		<h3 class="text-center">
 
          All Employees
 
@@ -37,11 +49,11 @@
 
 			<h3>@Model.ToList()[0].gymBaseDto.Name</h3>
 		}*/
-		<h3>@ViewBag.gymName</h3>
+		<h3 style=" margin-left:20px;">@ViewBag.gymName</h3>
 	}
 		
-	
-	<table class="table table-dark table-hover">
+	<div class="table-cont col-8 offset-2">
+	<table class="table table-striped table-hover">
 		<thead>
 			<tr>
 				<th scope="col">Employee ID</th>
@@ -73,10 +85,13 @@
 						<a class="" asp-controller="Employees" asp-action="Edit" asp-route-id="@employee.EmployeeID">Edit</a>
 					</td>
 					<td>
-						<a class="" asp-controller="Employees" asp-action="Delete" asp-route-id="@employee.EmployeeID" onclick="return confirm('Are You Sure that You Want To Delete The Employee @employee.Name  ?')">Delete</a>
+						<a class="Delete"  asp-controller="Employees" asp-action="Delete" asp-route-id="@employee.EmployeeID" onclick="return confirm('Are You Sure that You Want To Delete The Employee @employee.Name  ?')">Delete</a>
 					</td>
 				</tr>
 			}
 		</tbody>
 	</table>
+	</div>
 </div>
+
+
