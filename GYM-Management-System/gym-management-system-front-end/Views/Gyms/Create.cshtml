@@ -2,44 +2,46 @@
 
 @{
     ViewData["Title"] = "Create";
+    Layout = "_Admin";
+
 }
 
-<h1>Create</h1>
 
-<h4>PostGymDTO</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="container">
+	<div class="form-container">
+		<div class="form-box">
+		<h3>Creat New Gym</h3>
         <form asp-action="Create" asp-controller="Gyms">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+					<input type="text" asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
+					<input type="text" asp-for="Address" class="form-control" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="MaxCapacity" class="control-label"></label>
-                <input asp-for="MaxCapacity" class="form-control" />
+					<input type="text" asp-for="MaxCapacity" class="form-control" />
                 <span asp-validation-for="MaxCapacity" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CurrentCapacity" class="control-label"></label>
-                <input asp-for="CurrentCapacity" class="form-control" />
+                <input type="number" asp-for="CurrentCapacity" class="form-control" />
                 <span asp-validation-for="CurrentCapacity" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ActiveHours" class="control-label"></label>
-                <input asp-for="ActiveHours" class="form-control" />
+					<input type="text" asp-for="ActiveHours" class="form-control" />
                 <span asp-validation-for="ActiveHours" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Notification" class="control-label"></label>
-                <input asp-for="Notification" class="form-control" />
+					<input type="text" asp-for="Notification" class="form-control" />
                 <span asp-validation-for="Notification" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -48,10 +50,11 @@
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+	<div>
+		<a asp-action="Index">Back to List</a>
+	</div>
 </div>
+
 
 @section Scripts {
     @{
