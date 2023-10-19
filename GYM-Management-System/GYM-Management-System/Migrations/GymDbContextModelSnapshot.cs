@@ -91,20 +91,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-
-                            ConcurrencyStamp = "acc77232-3327-47cb-8cee-8cdc654c407f",
-
+                            ConcurrencyStamp = "753e0eaa-25d4-405a-b232-12d3b24b4aea",
                             Email = "adminUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMINUSER@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-
-                            PasswordHash = "AQAAAAIAAYagAAAAEGnQ0CR7aJXOwxYkFx+ORZhBsRLg19NP10kAxgWEMqcrCK/lKKz3HO4nj+Nw99R5hA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEB6kfJc3RID3nhepFjU6zWUNV+p6HExk33UWwJGdo1bDRecSrlJPUeY22q9xqurIFQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c009deb0-bbc5-45d7-9952-eed86b2c2b7e",
-
+                            SecurityStamp = "8625c826-7b80-420a-a061-84f548ef919c",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
@@ -112,20 +108,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-
-                            ConcurrencyStamp = "92356380-9a7d-4e09-8316-0097f5a9f932",
-
+                            ConcurrencyStamp = "edab6b35-18f2-43ea-a30f-6827976dc5c5",
                             Email = "employeeUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "EMPLOYEEUSER@EXAMPLE.COM",
                             NormalizedUserName = "EMPLOYEE",
-
-                            PasswordHash = "AQAAAAIAAYagAAAAEIkfbXdU2giYQLqLUXX1wWtCMPO6X5f3j27xFsbxeuXevAkw/687I4rA+0/GYINfNQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEO1BjkD3lqdErp/HXUR4g6IgLLRE+TdQaNfvpV8g0imLiWVPjXlGfXTtii8tir0RGw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "270b965a-1e14-4e51-916b-5024ee30e6bd",
-
+                            SecurityStamp = "70e3b948-da2f-451d-b9bf-6b26764ea601",
                             TwoFactorEnabled = false,
                             UserName = "Employee"
                         },
@@ -133,20 +125,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-
-                            ConcurrencyStamp = "adac8858-4812-4fab-893d-999941557244",
-
+                            ConcurrencyStamp = "4ca18e61-158d-484a-a747-f029b2ed3313",
                             Email = "ClientUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENTUSER@EXAMPLE.COM",
                             NormalizedUserName = "CLIENT",
-
-                            PasswordHash = "AQAAAAIAAYagAAAAEGU3keyb3rmINXiVSleJspSSewVfYqULpGDEI1nC68hRtQKdwVLL8lhmXYM1ZLgWFA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKYc0USfB+7FBdF+U1SoaLxVJXUNYuUCSk3bXTT4FyWYhzljgLahh9WLT51kNYC3vw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f9a7d309-55ea-4b8b-a00d-d0bb9a999252",
-
+                            SecurityStamp = "0ff92875-e8e9-4cd3-9a21-5f1332e2db8f",
                             TwoFactorEnabled = false,
                             UserName = "Client"
                         },
@@ -154,19 +142,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "4",
                             AccessFailedCount = 0,
-
-                            ConcurrencyStamp = "1fe43e46-dcc4-4ef7-9750-b8502537ce14",
-
+                            ConcurrencyStamp = "53d3ffbc-594d-4287-920e-648e3e16f133",
                             Email = "Client2User@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENT2USER@EXAMPLE.COM",
                             NormalizedUserName = "CLIENT2",
-                       PasswordHash = "AQAAAAIAAYagAAAAEGyToDgO5ufyA8IWF7i3OIvEbVcrN22aWM5UPIqMGF3dyQZvadXldKcpsloc9EkD1A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEE7du87CKC9M5pk1Navl55n1sjFyoZfxUP/IQEZk5T8FtATQn0qbAYpT2m1ixsCnfg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "75801924-15e7-4265-9e93-20a02e108f6b",
-
+                            SecurityStamp = "0cb0404b-f4a0-4f0d-addd-55ccd9f01607",
                             TwoFactorEnabled = false,
                             UserName = "Client2"
                         });
@@ -218,10 +203,8 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             InGym = true,
                             Name = "Client",
-
-                            SubscriptionDate = new DateTime(2023, 10, 18, 23, 51, 56, 462, DateTimeKind.Local).AddTicks(2841),
-                            SubscriptionExpiry = new DateTime(2024, 4, 18, 23, 51, 56, 462, DateTimeKind.Local).AddTicks(2851),
-
+                            SubscriptionDate = new DateTime(2023, 10, 19, 11, 11, 51, 811, DateTimeKind.Local).AddTicks(2707),
+                            SubscriptionExpiry = new DateTime(2024, 4, 19, 11, 11, 51, 811, DateTimeKind.Local).AddTicks(2724),
                             SubscriptionTierID = 1,
                             UserId = "3"
                         },
@@ -231,9 +214,8 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             InGym = true,
                             Name = "Client2",
-                    SubscriptionDate = new DateTime(2023, 10, 18, 23, 51, 56, 462, DateTimeKind.Local).AddTicks(2857),
-                            SubscriptionExpiry = new DateTime(2024, 4, 18, 23, 51, 56, 462, DateTimeKind.Local).AddTicks(2857),
-
+                            SubscriptionDate = new DateTime(2023, 10, 19, 11, 11, 51, 811, DateTimeKind.Local).AddTicks(2742),
+                            SubscriptionExpiry = new DateTime(2024, 4, 19, 11, 11, 51, 811, DateTimeKind.Local).AddTicks(2743),
                             SubscriptionTierID = 1,
                             UserId = "4"
                         });
@@ -428,10 +410,8 @@ namespace GYM_Management_System.Migrations
                             GymID = 2,
                             Name = "dumbbells",
                             OutOfService = 0,
-
                             PhotoUrl = "https://www.bowflex.com/dw/image/v2/AAYW_PRD/on/demandware.static/-/Sites-nautilus-master-catalog/default/dwf21fb1cf/images/bfx/weights/100131/bowflex-selecttech-552-dumbbell-weights-hero.jpg?sw=2600&sh=1464&sm=fit",
                             Quantity = 60
-
                         },
                         new
                         {
@@ -572,7 +552,6 @@ namespace GYM_Management_System.Migrations
                             SupplementID = 4,
                             Description = "A pre-workout blend is a class of powdered drink mixes that are consumed 20-30 minutes prior to the beginning of a rigorous workout to increase exercise performance.",
                             Name = "Pre-Workout Blend",
-
                             Price = 60.0,
                             imageURL = "https://techpioneers.blob.core.windows.net/images/Pre-WorkoutBlend.png"
                         },
@@ -627,7 +606,6 @@ namespace GYM_Management_System.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-
                     b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -648,24 +626,21 @@ namespace GYM_Management_System.Migrations
                     b.HasData(
                         new
                         {
-
-                            Id = "2ba0e8f3-78cd-4b34-a20d-e4e06ca516a4",
+                            Id = "3fb28755-191d-45ab-b387-57d01e5c2469",
                             ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-
-                            Id = "c32ccdb0-d756-4101-b460-4fb94934249c",
-
+                            Id = "4e67310f-5758-4569-875f-925b3a32227d",
                             ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
-               Id = "acd4352c-4c4f-47af-a273-ae7ef7892e69",
+                            Id = "68aded20-81fb-4bbe-8312-b3a982ad4886",
                             ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
                             Name = "Client",
                             NormalizedName = "CLIENT"
@@ -702,71 +677,63 @@ namespace GYM_Management_System.Migrations
                             Id = 10,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "createAdmin",
-              RoleId = "2ba0e8f3-78cd-4b34-a20d-e4e06ca516a4"
+                            RoleId = "3fb28755-191d-45ab-b387-57d01e5c2469"
                         },
                         new
                         {
                             Id = 11,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "updateAdmin",
-
-                            RoleId = "2ba0e8f3-78cd-4b34-a20d-e4e06ca516a4"
+                            RoleId = "3fb28755-191d-45ab-b387-57d01e5c2469"
                         },
                         new
                         {
                             Id = 12,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "deleteAdmin",
-
-                            RoleId = "2ba0e8f3-78cd-4b34-a20d-e4e06ca516a4"
+                            RoleId = "3fb28755-191d-45ab-b387-57d01e5c2469"
                         },
                         new
                         {
                             Id = 13,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "readAdmin",
-
-                            RoleId = "2ba0e8f3-78cd-4b34-a20d-e4e06ca516a4"
+                            RoleId = "3fb28755-191d-45ab-b387-57d01e5c2469"
                         },
                         new
                         {
                             Id = 14,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "createEmployee",
-
-
-                            RoleId = "c32ccdb0-d756-4101-b460-4fb94934249c"
+                            RoleId = "4e67310f-5758-4569-875f-925b3a32227d"
                         },
                         new
                         {
                             Id = 15,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "updateEmployee",
-                            RoleId = "c32ccdb0-d756-4101-b460-4fb94934249c"
+                            RoleId = "4e67310f-5758-4569-875f-925b3a32227d"
                         },
                         new
                         {
                             Id = 16,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "readEmployee",
-                            RoleId = "c32ccdb0-d756-4101-b460-4fb94934249c"
+                            RoleId = "4e67310f-5758-4569-875f-925b3a32227d"
                         },
                         new
                         {
                             Id = 17,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "updateClient",
-                            RoleId = "acd4352c-4c4f-47af-a273-ae7ef7892e69"
-
+                            RoleId = "68aded20-81fb-4bbe-8312-b3a982ad4886"
                         },
                         new
                         {
                             Id = 18,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "readClient",
-
-                            RoleId = "acd4352c-4c4f-47af-a273-ae7ef7892e69"
-
+                            RoleId = "68aded20-81fb-4bbe-8312-b3a982ad4886"
                         });
                 });
 
@@ -791,9 +758,6 @@ namespace GYM_Management_System.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
-
-
-
 
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
@@ -829,7 +793,6 @@ namespace GYM_Management_System.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("UserId", "RoleId");
-
 
                     b.HasIndex("RoleId");
 

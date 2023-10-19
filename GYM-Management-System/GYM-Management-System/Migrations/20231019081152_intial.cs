@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GYM_Management_System.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class intial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -63,7 +63,8 @@ namespace GYM_Management_System.Migrations
                     MaxCapacity = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CurrentCapacity = table.Column<int>(type: "int", nullable: false),
                     ActiveHours = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Notification = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Notification = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    imageURL = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -92,8 +93,9 @@ namespace GYM_Management_System.Migrations
                     SupplementID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    imageURL = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -242,7 +244,7 @@ namespace GYM_Management_System.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OutOfService = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    img = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PhotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -316,9 +318,9 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "38a22286-71a8-4b41-991c-b4685997d8bc", "00000000-0000-0000-0000-000000000000", "Employee", "EMPLOYEE" },
-                    { "6f6794b0-fc47-4db3-a481-ed1ae165ecc1", "00000000-0000-0000-0000-000000000000", "Client", "CLIENT" },
-                    { "708944b6-ab5a-4684-8f13-5c2e915c1b43", "00000000-0000-0000-0000-000000000000", "Admin", "ADMIN" }
+                    { "3fb28755-191d-45ab-b387-57d01e5c2469", "00000000-0000-0000-0000-000000000000", "Admin", "ADMIN" },
+                    { "4e67310f-5758-4569-875f-925b3a32227d", "00000000-0000-0000-0000-000000000000", "Employee", "EMPLOYEE" },
+                    { "68aded20-81fb-4bbe-8312-b3a982ad4886", "00000000-0000-0000-0000-000000000000", "Client", "CLIENT" }
                 });
 
             migrationBuilder.InsertData(
@@ -326,20 +328,20 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1", 0, "acc77232-3327-47cb-8cee-8cdc654c407f", "adminUser@example.com", true, false, null, "ADMINUSER@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAEM2qkJgc/nLbIRA/QwQMnEyzBbw4EStOsWGlOAmAuo5RZF2T2IDnlNNrqgBgoVwHPw==", "1234567890", false, "7b2789ae-cc57-416d-951e-a563a91e991f", false, "Admin" },
-                    { "2", 0, "cb25507e-8a64-469d-808e-35526c492dc4", "employeeUser@example.com", true, false, null, "EMPLOYEEUSER@EXAMPLE.COM", "EMPLOYEE", "AQAAAAIAAYagAAAAEAGN2Oa0jbITWJccpJKXn7sep8JFKKa2DxO8bYcmCxLTwrrbOoQj+h7DvxxZFA/9Iw==", "1234567890", false, "a9092a56-1343-4623-af45-7f760ca8f7e3", false, "Employee" },
-                    { "3", 0, "adac8858-4812-4fab-893d-999941557244", "ClientUser@example.com", true, false, null, "CLIENTUSER@EXAMPLE.COM", "CLIENT", "AQAAAAIAAYagAAAAEGNkFhuk+B1gXjZUiii46mEjnhqURWaX/jAF61Y3VRzs+4X7/q7QRFDo40RlQFUS4w==", "1234567890", false, "85a595e9-c13a-4c27-8ff5-34dfaa028f80", false, "Client" },
-                    { "4", 0, "185d9086-0927-40a6-845a-0f6d71a68ddc", "Client2User@example.com", true, false, null, "CLIENT2USER@EXAMPLE.COM", "CLIENT2", "AQAAAAIAAYagAAAAECi66s/qfklUIqnrN8vnuFhcV73oQT0tuLC3IXwbZOOO6JfH35z+teDw2Ni/H/WGJA==", "1234567890", false, "e6e46088-3041-4ea1-b198-e5207b506fcc", false, "Client2" }
+                    { "1", 0, "753e0eaa-25d4-405a-b232-12d3b24b4aea", "adminUser@example.com", true, false, null, "ADMINUSER@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAEB6kfJc3RID3nhepFjU6zWUNV+p6HExk33UWwJGdo1bDRecSrlJPUeY22q9xqurIFQ==", "1234567890", false, "8625c826-7b80-420a-a061-84f548ef919c", false, "Admin" },
+                    { "2", 0, "edab6b35-18f2-43ea-a30f-6827976dc5c5", "employeeUser@example.com", true, false, null, "EMPLOYEEUSER@EXAMPLE.COM", "EMPLOYEE", "AQAAAAIAAYagAAAAEO1BjkD3lqdErp/HXUR4g6IgLLRE+TdQaNfvpV8g0imLiWVPjXlGfXTtii8tir0RGw==", "1234567890", false, "70e3b948-da2f-451d-b9bf-6b26764ea601", false, "Employee" },
+                    { "3", 0, "4ca18e61-158d-484a-a747-f029b2ed3313", "ClientUser@example.com", true, false, null, "CLIENTUSER@EXAMPLE.COM", "CLIENT", "AQAAAAIAAYagAAAAEKYc0USfB+7FBdF+U1SoaLxVJXUNYuUCSk3bXTT4FyWYhzljgLahh9WLT51kNYC3vw==", "1234567890", false, "0ff92875-e8e9-4cd3-9a21-5f1332e2db8f", false, "Client" },
+                    { "4", 0, "53d3ffbc-594d-4287-920e-648e3e16f133", "Client2User@example.com", true, false, null, "CLIENT2USER@EXAMPLE.COM", "CLIENT2", "AQAAAAIAAYagAAAAEE7du87CKC9M5pk1Navl55n1sjFyoZfxUP/IQEZk5T8FtATQn0qbAYpT2m1ixsCnfg==", "1234567890", false, "0cb0404b-f4a0-4f0d-addd-55ccd9f01607", false, "Client2" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Gyms",
-                columns: new[] { "GymID", "ActiveHours", "Address", "CurrentCapacity", "MaxCapacity", "Name", "Notification" },
+                columns: new[] { "GymID", "ActiveHours", "Address", "CurrentCapacity", "MaxCapacity", "Name", "Notification", "imageURL" },
                 values: new object[,]
                 {
-                    { 1, "5AM-12PM", "Amman - University Street - Building 25", 1, "125", "WillPower - Amman", "Everything ok" },
-                    { 2, "6AM-12PM", "Zarqa - 36th Street - Building 20", 1, "100", "WillPower - Zarqa", "Everything ok" },
-                    { 3, "6AM-12PM", "Irbid - Yarmouk University Street - Building 30", 0, "150", "WillPower - Irbid", "Under maintenance until 9-9-2023 AD" }
+                    { 1, "5AM-12PM", "Amman - University Street - Building 25", 1, "125", "WillPower - Amman", "Everything ok", "https://techpioneers.blob.core.windows.net/images/AmmanGym.png" },
+                    { 2, "6AM-12PM", "Zarqa - 36th Street - Building 20", 1, "100", "WillPower - Zarqa", "Everything ok", "https://techpioneers.blob.core.windows.net/images/ZarqaGym.png" },
+                    { 3, "6AM-12PM", "Irbid - Yarmouk University Street - Building 30", 0, "150", "WillPower - Irbid", "Under maintenance until 9-9-2023 AD", "https://techpioneers.blob.core.windows.net/images/IrbidGym.png" }
                 });
 
             migrationBuilder.InsertData(
@@ -355,13 +357,18 @@ namespace GYM_Management_System.Migrations
 
             migrationBuilder.InsertData(
                 table: "Supplements",
-                columns: new[] { "SupplementID", "Description", "Name", "Price" },
+                columns: new[] { "SupplementID", "Description", "Name", "Price", "imageURL" },
                 values: new object[,]
                 {
-                    { 1, "Whey protein is a mixture of proteins isolated from whey, which is the liquid part of milk that separates during cheese production.\r\nMilk actually contains two main types of protein: casein (80%) and whey (20%).", "Whey Protein Powder", "80 JD" },
-                    { 2, "Creatine is a combination of three different amino acids: glycine, arginine, and methionine.", "Creatine Monohydrate", "40 JD" },
-                    { 3, "Branched-Chain Amino Acids (BCAAs) are a group of three essential amino acids: leucine, isoleucine, and valine. They are called branched-chain because they are the only three amino acids to have a chain that branches off to one side.", "Branched-Chain Amino Acids (BCAAs)", "30 JD" },
-                    { 4, "A pre-workout blend is a class of powdered drink mixes that are consumed 20-30 minutes prior to the beginning of a rigorous workout to increase exercise performance.", "Pre-Workout Blend", "50 JD" }
+                    { 1, "Whey protein is a mixture of proteins isolated from whey, which is the liquid part of milk that separates during cheese production.\r\nMilk actually contains two main types of protein: casein (80%) and whey (20%).", "Whey Protein Powder", 100.0, "https://techpioneers.blob.core.windows.net/images/WheyProteinPowder.png" },
+                    { 2, "Creatine is a combination of three different amino acids: glycine, arginine, and methionine.", "Creatine Monohydrate", 90.0, "https://techpioneers.blob.core.windows.net/images/CreatineMonohydrate.png" },
+                    { 3, "Branched-Chain Amino Acids (BCAAs) are a group of three essential amino acids: leucine, isoleucine, and valine. They are called branched-chain because they are the only three amino acids to have a chain that branches off to one side.", "Branched-Chain Amino Acids (BCAAs)", 45.0, "https://techpioneers.blob.core.windows.net/images/Branched-ChainAminoAcidsBCAAs.png" },
+                    { 4, "A pre-workout blend is a class of powdered drink mixes that are consumed 20-30 minutes prior to the beginning of a rigorous workout to increase exercise performance.", "Pre-Workout Blend", 60.0, "https://techpioneers.blob.core.windows.net/images/Pre-WorkoutBlend.png" },
+                    { 5, "BCAA Energy Drink is a powerful blend of Branched-Chain Amino Acids (BCAAs), providing energy and supporting muscle recovery during workouts.", "BCAA Energy Drink", 5.0, "https://techpioneers.blob.core.windows.net/images/BCAAEnergyDrink.png" },
+                    { 6, "This Pre-Workout Nitric Oxide Booster is designed to enhance focus, increase energy levels, and improve blood flow for optimal workout performance.", "Pre-Workout Nitric Oxide Booster", 60.0, "https://techpioneers.blob.core.windows.net/images/Pre-WorkoutNitricOxideBooster.png" },
+                    { 7, "Glutamine Capsules provide essential amino acids that aid in muscle recovery, immune system support, and reducing muscle soreness after intense workouts.", "Glutamine Capsules", 25.0, "https://techpioneers.blob.core.windows.net/images/GlutamineCapsules.png" },
+                    { 8, "Omega-3 Fish Oil supplements are rich in essential fatty acids that support cardiovascular health, joint function, and muscle recovery.", "Omega-3 Fish Oil", 17.0, "https://techpioneers.blob.core.windows.net/images/Omega-3FishOil.png" },
+                    { 9, "L-Carnitine Fat Burner helps convert stored body fat into energy, making it an effective supplement for those looking to manage weight and increase endurance.", "L-Carnitine Fat Burner", 17.0, "https://techpioneers.blob.core.windows.net/images/LCarnitineFatBurner.png" }
                 });
 
             migrationBuilder.InsertData(
@@ -369,15 +376,15 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "Id", "ClaimType", "ClaimValue", "RoleId" },
                 values: new object[,]
                 {
-                    { 10, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createAdmin", "708944b6-ab5a-4684-8f13-5c2e915c1b43" },
-                    { 11, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateAdmin", "708944b6-ab5a-4684-8f13-5c2e915c1b43" },
-                    { 12, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "deleteAdmin", "708944b6-ab5a-4684-8f13-5c2e915c1b43" },
-                    { 13, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readAdmin", "708944b6-ab5a-4684-8f13-5c2e915c1b43" },
-                    { 14, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createEmployee", "38a22286-71a8-4b41-991c-b4685997d8bc" },
-                    { 15, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateEmployee", "38a22286-71a8-4b41-991c-b4685997d8bc" },
-                    { 16, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readEmployee", "38a22286-71a8-4b41-991c-b4685997d8bc" },
-                    { 17, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateClient", "6f6794b0-fc47-4db3-a481-ed1ae165ecc1" },
-                    { 18, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readClient", "6f6794b0-fc47-4db3-a481-ed1ae165ecc1" }
+                    { 10, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createAdmin", "3fb28755-191d-45ab-b387-57d01e5c2469" },
+                    { 11, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateAdmin", "3fb28755-191d-45ab-b387-57d01e5c2469" },
+                    { 12, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "deleteAdmin", "3fb28755-191d-45ab-b387-57d01e5c2469" },
+                    { 13, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readAdmin", "3fb28755-191d-45ab-b387-57d01e5c2469" },
+                    { 14, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createEmployee", "4e67310f-5758-4569-875f-925b3a32227d" },
+                    { 15, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateEmployee", "4e67310f-5758-4569-875f-925b3a32227d" },
+                    { 16, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readEmployee", "4e67310f-5758-4569-875f-925b3a32227d" },
+                    { 17, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateClient", "68aded20-81fb-4bbe-8312-b3a982ad4886" },
+                    { 18, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readClient", "68aded20-81fb-4bbe-8312-b3a982ad4886" }
                 });
 
             migrationBuilder.InsertData(
@@ -385,8 +392,8 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "ClientID", "GymID", "InGym", "Name", "SubscriptionDate", "SubscriptionExpiry", "SubscriptionTierID", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, true, "Client", new DateTime(2023, 10, 19, 3, 37, 27, 455, DateTimeKind.Local).AddTicks(6943), new DateTime(2024, 4, 19, 3, 37, 27, 455, DateTimeKind.Local).AddTicks(6956), 1, "3" },
-                    { 2, 1, true, "Client2", new DateTime(2023, 10, 19, 3, 37, 27, 455, DateTimeKind.Local).AddTicks(6965), new DateTime(2024, 4, 19, 3, 37, 27, 455, DateTimeKind.Local).AddTicks(6966), 1, "4" }
+                    { 1, 1, true, "Client", new DateTime(2023, 10, 19, 11, 11, 51, 811, DateTimeKind.Local).AddTicks(2707), new DateTime(2024, 4, 19, 11, 11, 51, 811, DateTimeKind.Local).AddTicks(2724), 1, "3" },
+                    { 2, 1, true, "Client2", new DateTime(2023, 10, 19, 11, 11, 51, 811, DateTimeKind.Local).AddTicks(2742), new DateTime(2024, 4, 19, 11, 11, 51, 811, DateTimeKind.Local).AddTicks(2743), 1, "4" }
                 });
 
             migrationBuilder.InsertData(
@@ -396,13 +403,13 @@ namespace GYM_Management_System.Migrations
 
             migrationBuilder.InsertData(
                 table: "GymEquipments",
-                columns: new[] { "GymEquipmentID", "GymID", "Name", "OutOfService", "Quantity", "img" },
+                columns: new[] { "GymEquipmentID", "GymID", "Name", "OutOfService", "PhotoUrl", "Quantity" },
                 values: new object[,]
                 {
-                    { 2, 1, "bench press", 0, 2, "https://m.media-amazon.com/images/I/61cGWhpz3ZL._AC_UF1000,1000_QL80_.jpg" },
-                    { 3, 1, "treadmill", 2, 10, "https://shop.lifefitness.com/cdn/shop/products/clubseries-plus-treadmill-titanium-storm-se3hd-1000x1000_1800x1800.jpg?v=1678726811" },
-                    { 4, 2, "dumbbells", 0, 60, "https://www.bowflex.com/dw/image/v2/AAYW_PRD/on/demandware.static/-/Sites-nautilus-master-catalog/default/dwf21fb1cf/images/bfx/weights/100131/bowflex-selecttech-552-dumbbell-weights-hero.jpg?sw=2600&sh=1464&sm=fit" },
-                    { 5, 2, "elliptical machine", 0, 3, "https://www.precorhomefitness.com/cdn/shop/products/precor-efx-635-elliptical_5000x.jpg?v=1686422733" }
+                    { 2, 1, "bench press", 0, "https://m.media-amazon.com/images/I/61cGWhpz3ZL._AC_UF1000,1000_QL80_.jpg", 2 },
+                    { 3, 1, "treadmill", 2, "https://shop.lifefitness.com/cdn/shop/products/clubseries-plus-treadmill-titanium-storm-se3hd-1000x1000_1800x1800.jpg?v=1678726811", 10 },
+                    { 4, 2, "dumbbells", 0, "https://www.bowflex.com/dw/image/v2/AAYW_PRD/on/demandware.static/-/Sites-nautilus-master-catalog/default/dwf21fb1cf/images/bfx/weights/100131/bowflex-selecttech-552-dumbbell-weights-hero.jpg?sw=2600&sh=1464&sm=fit", 60 },
+                    { 5, 2, "elliptical machine", 0, "https://www.precorhomefitness.com/cdn/shop/products/precor-efx-635-elliptical_5000x.jpg?v=1686422733", 3 }
                 });
 
             migrationBuilder.CreateIndex(
