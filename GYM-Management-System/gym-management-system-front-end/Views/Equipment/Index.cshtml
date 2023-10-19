@@ -1,35 +1,37 @@
-﻿@model IEnumerable<gym_management_system_front_end.Models.SubscriptionTiersViewModel>
+﻿@model List<EquipmentViewModel>
 
-@{
-    ViewData["Title"] = "Index";
-    Layout = "_Admin";
-}
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Subscription Tiers List</title>
+    <link href="~/css/adminstyle.css" rel="stylesheet" />
+
+    <title>Gym Equipment List</title>
+  
 </head>
 <body>
     <p>
-        <a asp-action="Create" class="btn btn-primary">Create New</a>
+        <a asp-action="Create"  class="btn btn-primary">Create New</a>
     </p>
     <div class="container">
-        <h2>Subscription Tiers List</h2>
+        <h2>Equipment List</h2>
         <div class="row">
-            @foreach (var item in Model)
+            @foreach (var equipment in Model)
             {
                 <div class="col-md-4 col-sm-6 col-12">
                     <div class="card">
+                        <img src="@equipment.img" alt="@equipment.Name" class="card-img-top">
                         <div class="card-body">
-                            <h5 class="card-title">@item.Name</h5>
+                            <h5 class="card-title">@equipment.Name</h5>
                             <p class="card-text">
-                                SubscriptionTier ID: @item.SubscriptionTierID<br>
-                                Price: @item.Price<br>
-                                Length: @item.Length
+                                Equipment ID: @equipment.GymEquipmentID<br>
+                                Gym ID: @equipment.GymID<br>
+                                Out of Service: @equipment.OutOfService<br>
+                                Quantity: @equipment.Quantity
                             </p>
-                            <a asp-action="Edit" asp-route-id="@item.SubscriptionTierID" class="btn btn-primary">Edit</a>
-                            <a asp-action="Delete" asp-route-id="@item.SubscriptionTierID" class="btn btn-danger">Delete</a>
+                            <a asp-action="Details" asp-route-id="@equipment.GymEquipmentID" class="btn btn-primary">Details</a>
+                            <a asp-action="Edit" asp-route-id="@equipment.GymEquipmentID" class="btn btn-primary">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@equipment.GymEquipmentID" class="btn btn-danger">Delete</a>
                         </div>
                     </div>
                 </div>
