@@ -29,7 +29,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>A list of supplements.</returns>
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SupplementDTO>>> GetSupplements()
+        public async Task<ActionResult<IEnumerable<SupplementDTO>>> GetSupplementsBackEnd()
         {
             var supplements = await _supplements.GetAllSupplements();
             if (supplements == null || !supplements.Any())
@@ -47,7 +47,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>The supplement details.</returns>
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<ActionResult<SupplementDTO>> GetSupplement(int id)
+        public async Task<ActionResult<SupplementDTO>> GetSupplementBackEnd(int id)
         {
             var supplement = await _supplements.GetSupplementById(id);
             if (supplement == null)
@@ -66,7 +66,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>The updated supplement data.</returns>
         //[Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
-        public async Task<ActionResult<SupplementDTO>> PutSupplement(int id, CreatSupplementDTO supplement)
+        public async Task<ActionResult<SupplementDTO>> PutSupplementBackEnd(int id, CreatSupplementDTO supplement)
         {
             var updatedSupplement = await _supplements.UpdateSupplement(id, supplement);
 
@@ -85,12 +85,12 @@ namespace GYM_Management_System.Controllers
         /// <returns>The created supplement data.</returns>
        // [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<ActionResult<SupplementDTO>> PostSupplement(CreatSupplementDTO supplement)
+        public async Task<ActionResult<SupplementDTO>> PostSupplementBackEnd(CreatSupplementDTO supplement)
         {
             try
             {
                 var supplementDto = await _supplements.CreateSupplement(supplement);
-                return CreatedAtAction(nameof(GetSupplement), new { id = supplementDto.SupplementID }, supplementDto);
+                return CreatedAtAction(nameof(GetSupplementBackEnd), new { id = supplementDto.SupplementID }, supplementDto);
             }
             catch (Exception ex)
             {
@@ -105,7 +105,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>A message indicating the deletion status.</returns>
        // [Authorize(Policy = "deleteAdmin")]
         [HttpDelete("{id}")]
-        public async Task<string> DeleteSupplement(int id)
+        public async Task<string> DeleteSupplementBackEnd(int id)
         {
             bool result = await _supplements.DeleteSupplement(id);
             if (result == true)

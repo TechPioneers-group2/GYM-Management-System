@@ -18,14 +18,14 @@ namespace GYM_Management_System.Controllers
             _payment = payment;
         }
 
-        public async Task<string> AddImageToCloud(IFormFile file)
+        public async Task<string> AddImageToCloudBackEnd(IFormFile file)
         {
             var x = await _azureBlobStorageService.UploadAsync(file);
 
             return x;
         }
 
-        public async Task<IActionResult> Payment(List<CartViewModel> carts)
+        public async Task<IActionResult> PaymentBackEnd(List<CartViewModel> carts)
         {
             var session = await _payment.PaymentProcess(carts);
 
@@ -33,5 +33,7 @@ namespace GYM_Management_System.Controllers
 
             return new StatusCodeResult(303);
         }
+
+        // implement a behind the scene method to query the clients if any of them is close
     }
 }

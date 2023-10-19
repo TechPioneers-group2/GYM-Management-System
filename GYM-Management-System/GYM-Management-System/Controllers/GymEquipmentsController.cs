@@ -32,7 +32,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>A list of gym equipment.</returns>
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EquipmentDTO>>> Get()
+        public async Task<ActionResult<IEnumerable<EquipmentDTO>>> GetBackEnd()
         {
             var equipmentDTOs = await _equipment.GetGymEquipments();
             return Ok(equipmentDTOs);
@@ -45,7 +45,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>The gym equipment details.</returns>
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<ActionResult<EquipmentDTO>> GetGymEquipment(int id)
+        public async Task<ActionResult<EquipmentDTO>> GetGymEquipmentBackEnd(int id)
         {
             var equipment = await _equipment.GetEquipmentById(id);
             return Ok(equipment);
@@ -59,7 +59,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>The updated gym equipment data.</returns>
        // [Authorize(Roles = "Admin, Employee")]
         [HttpPut("{id}")]
-        public async Task<ActionResult<EquipmentDTO>> PutGymEquipment(int id, EquipmentDTOPutservice gymEquipment)
+        public async Task<ActionResult<EquipmentDTO>> PutGymEquipmentBackEnd(int id, EquipmentDTOPutservice gymEquipment)
         {
             var updatedEquipment = await _equipment.UpdateGymEquipment(id, gymEquipment);
 
@@ -78,7 +78,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>The created gym equipment data.</returns>
         //[Authorize(Roles = "Admin, Employee")]
         [HttpPost]
-        public async Task<ActionResult<EquipmentDTO>> PostGymEquipment(CreatEquipmentDTO gymEquipment)
+        public async Task<ActionResult<EquipmentDTO>> PostGymEquipmentBackEnd(CreatEquipmentDTO gymEquipment)
         {
             var createdEquipment = await _equipment.Create(gymEquipment);
 
@@ -92,18 +92,11 @@ namespace GYM_Management_System.Controllers
         /// <returns>No content if the gym equipment was successfully deleted.</returns>
        // [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGymEquipment(int id)
+        public async Task<IActionResult> DeleteGymEquipmentBackEnd(int id)
         {
             await _equipment.DeleteGymEquipment(id);
 
             return NoContent();
-        }
-
-        public async Task<string> AddImageToCloud(IFormFile file)
-        {
-            var x = await _azureBlobStorageService.UploadAsync(file);
-
-            return x;
         }
     }
 }

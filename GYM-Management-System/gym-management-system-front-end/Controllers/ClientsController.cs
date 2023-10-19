@@ -22,7 +22,7 @@ namespace gym_management_system_front_end.Controllers
         public IActionResult Index(int gymid)
         {
             List<ClientViewModel> clientList = new List<ClientViewModel>();
-            var response = _client.GetAsync(_client.BaseAddress + "/GetClients/gym/" + gymid).Result;
+            var response = _client.GetAsync(_client.BaseAddress + "/GetClientsBackEnd/gym/" + gymid).Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -35,7 +35,7 @@ namespace gym_management_system_front_end.Controllers
         public async Task<ActionResult<ClientViewModel>> Details(int clientID, int gymID)
         {
             var clientViewModel = new ClientViewModel();
-            HttpResponseMessage response = _client.GetAsync($"{_client.BaseAddress}/GetClient/{clientID}/gym/{gymID}").Result;
+            HttpResponseMessage response = _client.GetAsync($"{_client.BaseAddress}/GetClientBackEnd/{clientID}/gym/{gymID}").Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -70,7 +70,7 @@ namespace gym_management_system_front_end.Controllers
         public async Task<IActionResult> Edit(int clientID, int gymID)
         {
             ClientViewModel model = new ClientViewModel();
-            HttpResponseMessage response = _client.GetAsync($"{_client.BaseAddress}/GetClient/{clientID}/gym/{gymID}").Result;
+            HttpResponseMessage response = _client.GetAsync($"{_client.BaseAddress}/GetClientBackEnd/{clientID}/gym/{gymID}").Result;
             if (response.IsSuccessStatusCode)
             {
                 string Data = response.Content.ReadAsStringAsync().Result;
@@ -88,7 +88,7 @@ namespace gym_management_system_front_end.Controllers
             string data = JsonConvert.SerializeObject(clientDTO);
 
             // Create the URL for the PUT request
-            string url = _client.BaseAddress + "/PutClient/" + clientID + "/gym/" + gymID;
+            string url = _client.BaseAddress + "/PutClientBackEnd/" + clientID + "/gym/" + gymID;
 
             // Create the request content
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
@@ -108,7 +108,7 @@ namespace gym_management_system_front_end.Controllers
         public IActionResult Delete(int clientID, int gymID)
         {
             ClientViewModel del = new ClientViewModel();
-            HttpResponseMessage response = _client.GetAsync($"{_client.BaseAddress}/GetClient/{clientID}/gym/{gymID}").Result;
+            HttpResponseMessage response = _client.GetAsync($"{_client.BaseAddress}/GetClientBackEnd/{clientID}/gym/{gymID}").Result;
             if (response.IsSuccessStatusCode)
             {
                 string Data = response.Content.ReadAsStringAsync().Result;
@@ -125,7 +125,7 @@ namespace gym_management_system_front_end.Controllers
             try
             {
                 // Construct the full URL for the DELETE request
-                string deleteUrl = $"{_client.BaseAddress}/DeleteClient/{clientID}/gym/{gymID}";
+                string deleteUrl = $"{_client.BaseAddress}/DeleteClientBackEnd/{clientID}/gym/{gymID}";
 
                 // Send the HTTP DELETE request
                 HttpResponseMessage response = await _client.DeleteAsync(deleteUrl);

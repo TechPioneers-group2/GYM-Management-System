@@ -21,6 +21,11 @@ namespace GYM_Management_System.Controllers
             _client = context;
         }
 
+        public async Task<ActionResult<IEnumerable<GetClientDTO>>> GetAllClientsBackEnd()
+        {
+            return new List<GetClientDTO>();
+        }
+
         // GET: api/Clients
 
         /// <summary>
@@ -30,8 +35,13 @@ namespace GYM_Management_System.Controllers
         /// <returns>A list of clients.</returns>
 
         //[Authorize(Roles = "Admin, Employee")]
+
+
+        // backend pagination ( skip / take ) methods
+
+
         [HttpGet("gym/{gymid}")]
-        public async Task<ActionResult<IEnumerable<GetClientDTO>>> GetClients(int gymid)
+        public async Task<ActionResult<IEnumerable<GetClientDTO>>> GetClientsBackEnd(int gymid)
         {
             return Ok(await _client.GetClients(gymid));
         }
@@ -46,7 +56,7 @@ namespace GYM_Management_System.Controllers
 
         //[Authorize(Roles = "Admin, Employee")]
         [HttpGet("{clientid}/gym/{gymid}")]
-        public async Task<ActionResult<GetClientDTO>> GetClient(int clientid, int gymid)
+        public async Task<ActionResult<GetClientDTO>> GetClientBackEnd(int clientid, int gymid)
         {
             return Ok(await _client.GetClient(clientid, gymid));
         }
@@ -67,7 +77,7 @@ namespace GYM_Management_System.Controllers
         // [Authorize(Roles = "Admin, Employee")]
 
         [HttpPut("{clientid}/gym/{gymid}")]
-        public async Task<IActionResult> PutClient(int clientid, int gymid, UpdateClientDTO client)
+        public async Task<IActionResult> PutClientBackEnd(int clientid, int gymid, UpdateClientDTO client)
         {
             var updatedClient = await _client.UpdateClient(clientid, gymid, client);
             return Ok(updatedClient);
@@ -88,7 +98,7 @@ namespace GYM_Management_System.Controllers
 
         [Authorize(Roles = "Admin, Employee")]
         [HttpPost("Deprecated/{gymid}")]
-        public async Task<ActionResult<Client>> PostClient(int gymid, PostClientDTO clientDto)
+        public async Task<ActionResult<Client>> PostClientBackEnd(int gymid, PostClientDTO clientDto)
         {
             var createdClient = await _client.CreateClient(gymid, clientDto);
 
@@ -120,9 +130,9 @@ namespace GYM_Management_System.Controllers
         /// <param name="gymid">The ID of the gym the client is associated with.</param>
         /// <returns>No content if the client was successfully deleted.</returns>
 
-       // [Authorize(Roles = "Admin, Employee")]
+        // [Authorize(Roles = "Admin, Employee")]
         [HttpDelete("{clientid}/gym/{gymid}")]
-        public async Task<IActionResult> DeleteClient(int clientid, int gymid)
+        public async Task<IActionResult> DeleteClientBackEnd(int clientid, int gymid)
         {
             await _client.DeleteClient(clientid, gymid);
             return NoContent();

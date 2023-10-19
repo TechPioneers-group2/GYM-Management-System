@@ -25,7 +25,7 @@ namespace gym_management_system_front_end.Controllers
 
             foreach (var item in dicCart)
             {
-                var res = await _client.GetAsync(_client.BaseAddress + "Supplements/GetSupplement/" + item.Key);
+                var res = await _client.GetAsync(_client.BaseAddress + "Supplements/GetSupplementBackEnd/" + item.Key);
                 var jsondata = await res.Content.ReadAsStringAsync();
                 var product = JsonConvert.DeserializeObject<SupplementViewModel>(jsondata);
                 int y;
