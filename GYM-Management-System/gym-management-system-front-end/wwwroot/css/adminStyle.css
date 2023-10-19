@@ -1,0 +1,176 @@
+﻿body {
+    background-color: #0F2537 !important;
+}
+nav-div {
+    background-color: #4E5D6C !important;
+}
+side-div {
+    background-color: #4E5D7C !important;
+}
+.content {
+    background-color: #0F2537 !important;
+}
+td,th{
+    color:white;
+}
+
+a {
+    color: #FF771C !important;
+}
+
+    a:hover {
+        color: white !important;
+    }
+.Delete:hover {
+    color: red !important;
+}
+table-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.form-box {
+    background-color:#233242;
+    
+    padding: 20px;
+   
+    width: 100%;
+    max-width: 500px;
+}
+
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+
+    .form-group select {
+        width: 100%;
+        padding: 10px;
+        background-color: #0F2537;
+        border: 1px solid #FF771C;
+        color: white;
+    }
+
+.custom-select {
+    position: relative;
+}
+
+    .custom-select select {
+        width: 100%;
+        padding: 10px;
+        background-color: #0F2537;
+        border: 1px solid #FF771C;
+        color: white;
+        appearance: none; 
+    }
+
+    .custom-select::after {
+        content: "\25BC"; 
+        position: absolute;
+        top: 12px;
+        right: 10px;
+        color: #FF771C;
+        pointer-events: none;
+    }
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    background-color: #0F2537 !important;
+    border: 1px solid #FF771C !important;
+    color: white !important;
+}
+
+
+.form-group input[type="submit"] {
+    background-color: #FF771C !important;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+    .form-group input[type="submit"]:hover {
+        background-color: white !important;
+        color: #FF771C!important;
+    }
+    .text-danger {
+        color: #FF771C !important;
+    }
+.form-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.flex-form-div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.form-emp-T{
+    width:400px;
+}
+.form-emp-T label{
+    color:white;
+    padding-top:10px;
+    padding-bottom:10px;
+    font-weight:bold;
+}
+.btn-sub {
+    align-self: flex-end;
+}
+
+
+table-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    margin-left:20px;
+}
+.details {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.detail-row {
+    display: flex !important;
+    justify-content: space-around !important;
+    margin-bottom: 10px !important;
+}
+
+  
+    .detail-row label {
+        margin-right: 10px !important;
+        color: white;
+    }
+
+ 
+    .detail-row label {
+        font-weight: bold;
+    }
+div h3 {
+    color: #FF771C;
+    padding:20px;
+}

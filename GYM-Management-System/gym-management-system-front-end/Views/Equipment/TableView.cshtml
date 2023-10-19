@@ -1,0 +1,55 @@
+﻿@model List<EquipmentViewModel>
+@{
+    Layout = "_Admin";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/css/adminstyle.css" rel="stylesheet" />
+
+    <title>Gym Equipment List</title>
+
+</head>
+<body>
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+    <div class="container">
+        <h2>Equipment List</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Equipment ID</th>
+                    <th>Gym ID</th>
+                    <th>Out of Service</th>
+                    <th>Quantity</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var equipment in Model)
+                {
+                    <tr>
+                        <td><img src="@equipment.img" alt="@equipment.Name" class="img-thumbnail" style="max-width: 100px;"></td>
+                        <td>@equipment.Name</td>
+                        <td>@equipment.GymEquipmentID</td>
+                        <td>@equipment.GymID</td>
+                        <td>@equipment.OutOfService</td>
+                        <td>@equipment.Quantity</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@equipment.GymEquipmentID" class="btn btn-primary">Details</a>
+                            <a asp-action="Edit" asp-route-id="@equipment.GymEquipmentID" class="btn btn-primary">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@equipment.GymEquipmentID" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
