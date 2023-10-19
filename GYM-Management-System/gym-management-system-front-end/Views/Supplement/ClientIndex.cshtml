@@ -1,0 +1,27 @@
+﻿@model IEnumerable<gym_management_system_front_end.Models.SupplementViewModel>
+
+@{
+    ViewData["Title"] = "ClientIndex";
+}
+
+<section calss="bg-danger p-5" >
+    <div class="row  p-5 mt-5">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="@item.imageURL" class="card-img-top" alt="@item.Name">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text"><br>Price: @item.Price.ToString("0.00") JD<br /></p>
+                        <p class="card-text">@item.Description</p>
+                        @Html.ActionLink("Details", "Details", new { id=item.SupplementID }, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+
+

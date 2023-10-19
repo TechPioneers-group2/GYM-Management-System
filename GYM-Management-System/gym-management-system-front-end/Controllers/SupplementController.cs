@@ -29,6 +29,19 @@ namespace gym_management_system_front_end.Controllers
             return View(supplementList);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ClientIndex()
+        {
+            List<SupplementViewModel> supplementList = new List<SupplementViewModel>();
+            var response = await _client.GetAsync(_client.BaseAddress + "/GetSupplements");
+            if (response.IsSuccessStatusCode)
+            {
+                string data = await response.Content.ReadAsStringAsync();
+                supplementList = JsonConvert.DeserializeObject<List<SupplementViewModel>>(data);
+            }
+            return View(supplementList);
+        }
+
         // GET: SupplementController/Details/5
         public async Task<ActionResult<SupplementViewModel>> Details(int id)
         {
