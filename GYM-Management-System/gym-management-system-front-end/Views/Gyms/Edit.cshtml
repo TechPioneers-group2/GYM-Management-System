@@ -18,9 +18,15 @@
 
 
 <hr />
+<div>
+    IMAGE
+    <img src="@Model.imageURL" class="h-50 w-50" />
+</div>
 <div class="row">
+
     <div class="col-md-4 offset-4">
         <form asp-action="Edit" asp-controller="Gyms" asp-route-id="@Model.GymID">
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="GymID" />
             <input type="hidden" asp-for="Name" />
@@ -48,6 +54,11 @@
                 <label asp-for="Notification" class="control-label"></label>
                 <input asp-for="Notification" class="form-control" />
                 <span asp-validation-for="Notification" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="imageURL">Image</label>
+                <input asp-for="imageURL" type="file" name="file" class="form-control" />
+                <span asp-validation-for="imageURL" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

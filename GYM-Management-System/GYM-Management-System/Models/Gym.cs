@@ -9,6 +9,7 @@
         public int CurrentCapacity { get; set; }
         public string ActiveHours { get; set; }
         public string Notification { get; set; }
+        public string? imageURL { get; set; }
 
         //NP
         public List<Employee>? Employees { get; set; }

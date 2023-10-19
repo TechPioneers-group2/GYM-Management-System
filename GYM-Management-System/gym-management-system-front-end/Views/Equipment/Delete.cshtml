@@ -57,7 +57,7 @@
                         <p class="card-text">ID: @Model.GymEquipmentID</p>
                         <p class="card-text">Out of Service: @Model.OutOfService</p>
                         <p class="card-text">Quantity: @Model.Quantity</p>
-                        <img src="@Model.img" alt="@Model.Name" class="card-img-top" style="max-width: 100%;" />
+                        <img src="@Model.PhotoUrl" alt="@Model.Name" class="card-img-top" style="max-width: 100%;" />
                         <p>Are you sure you want to delete this gym equipment?</p>
                         @using (Html.BeginForm("Delete", "Equipment", FormMethod.Post))
                         {

@@ -122,8 +122,21 @@ namespace gym_management_system_front_end.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(PutGymDTO gymDTO)
+        public async Task<IActionResult> Edit(PutGymDTO gymDTO, IFormFile file)
         {
+            if (file != null)
+            {
+                var streamcontent = new StreamContent(file.OpenReadStream());
+
+                streamcontent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+
+                var imageContent = new MultipartFormDataContent
+                {
+                    { streamcontent, "file", file.FileName }
+                };
+                var imageResponse = await _client.PostAsync(_client.BaseAddress + "/Methods/AddImageToCloud", imageContent);
+                gymDTO.imageURL = await imageResponse.Content.ReadAsStringAsync();
+            }
 
             var json = JsonConvert.SerializeObject(gymDTO);
 
@@ -145,16 +158,31 @@ namespace gym_management_system_front_end.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(PostGymDTO gym)
+        public async Task<IActionResult> Create(PostGymDTO gym, IFormFile file)
         {
+
+            if (file != null)
+            {
+                var streamcontent = new StreamContent(file.OpenReadStream());
+
+                streamcontent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+
+                var imageContent = new MultipartFormDataContent
+     {
+         { streamcontent, "file", file.FileName }
+                };
+                var imageResponse = await _client.PostAsync("https://localhost:7200/api/Methods/AddImageToCloud", imageContent);
+                gym.imageURL = await imageResponse.Content.ReadAsStringAsync();
+            }
+
             var jsonContent = new StringContent(JsonConvert.SerializeObject(gym), Encoding.UTF8, "application/json");
 
             string jwtToken = Request.Cookies["JWTToken"];
 
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken);
 
-            var response = _client.PostAsync(_client.BaseAddress + "/PostGym", jsonContent).Result;
-            var data = response.Content.ReadAsStringAsync().Result;
+            var response = await _client.PostAsync(_client.BaseAddress + "/PostGym", jsonContent);
+            var data = await response.Content.ReadAsStringAsync();
             gym = JsonConvert.DeserializeObject<PostGymDTO>(data);
             return RedirectToAction("Index", "Gyms");
         }

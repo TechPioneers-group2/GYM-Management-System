@@ -16,34 +16,38 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        @using (Html.BeginForm("Create", "Equipment", FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
+                        <form asp-action="Create"  method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="__RequestVerificationToken" value="your-antiforgery-token-here" />
+
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Name)
-                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Quantity)
-                                @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.OutOfService)
-                                @Html.TextBoxFor(model => model.OutOfService, new { @class = "form-control" })
-                            </div>
-                           
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.GymID)
-                                @Html.TextBoxFor(model => model.GymID, new { @class = "form-control" })
+                                <label for="Name">Name</label>
+                                <input type="text" name="Name" class="form-control" />
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.img)
-                                @Html.TextBoxFor(model => model.img, new { @class = "form-control" })
+                                <label for="Quantity">Quantity</label>
+                                <input type="text" name="Quantity" class="form-control" />
                             </div>
+
+                            <div class="form-group">
+                                <label for="OutOfService">Out of Service</label>
+                                <input type="text" name="OutOfService" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="GymID">Gym ID</label>
+                                <input type="text" name="GymID" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="formFile">Image</label>
+                                <input type="file" name="file" class="form-control" />
+                            </div>
+
                             <button type="submit" class="btn btn-primary">Create</button>
-                        }
+                        </form>
                     </div>
+
                 </div>
             </div>
         </div>
