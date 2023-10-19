@@ -317,9 +317,9 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "25fe8498-05cd-4aaf-bec8-153ecf0855ea", "00000000-0000-0000-0000-000000000000", "Employee", "EMPLOYEE" },
-                    { "e9c0f43a-2dd4-4929-8a40-5c1c837c8fce", "00000000-0000-0000-0000-000000000000", "Admin", "ADMIN" },
-                    { "f7ea4988-6220-4c97-87ef-bf2a97bb682a", "00000000-0000-0000-0000-000000000000", "Client", "CLIENT" }
+                    { "5ad8ba74-fa7a-43eb-a3fa-ffd1e6155ca2", "00000000-0000-0000-0000-000000000000", "Admin", "ADMIN" },
+                    { "6d8708c1-c55f-44bd-871e-2c0576a91daf", "00000000-0000-0000-0000-000000000000", "Employee", "EMPLOYEE" },
+                    { "b0c5ab19-fbf9-4d45-b66a-8497af3f5111", "00000000-0000-0000-0000-000000000000", "Client", "CLIENT" }
                 });
 
             migrationBuilder.InsertData(
@@ -327,10 +327,10 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1", 0, "1cecd421-17ee-405c-8799-1c187153092c", "adminUser@example.com", true, false, null, "ADMINUSER@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAENmvJI9CzTL5U23hJuaAmmPNB9aDbqKu+6JbcrXQUK8VjwrscvtVnJbYFPk5D3s+2g==", "1234567890", false, "fd72acc1-dd29-4d61-abc6-064660eb0cf2", false, "Admin" },
-                    { "2", 0, "0d7462e0-06ac-4323-a9ea-c7a8dcf6b53b", "employeeUser@example.com", true, false, null, "EMPLOYEEUSER@EXAMPLE.COM", "EMPLOYEE", "AQAAAAIAAYagAAAAEJsXyME4xD8xiecrGWoAqYp4ju4tnyhsh9L4Ssnqg0cbedWORyyOTEmP+oZVaukZLw==", "1234567890", false, "2aa48dbe-7286-4ef5-a157-b951c93feab4", false, "Employee" },
-                    { "3", 0, "9e31521a-cc36-4fca-91e8-5ba0ff05813d", "ClientUser@example.com", true, false, null, "CLIENTUSER@EXAMPLE.COM", "CLIENT", "AQAAAAIAAYagAAAAEIaeH744vLZ03g+H0RCH0fpmD/H8X5offSF4jQPDM1JzqeN2iSALKUrAdsuKlzcW8w==", "1234567890", false, "6fcf542b-2135-4146-8143-229db1ff4aa8", false, "Client" },
-                    { "4", 0, "23202701-b8da-4940-b17b-9b4370520155", "Client2User@example.com", true, false, null, "CLIENT2USER@EXAMPLE.COM", "CLIENT2", "AQAAAAIAAYagAAAAEMeeeeBPV10GUWd8qNG1bvgfC7zo4zI3aZrMumJbHzBIybeEsKzb2KvKR0VJD7HcQg==", "1234567890", false, "1c12ff2f-a730-43a6-8d32-b14b54e0769c", false, "Client2" }
+                    { "1", 0, "c2d646db-165f-48ce-82f9-2ea586bd5bd2", "adminUser@example.com", true, false, null, "ADMINUSER@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAEP+eZQWxJc027/3XlB4lw99fzQWv8VITemdl7oEbv7wl+4oz1kAA0J2rNBUQoE7vJg==", "1234567890", false, "eea5b660-6ca2-4f75-b200-ee59669669d8", false, "Admin" },
+                    { "2", 0, "9d31efb1-504f-418e-8e7e-9c58900392ac", "employeeUser@example.com", true, false, null, "EMPLOYEEUSER@EXAMPLE.COM", "EMPLOYEE", "AQAAAAIAAYagAAAAEKj9cG1KUiS4Kb5Vm5sOea+kYNPoLdX72Uh6cLTW8lBi35+b/BweRKBhVn+8csyVTQ==", "1234567890", false, "dbb52d48-dd60-4863-adf0-c1430598d840", false, "Employee" },
+                    { "3", 0, "bc8726c4-e773-484b-9f25-9799c88f0be6", "ClientUser@example.com", true, false, null, "CLIENTUSER@EXAMPLE.COM", "CLIENT", "AQAAAAIAAYagAAAAEBQd3oTDzpsNJGZECAn+06mE9wh94gA2GZgMP4aZVRZ4ldkBMIjjyzuhWbcmRPzGwQ==", "1234567890", false, "68fd6098-7571-46a9-a694-a0561ef52823", false, "Client" },
+                    { "4", 0, "d74764a8-17fe-4a83-8815-b25e066e4c37", "Client2User@example.com", true, false, null, "CLIENT2USER@EXAMPLE.COM", "CLIENT2", "AQAAAAIAAYagAAAAEJSDcEX5BHecGsclN0TgTpdKbpTREazj9a2y6ko96lk7yU892CgkqqwlocM0qKNHUQ==", "1234567890", false, "91e0864c-baf1-4b6c-af03-e3c02308c4b2", false, "Client2" }
                 });
 
             migrationBuilder.InsertData(
@@ -375,15 +375,15 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "Id", "ClaimType", "ClaimValue", "RoleId" },
                 values: new object[,]
                 {
-                    { 10, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createAdmin", "e9c0f43a-2dd4-4929-8a40-5c1c837c8fce" },
-                    { 11, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateAdmin", "e9c0f43a-2dd4-4929-8a40-5c1c837c8fce" },
-                    { 12, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "deleteAdmin", "e9c0f43a-2dd4-4929-8a40-5c1c837c8fce" },
-                    { 13, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readAdmin", "e9c0f43a-2dd4-4929-8a40-5c1c837c8fce" },
-                    { 14, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createEmployee", "25fe8498-05cd-4aaf-bec8-153ecf0855ea" },
-                    { 15, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateEmployee", "25fe8498-05cd-4aaf-bec8-153ecf0855ea" },
-                    { 16, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readEmployee", "25fe8498-05cd-4aaf-bec8-153ecf0855ea" },
-                    { 17, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateClient", "f7ea4988-6220-4c97-87ef-bf2a97bb682a" },
-                    { 18, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readClient", "f7ea4988-6220-4c97-87ef-bf2a97bb682a" }
+                    { 10, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createAdmin", "5ad8ba74-fa7a-43eb-a3fa-ffd1e6155ca2" },
+                    { 11, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateAdmin", "5ad8ba74-fa7a-43eb-a3fa-ffd1e6155ca2" },
+                    { 12, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "deleteAdmin", "5ad8ba74-fa7a-43eb-a3fa-ffd1e6155ca2" },
+                    { 13, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readAdmin", "5ad8ba74-fa7a-43eb-a3fa-ffd1e6155ca2" },
+                    { 14, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createEmployee", "6d8708c1-c55f-44bd-871e-2c0576a91daf" },
+                    { 15, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateEmployee", "6d8708c1-c55f-44bd-871e-2c0576a91daf" },
+                    { 16, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readEmployee", "6d8708c1-c55f-44bd-871e-2c0576a91daf" },
+                    { 17, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateClient", "b0c5ab19-fbf9-4d45-b66a-8497af3f5111" },
+                    { 18, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readClient", "b0c5ab19-fbf9-4d45-b66a-8497af3f5111" }
                 });
 
             migrationBuilder.InsertData(
@@ -391,8 +391,8 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "ClientID", "GymID", "InGym", "Name", "SubscriptionDate", "SubscriptionExpiry", "SubscriptionTierID", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, true, "Client", new DateTime(2023, 10, 19, 11, 14, 35, 218, DateTimeKind.Local).AddTicks(5920), new DateTime(2024, 4, 19, 11, 14, 35, 218, DateTimeKind.Local).AddTicks(5931), 1, "3" },
-                    { 2, 1, true, "Client2", new DateTime(2023, 10, 19, 11, 14, 35, 218, DateTimeKind.Local).AddTicks(5937), new DateTime(2024, 4, 19, 11, 14, 35, 218, DateTimeKind.Local).AddTicks(5938), 1, "4" }
+                    { 1, 1, true, "Client", new DateTime(2023, 10, 19, 13, 7, 29, 864, DateTimeKind.Local).AddTicks(1275), new DateTime(2024, 4, 19, 13, 7, 29, 864, DateTimeKind.Local).AddTicks(1288), 1, "3" },
+                    { 2, 1, true, "Client2", new DateTime(2023, 10, 19, 13, 7, 29, 864, DateTimeKind.Local).AddTicks(1295), new DateTime(2024, 4, 19, 13, 7, 29, 864, DateTimeKind.Local).AddTicks(1295), 1, "4" }
                 });
 
             migrationBuilder.InsertData(
