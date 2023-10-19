@@ -26,7 +26,7 @@ namespace GYM_Management_System.Models.Interfaces
         Task<List<GetManagerGymDTO>> GetGymManger();
 
 
-
+       // Task <GetSupplementFromGymDTO> GetSupplementFromGym(int supplemendid ,int gymid);
 
         // Add a supplement to a Gym
         Task<GymSupplement> AddSupplementToGym(int gymId, int supplementId, UpdateGymSupplementDTO newGymSupplement);
