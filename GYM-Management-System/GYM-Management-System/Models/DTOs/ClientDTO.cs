@@ -12,8 +12,6 @@
         public DateTime SubscriptionDate { get; set; }
         public DateTime SubscriptionExpiry { get; set; }
 
-        //N.P
-
     }
 
     public class GetClientDTO

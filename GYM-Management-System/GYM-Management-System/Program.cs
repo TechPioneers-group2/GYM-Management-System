@@ -1,3 +1,4 @@
+using GYM_Management_System.Controllers;
 using GYM_Management_System.Data;
 using GYM_Management_System.Models;
 using GYM_Management_System.Models.Interfaces;
@@ -44,6 +45,9 @@ namespace gym_management_system_front_end.Models
             builder.Services.AddTransient<IEmail, EmailService>();
             builder.Services.AddTransient<IAzureBlobStorageService, AzureBlobStorageService>();
             builder.Services.AddTransient<IPaymentService, PaymentService>();
+            builder.Services.AddTransient<SubscriptionTiersController>();
+
+            builder.Services.AddHostedService<SubscriptionCheckBackgroundService>();
 
             builder.Services.AddScoped<jwtTokenServices>();
 
