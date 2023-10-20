@@ -9,7 +9,6 @@ namespace GYM_Management_System.Controllers
     public class MethodsController : ControllerBase
     {
         private readonly IAzureBlobStorageService _azureBlobStorageService;
-
         private readonly IPaymentService _payment;
 
         public MethodsController(IAzureBlobStorageService azure, IPaymentService payment)
@@ -33,7 +32,5 @@ namespace GYM_Management_System.Controllers
 
             return new StatusCodeResult(303);
         }
-
-        // implement a behind the scene method to query the clients if any of them is close
     }
 }
