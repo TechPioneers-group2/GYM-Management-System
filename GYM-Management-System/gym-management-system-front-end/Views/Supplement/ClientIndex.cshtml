@@ -5,25 +5,42 @@
 }
 
 
+<link href="~/css/supplementscards.css" rel="stylesheet" />
 
-<section class="p-5 d-flex justify-content-center">
-    <div class="row mt-5 d-flex justify-content-center">
-        @foreach (var item in Model)
-        {
-            <div class="col-md-4 mb-4">
-                <div class=" card clientsupplementcard" >
-                    <img src="@item.imageURL" class="clientsupplementcard-img-top" alt="Product image">
-                    <div class="clientsupplementcard-body p-4">
-                        <h5 class="clientsupplementcard-title">@item.Name</h5>
-                        <p class="card-text"><br><strong>Price:</strong> @item.Price.ToString("0.00") JD<br /></p>
-                        <p class="clientsupplementcard-text">@item.Description</p>
-                        <div class="d-flex justify-content-between">
-                            <a class="btn btn-primary" asp-controller="Supplement" asp-action="Details" asp-route-id="@item.SupplementID">Details</a>
-                            <a class="btn btn-primary" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.SupplementID"> Add To Cart</a>
+<section>
+    <div class="container-fluid bg-trasparent my-4 p-3 pt-5 mt-5" style="position: relative">
+        <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+            @foreach (var item in Model)
+            {
+                <div class="col hp">
+                    <div class="card h-100 shadow-sm">
+                        <a asp-controller="Supplement" asp-action="Details" asp-route-id="@item.SupplementID">
+                            <img src="@item.imageURL" class="card-img-top" alt="product.title" />
+                        </a>
+                        <div class="card-body">
+                            <div class="clearfix mb-3">
+                                <span class="float-start badge rounded-pill bg-success"> @item.Price.ToString("0.00") JD</span>
+                            </div>
+                            <h5 class="card-title">
+                                <a asp-controller="Supplement" asp-action="Details" asp-route-id="@item.SupplementID" class="fw-bold">@item.Name</a>
+                            </h5>
+                            <div class="d-grid gap-2 my-4">
+                                <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.SupplementID" class="btn btn-warning bold-btn">add to cart</a>
+                            </div>
+                            <div class="clearfix mb-1">
+                                <span class="float-start">
+                                    <a href="/Home/Index#contact">
+                                        <i class="fas fa-question-circle text-secondary" style="cursor: pointer"></i>
+                                    </a>
+                                </span>
+                                <span class="float-end">
+                                    <i class="far fa-heart " style="cursor: pointer; color:red;"></i>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 </section>

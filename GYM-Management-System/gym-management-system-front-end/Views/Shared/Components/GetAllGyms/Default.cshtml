@@ -1,12 +1,15 @@
 ﻿@model IEnumerable<gym_management_system_front_end.Models.GymViewModel>
-<div class="row">
+
+<link href="~/css/gymshomepagecards.css" rel="stylesheet" />
+
+<div class="row  d-flex justify-content-center align-items-center">
     @foreach (var item in Model)
     {
         <div class="col-md-6 col-lg-4 mb-4 gymscard">
-            <a href="@Url.Action("Details", "Gyms", new { id = item.GymID })">
+            <a href="@Url.Action("Details", "Gyms", new { id = item.GymID })" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to see the details" data-type="red">
                 <div class="card-inner">
                     <div class="card-front">
-                        <img src="@item.imageURL" class="card-img-top" alt="...">
+                        <img src="@item.imageURL" class="img-top " alt="...">
                     </div>
                     <div class="card-back">
                         <h5 class="card-title mb-2 fw-bold text-warning">@item.Name</h5>
@@ -20,5 +23,5 @@
 </div>
 
 
-<link rel="stylesheet" href="./css/site.css">
+
 
