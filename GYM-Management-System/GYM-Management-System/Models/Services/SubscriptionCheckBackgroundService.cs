@@ -42,14 +42,11 @@ namespace GYM_Management_System.Models.Services
         public async Task CheckSubscriptions(GymDbContext _context)
 
         {
-            DateTime currentDate = DateTime.Now.Date;
-            DateTime targerDate = currentDate.AddDays(7);
+            DateTime targerDate = DateTime.Now.Date.AddDays(7);
 
             var clients = await _context.Clients
                 .Where(subex => subex.SubscriptionExpiry.Date == targerDate)
                 .ToListAsync();
-
-
 
             foreach (var client in clients)
             {
@@ -93,11 +90,6 @@ namespace GYM_Management_System.Models.Services
     "    </div>\r\n" +
     "</body>\r\n" +
     "</html>";
-
-
-
-
-
 
                 await _email.SendEmail(user.Email, client.Name, emailSubject, emailBody);
             }
