@@ -139,7 +139,8 @@ namespace gym_management_system_front_end.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterClient(RegisterClientDTO clientDTO)
         {
-
+            clientDTO.UserId = string.Empty;
+            clientDTO.Name = clientDTO.UserName;
             var json = JsonConvert.SerializeObject(clientDTO);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await _client.PostAsync(baseAddress + "ClientRegisterBackEnd", data);
