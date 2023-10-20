@@ -1,4 +1,5 @@
 ﻿using GYM_Management_System.Models;
+using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Stripe.Checkout;
@@ -37,19 +38,29 @@ namespace GYM_Management_System.Controllers
 
         }
 
-        public async Task<Session> SubTierPaymentBackEnd(int subTierID)
+        public async Task<Session> SubTierPaymentBackEnd(RegisterClientDTO client)
         {
+            var actionResult = await _subscriptionTiersController.GetSubscriptionTierBackEnd(client.SubscriptionTierID);
 
-            // i need to use the controller action "GetSubscriptionTierBackEnd" from the controller "SubscriptionTiers" and pass subTierID to it
+            if (actionResult.Result is OkObjectResult okObjectResult)
+            {
+                var subTier = okObjectResult.Value as GetSubscriptionTierDTO;
+                var session = await _payment.SubTierPaymentProcess(subTier);
+                return session;
+            }
+            else if (actionResult.Result is OkResult)
+            {
+                // Handle the case where there's no value
+                Console.WriteLine("Received OkResult with no value.");
+            }
+            else
+            {
+                // Handle other types of results
+                Console.WriteLine($"Unexpected result type: {actionResult.Result.GetType().Name}");
+            }
 
-            var subTier = await _subscriptionTiersController.GetSubscriptionTierBackEnd(subTierID);
 
-            var session = await _payment.SubTierPaymentProcess(subTier.Value);
-
-            return session;
-
+            return new Session();
         }
-
-        // implement a behind the scene method to query the clients if any of them is close
     }
 }

@@ -155,7 +155,6 @@ namespace gym_management_system_front_end.Controllers
                 {
                     HttpOnly = true
                 });
-
             }
 
             else if (response.StatusCode == HttpStatusCode.BadRequest)
@@ -167,7 +166,7 @@ namespace gym_management_system_front_end.Controllers
                     ModelState.AddModelError(error.Key, string.Join("", error.Value));
                 }
             }
-            string jsonCartItems = JsonConvert.SerializeObject(clientDTO.SubscriptionTierID);
+            string jsonCartItems = JsonConvert.SerializeObject(clientDTO);
             HttpContent content = new StringContent(jsonCartItems, Encoding.UTF8, "application/json");
             var PaymentResponse = await _client.PostAsync("https://localhost:7200/api/Methods/SubTierPaymentBackEnd", content);
 
@@ -181,6 +180,5 @@ namespace gym_management_system_front_end.Controllers
 
             return View(clientDTO);
         }
-
     }
 }
