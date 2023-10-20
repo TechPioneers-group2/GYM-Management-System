@@ -47,6 +47,8 @@ namespace gym_management_system_front_end.Models
             builder.Services.AddTransient<IPaymentService, PaymentService>();
             builder.Services.AddTransient<SubscriptionTiersController>();
 
+            builder.Services.AddHostedService<SubscriptionCheckBackgroundService>();
+
             builder.Services.AddScoped<jwtTokenServices>();
 
             builder.Services.AddAuthentication(options =>

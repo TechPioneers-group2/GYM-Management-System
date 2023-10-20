@@ -11,7 +11,6 @@ namespace GYM_Management_System.Controllers
     public class MethodsController : ControllerBase
     {
         private readonly IAzureBlobStorageService _azureBlobStorageService;
-
         private readonly IPaymentService _payment;
 
         private readonly SubscriptionTiersController _subscriptionTiersController;
