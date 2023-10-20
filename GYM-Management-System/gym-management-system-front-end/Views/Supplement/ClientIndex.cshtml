@@ -28,10 +28,13 @@
                                 <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.SupplementID" class="btn btn-warning bold-btn">add to cart</a>
                             </div>
                             <div class="clearfix mb-1">
-                                <span class="float-start"><a href="#"><i class="fas fa-question-circle"></i></a></span>
-
+                                <span class="float-start">
+                                    <a href="/Home/Index#contact">
+                                        <i class="fas fa-question-circle text-secondary" style="cursor: pointer"></i>
+                                    </a>
+                                </span>
                                 <span class="float-end">
-                                    <i class="far fa-heart" style="cursor: pointer"></i>
+                                    <i class="far fa-heart " style="cursor: pointer; color:red;"></i>
                                 </span>
                             </div>
                         </div>
