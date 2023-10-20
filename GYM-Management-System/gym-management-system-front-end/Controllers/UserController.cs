@@ -131,9 +131,34 @@ namespace gym_management_system_front_end.Controllers
             return View(employeeDTO);
         }
 
-        public IActionResult RegisterClient()
+        public async Task<IActionResult> RegisterClient()
         {
-            return View();
+            var gymResponse = await _client.GetAsync("https://localhost:7200/api/Gyms/GetGymsBackEnd");
+            var gymResult = await gymResponse.Content.ReadAsStringAsync();
+            var gymList = JsonConvert.DeserializeObject<List<GetUserGymDTO>>(gymResult);
+
+            var idList = new List<GymIDDTO>();
+
+            foreach (var item in gymList)
+            {
+                idList.Add(new GymIDDTO
+                {
+                    GymID = item.GymID,
+                    Name = item.Name,
+                });
+            }
+
+            var subTierResponse = await _client.GetAsync("https://localhost:7200/api/SubscriptionTiers/GetSubscriptionTiersBackEnd");
+            var subTierResult = await subTierResponse.Content.ReadAsStringAsync();
+            var subTierList = JsonConvert.DeserializeObject<List<GetSubscriptionTierDTO>>(subTierResult);
+
+            var returnClientView = new RegisterClientDTO
+            {
+                GymIDsNames = idList,
+                SubscriptionTierDTOs = subTierList
+            };
+
+            return View(returnClientView);
         }
 
         [HttpPost]

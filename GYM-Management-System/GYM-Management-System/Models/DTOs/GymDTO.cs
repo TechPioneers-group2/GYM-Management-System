@@ -13,9 +13,6 @@ namespace GYM_Management_System.Models.DTOs
         public string? ActiveHours { get; set; }
         public string? Notification { get; set; }
         public string? imageURL { get; set; }
-
-        //NP
-
         public List<EquipmentDTO>? Equipments { get; set; }
         public List<GymGetSubscriptionTierDTO>? SubscriptionTier { get; set; }
         public List<GymSupplementDTO>? Supplements { get; set; }

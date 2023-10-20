@@ -18,6 +18,13 @@ namespace gym_management_system_front_end.Models
         public List<GymSupplementDTO>? Supplements { get; set; }
     }
 
+    public class GymIDDTO
+    {
+        public int GymID { get; set; }
+
+        public string Name { get; set; }
+    }
+
     public class EquipmentDTOPut
     {
         public int GymEquipmentID { get; set; }
