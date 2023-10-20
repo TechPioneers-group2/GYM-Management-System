@@ -1,5 +1,8 @@
 @model IEnumerable<gym_management_system_front_end.Models.SupplementViewModel>
 
+<link href="~/css/supplementscards.css" rel="stylesheet" />
+
+
 <div class="row">
     @{
         int counter = 0;
@@ -7,12 +10,28 @@
         {
             if (counter < 6)
             {
-                <div class="col-md-4 mb-4 supplementscard">
-                    <div class="card">
-                        <img src="@item.imageURL" alt="...">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <a asp-controller="Supplement" asp-action="Details" asp-route-id="@item.SupplementID" data-toggle="tooltip" title="Click to see the details of this supplement">
+                            <img src="@item.imageURL" class="card-img-top" alt="product.title" />
+                        </a>
+
                         <div class="card-body">
-                            <h5 class="card-title text-dark fw-bold">@item.Name</h5>
-                            <p class="text-info fw-bold">SEE MORE</p>
+                            <div class="clearfix mb-3">
+                                <span class="float-start badge rounded-pill bg-success"> @item.Price.ToString("0.00") JD</span>
+                            </div>
+                            <h5 class="card-title">
+                                <a asp-controller="Supplement" asp-action="Details" asp-route-id="@item.SupplementID" class="fw-bold">@item.Name</a>
+                            </h5>
+                            <div class="d-grid gap-2 my-4">
+                                <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.SupplementID" class="btn btn-warning bold-btn">add to cart</a>
+                            </div>
+                            <div class="clearfix mb-1">
+                                <span class="float-start"><a href="#"><i class="fas fa-question-circle"></i></a></span>
+                                <span class="float-end">
+                                    <i class="far fa-heart" style="cursor: pointer"></i>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -28,6 +47,3 @@
 <div class="d-grid gap-2">
     <a class="btn btn-lg btn-outline-info seeMoreBtn" asp-controller="Supplement" asp-action="ClientIndex">SEE MORE<i class="bi bi-arrow-right ms-3 fw-bold"></i></a>
 </div>
-
-
-<link rel="stylesheet" href="./css/site.css">

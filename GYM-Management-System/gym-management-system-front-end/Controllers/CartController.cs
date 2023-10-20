@@ -18,30 +18,38 @@ namespace gym_management_system_front_end.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var cart = HttpContext.Request.Cookies["SupplementCart"];
-            var dicCart = JsonConvert.DeserializeObject<Dictionary<int, int>>(cart);
-            var cartItems = new List<CartViewModel>();
-
-            foreach (var item in dicCart)
+            try
             {
-                var res = await _client.GetAsync(_client.BaseAddress + "Supplements/GetSupplementBackEnd/" + item.Key);
-                var jsondata = await res.Content.ReadAsStringAsync();
-                var product = JsonConvert.DeserializeObject<SupplementViewModel>(jsondata);
-                int y;
-                dicCart.TryGetValue(product.SupplementID, out y);
-                var x = new CartViewModel
-                {
-                    SupplementID = product.SupplementID,
-                    imageURL = product.imageURL,
-                    Description = product.Description,
-                    Price = product.Price,
-                    Name = product.Name,
-                    Quantity = y
-                };
-                cartItems.Add(x);
-            }
+                var cart = HttpContext.Request.Cookies["SupplementCart"];
+                var dicCart = JsonConvert.DeserializeObject<Dictionary<int, int>>(cart);
+                var cartItems = new List<CartViewModel>();
 
-            return View(cartItems);
+                foreach (var item in dicCart)
+                {
+                    var res = await _client.GetAsync(_client.BaseAddress + "Supplements/GetSupplementBackEnd/" + item.Key);
+                    var jsondata = await res.Content.ReadAsStringAsync();
+                    var product = JsonConvert.DeserializeObject<SupplementViewModel>(jsondata);
+                    int y;
+                    dicCart.TryGetValue(product.SupplementID, out y);
+                    var x = new CartViewModel
+                    {
+                        SupplementID = product.SupplementID,
+                        imageURL = product.imageURL,
+                        Description = product.Description,
+                        Price = product.Price,
+                        Name = product.Name,
+                        Quantity = y
+                    };
+                    cartItems.Add(x);
+                }
+
+                return View(cartItems);
+            }
+            catch
+            {
+
+                return View(null);
+            }
 
         }
 

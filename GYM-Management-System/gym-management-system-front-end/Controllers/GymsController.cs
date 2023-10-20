@@ -32,6 +32,21 @@ namespace gym_management_system_front_end.Controllers
             return View(gymList);
         }
 
+        public async Task<IActionResult> ClientIndex()
+        {
+            List<GymViewModel> gymList = new List<GymViewModel>();
+
+            var response = await _client.GetAsync(_client.BaseAddress + "/GetGymsBackEnd");
+
+            if (response.IsSuccessStatusCode)
+            {
+                string data = await response.Content.ReadAsStringAsync();
+
+                gymList = JsonConvert.DeserializeObject<List<GymViewModel>>(data);
+            }
+            return View(gymList);
+        }
+
         public IActionResult Manager()
         {
             List<GetManagerGymDTO> gymList = new List<GetManagerGymDTO>();
