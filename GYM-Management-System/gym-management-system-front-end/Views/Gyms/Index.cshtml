@@ -5,7 +5,7 @@
     
 }
 
-<div class="container mt-5 pt-5">
+<div class="container mt-5 pt-5" style="min-height:80vh;">
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <h1 class="text-center mt-2 text-primary">Our Branches</h1>
@@ -14,25 +14,25 @@
                 <a class="btn btn-success" asp-action="Create" asp-controller="Gyms">Create New</a>
             </div>
 
-            <table class="table table-striped border">
+            <table class="table table-striped border table-borderless border-primary">
                 <thead class="bg-dark text-white">
-                    <tr>
-                        <th scope="col">Gym ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Actions</th>
+                    <tr >
+                        <th class="text-light col-md-2" scope="col">Gym ID</th>
+                        <th class="text-light col-md-2" scope="col">Name</th>
+                        <th class="text-light col-md-2 ps-5" scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var gym in Model)
                     {
                         <tr>
-                            <th scope="row">@gym.GymID</th>
-                            <td>@gym.Name</td>
-                            <td>
-                                <div class="btn-group " role="group">
-                                    <a class="btn btn-primary" asp-controller="Gyms" asp-action="Details" asp-route-id="@gym.GymID">Details</a>
-                                    <a class="btn btn-light mx-3 text-dark" asp-controller="Gyms" asp-action="Edit" asp-route-id="@gym.GymID">Edit</a>
-                                    <a class="btn btn-primary" asp-controller="Gyms" asp-action="Delete" asp-route-id="@gym.GymID">Delete</a>
+                            <th class="text-light col-md-1 px-4" scope="row">@gym.GymID</th>
+                            <td class="text-light col-md-2">@gym.Name</td>
+                            <td >
+                                <div class="btn-group col-lg-5 col-md-8" role="group">
+                                    <a class="btn btn-outline-primary" asp-controller="Gyms" asp-action="Details" asp-route-id="@gym.GymID">Details</a>
+                                    <a class="btn btn-outline-warning mx-3" asp-controller="Gyms" asp-action="Edit" asp-route-id="@gym.GymID">Edit</a>
+                                    <a class="btn btn-outline-danger" asp-controller="Gyms" asp-action="Delete" asp-route-id="@gym.GymID">Delete</a>
                                 </div>
                             </td>
                         </tr>
