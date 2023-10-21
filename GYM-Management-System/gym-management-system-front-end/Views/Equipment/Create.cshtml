@@ -35,8 +35,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="GymID">Gym ID</label>
-                                <input type="text" name="GymID" class="form-control" />
+                                <label for="GymID">Gym</label>
+                                <select asp-for="GymID">
+                                @foreach(var item in Model.GymIDsNames)
+                                {
+                                    <option value="@item.GymID">@item.Name</option>
+                                }
+                                </select>
                             </div>
 
                             <div class="form-group">

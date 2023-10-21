@@ -108,6 +108,7 @@ namespace GYM_Management_System.Models.Services
                         Quantity = eqp.Quantity,
                         OutOfService = eqp.OutOfService,
                         GymEquipmentID = eqp.GymEquipmentID,
+                        PhotoUrl = eqp.PhotoUrl,
                     }).ToListAsync();
 
                 var suppTierList = await _gymDbContext.SubscriptionTiers

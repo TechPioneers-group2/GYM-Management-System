@@ -174,9 +174,6 @@ namespace GYM_Management_System.Models.Services
         /// <returns>The registered client user data.</returns>
         public async Task<UserDTO> RegisterUser(RegisterClientDTO registerClientDTO, ModelStateDictionary modelState)
         {
-
-            registerClientDTO.UserId = string.Empty;
-
             var user = new ApplicationUser()
             {
                 UserName = registerClientDTO.UserName,
