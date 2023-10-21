@@ -13,14 +13,29 @@
         <form asp-action="AddSupplementToGym">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="SupplementID" class="control-label"></label>
-                <input asp-for="SupplementID" class="form-control" />
-                <span asp-validation-for="SupplementID" class="text-danger"></span>
+                <label asp-for="GymID" class="">Gym</label>
+                <select class="form-select border border-1 border-primary" asp-for="GymID">
+                    <option value="">-- Select Gym --</option>
+                    @{
+                        foreach (var item in Model.GymIDs)
+                        {
+                            <option value="@item.GymID">@item.Name</option>
+                        }
+                    }
+                </select>
             </div>
+
             <div class="form-group">
-                <label asp-for="GymID" class="control-label"></label>
-                <input asp-for="GymID" class="form-control" />
-                <span asp-validation-for="GymID" class="text-danger"></span>
+                <label asp-for="SupplementID">Supplement</label>
+                <select class="form-select border border-1 border-primary" asp-for="SupplementID" >
+                    <option value="">-- Select Supplement --</option>
+                    @{
+                        foreach (var item in Model.SupplementIDs)
+                        {
+                            <option value="@item.SupplementID">@item.Name</option>
+                        }
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Quantity" class="control-label"></label>
@@ -31,6 +46,7 @@
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
+
     </div>
 </div>
 

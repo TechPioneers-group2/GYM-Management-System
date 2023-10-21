@@ -66,6 +66,15 @@
 
             <!-- Equipments -->
 
+            @if (Model.Equipments != null)
+            {
+                <div class="row bg-dark rounded p-4 mb-3">
+                    <h4 class="mb-3 text-white">Equipments</h4>
+                    <div class="list-group" style="max-height: 23vh; overflow-y: auto;">
+
+                        @{
+                            int counter = 0;
+                        }
             <div class="container bg-dark rounded mb-3 p-1">
                 <h4 class="mb-3 text-white text-center">Equipments</h4>
                 <div class="container-fluid" style="max-height: 36vh; overflow-y: auto;">
@@ -127,6 +136,22 @@
                             </div>
                         }
                     </div>
+                </div>
+
+            <!-- Subscription Tiers -->
+            @if (Model.SubscriptionTier != null)
+            {
+                <div class="row bg-dark rounded p-4">
+                    <h4 class="mb-3 text-white">Subscription Tiers</h4>
+                    <ul class="list-group">
+                        @foreach (var tier in Model.SubscriptionTier)
+                        {
+                            <li class="list-group-item text-white">
+                                @tier.Name
+                                @tier.Price
+                            </li>
+                        }
+                    </ul>
                 </div>
 
             }

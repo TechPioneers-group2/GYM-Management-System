@@ -13,7 +13,10 @@ namespace gym_management_system_front_end.Models
 
 
         public SupplementViewModel? Supplement { get; set; }
+        public List<GymIDDTO>? GymIDs { get; set; }
+        public List<SupplementIDDTO>? SupplementIDs { get; set; }
     }
+
     public class UpdateGymSupplementDTO
     {
         public int Quantity { get; set; }
