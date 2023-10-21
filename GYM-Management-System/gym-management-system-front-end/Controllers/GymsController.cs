@@ -203,9 +203,33 @@ namespace gym_management_system_front_end.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddSupplementToGym()
+        public async Task<IActionResult> AddSupplementToGym()
         {
-            return View();
+            var gymResponse = await _client.GetAsync("https://localhost:7200/api/Gyms/GetGymsBackEnd");
+            var gymResult = await gymResponse.Content.ReadAsStringAsync();
+            var gymList = JsonConvert.DeserializeObject<List<GetUserGymDTO>>(gymResult);
+
+            var idList = new List<GymIDDTO>();
+
+            foreach (var item in gymList)
+            {
+                idList.Add(new GymIDDTO
+                {
+                    GymID = item.GymID,
+                    Name = item.Name,
+                });
+            }
+            var supplementResponse = await _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplementsBackEnd");
+            var supplementResult = await supplementResponse.Content.ReadAsStringAsync();
+            var supplementList = JsonConvert.DeserializeObject<List<SupplementIDDTO>>(supplementResult);
+
+            var returnClientView = new GymSupplementViewModel
+            {
+                GymIDs = idList,
+                SupplementIDs = supplementList
+            };
+
+            return View(returnClientView);
         }
 
         [HttpPost]

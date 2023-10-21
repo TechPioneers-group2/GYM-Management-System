@@ -28,9 +28,9 @@
             </table>
 
             <div class="form-group text-center mt-3 d-grid gap-2">
-                <input type="submit" value="Submit" class="btn btn-lg btn-primary border border-1 border-primary" />
                 <a asp-action="Index" class="btn btn-secondary ml-2">Back to List</a>
                 <a class="btn btn-danger" asp-action="Index" asp-controller="Clients" asp-route-gymid="@Model.GymID">Get Clients</a>
+                <a class="btn btn-success" asp-action="AddSupplementToGym" asp-controller="Gyms" asp-route-gymid="@Model.GymID">Add Supplement</a>
             </div>
 
         </div>
@@ -45,7 +45,7 @@
                     <div class="list-group" style="max-height: 23vh; overflow-y: auto;">
 
                         @{
-                            int counter =0;
+                            int counter = 0;
                         }
 
                         @foreach (var equipment in Model.Equipments)
@@ -77,12 +77,9 @@
             {
                 <div class="row bg-dark rounded p-4 mb-3">
                     <h4 class="mb-3 text-white">Supplements</h4>
-                    <ul class="list-group">
+                    <ul class="list-group" style="max-height: 300px; overflow-y: auto;">
                         @foreach (var supplement in Model.Supplements)
                         {
-                            <li class="list-group-item text-white">
-                                <img src="@supplement.Supplements.imageURL" />
-                            </li>
                             <li class="list-group-item text-white">
                                 Name: @supplement.Supplements.Name
                             </li>
@@ -92,13 +89,28 @@
                             <li class="list-group-item text-white">
                                 Quantity: @supplement.Quantity
                             </li>
-                            <li class="list-group-item text-white">
-                                Description: @supplement.Supplements.Description
+                            <li class="list-group-item text-white border-bottom">
+                                <a asp-action="RemoveSupplementFromGym"
+                                   asp-route-gymId="@Model.GymID"
+                                   asp-route-supplementId="@supplement.SupplementID"
+                                   class="btn btn-danger btn-sm">
+                                    Remove
+                                </a>
+                                <a asp-action="UpdateSupplementForGym"
+                                   asp-controller="Gyms"
+                                   asp-route-gymId="@Model.GymID"
+                                   asp-route-supplementId="@supplement.SupplementID"
+                                   asp-route-quantity="@supplement.Quantity"
+                                   class="btn btn-primary btn-sm">
+                                    Update
+                                </a>
                             </li>
                         }
                     </ul>
                 </div>
             }
+
+
 
             <!-- Subscription Tiers -->
             @if (Model.SubscriptionTier != null)
