@@ -38,8 +38,8 @@
 
             return new CreatEquipmentDTO
             {
-                GymID=0,
-                Name="",
+                GymID = 0,
+                Name = "",
                 OutOfService = creatEquipmentDTO.OutOfService,
                 PhotoUrl = creatEquipmentDTO.PhotoUrl,
                 Quantity = creatEquipmentDTO.Quantity,

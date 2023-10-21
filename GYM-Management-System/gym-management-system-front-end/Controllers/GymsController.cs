@@ -32,6 +32,21 @@ namespace gym_management_system_front_end.Controllers
             return View(gymList);
         }
 
+        public async Task<IActionResult> ClientIndex()
+        {
+            List<GymViewModel> gymList = new List<GymViewModel>();
+
+            var response = await _client.GetAsync(_client.BaseAddress + "/GetGymsBackEnd");
+
+            if (response.IsSuccessStatusCode)
+            {
+                string data = await response.Content.ReadAsStringAsync();
+
+                gymList = JsonConvert.DeserializeObject<List<GymViewModel>>(data);
+            }
+            return View(gymList);
+        }
+
         public IActionResult Manager()
         {
             List<GetManagerGymDTO> gymList = new List<GetManagerGymDTO>();
@@ -188,15 +203,39 @@ namespace gym_management_system_front_end.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddSupplementToGym()
+        public async Task<IActionResult> AddSupplementToGym()
         {
-            return View();
+            var gymResponse = await _client.GetAsync("https://localhost:7200/api/Gyms/GetGymsBackEnd");
+            var gymResult = await gymResponse.Content.ReadAsStringAsync();
+            var gymList = JsonConvert.DeserializeObject<List<GetUserGymDTO>>(gymResult);
+
+            var idList = new List<GymIDDTO>();
+
+            foreach (var item in gymList)
+            {
+                idList.Add(new GymIDDTO
+                {
+                    GymID = item.GymID,
+                    Name = item.Name,
+                });
+            }
+            var supplementResponse = await _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplementsBackEnd");
+            var supplementResult = await supplementResponse.Content.ReadAsStringAsync();
+            var supplementList = JsonConvert.DeserializeObject<List<SupplementIDDTO>>(supplementResult);
+
+            var returnClientView = new GymSupplementViewModel
+            {
+                GymIDs = idList,
+                SupplementIDs = supplementList
+            };
+
+            return View(returnClientView);
         }
 
         [HttpPost]
         public IActionResult AddSupplementToGym(GymSupplementViewModel newGymSupplement)
         {
-            var supplementResponse = _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplement/" + newGymSupplement.SupplementID).Result;
+            var supplementResponse = _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplementBackEnd/" + newGymSupplement.SupplementID).Result;
 
             if (supplementResponse.IsSuccessStatusCode)
             {

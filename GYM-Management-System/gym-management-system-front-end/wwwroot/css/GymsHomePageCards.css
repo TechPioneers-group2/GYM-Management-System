@@ -1,0 +1,63 @@
+﻿.gymscard {
+    width: 350px !important;
+    height: 350px !important;
+    perspective: 1000px !important;
+}
+
+    .gymscard .card-inner {
+        width: 100% !important;
+        height: 100% !important;
+        position: relative !important;
+        transform-style: preserve-3d !important;
+        transition: transform 0.999s !important;
+    }
+
+    .gymscard:hover .card-inner {
+        transform: rotateY(180deg) !important;
+    }
+
+    .gymscard .card-front,
+    .gymscard .card-back {
+        position: absolute !important;
+        width: 100% !important;
+        height: 100% !important;
+        backface-visibility: hidden !important;
+    }
+
+    .gymscard .card-front {
+        background-color: #FF771C !important;
+        color: #fff !important;
+        display: flex !important;
+        align-items: center !important;
+        border: 6px solid #FF771C !important;
+        border-radius: 6px !important;
+        justify-content: center !important;
+        font-size: 24px !important;
+        transform: rotateY(0deg) !important;
+    }
+
+        .gymscard .card-front img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+        }
+
+    .gymscard .card-back {
+        background-color: #4E5D6C !important;
+        color: #fff !important;
+        border: 6px solid #4E5D6C !important;
+        border-radius: 6px !important;
+        justify-content: center !important;
+        font-size: 24px !important;
+        transform: rotateY(180deg) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+        .gymscard .card-back h5,
+        .gymscard .card-back p {
+            margin: 0 !important;
+        }

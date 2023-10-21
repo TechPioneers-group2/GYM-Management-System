@@ -1,5 +1,7 @@
 ﻿
 
+using gym_management_system_front_end.Models;
+
 namespace gym_management_system_front_end
 {
     public class EquipmentViewModel
@@ -11,10 +13,7 @@ namespace gym_management_system_front_end
         public int OutOfService { get; set; }
         public int Quantity { get; set; }
         public string? PhotoUrl { get; set; }
+        public List<GymIDDTO>? GymIDsNames { get; set; }
 
-
-
-        //N.P
-        //  public Gym Gym { get; set; }
     }
 }

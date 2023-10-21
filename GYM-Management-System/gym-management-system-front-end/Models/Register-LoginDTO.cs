@@ -47,6 +47,10 @@ namespace gym_management_system_front_end.Models
         public int SubscriptionTierID { get; set; }
         public DateTime SubscriptionDate { get; set; }
         public DateTime SubscriptionExpiry { get; set; }
+        public List<GymIDDTO>? GymIDsNames { get; set; }
+
+        public List<GetSubscriptionTierDTO>? SubscriptionTierDTOs { get; set; }
+
     }
     // public class UserDTO
     // {

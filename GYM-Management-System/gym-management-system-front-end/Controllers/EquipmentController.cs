@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using gym_management_system_front_end.Models;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
@@ -26,8 +27,6 @@ namespace gym_management_system_front_end.Controllers
             {
                 string data = response.Content.ReadAsStringAsync().Result;
                 equipments = JsonConvert.DeserializeObject<List<EquipmentViewModel>>(data);
-
-
             }
             return View(equipments);
         }
@@ -47,9 +46,29 @@ namespace gym_management_system_front_end.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var gymResponse = await _httpClient.GetAsync("https://localhost:7200/api/Gyms/GetGymsBackEnd");
+            var gymResult = await gymResponse.Content.ReadAsStringAsync();
+            var gymList = JsonConvert.DeserializeObject<List<GetUserGymDTO>>(gymResult);
+
+            var idList = new List<GymIDDTO>();
+
+            foreach (var item in gymList)
+            {
+                idList.Add(new GymIDDTO
+                {
+                    GymID = item.GymID,
+                    Name = item.Name,
+                });
+            }
+
+            var returnClientView = new EquipmentViewModel
+            {
+                GymIDsNames = idList,
+            };
+
+            return View(returnClientView);
         }
 
         [HttpPost]
