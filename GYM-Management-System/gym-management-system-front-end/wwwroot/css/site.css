@@ -889,3 +889,34 @@ header.masthead {
             color: rgba(255, 255, 255, 1);
         }
 
+#tblData_wrapper {
+    color: aliceblue !important;
+}
+#tblData th, #tblData td {
+    color:aliceblue !important;
+}
+#tblData_filter input[type="search"] {
+    margin: 10px 2px !important;
+}
+#tblData .form-label {
+    margin: 10px 2px !important;
+}
+#tblData_filter {
+    margin: 10px 2px !important;
+}
+#tblData_length {
+    margin: 15px 10px !important;
+
+}
+    #tblData_length option {
+        color: darkblue !important;
+    }
+#tblData_wrapper {
+    padding: 5px 5px !important;
+    background: rgba(255, 255, 255, 0.14) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(3.2px) !important;
+    -webkit-backdrop-filter: blur(3.2px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.64) !important;
+}
