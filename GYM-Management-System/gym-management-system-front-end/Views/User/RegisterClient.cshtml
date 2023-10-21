@@ -53,7 +53,7 @@
                     @{
                         foreach (var item in Model.SubscriptionTierDTOs)
                         {
-                            <option value="@item.SubscriptionTierID">@item.Name</option>
+                            <option value="@item.SubscriptionTierID">@item.Name - @item.Price</option>
                         }
                     }
                 </select>

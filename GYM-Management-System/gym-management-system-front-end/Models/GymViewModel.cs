@@ -31,7 +31,7 @@ namespace gym_management_system_front_end.Models
         public string Name { get; set; }
         public int OutOfService { get; set; }
         public int Quantity { get; set; }
-        public string? imageURL { get; set; }
+        public string? PhotoUrl { get; set; }
 
     }
 

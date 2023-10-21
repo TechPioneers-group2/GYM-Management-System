@@ -42,14 +42,18 @@
             {
                 <div class="row bg-dark rounded p-4 mb-3">
                     <h4 class="mb-3 text-white">Equipments</h4>
-                    <div class="list-group" style="max-height: 33vh; overflow-y: auto;">
+                    <div class="list-group" style="max-height: 23vh; overflow-y: auto;">
+
+                        @{
+                            int counter =0;
+                        }
 
                         @foreach (var equipment in Model.Equipments)
                         {
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="list-group-item text-white">
-                                        <img src="@equipment.imageURL" />
+                                    <div class="list-group-item text-white ">
+                                        <img src="@equipment.PhotoUrl" class="w-25 h-25" />
                                     </div>
                                     <div class="list-group-item text-white">
                                         Name: @equipment.Name
@@ -67,8 +71,6 @@
                     </div>
                 </div>
             }
-
-
 
             <!-- Supplements -->
             @if (Model.Supplements != null)
