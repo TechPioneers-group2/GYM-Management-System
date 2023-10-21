@@ -96,6 +96,7 @@ namespace GYM_Management_System.Models.Services
                             Name = x.Supplements.Name,
                             Price = x.Supplements.Price,
                             Description = x.Supplements.Description,
+                            imageURL = x.Supplements.imageURL
                         }
                     })
                     .ToList();
