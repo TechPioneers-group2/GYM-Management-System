@@ -108,12 +108,9 @@
                                         Quantity: @supplement.Quantity
                                     </li>
                                     <li class="list-group-item text-white border-bottom">
-                                        <a asp-action="RemoveSupplementFromGym"
-                                           asp-route-gymId="@Model.GymID"
-                                           asp-route-supplementId="@supplement.SupplementID"
-                                           class="btn btn-danger btn-sm">
-                                            Remove
-                                        </a>
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteAlert(@Model.GymID, @supplement.SupplementID)">Remove</button>
+
+
                                         <a asp-action="UpdateSupplementForGym"
                                            asp-controller="Gyms"
                                            asp-route-gymId="@Model.GymID"
