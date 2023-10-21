@@ -1,63 +1,60 @@
 ﻿@model EquipmentViewModel
 
 @{
-    Layout = "_Admin";
+    ViewData["Title"] = "CreateGymEquipment";
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Create Gym Equipment</title>
-   
-</head>
-<body>
-    <div class="container">
-        <h2>Create Gym Equipment</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <form asp-action="Create"  method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="__RequestVerificationToken" value="your-antiforgery-token-here" />
 
-                            <div class="form-group">
-                                <label for="Name">Name</label>
-                                <input type="text" name="Name" class="form-control" />
-                            </div>
+<div class="container d-flex justify-content-center align-items-center mt-5 pt-5" style="min-height: 81vh;">
+    <div class="col-md-6 bg-dark rounded p-4 border border-1 border-primary rounded">
+        <h4 class="text-white mb-4">Create Gym Equipment</h4>
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
 
-                            <div class="form-group">
-                                <label for="Quantity">Quantity</label>
-                                <input type="text" name="Quantity" class="form-control" />
-                            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                            <div class="form-group">
-                                <label for="OutOfService">Out of Service</label>
-                                <input type="text" name="OutOfService" class="form-control" />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="GymID">Gym</label>
-                                <select asp-for="GymID">
-                                @foreach(var item in Model.GymIDsNames)
-                                {
-                                    <option value="@item.GymID">@item.Name</option>
-                                }
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="formFile">Image</label>
-                                <input type="file" name="file" class="form-control" />
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Create</button>
-                        </form>
-                    </div>
-
-                </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label text-white"></label>
+                <input asp-for="Name" class="form-control rounded rounded-3 border border-1 border-primary" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-        </div>
+
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label text-white"></label>
+                <input asp-for="Quantity" type="number" class="form-control rounded rounded-3 border border-1 border-primary" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="OutOfService" class="">Out of Service</label>
+                <input asp-for="OutOfService" type="number" class="form-control rounded rounded-3  border border-1 border-primary" />
+                <span asp-validation-for="OutOfService" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="GymID">Gym</label>
+                <select class="form-select border border-1 border-primary" asp-for="GymID">
+                    @{
+                        foreach (var item in Model.GymIDsNames)
+                        {
+                            <option value="@item.GymID">@item.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="formFile">Image</label>
+                <input type="file" name="file" class="form-control rounded rounded-3  border border-1 border-primary" />
+            </div>
+
+            <div class="form-group text-center mt-3 d-grid gap-2">
+                <input type="submit" value="Submit" class="btn btn-lg btn-primary border border-1 border-primary" />
+            </div>
+        </form>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

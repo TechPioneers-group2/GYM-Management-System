@@ -246,7 +246,7 @@ namespace GYM_Management_System.Models.Services
                             Name = geq.Name,
                             OutOfService = geq.OutOfService,
                             Quantity = geq.Quantity,
-                            PhotoUrl= geq.PhotoUrl
+                            PhotoUrl = geq.PhotoUrl
                         }).ToList(),
                         Supplements = Gm.GymSupplements.Select(GS => new GymSupplementDTO()
                         {
