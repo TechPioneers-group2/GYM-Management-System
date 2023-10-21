@@ -211,7 +211,7 @@ namespace gym_management_system_front_end.Controllers
         [HttpPost]
         public IActionResult AddSupplementToGym(GymSupplementViewModel newGymSupplement)
         {
-            var supplementResponse = _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplement/" + newGymSupplement.SupplementID).Result;
+            var supplementResponse = _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplementBackEnd/" + newGymSupplement.SupplementID).Result;
 
             if (supplementResponse.IsSuccessStatusCode)
             {
