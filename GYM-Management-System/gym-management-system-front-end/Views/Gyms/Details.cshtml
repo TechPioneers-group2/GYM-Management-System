@@ -2,69 +2,104 @@
 
 @{
     ViewData["Title"] = "Details";
-    Layout = "_lay";
+    Layout = "_Layout";
 }
 
-<h1 class="fs-2 ms-4">Details</h1>
-
-    <div class="d-flex justify-content-center bg-Secondary col-4 offset-4 flex-column rounded-3 align-items-center shadow-md" style="background-color:#233242">
-        <h4 class="my-4">GymViewModel</h4>
-        <hr />
-        <table class="table">
-        <tr>
-            <th class="text-danger">Gym ID</th>
-            <td>@Html.DisplayFor(model => model.GymID)</td>
-        </tr>
-        <tr>
-            <th class="text-danger">Name</th>
-            <td>@Html.DisplayFor(model => model.Name)</td>
-        </tr>
-        <tr>
-            <th class="text-danger">Max Capacity</th>
-            <td>@Html.DisplayFor(model => model.MaxCapacity)</td>
-        </tr>
-        <tr>
-            <th class="text-danger">Address</th>
-            <td>@Html.DisplayFor(model => model.Address)</td>
-        </tr>
-       </table>
 
 
-        <div>
-            @if (Model.Supplements != null)
-            {
-                <h4 class="mb-3">Supplements</h4>
-                <ul class="list-group">
-                    @foreach (var supplement in Model.Supplements)
-                    {
-                        <li class="list-group-item">
-                            @supplement.Supplements.Name
-                            @supplement.Supplements.Price
-                            @supplement.Quantity
-                            <a asp-action="RemoveSupplementFromGym"
-                               asp-route-gymId="@Model.GymID"
-                               asp-route-supplementId="@supplement.SupplementID"
-                               class="btn btn-danger btn-sm">
-                                Remove
-                            </a>
-                            <a asp-action="UpdateSupplementForGym" asp-controller="Gyms"
-                               asp-route-gymId="@Model.GymID"
-                               asp-route-supplementId="@supplement.SupplementID"
-                               asp-route-quantity="@supplement.Quantity"
-                               class="btn btn-primary btn-sm">
-                                Update
-                            </a>
-                        </li>
-                    }
-                </ul>
-            }
+<div class="container mt-5 pt-5">
+    <div class="card bg-secondary text-white">
+        <div class="card-header">
+            <h4 class="text-center">Gym Information</h4>
         </div>
-  
-        <div class="my-3 d-flex align-items-center justify-content-between">
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <a asp-action="Index" class="btn btn-secondary ml-2">Back to List</a>
-            <a class="btn btn-danger" asp-action="Index" asp-controller="Clients" asp-route-gymid="@Model.GymID">Get Clients</a>
-        </div>
+        <div class="card-body text-center">
+            <table class="table table-striped table-dark">
+                <tr>
+                    <th class="text-danger">Gym ID</th>
+                    <td class="text-center">@Html.DisplayFor(model => model.GymID)</td>
+                    <td class="text-start"></td>
+                </tr>
+                <tr>
+                    <th class="text-danger">Name</th>
+                    <td class ="text-center">@Html.DisplayFor(model => model.Name)</td>
+                    <td class ="text-start"></td>
+                </tr>
+                <tr>
+                    <th class="text-danger">Max Capacity</th>
+                    <td class="text-center">@Html.DisplayFor(model => model.MaxCapacity)</td>
+                    <td class="text-start"></td>
 
+                </tr>
+                <tr>
+                    <th class="text-danger">Address</th>
+                    <td class="text-center">@Html.DisplayFor(model => model.Address)</td>
+                    <td class="text-start"></td>
+                </tr>
+            </table>
+        </div>
     </div>
+</div>
+
+
+<div>
+    @if (Model.Supplements != null)
+    {
+        <h4 class="mb-3">Supplements</h4>
+        <ul class="list-group">
+            @foreach (var supplement in Model.Supplements)
+            {
+                <li class="list-group-item">
+                    @supplement.Supplements.Name
+                    @supplement.Supplements.Price
+                    @supplement.Quantity
+                    <a asp-action="RemoveSupplementFromGym"
+                       asp-route-gymId="@Model.GymID"
+                       asp-route-supplementId="@supplement.SupplementID"
+                       class="btn btn-danger btn-sm">
+                        Remove
+                    </a>
+                    <a asp-action="UpdateSupplementForGym" asp-controller="Gyms"
+                       asp-route-gymId="@Model.GymID"
+                       asp-route-supplementId="@supplement.SupplementID"
+                       asp-route-quantity="@supplement.Quantity"
+                       class="btn btn-primary btn-sm">
+                        Update
+                    </a>
+                </li>
+            }
+        </ul>
+    }
+</div>
+
+
+
+<div >
+    @if (Model.Equipments != null)
+    {
+        <h4 class="mb-3 text-center">Equipments</h4>
+        <ul class="d-flex align-items-center justify-content-center">
+            @foreach (var eq in Model.Equipments)
+            {
+                <div class="card mx-2" style="width: 18rem;">
+                    <img src="@eq.imageURL" class="card-img-top" alt="Equipment Image">
+                    <div class="card-body">
+                        <h5 class="card-title"> Name: @eq.Name</h5>
+                        <p class="card-text">OutOfService: @eq.OutOfService</p>
+                        <a asp-controller="Equipment" asp-action="Details" asp-route-id="@eq.GymEquipmentID" class="btn btn-primary">Details</a>
+                        <a asp-controller="Equipment" asp-action="Edit" asp-route-id="@eq.GymEquipmentID" class="btn btn-primary">Edit</a>
+                        <a asp-controller="Equipment" asp-action="Delete" asp-route-id="@eq.GymEquipmentID" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            }
+
+        </ul>
+    }
+</div>
+
+<div class="my-3 d-flex align-items-center justify-content-center">
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a asp-action="Index" class="btn btn-secondary ml-2">Back to List</a>
+    <a class="btn btn-danger" asp-action="Index" asp-controller="Clients" asp-route-gymid="@Model.GymID">Get Clients</a>
+</div>
+
 
