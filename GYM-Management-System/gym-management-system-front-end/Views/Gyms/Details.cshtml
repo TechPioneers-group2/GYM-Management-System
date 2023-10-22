@@ -2,16 +2,13 @@
 
 @{
     ViewData["Title"] = "Details";
+
+
 }
-<style>
-    .col-md-6:first-child .card {
-        margin-bottom: 10px !important; /* Adjust this value as needed */
-    }
-</style>
 
 <div class="container-fluid" style="margin-top:6.6rem;">
     <div class="row">
-        <div class="col-md-4 bg-dark rounded p-4 ms-4 me-3">
+        <div class="col-md-4 bg-dark rounded p-4 mx-4" >
             <h4 class="text-white mb-4">@Model.Name</h4>
             <table class="table">
                 <tr>
@@ -62,8 +59,7 @@
             }
         </div>
 
-        <div class="col-md-7 mx-1">
-
+        <div class="col-md-7 mx-1 mt-5">
             <!-- Equipments -->
 
             <div class="container bg-dark rounded mb-3 p-1">
@@ -87,10 +83,10 @@
                 </div>
             </div>
 
-
             <!-- Supplements -->
             @if (Model.Supplements != null)
             {
+
                 <div class="container bg-dark rounded p-4 mb-3">
                     <h4 class="mb-3 text-white">Supplements</h4>
                     <div class="row" style="max-height: 300px; overflow-y: auto;">
@@ -123,12 +119,12 @@
                                 </ul>
                             </div>
                         }
+
                     </div>
                 </div>
-
             }
-        </div>
 
+        </div>
     </div>
 </div>
 @section Scripts {
@@ -136,3 +132,4 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     }
+

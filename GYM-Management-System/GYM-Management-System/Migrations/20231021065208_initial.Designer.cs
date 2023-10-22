@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GYM_Management_System.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    [Migration("20231019100730_initial")]
+    [Migration("20231021065208_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -94,16 +94,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c2d646db-165f-48ce-82f9-2ea586bd5bd2",
+                            ConcurrencyStamp = "b1fe6810-8919-4e9c-b1b0-313e02c74808",
                             Email = "adminUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMINUSER@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEP+eZQWxJc027/3XlB4lw99fzQWv8VITemdl7oEbv7wl+4oz1kAA0J2rNBUQoE7vJg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENpi7P5aEFenGZFXoxQq9E7JjYBchgJbJYjn1Ru6+MwxNmojIsmTTraP2Q8F6DhUyQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eea5b660-6ca2-4f75-b200-ee59669669d8",
+                            SecurityStamp = "ddbb2429-4eea-457a-afce-90721dc829bb",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
@@ -111,16 +111,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9d31efb1-504f-418e-8e7e-9c58900392ac",
+                            ConcurrencyStamp = "53024242-d950-4387-86db-0c4481166ff3",
                             Email = "employeeUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "EMPLOYEEUSER@EXAMPLE.COM",
                             NormalizedUserName = "EMPLOYEE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKj9cG1KUiS4Kb5Vm5sOea+kYNPoLdX72Uh6cLTW8lBi35+b/BweRKBhVn+8csyVTQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELI0i9mByEnJ2B4XgCp9h1MEnh3rKtjbQJzH1DGE0XuX/kbj1YxC8CMoZQl0k3wXsw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "dbb52d48-dd60-4863-adf0-c1430598d840",
+                            SecurityStamp = "7d40b6ae-dc32-4eb5-8c05-71c53e7bf15b",
                             TwoFactorEnabled = false,
                             UserName = "Employee"
                         },
@@ -128,16 +128,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bc8726c4-e773-484b-9f25-9799c88f0be6",
+                            ConcurrencyStamp = "a9e48b94-480b-4257-909b-317e8c6cdf86",
                             Email = "ClientUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENTUSER@EXAMPLE.COM",
                             NormalizedUserName = "CLIENT",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBQd3oTDzpsNJGZECAn+06mE9wh94gA2GZgMP4aZVRZ4ldkBMIjjyzuhWbcmRPzGwQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELPM+Vm3nxx+Rhv2WP2D7yGoE+Lf3F7W4AwZBBXpODulNcBCUiNbLcr2pC8UhxDbPQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "68fd6098-7571-46a9-a694-a0561ef52823",
+                            SecurityStamp = "230c7c37-ec75-40c4-a421-69e2e3bd244f",
                             TwoFactorEnabled = false,
                             UserName = "Client"
                         },
@@ -145,16 +145,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d74764a8-17fe-4a83-8815-b25e066e4c37",
+                            ConcurrencyStamp = "ef3b2055-8a11-41d2-b260-930026922581",
                             Email = "Client2User@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENT2USER@EXAMPLE.COM",
                             NormalizedUserName = "CLIENT2",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJSDcEX5BHecGsclN0TgTpdKbpTREazj9a2y6ko96lk7yU892CgkqqwlocM0qKNHUQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAsf+BHJbvLSYehTsGGhIcIVYnJbjpsIxGD00Hxyb5R8KoVFYhiBo8KgfnXu/dFibw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "91e0864c-baf1-4b6c-af03-e3c02308c4b2",
+                            SecurityStamp = "2ba842f7-142b-4d1d-9c56-4dd3de26311a",
                             TwoFactorEnabled = false,
                             UserName = "Client2"
                         });
@@ -206,8 +206,8 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             InGym = true,
                             Name = "Client",
-                            SubscriptionDate = new DateTime(2023, 10, 19, 13, 7, 29, 864, DateTimeKind.Local).AddTicks(1275),
-                            SubscriptionExpiry = new DateTime(2024, 4, 19, 13, 7, 29, 864, DateTimeKind.Local).AddTicks(1288),
+                            SubscriptionDate = new DateTime(2023, 10, 21, 9, 52, 8, 9, DateTimeKind.Local).AddTicks(7582),
+                            SubscriptionExpiry = new DateTime(2024, 4, 21, 9, 52, 8, 9, DateTimeKind.Local).AddTicks(7600),
                             SubscriptionTierID = 1,
                             UserId = "3"
                         },
@@ -217,8 +217,8 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             InGym = true,
                             Name = "Client2",
-                            SubscriptionDate = new DateTime(2023, 10, 19, 13, 7, 29, 864, DateTimeKind.Local).AddTicks(1295),
-                            SubscriptionExpiry = new DateTime(2024, 4, 19, 13, 7, 29, 864, DateTimeKind.Local).AddTicks(1295),
+                            SubscriptionDate = new DateTime(2023, 10, 21, 9, 52, 8, 9, DateTimeKind.Local).AddTicks(7609),
+                            SubscriptionExpiry = new DateTime(2024, 4, 21, 9, 52, 8, 9, DateTimeKind.Local).AddTicks(7610),
                             SubscriptionTierID = 1,
                             UserId = "4"
                         });
@@ -629,21 +629,21 @@ namespace GYM_Management_System.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5ad8ba74-fa7a-43eb-a3fa-ffd1e6155ca2",
+                            Id = "6b449bbb-0fdf-42b0-92b2-0b9d2cf704de",
                             ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "6d8708c1-c55f-44bd-871e-2c0576a91daf",
+                            Id = "f2dd6948-4082-4f0d-9ebb-08bf653d4e02",
                             ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
-                            Id = "b0c5ab19-fbf9-4d45-b66a-8497af3f5111",
+                            Id = "13303c49-60c6-44e2-8f60-fd7952976fd6",
                             ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
                             Name = "Client",
                             NormalizedName = "CLIENT"
@@ -680,63 +680,63 @@ namespace GYM_Management_System.Migrations
                             Id = 10,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "createAdmin",
-                            RoleId = "5ad8ba74-fa7a-43eb-a3fa-ffd1e6155ca2"
+                            RoleId = "6b449bbb-0fdf-42b0-92b2-0b9d2cf704de"
                         },
                         new
                         {
                             Id = 11,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "updateAdmin",
-                            RoleId = "5ad8ba74-fa7a-43eb-a3fa-ffd1e6155ca2"
+                            RoleId = "6b449bbb-0fdf-42b0-92b2-0b9d2cf704de"
                         },
                         new
                         {
                             Id = 12,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "deleteAdmin",
-                            RoleId = "5ad8ba74-fa7a-43eb-a3fa-ffd1e6155ca2"
+                            RoleId = "6b449bbb-0fdf-42b0-92b2-0b9d2cf704de"
                         },
                         new
                         {
                             Id = 13,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "readAdmin",
-                            RoleId = "5ad8ba74-fa7a-43eb-a3fa-ffd1e6155ca2"
+                            RoleId = "6b449bbb-0fdf-42b0-92b2-0b9d2cf704de"
                         },
                         new
                         {
                             Id = 14,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "createEmployee",
-                            RoleId = "6d8708c1-c55f-44bd-871e-2c0576a91daf"
+                            RoleId = "f2dd6948-4082-4f0d-9ebb-08bf653d4e02"
                         },
                         new
                         {
                             Id = 15,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "updateEmployee",
-                            RoleId = "6d8708c1-c55f-44bd-871e-2c0576a91daf"
+                            RoleId = "f2dd6948-4082-4f0d-9ebb-08bf653d4e02"
                         },
                         new
                         {
                             Id = 16,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "readEmployee",
-                            RoleId = "6d8708c1-c55f-44bd-871e-2c0576a91daf"
+                            RoleId = "f2dd6948-4082-4f0d-9ebb-08bf653d4e02"
                         },
                         new
                         {
                             Id = 17,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "updateClient",
-                            RoleId = "b0c5ab19-fbf9-4d45-b66a-8497af3f5111"
+                            RoleId = "13303c49-60c6-44e2-8f60-fd7952976fd6"
                         },
                         new
                         {
                             Id = 18,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "readClient",
-                            RoleId = "b0c5ab19-fbf9-4d45-b66a-8497af3f5111"
+                            RoleId = "13303c49-60c6-44e2-8f60-fd7952976fd6"
                         });
                 });
 

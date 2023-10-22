@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -317,9 +318,9 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "5ad8ba74-fa7a-43eb-a3fa-ffd1e6155ca2", "00000000-0000-0000-0000-000000000000", "Admin", "ADMIN" },
-                    { "6d8708c1-c55f-44bd-871e-2c0576a91daf", "00000000-0000-0000-0000-000000000000", "Employee", "EMPLOYEE" },
-                    { "b0c5ab19-fbf9-4d45-b66a-8497af3f5111", "00000000-0000-0000-0000-000000000000", "Client", "CLIENT" }
+                    { "13303c49-60c6-44e2-8f60-fd7952976fd6", "00000000-0000-0000-0000-000000000000", "Client", "CLIENT" },
+                    { "6b449bbb-0fdf-42b0-92b2-0b9d2cf704de", "00000000-0000-0000-0000-000000000000", "Admin", "ADMIN" },
+                    { "f2dd6948-4082-4f0d-9ebb-08bf653d4e02", "00000000-0000-0000-0000-000000000000", "Employee", "EMPLOYEE" }
                 });
 
             migrationBuilder.InsertData(
@@ -327,10 +328,10 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1", 0, "c2d646db-165f-48ce-82f9-2ea586bd5bd2", "adminUser@example.com", true, false, null, "ADMINUSER@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAEP+eZQWxJc027/3XlB4lw99fzQWv8VITemdl7oEbv7wl+4oz1kAA0J2rNBUQoE7vJg==", "1234567890", false, "eea5b660-6ca2-4f75-b200-ee59669669d8", false, "Admin" },
-                    { "2", 0, "9d31efb1-504f-418e-8e7e-9c58900392ac", "employeeUser@example.com", true, false, null, "EMPLOYEEUSER@EXAMPLE.COM", "EMPLOYEE", "AQAAAAIAAYagAAAAEKj9cG1KUiS4Kb5Vm5sOea+kYNPoLdX72Uh6cLTW8lBi35+b/BweRKBhVn+8csyVTQ==", "1234567890", false, "dbb52d48-dd60-4863-adf0-c1430598d840", false, "Employee" },
-                    { "3", 0, "bc8726c4-e773-484b-9f25-9799c88f0be6", "ClientUser@example.com", true, false, null, "CLIENTUSER@EXAMPLE.COM", "CLIENT", "AQAAAAIAAYagAAAAEBQd3oTDzpsNJGZECAn+06mE9wh94gA2GZgMP4aZVRZ4ldkBMIjjyzuhWbcmRPzGwQ==", "1234567890", false, "68fd6098-7571-46a9-a694-a0561ef52823", false, "Client" },
-                    { "4", 0, "d74764a8-17fe-4a83-8815-b25e066e4c37", "Client2User@example.com", true, false, null, "CLIENT2USER@EXAMPLE.COM", "CLIENT2", "AQAAAAIAAYagAAAAEJSDcEX5BHecGsclN0TgTpdKbpTREazj9a2y6ko96lk7yU892CgkqqwlocM0qKNHUQ==", "1234567890", false, "91e0864c-baf1-4b6c-af03-e3c02308c4b2", false, "Client2" }
+                    { "1", 0, "b1fe6810-8919-4e9c-b1b0-313e02c74808", "adminUser@example.com", true, false, null, "ADMINUSER@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAENpi7P5aEFenGZFXoxQq9E7JjYBchgJbJYjn1Ru6+MwxNmojIsmTTraP2Q8F6DhUyQ==", "1234567890", false, "ddbb2429-4eea-457a-afce-90721dc829bb", false, "Admin" },
+                    { "2", 0, "53024242-d950-4387-86db-0c4481166ff3", "employeeUser@example.com", true, false, null, "EMPLOYEEUSER@EXAMPLE.COM", "EMPLOYEE", "AQAAAAIAAYagAAAAELI0i9mByEnJ2B4XgCp9h1MEnh3rKtjbQJzH1DGE0XuX/kbj1YxC8CMoZQl0k3wXsw==", "1234567890", false, "7d40b6ae-dc32-4eb5-8c05-71c53e7bf15b", false, "Employee" },
+                    { "3", 0, "a9e48b94-480b-4257-909b-317e8c6cdf86", "ClientUser@example.com", true, false, null, "CLIENTUSER@EXAMPLE.COM", "CLIENT", "AQAAAAIAAYagAAAAELPM+Vm3nxx+Rhv2WP2D7yGoE+Lf3F7W4AwZBBXpODulNcBCUiNbLcr2pC8UhxDbPQ==", "1234567890", false, "230c7c37-ec75-40c4-a421-69e2e3bd244f", false, "Client" },
+                    { "4", 0, "ef3b2055-8a11-41d2-b260-930026922581", "Client2User@example.com", true, false, null, "CLIENT2USER@EXAMPLE.COM", "CLIENT2", "AQAAAAIAAYagAAAAEAsf+BHJbvLSYehTsGGhIcIVYnJbjpsIxGD00Hxyb5R8KoVFYhiBo8KgfnXu/dFibw==", "1234567890", false, "2ba842f7-142b-4d1d-9c56-4dd3de26311a", false, "Client2" }
                 });
 
             migrationBuilder.InsertData(
@@ -375,15 +376,15 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "Id", "ClaimType", "ClaimValue", "RoleId" },
                 values: new object[,]
                 {
-                    { 10, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createAdmin", "5ad8ba74-fa7a-43eb-a3fa-ffd1e6155ca2" },
-                    { 11, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateAdmin", "5ad8ba74-fa7a-43eb-a3fa-ffd1e6155ca2" },
-                    { 12, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "deleteAdmin", "5ad8ba74-fa7a-43eb-a3fa-ffd1e6155ca2" },
-                    { 13, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readAdmin", "5ad8ba74-fa7a-43eb-a3fa-ffd1e6155ca2" },
-                    { 14, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createEmployee", "6d8708c1-c55f-44bd-871e-2c0576a91daf" },
-                    { 15, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateEmployee", "6d8708c1-c55f-44bd-871e-2c0576a91daf" },
-                    { 16, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readEmployee", "6d8708c1-c55f-44bd-871e-2c0576a91daf" },
-                    { 17, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateClient", "b0c5ab19-fbf9-4d45-b66a-8497af3f5111" },
-                    { 18, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readClient", "b0c5ab19-fbf9-4d45-b66a-8497af3f5111" }
+                    { 10, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createAdmin", "6b449bbb-0fdf-42b0-92b2-0b9d2cf704de" },
+                    { 11, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateAdmin", "6b449bbb-0fdf-42b0-92b2-0b9d2cf704de" },
+                    { 12, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "deleteAdmin", "6b449bbb-0fdf-42b0-92b2-0b9d2cf704de" },
+                    { 13, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readAdmin", "6b449bbb-0fdf-42b0-92b2-0b9d2cf704de" },
+                    { 14, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createEmployee", "f2dd6948-4082-4f0d-9ebb-08bf653d4e02" },
+                    { 15, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateEmployee", "f2dd6948-4082-4f0d-9ebb-08bf653d4e02" },
+                    { 16, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readEmployee", "f2dd6948-4082-4f0d-9ebb-08bf653d4e02" },
+                    { 17, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateClient", "13303c49-60c6-44e2-8f60-fd7952976fd6" },
+                    { 18, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readClient", "13303c49-60c6-44e2-8f60-fd7952976fd6" }
                 });
 
             migrationBuilder.InsertData(
@@ -391,8 +392,8 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "ClientID", "GymID", "InGym", "Name", "SubscriptionDate", "SubscriptionExpiry", "SubscriptionTierID", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, true, "Client", new DateTime(2023, 10, 19, 13, 7, 29, 864, DateTimeKind.Local).AddTicks(1275), new DateTime(2024, 4, 19, 13, 7, 29, 864, DateTimeKind.Local).AddTicks(1288), 1, "3" },
-                    { 2, 1, true, "Client2", new DateTime(2023, 10, 19, 13, 7, 29, 864, DateTimeKind.Local).AddTicks(1295), new DateTime(2024, 4, 19, 13, 7, 29, 864, DateTimeKind.Local).AddTicks(1295), 1, "4" }
+                    { 1, 1, true, "Client", new DateTime(2023, 10, 21, 9, 52, 8, 9, DateTimeKind.Local).AddTicks(7582), new DateTime(2024, 4, 21, 9, 52, 8, 9, DateTimeKind.Local).AddTicks(7600), 1, "3" },
+                    { 2, 1, true, "Client2", new DateTime(2023, 10, 21, 9, 52, 8, 9, DateTimeKind.Local).AddTicks(7609), new DateTime(2024, 4, 21, 9, 52, 8, 9, DateTimeKind.Local).AddTicks(7610), 1, "4" }
                 });
 
             migrationBuilder.InsertData(
