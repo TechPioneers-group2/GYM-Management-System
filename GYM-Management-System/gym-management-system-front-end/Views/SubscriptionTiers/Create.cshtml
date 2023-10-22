@@ -2,22 +2,16 @@
 
 @{
     ViewData["Title"] = "Create";
-    Layout = "_Admin";
+    Layout = "_Layout";
+  
 }
 
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Create Subscription Tier</title>
-</head>
-<body>
-    <div class="container">
-        <h2>Create Subscription Tier</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 87vh;">
+    <div class="col-md-6 bg-dark rounded p-4">
+
+        <h4 class="text-white mb-4">Create Subscription Tier</h4>
                         <form asp-action="Create">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -36,22 +30,16 @@
                                 <input asp-for="Length" class="form-control" />
                                 <span asp-validation-for="Length" class="text-danger"></span>
                             </div>
-                            <div class="form-group">
-                                <input type="submit" value="Create" class="btn btn-primary" />
-                            </div>
+            <div class="form-group text-center mt-3 d-grid gap-2">
+                <input type="submit" value="Submit" class="btn btn-lg btn-primary border border-1 border-primary" />
+            </div>
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  
+         
   @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
-</body>
-</html>
+

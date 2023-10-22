@@ -3,11 +3,12 @@
 @{
     ViewData["Title"] = "Creat Employee";
     var gymList = new SelectList(ViewBag.gymList, "GymID", "Name");
+    Layout = "_Layout";
 }
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 87vh;">
+    <div class="col-md-6 bg-dark rounded p-4">
 
-<div class="container">
-    <div class="form-container">
-        <div class="form-box">
+       
             <form method="Post" asp-controller="Employees" asp-action="Create">
                 <div class="row">
                     <div>
@@ -77,14 +78,13 @@
 
 
 
-                <div class="form-group ">
-                    <input type="submit" value="create" />
-                </div>
+            <div class="form-group text-center mt-3 d-grid gap-2">
+                <input type="submit" value="Submit" class="btn btn-lg btn-primary border border-1 border-primary" />
+            </div>
 
             </form>
         </div>
     </div>
-</div>
 
 @section Scripts{
     @{

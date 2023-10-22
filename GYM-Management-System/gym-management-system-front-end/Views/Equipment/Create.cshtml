@@ -1,21 +1,23 @@
 ﻿@model EquipmentViewModel
-
 @{
-    Layout = "_Admin";
-}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Create Gym Equipment</title>
+    ViewData["Title"] = "Create Equipment";
    
-</head>
-<body>
-    <div class="container">
-        <h2>Create Gym Equipment</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
+    Layout = "_Layout";
+
+
+}
+
+
+
+
+   
+   
+
+
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 87vh;">
+        <div class="col-md-6 bg-dark rounded p-4">
+     
+        <h4 class="text-white mb-4">Create Gym Equipment</h4>
                         <form asp-action="Create"  method="post" enctype="multipart/form-data">
                             <input type="hidden" name="__RequestVerificationToken" value="your-antiforgery-token-here" />
 
@@ -44,7 +46,9 @@
                                 <input type="file" name="file" class="form-control" />
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Create</button>
+                            <div class="form-group text-center mt-3 d-grid gap-2">
+                                <input type="submit" value="Submit" class="btn btn-lg btn-primary border border-1 border-primary" />
+                            </div>
                         </form>
                     </div>
 
@@ -52,7 +56,6 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+
+</div>
+
