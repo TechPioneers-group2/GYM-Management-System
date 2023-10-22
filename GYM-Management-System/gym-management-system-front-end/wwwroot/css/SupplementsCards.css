@@ -146,7 +146,6 @@
 
 /* START BUTTON */
 .btn-warning {
-    background: var(--btnbg);
     color: var(--btnfontcolor);
     fill: #ffffff;
     border: none;
