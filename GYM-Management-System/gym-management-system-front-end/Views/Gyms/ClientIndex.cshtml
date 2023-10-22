@@ -3,41 +3,37 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<div class=" mt-5 pt-5 px-5 d-flex justify-content-center align-items-center">
-    <div class="row" style=" padding-left:0px !important;">
-        @foreach (var gym in Model)
-        {
-            <div class="card w-100 mt-3" style=" padding-left:0px !important;  padding-right:0px !important;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="@gym.imageURL" class="img-fluid  w-100 h-100" style="object-fit:fill;">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title text-primary">@gym.Name</h5>
-                            <p class="card-text">
-                                <span class="fw-bold">Address: </span> @gym.Address
-                            </p>
-                            <p class="card-text">
-                                <span class="fw-bold"> Max Capacity: </span> @gym.MaxCapacity
-                            </p>
-                            <p class="card-text">
-                                <span class="fw-bold"> Current Capacity: </span> @gym.CurrentCapacity
-                            </p>
-                            <p class="card-text">
-                                <span class="fw-bold"> Active Hours: </span> @gym.ActiveHours
-                            </p>
-                            <p class="card-text">
-                                <span class="fw-bold"> Notification:</span>  @gym.Notification
-                            </p>
+<link href="~/css/gymshomepagecards.css" rel="stylesheet" />
+<div class="container container-fluid mt-2 pt-5">
+    <div class=" mt-5 pt-5 px-5 ">
+        <div class="row">
+            @foreach (var gym in Model)
+            {
+                <div class="col-lg-3 col-md-6 mb-4 offset-lg-1">
+                    <div class="card clientsGyms h-100">
+                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                             data-mdb-ripple-color="light">
+                            <img src="@gym.imageURL" />
+                            <a asp-controller="Gyms" asp-action="Details" asp-route-id="@gym.GymID">
+                                <div class="hover-overlay">
+                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                </div>
+                            </a>
                         </div>
-                            <div class="card-footer d-grid gap-2">
-                                <a asp-controller="Gyms" asp-action="Details" asp-route-id="@gym.GymID" class="btn btn-lg btn-primary">CHECK DETAILS</a>
-                            </div>
+                        <div class="card-body p-1">
+                            <a asp-controller="Gyms" asp-action="Details" asp-route-id="@gym.GymID" class="text-reset">
+                                <h5 class="card-title mb-3  text-primary">@gym.Name</h5>
+                            </a>
+                            <h6 class="mb-1"><span class="fw-bold"> Address:  </span> <span>@gym.Address</span></h6>
+                            <h6 class="mb-1"><span class="fw-bold"> Max Capacity: </span> <span>@gym.MaxCapacity</span></h6>
+                            <h6 class="mb-1"><span class="fw-bold"> Current Capacity: </span><span> @gym.CurrentCapacity</span></h6>
+                            <h6 class="mb-1"><span class="fw-bold"> Active Hours: </span><span> @gym.ActiveHours</span></h6>
+                            <h6 class="mb-1"><span class="fw-bold"> Notification:</span> <span> @gym.Notification</span></h6>
+                        </div>
+                        <a asp-controller="Gyms" asp-action="Details" asp-route-id="@gym.GymID" class="btn btn-lg btn-primary">CHECK DETAILS</a>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 </div>
-
