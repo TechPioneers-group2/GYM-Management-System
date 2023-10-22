@@ -2,64 +2,49 @@
 @model IEnumerable<gym_management_system_front_end.Models.CartViewModel>
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Cart";
 }
-<section class="p-5" style="height:87vh;">
-
-    <div class="row p-5 mt-3">
-        <h1>Your items</h1>
+<section class="p-5" style="height: 87vh;">
+    <div class="container">
+        <h1 class="mb-4">Your Cart</h1>
         @if (Model != null && Model.Any())
         {
-            foreach (var item in Model)
-            {
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">@item.Name</h5>
-                            <p class="card-text">@item.Description</p>
-                            <p class="card-text">Price: $@item.Price</p>
-                            <div class="d-flex justify-content-center align-items-center ">
-                                <form method="post" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.SupplementID">
-                                    <button type="submit" class="btn btn-danger delete-button" value="-1">-</button>
-                                </form>
-                                <p class="card-text mx-2 ">Quantity:@item.Quantity</p>
-                                <form method="post" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.SupplementID">
-                                    <button type="submit" class="btn btn-danger delete-button" value="1">+</button>
-                                </form>
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Name</h5>
+                                <p class="card-text">@item.Description</p>
+                                <p class="card-text">Price: $@item.Price</p>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <form method="post" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.SupplementID">
+                                        <button type="submit" class="btn btn-danger delete-button" data-x="-1">-</button>
+                                    </form>
+                                    <p class="card-text mx-2">Quantity: @item.Quantity</p>
+                                    <form method="post" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.SupplementID">
+                                        <button type="submit" class="btn btn-danger delete-button" data-x="1">+</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         }
         else
         {
-            <h1>no product added</h1>
+            <div class="alert alert-danger" role="alert">
+                Your cart is empty.
+            </div>
         }
+        <form method="post" asp-action="CheckOut">
+            <input type="hidden" name="carts" value='@JsonConvert.SerializeObject(Model)'>
+            @if (Model != null && Model.Any())
+            {
+                <button type="submit" class="btn btn-primary mt-3">Proceed to Payment</button>
+            }
+        </form>
     </div>
-
-    <form method="post" asp-action="CheckOut">
-        <input type="hidden" name="carts" value='@JsonConvert.SerializeObject(Model)'>
-        <button type="submit">Proceed to Payment</button>
-    </form>
-
-
-    <script>
-        document.querySelectorAll(".delete-button").forEach(function (button) {
-            button.addEventListener("click", function () {
-                var x = parseInt(this.getAttribute("data-x"));
-
-                if (x > 1) {
-                    x--; // Decrease x
-                } else {
-                    // Send the POST request
-                    var form = this.closest("form");
-                    if (form) {
-                        form.submit();
-                    }
-                }
-            });
-        });
-    </script>
 </section>
-

@@ -4,40 +4,20 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<link href="~/css/supplementscards.css" rel="stylesheet" />
 
-<div>
-    <h4>SupplementViewModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SupplementID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SupplementID)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-    </dl>
-</div>
-<div>
-    
-    @Html.ActionLink("Edit", "Edit", new { id = Model.SupplementID }) |
-    <a asp-action="Index">Back to List</a>
+<div class="container my-4 p-3 pt-5 mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="@Model.imageURL" class="supplement-image" alt="@Model.Name" />
+        </div>
+        <div class="col-md-6">
+            <h1 class="supplement-title">@Model.Name</h1>
+            <p class="supplement-price">Price: @Model.Price.ToString("0.00") JD</p>
+            <p class="supplement-description">@Model.Description</p>
+            <div class="d-grid gap-2 my-4" style="position: relative;">
+                <a asp-action="ClientIndex" class="btn btn-secondary" style="position: absolute;  ; left: 50%; transform: translateX(-50%);">Back to List</a>
+            </div>
+        </div>
+    </div>
 </div>
