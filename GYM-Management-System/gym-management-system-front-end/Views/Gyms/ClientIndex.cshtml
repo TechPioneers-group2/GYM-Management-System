@@ -4,66 +4,40 @@
     ViewData["Title"] = "Home Page";
 }
 <div class=" mt-5 pt-5 px-5 d-flex justify-content-center align-items-center">
-    <div class="row">
+    <div class="row" style=" padding-left:0px !important;">
         @foreach (var gym in Model)
         {
-            <div class="col-sm-6 col-md-4 col-lg-4 mb-4 g-3">
-                <div class="card h-100 w-100">
-                    <img src="@gym.imageURL" class="card-img-top" alt="@gym.Name">
-                    <div class="card-body">
-                        <h5 class="card-title mb-2 text-primary fw-bold">@gym.Name</h5>
-                        <div class="row">
-                            <div class="col">
-                                <strong>Address:</strong>
-                            </div>
-                            <div class="col">
-                                @gym.Address
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <strong>Max Capacity:</strong>
-                            </div>
-                            <div class="col">
-                                @gym.MaxCapacity
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <strong>Current Capacity:</strong>
-                            </div>
-                            <div class="col">
-                                @gym.CurrentCapacity
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <strong>Active Hours:</strong>
-                            </div>
-                            <div class="col">
-                                @gym.ActiveHours
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <strong>Notification:</strong>
-                            </div>
-                            <div class="col">
-                                @gym.Notification
-                            </div>
-                        </div>
+            <div class="card w-100 mt-3" style=" padding-left:0px !important;  padding-right:0px !important;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="@gym.imageURL" class="img-fluid  w-100 h-100" style="object-fit:fill;">
                     </div>
-                    <div class="card-footer d-grid gap-2">
-                        <a asp-controller="Gyms" asp-action="Details" asp-route-id="@gym.GymID" class="btn btn-lg btn-primary">CHECK DETAILS</a>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">@gym.Name</h5>
+                            <p class="card-text">
+                                <span class="fw-bold">Address: </span> @gym.Address
+                            </p>
+                            <p class="card-text">
+                                <span class="fw-bold"> Max Capacity: </span> @gym.MaxCapacity
+                            </p>
+                            <p class="card-text">
+                                <span class="fw-bold"> Current Capacity: </span> @gym.CurrentCapacity
+                            </p>
+                            <p class="card-text">
+                                <span class="fw-bold"> Active Hours: </span> @gym.ActiveHours
+                            </p>
+                            <p class="card-text">
+                                <span class="fw-bold"> Notification:</span>  @gym.Notification
+                            </p>
+                        </div>
+                            <div class="card-footer d-grid gap-2">
+                                <a asp-controller="Gyms" asp-action="Details" asp-route-id="@gym.GymID" class="btn btn-lg btn-primary">CHECK DETAILS</a>
+                            </div>
                     </div>
                 </div>
             </div>
         }
     </div>
 </div>
-
-
-
-
-
 

@@ -84,6 +84,7 @@
             <!-- Supplements -->
             @if (Model.Supplements != null)
             {
+
                 <div class="container bg-dark rounded mb-3 p-1">
                     <h4 class="mb-3 text-white text-center">Supplements</h4>
                     <div class="container-fluid" style="max-height: 33vh; overflow-y: auto;">
@@ -100,12 +101,8 @@
                                                 <h6 class="card-text">Quantity: @supplement.Quantity</h6>
                                             </div>
                                             <div class="d-flex justify-content-around w-100">
-                                                <a asp-action="RemoveSupplementFromGym"
-                                                   asp-route-gymId="@Model.GymID"
-                                                   asp-route-supplementId="@supplement.SupplementID"
-                                                   class="btn btn-danger btn-sm">
-                                                    Remove
-                                                </a>
+                                                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteAlert(@Model.GymID, @supplement.SupplementID)">Remove</button>
+
                                                 <a asp-action="UpdateSupplementForGym"
                                                    asp-controller="Gyms"
                                                    asp-route-gymId="@Model.GymID"
@@ -121,6 +118,7 @@
                                 </div>
                             }
                         </div>
+
                     </div>
                 </div>
             }

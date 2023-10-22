@@ -211,12 +211,14 @@ namespace gym_management_system_front_end.Controllers
 
             var idList = new GymIDDTO() 
             {
+
                
                 GymID = gymList.GymID,
                 Name=gymList.Name
 
             };
            
+
 
             var supplementResponse = await _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplementsBackEnd");
             var supplementResult = await supplementResponse.Content.ReadAsStringAsync();
