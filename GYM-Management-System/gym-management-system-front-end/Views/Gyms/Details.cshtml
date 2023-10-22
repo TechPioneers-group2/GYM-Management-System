@@ -1,9 +1,7 @@
 ﻿@model gym_management_system_front_end.Models.GymViewModel
 
 @{
-    ViewData["Title"] = "Details";
-
-
+    ViewData["Title"] = "Home Page";
 }
 
 <div class="container-fluid" style="margin-top:6.6rem;">
@@ -87,38 +85,39 @@
             @if (Model.Supplements != null)
             {
 
-                <div class="container bg-dark rounded p-4 mb-3">
-                    <h4 class="mb-3 text-white">Supplements</h4>
-                    <div class="row" style="max-height: 300px; overflow-y: auto;">
-                        @foreach (var supplement in Model.Supplements)
-                        {
-                            <div class="col-md-4">
-                                <ul class="list-group">
-                                    <li class="list-group-item text-white">
-                                        Name: @supplement.Supplements.Name
-                                    </li>
-                                    <li class="list-group-item text-white">
-                                        Price: @supplement.Supplements.Price
-                                    </li>
-                                    <li class="list-group-item text-white">
-                                        Quantity: @supplement.Quantity
-                                    </li>
-                                    <li class="list-group-item text-white border-bottom">
-                                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteAlert(@Model.GymID, @supplement.SupplementID)">Remove</button>
+                <div class="container bg-dark rounded mb-3 p-1">
+                    <h4 class="mb-3 text-white text-center">Supplements</h4>
+                    <div class="container-fluid" style="max-height: 33vh; overflow-y: auto;">
+                        <div class="row">
+                            @foreach (var supplement in Model.Supplements)
+                            {
+                                <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                                    <div class="card bg-secondary text-white align-items-center mb-1 h-100">
+                                        <img src="@supplement.Supplements.imageURL" class="card-img-top mt-2" alt="@supplement.Supplements.Name" style="object-fit:contain; height: 140px; width: 100%;">
+                                        <div class="card-body d-flex flex-column align-items-center justify-content-between">
+                                            <h5 class="card-title fw-bold text-center mb-3">@supplement.Supplements.Name</h5>
+                                            <div class="d-flex w-100 justify-content-between mb-2">
+                                                <h6 class="card-text">Price: @supplement.Supplements.Price</h6>
+                                                <h6 class="card-text">Quantity: @supplement.Quantity</h6>
+                                            </div>
+                                            <div class="d-flex justify-content-around w-100">
+                                                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteAlert(@Model.GymID, @supplement.SupplementID)">Remove</button>
 
+                                                <a asp-action="UpdateSupplementForGym"
+                                                   asp-controller="Gyms"
+                                                   asp-route-gymId="@Model.GymID"
+                                                   asp-route-supplementId="@supplement.SupplementID"
+                                                   asp-route-quantity="@supplement.Quantity"
+                                                   class="btn btn-primary btn-sm">
+                                                    Update
+                                                </a>
+                                            </div>
+                                        </div>
 
-                                        <a asp-action="UpdateSupplementForGym"
-                                           asp-controller="Gyms"
-                                           asp-route-gymId="@Model.GymID"
-                                           asp-route-supplementId="@supplement.SupplementID"
-                                           asp-route-quantity="@supplement.Quantity"
-                                           class="btn btn-primary btn-sm">
-                                            Update
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
 
                     </div>
                 </div>

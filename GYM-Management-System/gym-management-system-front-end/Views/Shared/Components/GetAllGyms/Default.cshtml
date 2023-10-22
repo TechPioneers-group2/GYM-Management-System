@@ -1,6 +1,13 @@
 ﻿@model IEnumerable<gym_management_system_front_end.Models.GymViewModel>
 
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
 <link href="~/css/gymshomepagecards.css" rel="stylesheet" />
+
+ 
 
 <div class="row  d-flex justify-content-center align-items-center">
     @foreach (var item in Model)

@@ -892,6 +892,7 @@ header.masthead {
         }
 
 
+
 #tblData_wrapper {
     color: aliceblue !important;
 }
@@ -923,4 +924,5 @@ header.masthead {
     -webkit-backdrop-filter: blur(3.2px) !important;
     border: 1px solid rgba(255, 255, 255, 0.64) !important;
 }
+
 
