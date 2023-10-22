@@ -38,6 +38,8 @@ namespace gym_management_system_front_end.Models
     public class GymSupplementDTO
     {
         public int SupplementID { get; set; }
+
+        public string Name { get; set; }
         //public int GymID { get; set; }
         public int Quantity { get; set; }
 

@@ -203,30 +203,51 @@ namespace gym_management_system_front_end.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddSupplementToGym()
+        public async Task<IActionResult> AddSupplementToGym(int gymid)
         {
-            var gymResponse = await _client.GetAsync("https://localhost:7200/api/Gyms/GetGymsBackEnd");
+            var gymResponse = await _client.GetAsync($"https://localhost:7200/api/Gyms/GetGymBackEnd/{gymid}");
             var gymResult = await gymResponse.Content.ReadAsStringAsync();
-            var gymList = JsonConvert.DeserializeObject<List<GetUserGymDTO>>(gymResult);
+            var gymList = JsonConvert.DeserializeObject<GetUserGymDTO>(gymResult);
 
-            var idList = new List<GymIDDTO>();
-
-            foreach (var item in gymList)
+            var idList = new GymIDDTO() 
             {
-                idList.Add(new GymIDDTO
-                {
-                    GymID = item.GymID,
-                    Name = item.Name,
-                });
-            }
+               
+                GymID = gymList.GymID,
+                Name=gymList.Name
+
+            };
+           
+
             var supplementResponse = await _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplementsBackEnd");
             var supplementResult = await supplementResponse.Content.ReadAsStringAsync();
             var supplementList = JsonConvert.DeserializeObject<List<SupplementIDDTO>>(supplementResult);
 
+            var list = new List<GymSupplementDTO>();
+
+            foreach (var item in supplementList)
+            {
+                // Check if the SupplementID is already in gymList.Supplements
+                if (!gymList.Supplements.Any(s => s.SupplementID == item.SupplementID))
+                {
+                    list.Add(new GymSupplementDTO
+                    {
+                        SupplementID = item.SupplementID,
+                        Name = item.Name // Assuming 'Name' is the property in SupplementIDDTO
+                    });
+                }
+            }
+
+            var supplementIDList = list.Select(s => new SupplementIDDTO
+            {
+                SupplementID = s.SupplementID,
+                Name = s.Name // Include the 'Name' property
+            }).ToList();
+
             var returnClientView = new GymSupplementViewModel
             {
-                GymIDs = idList,
-                SupplementIDs = supplementList
+                GymIDs =idList ,
+                GymID = idList.GymID,
+                SupplementIDs = supplementIDList,
             };
 
             return View(returnClientView);
@@ -261,7 +282,8 @@ namespace gym_management_system_front_end.Controllers
                 return View(newGymSupplement);
             }
 
-            return RedirectToAction("Index", "Gyms");
+            return RedirectToAction("Details", "Gyms", new { id = newGymSupplement.GymID });
+
         }
 
         [HttpGet]
