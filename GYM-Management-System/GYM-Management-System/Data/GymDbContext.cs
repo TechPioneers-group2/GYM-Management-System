@@ -169,7 +169,7 @@ namespace GYM_Management_System.Data
                     Name = "bench press",
                     Quantity = 2,
                     OutOfService = 0,
-                    PhotoUrl = "https://m.media-amazon.com/images/I/61cGWhpz3ZL._AC_UF1000,1000_QL80_.jpg",
+                    PhotoUrl = "https://techpioneers.blob.core.windows.net/images/61cGWhpz3ZL._AC_UF10001000_QL80_.jpg",
                 },
                 new GymEquipment
                 {
@@ -178,7 +178,7 @@ namespace GYM_Management_System.Data
                     Name = "treadmill",
                     Quantity = 10,
                     OutOfService = 2,
-                    PhotoUrl = "https://shop.lifefitness.com/cdn/shop/products/clubseries-plus-treadmill-titanium-storm-se3hd-1000x1000_1800x1800.jpg?v=1678726811",
+                    PhotoUrl = "https://techpioneers.blob.core.windows.net/images/clubseries-plus-treadmill-titanium-storm-se3hd-1000x1000_1800x1800.webp",
                 },
                 new GymEquipment
                 {
@@ -187,7 +187,7 @@ namespace GYM_Management_System.Data
                     Name = "dumbbells",
                     Quantity = 60,
                     OutOfService = 0,
-                    PhotoUrl = "https://www.bowflex.com/dw/image/v2/AAYW_PRD/on/demandware.static/-/Sites-nautilus-master-catalog/default/dwf21fb1cf/images/bfx/weights/100131/bowflex-selecttech-552-dumbbell-weights-hero.jpg?sw=2600&sh=1464&sm=fit",
+                    PhotoUrl = "https://techpioneers.blob.core.windows.net/images/bowflex-selecttech-552-dumbbell-weights-hero.webp",
                 },
                 new GymEquipment
                 {
@@ -196,7 +196,7 @@ namespace GYM_Management_System.Data
                     Name = "elliptical machine",
                     Quantity = 3,
                     OutOfService = 0,
-                    PhotoUrl = "https://www.precorhomefitness.com/cdn/shop/products/precor-efx-635-elliptical_5000x.jpg?v=1686422733",
+                    PhotoUrl = "https://techpioneers.blob.core.windows.net/images/precor-efx-635-elliptical_5000x.jpg",
                 });
 
 
