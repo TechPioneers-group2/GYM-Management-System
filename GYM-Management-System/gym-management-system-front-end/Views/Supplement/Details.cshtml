@@ -8,15 +8,18 @@
 
 <div class="container my-4 p-3 pt-5 mt-5">
     <div class="row">
-        <div class="col-md-6">
-            <img src="@Model.imageURL" class="supplement-image" alt="@Model.Name" />
-        </div>
-        <div class="col-md-6">
-            <h1 class="supplement-title">@Model.Name</h1>
-            <p class="supplement-price">Price: @Model.Price.ToString("0.00") JD</p>
-            <p class="supplement-description">@Model.Description</p>
-            <div class="d-grid gap-2 my-4" style="position: relative;">
-                <a asp-action="ClientIndex" class="btn btn-secondary" style="position: absolute;  ; left: 50%; transform: translateX(-50%);">Back to List</a>
+        <div class="col-md-6 mx-auto pt-2">
+            <div class="card bg-dark">
+                <img src="@Model.imageURL" class="card-img-top supplement-image" alt="@Model.Name" style="width: 100%; height: auto;background-color: white; padding: 15px;" />
+                <div class="card-body text-white">
+                    <h1 class="card-title">@Model.Name</h1>
+                    <p class="card-text">Price: <span style="color: green;">@Model.Price.ToString("0.00") JD</span></p>
+                    <p class="card-text">@Model.Description</p>
+                    <div class="d-flex justify-content-between align-items-center my-4">
+                        <a asp-action="ClientIndex" class="btn bold-btn btn-secondary rounded-pill ">Back to List</a>
+                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.SupplementID" class="btn bold-btn btn-warning ">Add to Cart</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
