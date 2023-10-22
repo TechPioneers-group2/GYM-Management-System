@@ -64,9 +64,10 @@ namespace GYM_Management_System.Controllers
             return new Session();
         }
 
-        public async Task RecieveEmail(string senderEmail, string senderName, string emailSubject, string emailBody)
+        [HttpPost]
+        public async Task RecieveEmail(EmailDTO dto)
         {
-            await _email.RecieveEmail(senderEmail, senderName, emailSubject, emailBody);
+            await _email.RecieveEmail(dto.senderEmail, dto.senderName, dto.emailBody);
         }
     }
 }

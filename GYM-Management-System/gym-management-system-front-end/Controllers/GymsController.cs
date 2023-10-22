@@ -209,15 +209,15 @@ namespace gym_management_system_front_end.Controllers
             var gymResult = await gymResponse.Content.ReadAsStringAsync();
             var gymList = JsonConvert.DeserializeObject<GetUserGymDTO>(gymResult);
 
-            var idList = new GymIDDTO() 
+            var idList = new GymIDDTO()
             {
 
-               
+
                 GymID = gymList.GymID,
-                Name=gymList.Name
+                Name = gymList.Name
 
             };
-           
+
 
 
             var supplementResponse = await _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplementsBackEnd");
@@ -247,7 +247,7 @@ namespace gym_management_system_front_end.Controllers
 
             var returnClientView = new GymSupplementViewModel
             {
-                GymIDs =idList ,
+                GymIDs = idList,
                 GymID = idList.GymID,
                 SupplementIDs = supplementIDList,
             };
