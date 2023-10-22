@@ -12,14 +12,16 @@ namespace GYM_Management_System.Controllers
     {
         private readonly IAzureBlobStorageService _azureBlobStorageService;
         private readonly IPaymentService _payment;
+        private readonly IEmail _email;
 
         private readonly SubscriptionTiersController _subscriptionTiersController;
 
-        public MethodsController(IAzureBlobStorageService azure, IPaymentService payment, SubscriptionTiersController c)
+        public MethodsController(IAzureBlobStorageService azure, IPaymentService payment, SubscriptionTiersController c, IEmail email)
         {
             _subscriptionTiersController = c;
             _azureBlobStorageService = azure;
             _payment = payment;
+            _email = email;
         }
 
         public async Task<string> AddImageToCloudBackEnd(IFormFile file)
@@ -60,6 +62,12 @@ namespace GYM_Management_System.Controllers
 
 
             return new Session();
+        }
+
+        [HttpPost]
+        public async Task RecieveEmail(EmailDTO dto)
+        {
+            await _email.RecieveEmail(dto.senderEmail, dto.senderName, dto.emailBody);
         }
     }
 }

@@ -26,9 +26,9 @@ namespace gym_management_system_front_end.Controllers
             if (response.IsSuccessStatusCode)
             {
                 string data = await response.Content.ReadAsStringAsync();
-
                 gymList = JsonConvert.DeserializeObject<List<GymViewModel>>(data);
             }
+
             return View(gymList);
         }
 
@@ -41,9 +41,9 @@ namespace gym_management_system_front_end.Controllers
             if (response.IsSuccessStatusCode)
             {
                 string data = await response.Content.ReadAsStringAsync();
-
                 gymList = JsonConvert.DeserializeObject<List<GymViewModel>>(data);
             }
+
             return View(gymList);
         }
 
@@ -57,6 +57,7 @@ namespace gym_management_system_front_end.Controllers
                 string data = response.Content.ReadAsStringAsync().Result;
                 gymList = JsonConvert.DeserializeObject<List<GetManagerGymDTO>>(data);
             }
+
             return View(gymList);
         }
 
@@ -70,6 +71,7 @@ namespace gym_management_system_front_end.Controllers
                 string data = await response.Content.ReadAsStringAsync();
                 gymViewModel = JsonConvert.DeserializeObject<GymViewModel>(data);
             }
+
             return View(gymViewModel);
         }
 
@@ -106,7 +108,11 @@ namespace gym_management_system_front_end.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
-                    // Handle successful delete here
+                    TempData["success"] = "Gym deleted successfully";
+                }
+                else
+                {
+                    TempData["error"] = "Failed to delete gym. Please try again.";
                 }
                 return RedirectToAction("Index", "Gyms");
             }
@@ -161,10 +167,14 @@ namespace gym_management_system_front_end.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                // Handle successful delete here
+                TempData["success"] = "Gym updated successfully";
             }
-            return RedirectToAction("Index", "Gyms");
+            else
+            {
+                TempData["error"] = "Failed to update gym. Please try again.";
+            }
 
+            return RedirectToAction("Index", "Gyms");
         }
 
         public IActionResult Create()
@@ -175,7 +185,6 @@ namespace gym_management_system_front_end.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(PostGymDTO gym, IFormFile file)
         {
-
             if (file != null)
             {
                 var streamcontent = new StreamContent(file.OpenReadStream());
@@ -183,8 +192,8 @@ namespace gym_management_system_front_end.Controllers
                 streamcontent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
 
                 var imageContent = new MultipartFormDataContent
-     {
-         { streamcontent, "file", file.FileName }
+                {
+                    { streamcontent, "file", file.FileName }
                 };
                 var imageResponse = await _client.PostAsync("https://localhost:7200/api/Methods/AddImageToCloud", imageContent);
                 gym.imageURL = await imageResponse.Content.ReadAsStringAsync();
@@ -199,19 +208,69 @@ namespace gym_management_system_front_end.Controllers
             var response = await _client.PostAsync(_client.BaseAddress + "/PostGymBackEnd", jsonContent);
             var data = await response.Content.ReadAsStringAsync();
             gym = JsonConvert.DeserializeObject<PostGymDTO>(data);
+
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["success"] = "Gym created successfully";
+            }
+            else
+            {
+                TempData["error"] = "Failed to create gym. Please try again.";
+            }
+
             return RedirectToAction("Index", "Gyms");
         }
 
-        [HttpGet]
-        public IActionResult AddSupplementToGym()
+        public async Task<IActionResult> AddSupplementToGym(int gymid)
         {
-            return View();
+            var gymResponse = await _client.GetAsync($"https://localhost:7200/api/Gyms/GetGymBackEnd/{gymid}");
+            var gymResult = await gymResponse.Content.ReadAsStringAsync();
+            var gymList = JsonConvert.DeserializeObject<GetUserGymDTO>(gymResult);
+
+            var idList = new GymIDDTO()
+            {
+                GymID = gymList.GymID,
+                Name = gymList.Name
+            };
+
+            var supplementResponse = await _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplementsBackEnd");
+            var supplementResult = await supplementResponse.Content.ReadAsStringAsync();
+            var supplementList = JsonConvert.DeserializeObject<List<SupplementIDDTO>>(supplementResult);
+
+            var list = new List<GymSupplementDTO>();
+
+            foreach (var item in supplementList)
+            {
+                if (!gymList.Supplements.Any(s => s.SupplementID == item.SupplementID))
+                {
+                    list.Add(new GymSupplementDTO
+                    {
+                        SupplementID = item.SupplementID,
+                        Name = item.Name
+                    });
+                }
+            }
+
+            var supplementIDList = list.Select(s => new SupplementIDDTO
+            {
+                SupplementID = s.SupplementID,
+                Name = s.Name
+            }).ToList();
+
+            var returnClientView = new GymSupplementViewModel
+            {
+                GymIDs = idList,
+                GymID = idList.GymID,
+                SupplementIDs = supplementIDList,
+            };
+
+            return View(returnClientView);
         }
 
         [HttpPost]
         public IActionResult AddSupplementToGym(GymSupplementViewModel newGymSupplement)
         {
-            var supplementResponse = _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplement/" + newGymSupplement.SupplementID).Result;
+            var supplementResponse = _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplementBackEnd/" + newGymSupplement.SupplementID).Result;
 
             if (supplementResponse.IsSuccessStatusCode)
             {
@@ -223,11 +282,11 @@ namespace gym_management_system_front_end.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
-                    TempData["success"] = "Supplement Created successfully";
+                    TempData["success"] = "Supplement added successfully";
                 }
                 else
                 {
-                    TempData["error"] = "Add Process failed";
+                    TempData["error"] = "Failed to add supplement. Please try again.";
                 }
             }
             else
@@ -237,7 +296,7 @@ namespace gym_management_system_front_end.Controllers
                 return View(newGymSupplement);
             }
 
-            return RedirectToAction("Index", "Gyms");
+            return RedirectToAction("Details", "Gyms", new { id = newGymSupplement.GymID });
         }
 
         [HttpGet]
@@ -250,7 +309,6 @@ namespace gym_management_system_front_end.Controllers
                 Quantity = quantity
             };
 
-            // Make a call to your API to get supplement info
             var supplementResponse = _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplementBackEnd/" + supplementId).Result;
 
             if (supplementResponse.IsSuccessStatusCode)
@@ -281,11 +339,11 @@ namespace gym_management_system_front_end.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
-                    TempData["success"] = "Supplement Updated successfully";
+                    TempData["success"] = "Supplement updated successfully";
                 }
                 else
                 {
-                    TempData["error"] = "Update Process failed";
+                    TempData["error"] = "Failed to update supplement. Please try again.";
                 }
             }
             else
@@ -293,10 +351,9 @@ namespace gym_management_system_front_end.Controllers
                 ModelState.AddModelError("", "Failed to retrieve supplement details. Please try again.");
                 TempData["error"] = "Update Process failed";
             }
+
             return RedirectToAction("Index", "Gyms");
         }
-
-
 
         [HttpGet]
         public IActionResult RemoveSupplementFromGym(int gymId, int supplementId)
@@ -307,7 +364,6 @@ namespace gym_management_system_front_end.Controllers
                 SupplementID = supplementId
             };
 
-            // Make a call to your API to get supplement info
             var supplementResponse = _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplementBackEnd/" + supplementId).Result;
 
             if (supplementResponse.IsSuccessStatusCode)
@@ -322,8 +378,6 @@ namespace gym_management_system_front_end.Controllers
 
             return View(gymSupplement);
         }
-
-
 
         [HttpPost]
         public IActionResult ConfirmRemoveSupplementFromGym(GymSupplementViewModel updatedGymSupplement)
@@ -341,7 +395,5 @@ namespace gym_management_system_front_end.Controllers
 
             return RedirectToAction("Index", "Gyms");
         }
-
-
     }
 }

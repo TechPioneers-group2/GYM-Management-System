@@ -1,7 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using gym_management_system_front_end.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace gym_management_system_front_end.Controllers
 {
@@ -9,7 +15,6 @@ namespace gym_management_system_front_end.Controllers
     {
         Uri BaseAdress = new Uri("https://localhost:7200/api");
         private readonly HttpClient _httpClient;
-
 
         public EquipmentController()
         {
@@ -26,11 +31,10 @@ namespace gym_management_system_front_end.Controllers
             {
                 string data = response.Content.ReadAsStringAsync().Result;
                 equipments = JsonConvert.DeserializeObject<List<EquipmentViewModel>>(data);
-
-
             }
             return View(equipments);
         }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -47,9 +51,29 @@ namespace gym_management_system_front_end.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var gymResponse = await _httpClient.GetAsync("https://localhost:7200/api/Gyms/GetGymsBackEnd");
+            var gymResult = await gymResponse.Content.ReadAsStringAsync();
+            var gymList = JsonConvert.DeserializeObject<List<GetUserGymDTO>>(gymResult);
+
+            var idList = new List<GymIDDTO>();
+
+            foreach (var item in gymList)
+            {
+                idList.Add(new GymIDDTO
+                {
+                    GymID = item.GymID,
+                    Name = item.Name,
+                });
+            }
+
+            var returnClientView = new EquipmentViewModel
+            {
+                GymIDsNames = idList,
+            };
+
+            return View(returnClientView);
         }
 
         [HttpPost]
@@ -79,13 +103,12 @@ namespace gym_management_system_front_end.Controllers
 
             if (jsonResponse.IsSuccessStatusCode)
             {
+                TempData["success"] = "Equipment Created successfully";
                 return RedirectToAction("Index", "Equipment");
             }
 
-            else
-            {
-                throw new Exception(jsonResponse.StatusCode.ToString());
-            }
+            TempData["error"] = "Failed to create equipment. Please try again.";
+            return View();
         }
 
         [HttpGet]
@@ -123,26 +146,20 @@ namespace gym_management_system_front_end.Controllers
                 equipment.PhotoUrl = await imageResponse.Content.ReadAsStringAsync();
             }
 
-            // Serialize the equipment object to JSON
             var equipmentJson = JsonConvert.SerializeObject(equipment);
-
-            // Create a StringContent object with JSON data
             var jsonContent = new StringContent(equipmentJson, Encoding.UTF8, "application/json");
-
-            // Send a POST request to the API to create a new equipment
             var jsonResponse = _httpClient.PutAsync($"{_httpClient.BaseAddress}/GymEquipments/PutGymEquipmentBackEnd/{id}", jsonContent).Result;
 
             if (jsonResponse.IsSuccessStatusCode)
             {
-                // Equipment created successfully, you can redirect to the equipment list or a success page.
+                TempData["success"] = "Equipment Updated successfully";
                 return RedirectToAction("Index");
             }
             else
             {
-                // Handle the case where creating the equipment was not successful.
+                TempData["error"] = "Failed to update equipment. Please try again.";
                 ModelState.AddModelError(string.Empty, "Error Editing equipment.");
             }
-
 
             return View(equipment);
         }
@@ -172,12 +189,12 @@ namespace gym_management_system_front_end.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
-                    // Equipment created successfully, you can redirect to the equipment list or a success page.
+                    TempData["success"] = "Equipment Deleted successfully";
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    // Handle the case where creating the equipment was not successful.
+                    TempData["error"] = "Failed to delete equipment. Please try again.";
                     ModelState.AddModelError(string.Empty, "Error Deleting equipment.");
                 }
             }

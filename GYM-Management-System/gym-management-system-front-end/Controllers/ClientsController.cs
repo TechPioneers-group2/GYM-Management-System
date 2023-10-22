@@ -1,16 +1,18 @@
 ﻿using gym_management_system_front_end.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace gym_management_system_front_end.Controllers
 {
     public class ClientsController : Controller
     {
         private Uri baseAddress = new Uri("https://localhost:7200/api/Clients");
-
         private readonly HttpClient _client;
-
 
         public ClientsController()
         {
@@ -29,6 +31,7 @@ namespace gym_management_system_front_end.Controllers
                 string data = response.Content.ReadAsStringAsync().Result;
                 clientList = JsonConvert.DeserializeObject<List<ClientViewModel>>(data);
             }
+
             return View(clientList);
         }
 
@@ -42,29 +45,9 @@ namespace gym_management_system_front_end.Controllers
                 string data = await response.Content.ReadAsStringAsync();
                 clientViewModel = JsonConvert.DeserializeObject<ClientViewModel>(data);
             }
+
             return View(clientViewModel);
         }
-
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create(int gymId, PostClientDTO client)
-        //{
-        //    var jsonContent = new StringContent(JsonConvert.SerializeObject(client), Encoding.UTF8, "application/json");
-        //    var response = await _client.PostAsync($"{_client.BaseAddress}/PostClient?gymId={gymId}", jsonContent);
-
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        // Handle successful create here
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(client);
-        //}
-
 
         [HttpGet]
         public async Task<IActionResult> Edit(int clientID, int gymID)
@@ -79,10 +62,7 @@ namespace gym_management_system_front_end.Controllers
             return View(model);
         }
 
-
-
         [HttpPost]
-
         public async Task<IActionResult> Edit(int clientID, int gymID, UpdateClientDTO clientDTO)
         {
             string data = JsonConvert.SerializeObject(clientDTO);
@@ -98,9 +78,11 @@ namespace gym_management_system_front_end.Controllers
 
             if (response.IsSuccessStatusCode)
             {
+                TempData["success"] = "Client Updated successfully";
                 return RedirectToAction("Index", new { gymID = gymID });
             }
 
+            TempData["error"] = "Failed to update client. Please try again.";
             return View();
         }
 
@@ -115,8 +97,6 @@ namespace gym_management_system_front_end.Controllers
                 del = JsonConvert.DeserializeObject<ClientViewModel>(Data);
             }
             return View(del);
-
-
         }
 
         [HttpPost, ActionName("Delete")]
@@ -130,31 +110,23 @@ namespace gym_management_system_front_end.Controllers
                 // Send the HTTP DELETE request
                 HttpResponseMessage response = await _client.DeleteAsync(deleteUrl);
 
-
                 // Check if the request was successful
                 if (response.IsSuccessStatusCode)
                 {
-                    // The resource has been successfully deleted
-                    // You can handle the success case here, e.g., return a success response or redirect
+                    TempData["success"] = "Client Deleted successfully";
                     return RedirectToAction("Index", new { gymID = gymID });
                 }
                 else
                 {
-                    // Handle the case where the deletion was not successful, e.g., return an error view or display an error message.
-                    return View("Error");
+                    TempData["error"] = "Failed to delete client. Please try again.";
+                    return RedirectToAction("Index", new { gymID = gymID });
                 }
             }
             catch (Exception ex)
             {
-                // Handle any exceptions that might occur during the request
-                // You might want to log the exception for debugging and return an error view
+                TempData["error"] = "An error occurred while processing your request.";
                 return View("Error");
             }
         }
-
-
     }
-
-
 }
-

@@ -7,7 +7,7 @@
     <div class="container">
         <div class="masthead-subheading">Welcome To Our Gym!</div>
         <div class="masthead-heading text-uppercase">Are you ready?</div>
-        <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
+        <a class="btn btn-primary btn-xl text-uppercase" asp-controller="Gyms" asp-action="ClientIndex">Tell Me More</a>
     </div>
 </header>
 <section class="page-section" id="Gyms">
@@ -29,5 +29,4 @@
     </div>
 </section>
 <partial name="_TeamSection"/>
-<partial name="_ContactView" />
-
+@await Component.InvokeAsync("ContactUs");

@@ -2,20 +2,18 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "_Admin";
+    
 }
 
 
-<!DOCTYPE html>
-<html>
-<head>
+
     <title>Clients List</title>
-</head>
-<body>
+
+<div class="mt-5 pt-5">
     <p>
         <a asp-action="RegisterClient" asp-controller="User" class="btn btn-primary">Create New</a>
     </p>
-    <div class="container">
+    <div class="container ">
         <h2>Clients List</h2>
         <table class="table table-bordered">
             <thead>
@@ -51,6 +49,6 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+</div>
+
 
