@@ -125,6 +125,33 @@ namespace gym_management_system_front_end.Controllers
 
         }
 
+        public ActionResult RemoveAllFromCart(int id)
+        {
+            var removed = HttpContext.Request.Cookies["SupplementCart"];
+            Dictionary<int, int> supplement;
+            if (removed != null)
+            {
+                supplement = JsonConvert.DeserializeObject<Dictionary<int, int>>(removed);
+
+
+                if (supplement.ContainsKey(id))
+                {
+
+                    supplement.Remove(id);
+                }
+
+                var option = new CookieOptions
+                {
+                    Expires = DateTime.Now.AddDays(7)
+
+                };
+                HttpContext.Response.Cookies.Append("SupplementCart", JsonConvert.SerializeObject(supplement), option);
+            }
+            string refURL = Request.Headers["Referer"].ToString();
+
+            return Redirect(refURL);
+
+        }
 
         public async Task<IActionResult> CheckOut()
         {
