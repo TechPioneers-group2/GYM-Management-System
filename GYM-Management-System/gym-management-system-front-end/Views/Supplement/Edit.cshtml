@@ -4,12 +4,12 @@
     ViewData["Title"] = "Edit";
 }
 
-<h4><i class="bi bi-pencil-square me-3"></i>Edit Supplement!</h4>
-<hr />
-<div>
-    <img src="@Model.imageURL" style=" width:10rem; height:10rem;" />
-</div>
-<div class="row">
+
+
+<div class="row mt-5 pt-5">
+
+
+    <h4><i class="bi bi-pencil-square me-3"></i>Edit Supplement</h4>
     <div class="col-md-4">
         <form asp-action="Edit" asp-controller="Supplement" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -29,9 +29,9 @@
                 <textarea asp-for="Description" class="form-control"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group mb-3">
+            <div class="form-group">
                 <label asp-for="imageURL">Image</label>
-                <input asp-for="imageURL" type="file" name="file" class="form-control border border-1 border-light border-dark-subtle" />
+                <input asp-for="imageURL" type="file" name="file" class="form-control" />
                 <span asp-validation-for="imageURL" class="text-danger"></span>
             </div>
             <div class="form-group m-1 d-flex justify-content-center">
@@ -42,8 +42,8 @@
     </div>
 </div>
 
-
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
