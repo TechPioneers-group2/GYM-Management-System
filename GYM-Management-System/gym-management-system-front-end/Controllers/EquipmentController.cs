@@ -1,13 +1,8 @@
 ﻿using gym_management_system_front_end.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace gym_management_system_front_end.Controllers
 {
@@ -92,6 +87,7 @@ namespace gym_management_system_front_end.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAsync(EquipmentViewModel equipment, IFormFile file)
         {
+            equipment.OutOfService = 0;
             if (file != null)
             {
                 var streamcontent = new StreamContent(file.OpenReadStream());
