@@ -6,55 +6,59 @@
         <form asp-action="RegisterClient" asp-controller="User">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <div class="form-group">
+            <div class="row">
+            <div class="form-group col-md-6">
                 <label asp-for="Email" class="control-label text-white"></label>
                 <input asp-for="Email" class="form-control rounded rounded-3 border border-1 border-primary" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label asp-for="Password" class="control-label text-white"></label>
                 <input asp-for="Password" type="password" class="form-control rounded rounded-3 border border-1 border-primary" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
+            </div>
 
-            <div class="form-group">
+            <div class="row">
+            <div class="form-group col-md-6">
                 <label asp-for="UserName" class="control-label text-white"></label>
                 <input asp-for="UserName" class="form-control rounded border rounded-3 border-1 border-primary" />
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label asp-for="PhoneNumber" class="control-label text-white"></label>
                 <input asp-for="PhoneNumber" type="number" class="form-control rounded rounded-3  border border-1 border-primary" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
-
-            <div class="form-group">
-                <label asp-for="GymID" class="">Gym</label>
-                <select class="form-select border border-1 border-primary" asp-for="GymID">
-                    @{
-                        foreach (var item in Model.GymIDsNames)
-                        {
-                            <option value="@item.GymID">@item.Name</option>
-                        }
-                    }
-                </select>
             </div>
 
-            <div class="form-group">
-                <label asp-for="SubscriptionTierID">Subscription Tier</label>
-                <select class="form-select border border-1 border-primary" asp-for="SubscriptionTierID">
-                    @{
-                        foreach (var item in Model.SubscriptionTierDTOs)
-                        {
-                            <option value="@item.SubscriptionTierID">@item.Name - @item.Price</option>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="GymID" class="">Gym</label>
+                    <select class="form-select border border-1 border-primary text-center" asp-for="GymID">
+                        @{
+                            foreach (var item in Model.GymIDsNames)
+                            {
+                                <option value="@item.GymID">@item.Name</option>
+                            }
                         }
-                    }
-                </select>
-            </div>
+                    </select>
+                </div>
 
+                <div class="form-group col-md-6">
+                    <label asp-for="SubscriptionTierID">Subscription Tier</label>
+                    <select class="form-select border border-1 border-primary text-center" asp-for="SubscriptionTierID">
+                        @{
+                            foreach (var item in Model.SubscriptionTierDTOs)
+                            {
+                                <option value="@item.SubscriptionTierID">@item.Name - @item.Price</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
             <div class="form-group text-center mt-3 d-grid gap-2">
                 <input type="submit" value="Submit" class="btn btn-lg btn-primary border border-1 border-primary" />
             </div>

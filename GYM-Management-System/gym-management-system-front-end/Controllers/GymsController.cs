@@ -185,6 +185,7 @@ namespace gym_management_system_front_end.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(PostGymDTO gym, IFormFile file)
         {
+            gym.Notification = string.Empty;
             if (file != null)
             {
                 var streamcontent = new StreamContent(file.OpenReadStream());
