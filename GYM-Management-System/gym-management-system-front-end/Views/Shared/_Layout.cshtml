@@ -35,7 +35,7 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle  py-4" data-bs-toggle="dropdown"><i class="bi bi-person-workspace  me-1"></i>Clients</a>
                     <div class="dropdown-menu bg-transparent border-0">
-                        <a class="dropdown-item" asp-controller="Clients" asp-action="Index">All Clients</a>
+                        <a class="dropdown-item" asp-controller="Clients" asp-action="GetallClients">All Clients</a>
                         <a class="dropdown-item" asp-controller="User" asp-action="RegisterClient">Add New Clients</a>
                     </div>
                 </div>
@@ -60,21 +60,26 @@
                         <a class="dropdown-item" asp-controller="SubscriptionTiers" asp-action="Create">Add New SubscriptionTiers</a>
                     </div>
                 </div>
-                <a href="#" class='nav-item nav-link'><i class='fa fa-chart-bar me-2'></i>Charts</a>
+                <div class="nav-link py-4">
+                    <a class="dropdown-item" asp-controller="Chart" asp-action="Chart">Chart</a>
+
+                </div>
             </div>
         </nav>
     </div>
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      
         <div class="container">
             @if (User.IsInRole("Admin"))
+
             {
                 <a class="btn text-decoration-non" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
                     <i class="fa fa-bars"></i>
                 </a>
             }
 
-            <a class="navbar-brand text-white p-0 m-0" asp-area="" asp-controller="Home" asp-action="Index"><img src="https://techpioneers.blob.core.windows.net/images/GMSLogoSmall.png" class="w-50 h-25" /></a>
+            <a class="navbar-brand text-white ms-3" asp-area="" asp-controller="Home" asp-action="Index">WillPower</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <img src="https://techpioneers.blob.core.windows.net/images/togellerIcon.png" class="h-75 w-75" />
             </button>

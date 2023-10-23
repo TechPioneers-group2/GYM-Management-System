@@ -128,6 +128,26 @@ namespace GYM_Management_System.Models.Services
                 }).Where(cl => cl.GymID == gymid).ToListAsync();
         }
 
+
+        public async Task<List<GetClientDTO>> GetAllClients()
+        {
+            return await _context.Clients
+                .Select(nc => new GetClientDTO()
+                {
+                    ClientID = nc.ClientID,
+                    GymID = nc.GymID,
+                    SubscriptionTierID = nc.SubscriptionTierID,
+                    Name = nc.Name,
+                    InGym = nc.InGym,
+                    SubscriptionDate = nc.SubscriptionDate,
+                    SubscriptionExpiry = nc.SubscriptionExpiry,
+                    subscriptionTier = new ClientGetSubscriptionTierDTO()
+                    {
+                        Name = nc.SubscriptionTierOBJ.Name
+                    }
+                }).ToListAsync();
+        }
+
         /// <summary>
         /// Updates a client's data.
         /// </summary>

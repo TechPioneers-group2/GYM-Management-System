@@ -11,18 +11,16 @@
     <div class="form-div mt-3">
         <form method="Post" asp-controller="Employees" asp-action="GetEmployeesByGymId" class="form-emp-T">
             <div class="flex-form-div">
-                <div class="form-group text-center">
-                    <label for="gymId" class="control-label">Choose A Gym</label>
-                </div>
                 <div class="d-flex justify-content-center align-items-center">
                     <div class="form-group mb-1">
-                        <select class="form-select" asp-items="@gymList" id="gymId" name="gymId">
+                        <label for="gymId" class="control-label">Choose A Gym</label>
+                        <select class="form-select mt-1" asp-items="@gymList" id="gymId" name="gymId">
                             <i class="bi bi-caret-down"></i>
                         </select>
                     </div>
-                    <div class="form-group btn-sub">
-                        <input type="submit" value="Search" class="btn-primary px-3 rounded-3 py-2 ms-2 " />
-                    </div>
+                    
+                        <input type="submit" value="Search" class="btn-primary px-3 rounded-3 py-1 ms-2 mt-4" />
+                    
                 </div>
                 
             </div>
