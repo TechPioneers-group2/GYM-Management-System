@@ -3,6 +3,7 @@ using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace GYM_Management_System.Controllers
 {
@@ -21,9 +22,10 @@ namespace GYM_Management_System.Controllers
             _client = context;
         }
 
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<GetClientDTO>>> GetAllClientsBackEnd()
         {
-            return new List<GetClientDTO>();
+            return Ok(await _client.GetAllClients());
         }
 
         // GET: api/Clients
@@ -60,6 +62,9 @@ namespace GYM_Management_System.Controllers
         {
             return Ok(await _client.GetClient(clientid, gymid));
         }
+        
+        
+
 
         // PUT: api/Clients/5
 

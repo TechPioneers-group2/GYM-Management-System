@@ -35,6 +35,21 @@ namespace gym_management_system_front_end.Controllers
             return View(clientList);
         }
 
+        public IActionResult GetallClients()
+        {
+            List<ClientViewModel> clientList = new List<ClientViewModel>();
+            var response = _client.GetAsync(_client.BaseAddress + "/GetAllClientsBackEnd/").Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                clientList = JsonConvert.DeserializeObject<List<ClientViewModel>>(data);
+            }
+
+            return View(clientList);
+        }
+
+
         public async Task<ActionResult<ClientViewModel>> Details(int clientID, int gymID)
         {
             var clientViewModel = new ClientViewModel();
@@ -86,6 +101,9 @@ namespace gym_management_system_front_end.Controllers
             return View();
         }
 
+       
+
+
         [HttpGet]
         public IActionResult Delete(int clientID, int gymID)
         {
@@ -128,5 +146,10 @@ namespace gym_management_system_front_end.Controllers
                 return View("Error");
             }
         }
+
+
+       
     }
+
+
 }

@@ -5,7 +5,7 @@
 
 <div class="container-fluid" style="margin-top:6.6rem;">
     <div class="row">
-        <div class="col-md-4 bg-dark rounded p-4 mx-4">
+        <div class="col-md-4 bg-dark rounded p-4 mx-4 h-50">
             <h4 class="text-white mb-4">@Model.Name</h4>
             <table class="table">
                 <tr>
@@ -36,8 +36,14 @@
 
             <!-- Action buttons -->
             <div class="form-group text-center mt-3 d-grid gap-2">
-                <a class="btn btn-danger" asp-action="Index" asp-controller="Clients" asp-route-gymid="@Model.GymID">Get Clients</a>
-                <a class="btn btn-success" asp-action="AddSupplementToGym" asp-controller="Gyms" asp-route-gymid="@Model.GymID">Add Supplement</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a class="btn btn-danger" asp-action="Index" asp-controller="Clients" asp-route-gymid="@Model.GymID">Get Clients</a>
+                }
+                @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                {
+                    <a class="btn btn-success" asp-action="AddSupplementToGym" asp-controller="Gyms" asp-route-gymid="@Model.GymID">Add Supplement</a>
+                }
             </div>
 
             <!-- Subscription Tiers -->
@@ -45,12 +51,12 @@
             {
                 <div class="container bg-dark rounded p-4">
                     <h4 class="mb-3 text-white">Subscription Tiers</h4>
-                    <ul class="list-group">
+                    <select class="form-select border border-1 border-primary">
                         @foreach (var tier in Model.SubscriptionTier)
                         {
-                            <li class="list-group-item text-white">@tier.Name @tier.Price</li>
+                            <option>@tier.Name @tier.Price</option>
                         }
-                    </ul>
+                    </select>
                 </div>
             }
         </div>
@@ -116,12 +122,17 @@
                                                     <h6 class="card-text">Quantity: @supplement.Quantity</h6>
                                                 </div>
                                                 <!-- Supplement action buttons -->
-                                                <div class="d-flex justify-content-around w-100">
-                                                    <!-- Remove supplement button -->
-                                                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteAlert(@Model.GymID, @supplement.SupplementID)">Remove</button>
-                                                    <!-- Update supplement button -->
-                                                    <a asp-action="UpdateSupplementForGym" asp-controller="Gyms" asp-route-gymId="@Model.GymID" asp-route-supplementId="@supplement.SupplementID" asp-route-quantity="@supplement.Quantity" class="btn btn-primary btn-sm"> Update </a>
+                                               
+                                                    <div class="d-flex justify-content-around w-100">
+                                                     @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                                                    {
+                                                        <!-- Remove supplement button -->
+                                                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteAlert(@Model.GymID, @supplement.SupplementID)">Remove</button>
+                                                        <!-- Update supplement button -->
+                                                        <a asp-action="UpdateSupplementForGym" asp-controller="Gyms" asp-route-gymId="@Model.GymID" asp-route-supplementId="@supplement.SupplementID" asp-route-quantity="@supplement.Quantity" class="btn btn-primary btn-sm"> Update </a>
+                                                    }
                                                 </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
