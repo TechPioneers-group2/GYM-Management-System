@@ -86,13 +86,17 @@
                     <li class="nav-item"><a class="nav-link" asp-controller="User" asp-action="Login">Login</a></li>
                     <li class="nav-item"><a class="nav-link" asp-controller="Gyms" asp-action="Index">Admin Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" asp-controller="User" asp-action="RegisterClient">Register Client</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="Cart" asp-action="Index">Cart</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Cart" asp-action="Index">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <main role="main" class="pb-3">
+    <main role="main" class="pb-3  ">
         <partial name="_Notification" />
         @RenderBody()
     </main>

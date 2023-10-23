@@ -3,7 +3,10 @@
 @{
     ViewData["Title"] = "Create Employee";
     var gymList = new SelectList(ViewBag.gymList, "GymID", "Name");
+    Layout = "_Layout";
 }
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 87vh;">
+    <div class="col-md-6 bg-dark rounded p-4">
 
 <div class="container d-flex justify-content-center align-items-center mt-5 pt-5" style="min-height: 87vh;">
     <div class="col-lg-6 col-12 bg-dark rounded p-4 border border-1 border-primary rounded">
@@ -72,7 +75,6 @@
             </form>
         </div>
     </div>
-</div>
 
 @section Scripts {
     @{
