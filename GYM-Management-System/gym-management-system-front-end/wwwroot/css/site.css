@@ -942,7 +942,7 @@ header.masthead {
     background-repeat: no-repeat !important;
     background-position: center center !important;
     width: 100vw !important;
-    max-height: 85vh !important;
+    height: 100vh !important;
     overflow-y: auto !important;
     top: 0 !important;
     left: 0 !important;

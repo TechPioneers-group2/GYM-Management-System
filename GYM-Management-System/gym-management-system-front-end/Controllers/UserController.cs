@@ -1,8 +1,11 @@
 ﻿using gym_management_system_front_end.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Stripe.Checkout;
 using System.Net;
+using System.Security.Claims;
 using System.Text;
 
 namespace gym_management_system_front_end.Controllers
@@ -35,6 +38,14 @@ namespace gym_management_system_front_end.Controllers
             {
                 var result = await response.Content.ReadAsStringAsync();
                 var userDTO = JsonConvert.DeserializeObject<UserDTO>(result);
+                // Create a ClaimsIdentity and add claims
+                var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+                identity.AddClaim(new Claim(ClaimTypes.Name, userDTO.UserName));
+                identity.AddClaim(new Claim(ClaimTypes.Role, userDTO.Roles[0]));
+
+                // Create a ClaimsPrincipal and sign in
+                var principal = new ClaimsPrincipal(identity);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
                 Response.Cookies.Append("JWTToken", userDTO.Token, new CookieOptions
                 {
