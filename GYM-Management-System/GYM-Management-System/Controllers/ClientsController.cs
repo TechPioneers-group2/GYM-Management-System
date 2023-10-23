@@ -3,7 +3,6 @@ using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace GYM_Management_System.Controllers
 {
@@ -62,8 +61,8 @@ namespace GYM_Management_System.Controllers
         {
             return Ok(await _client.GetClient(clientid, gymid));
         }
-        
-        
+
+
 
 
         // PUT: api/Clients/5
