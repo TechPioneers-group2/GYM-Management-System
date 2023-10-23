@@ -51,7 +51,7 @@
                                         </form>
                                     </div>
                                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                        <h5 class="mb-0">$@totalItemPrice.ToString("0.00")</h5>
+                                        <h5 class="mb-0">@totalItemPrice.ToString("0.00")JD</h5>
                                     </div>
                                     <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                                         <form method="post" asp-controller="Cart" asp-action="RemoveAllFromCart" asp-route-id="@item.SupplementID">
@@ -74,11 +74,10 @@
                     <input type="hidden" name="carts" value='@JsonConvert.SerializeObject(Model)'>
                      @if (Model != null && Model.Any())
             {
-                        <h4 class="text-end">Total: $@cartTotal.ToString("0.00")</h4>
+                        <h4 class="text-end">Total: @cartTotal.ToString("0.00")JD</h4>
                         <div style=" display: flex;
             ">
-                            <button type="submit" class="btn bold-btn btn-warning btn-block btn-lg text-center rounded-pill " style="
-            color: white;">
+                            <button type="submit" class="btn bold-btn btn-warning btn-block btn-lg text-center rounded-pill text-dark " >
                             Proceed to Payment
                         </button></div>
                     }
