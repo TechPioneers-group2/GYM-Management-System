@@ -80,7 +80,7 @@ namespace GYM_Management_System.Data
                     Address = "Irbid - Yarmouk University Street - Building 30",
                     MaxCapacity = "150",
                     CurrentCapacity = 0,
-                    Notification = "Under maintenance until 9-9-2023 AD",
+                    Notification = "Under maintenance",
                     imageURL = "https://techpioneers.blob.core.windows.net/images/IrbidGym.png"
                 }
             );
