@@ -1,0 +1,45 @@
+﻿@model IEnumerable<gym_management_system_front_end.Models.ClientViewModel>
+
+@{
+    ViewData["Title"] = "GetallClients";
+}
+
+
+    
+
+   
+    <div class="container mt-5 pt-5">
+       
+
+    <h2 class="text-center">Clients List</h2>
+    <p class="text-end  mx-3">
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+        <table class="table table-borderless text-white table-striped border border-1 border-primary ">
+            <thead>
+                <tr class="text-center">
+                    
+                    <th>@Html.DisplayNameFor(model => model.ClientID)</th>
+                    <th>@Html.DisplayNameFor(model => model.GymID)</th>
+                    <th>@Html.DisplayNameFor(model => model.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.InGym)</th>
+                    <th>@Html.DisplayNameFor(model => model.SubscriptionTierID)</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="text-center text-primary">
+                       
+                        <td>@Html.DisplayFor(modelItem => item.ClientID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.GymID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.InGym)</td>
+                        <td class="w-25">@Html.DisplayFor(modelItem => item.SubscriptionTierID)</td>
+                       
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

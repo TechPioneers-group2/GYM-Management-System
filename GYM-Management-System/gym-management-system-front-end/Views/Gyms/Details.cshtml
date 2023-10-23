@@ -123,12 +123,17 @@
                                                     <h6 class="card-text">Quantity: @supplement.Quantity</h6>
                                                 </div>
                                                 <!-- Supplement action buttons -->
-                                                <div class="d-flex justify-content-around w-100">
-                                                    <!-- Remove supplement button -->
-                                                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteAlert(@Model.GymID, @supplement.SupplementID)">Remove</button>
-                                                    <!-- Update supplement button -->
-                                                    <a asp-action="UpdateSupplementForGym" asp-controller="Gyms" asp-route-gymId="@Model.GymID" asp-route-supplementId="@supplement.SupplementID" asp-route-quantity="@supplement.Quantity" class="btn btn-primary btn-sm"> Update </a>
+                                               
+                                                    <div class="d-flex justify-content-around w-100">
+                                                     @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                                                    {
+                                                        <!-- Remove supplement button -->
+                                                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteAlert(@Model.GymID, @supplement.SupplementID)">Remove</button>
+                                                        <!-- Update supplement button -->
+                                                        <a asp-action="UpdateSupplementForGym" asp-controller="Gyms" asp-route-gymId="@Model.GymID" asp-route-supplementId="@supplement.SupplementID" asp-route-quantity="@supplement.Quantity" class="btn btn-primary btn-sm"> Update </a>
+                                                    }
                                                 </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
