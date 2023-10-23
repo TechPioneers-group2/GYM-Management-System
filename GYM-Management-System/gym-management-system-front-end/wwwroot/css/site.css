@@ -951,8 +951,11 @@ header.masthead {
 }
 
 .backgroundGymClass {
+
+    /*khamzat*/
+
     background-image: url('https://techpioneers.blob.core.windows.net/images/GymsBG.png') !important; /* Replace with the path to your image */
-    background-size:cover !important;
+    background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center center !important;
     width: 100vw !important;
@@ -961,6 +964,19 @@ header.masthead {
     top: 0 !important;
     left: 0 !important;
     bottom: 0 !important;
+    z-index: -5 !important;
+}
+
+.backgroundFormsClass {
+
+    /*dumbbell*/
+
+    background-image: url('https://techpioneers.blob.core.windows.net/images/W.png') !important; /* Replace with the path to your image */
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    width: 100vw !important;
+    height: 100vh !important;
     z-index: -5 !important;
 }
 
