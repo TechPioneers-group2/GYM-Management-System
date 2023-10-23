@@ -11,17 +11,18 @@
         <form id="contactForm" asp-controller="Home" asp-action="RecieveEmail">
             <div class="row align-items-stretch mb-5">
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group mb-5">
                         <!-- Name input-->
                         <input asp-for="senderName" class="form-control" id="name" type="text" placeholder="Your Name *" />
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-1">
                         <!-- Email address input-->
                         <input asp-for="senderEmail" class="form-control" id="email" type="email" placeholder="Your Email *" />
                     </div>
                 </div>
+
                 <div class="col-md-6">
-                    <div class="form-group form-group-textarea mb-md-0">
+                    <div class="form-group form-group-textarea  mb-1">
                         <!-- Message input-->
                         <textarea asp-for="emailBody" class="form-control" id="message" placeholder="Your Message *"></textarea>
                     </div>
