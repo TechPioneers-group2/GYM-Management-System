@@ -36,6 +36,19 @@ namespace gym_management_system_front_end.Controllers
         }
 
         [HttpGet]
+        public IActionResult equipmentCart()
+        {
+            List<EquipmentViewModel> equipments = new List<EquipmentViewModel>();
+            HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/GymEquipments/GetBackEnd").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                equipments = JsonConvert.DeserializeObject<List<EquipmentViewModel>>(data);
+            }
+            return View(equipments);
+        }
+
+        [HttpGet]
         public IActionResult Index()
         {
             List<EquipmentViewModel> equipments = new List<EquipmentViewModel>();
