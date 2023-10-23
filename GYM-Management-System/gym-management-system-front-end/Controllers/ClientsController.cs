@@ -32,8 +32,42 @@ namespace gym_management_system_front_end.Controllers
                 clientList = JsonConvert.DeserializeObject<List<ClientViewModel>>(data);
             }
 
+			int clientsInGymCount = clientList.Count(c => c.InGym);
+			int clientsNotInGymCount = clientList.Count(c => !c.InGym);
+
+			// Pass the counts to the view
+			ViewBag.ClientsInGymCount = clientsInGymCount;
+			ViewBag.ClientsNotInGymCount = clientsNotInGymCount;
+
+
+			return View(clientList);
+        }
+
+        [HttpGet]
+        public IActionResult Chart()
+        { 
+             List<ClientViewModel> clientList = new List<ClientViewModel>();
+            var response = _client.GetAsync( _client.BaseAddress + "/GetAllClientsBackEnd/").Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                clientList = JsonConvert.DeserializeObject<List<ClientViewModel>>(data);
+            }
+
+            int clientsInGymCount = clientList.Count(c => c.InGym );
+            int clientsNotInGymCount = clientList.Count(c => !c.InGym);
+
+
+            // Pass the counts to the view
+            ViewBag.ClientsInGymCount = clientsInGymCount;
+            ViewBag.ClientsNotInGymCount = clientsNotInGymCount;
+
+
             return View(clientList);
         }
+
+
 
         public IActionResult GetallClients()
         {
