@@ -2,53 +2,94 @@
 @model IEnumerable<gym_management_system_front_end.Models.CartViewModel>
 
 @{
-    ViewData["Title"] = "Home Page";
-}
-<section class="p-5" style="height:87vh;">
+    ViewData["Title"] = "Cart";
 
-    <div class="row p-5 mt-3">
-        <h1>Your items</h1>
-        @if (Model != null && Model.Any())
-        {
-            foreach (var item in Model)
-            {
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">@item.Name</h5>
-                            <p class="card-text">@item.Description</p>
-                            <p class="card-text">Price: $@item.Price</p>
-                            <div class="d-flex justify-content-center align-items-center ">
-                                <form method="post" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.SupplementID">
-                                    <button type="submit" class="btn btn-danger delete-button" value="-1">-</button>
-                                </form>
-                                <p class="card-text mx-2 ">Quantity:@item.Quantity</p>
-                                <form method="post" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.SupplementID">
-                                    <button type="submit" class="btn btn-danger delete-button" value="1">+</button>
-                                </form>
+}
+@{    decimal cartTotal = 0;}
+
+<section class="h-100 py-5 my-5 mh-100 ">
+    <div class="container h-100 py-5 mt-2 "style=" box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-10">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="fw-normal mb-0 text-black " style=" text-transform: uppercase; color: white !important;font-size: 28px;">Your Items</h3>
+                   
+                </div>
+
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var item in Model)
+                    {
+                        // Calculate the total price for the item
+                        var totalItemPrice = item.Price * item.Quantity;
+                        cartTotal += (decimal)totalItemPrice;
+                         
+                        <div class="card rounded-3 mb-4 bg-dark">
+                            <div class="card-body p-4">
+                                <div class="row d-flex justify-content-between align-items-center">
+                                    <div class="col-md-2 col-lg-2 col-xl-2">
+                                        <img src="@item.imageURL" class="img-fluid rounded-3" alt="@item.Name">
+                                    </div>
+                                    <div class="col-md-3 col-lg-3 col-xl-3">
+                                        <p class="lead fw-normal mb-2">@item.Name</p>
+                                    </div>
+                                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+
+                                        <form method="post" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.SupplementID">
+                                            <button type="submit" class="btn btn-danger delete-button" > <i class="fas fa-minus"></i></button>
+                                        </form>
+
+
+                                        <input id="quantity-@item.SupplementID" min="0" name="quantity" value="@item.Quantity" type="text"
+                                               class="form-control form-control-sm" />
+
+                                        <form method="post" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.SupplementID">
+                                            <button type="submit" class="btn btn-light delete-button" >  <i class="fas fa-plus"></i></button>
+
+
+
+                                        </form>
+                                    </div>
+                                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                        <h5 class="mb-0">$@totalItemPrice.ToString("0.00")</h5>
+                                    </div>
+                                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                        <form method="post" asp-controller="Cart" asp-action="RemoveAllFromCart" asp-route-id="@item.SupplementID">
+                                            <button type="submit" class="btn btn-link text-danger"><i class="fas fa-trash fa-lg"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-danger" role="alert">
+                        Your cart is empty.
                     </div>
-                </div>
-            }
-        }
-        else
-        {
-            <h1>no product added</h1>
-        }
+                }
+
+                <form method="post" asp-action="CheckOut">
+                    <input type="hidden" name="carts" value='@JsonConvert.SerializeObject(Model)'>
+                     @if (Model != null && Model.Any())
+            {
+                        <h4 class="text-end">Total: $@cartTotal.ToString("0.00")</h4>
+                        <div style=" display: flex;
+            ">
+                            <button type="submit" class="btn bold-btn btn-warning btn-block btn-lg text-center rounded-pill " style="
+            color: white;">
+                            Proceed to Payment
+                        </button></div>
+                    }
+                </form>
+            </div>
+        </div>
     </div>
-
-    <form method="post" asp-action="CheckOut">
-        <input type="hidden" name="carts" value='@JsonConvert.SerializeObject(Model)'>
-        <button type="submit">Proceed to Payment</button>
-    </form>
-
-
     <script>
         document.querySelectorAll(".delete-button").forEach(function (button) {
             button.addEventListener("click", function () {
                 var x = parseInt(this.getAttribute("data-x"));
-
                 if (x > 1) {
                     x--; // Decrease x
                 } else {
@@ -62,4 +103,3 @@
         });
     </script>
 </section>
-

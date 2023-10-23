@@ -1,7 +1,10 @@
 ﻿using gym_management_system_front_end.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace gym_management_system_front_end.Controllers
 {
@@ -9,14 +12,14 @@ namespace gym_management_system_front_end.Controllers
     {
         Uri baseAddress = new Uri("https://localhost:7200/api");
 
-
         private readonly HttpClient _client;
+
         public EmployeesController()
         {
             _client = new HttpClient();
             _client.BaseAddress = baseAddress;
-
         }
+
         public IActionResult Index()
         {
             List<EmployeeViewModel> employeesList = new List<EmployeeViewModel>();
@@ -32,6 +35,7 @@ namespace gym_management_system_front_end.Controllers
             ViewBag.Employees = "All";
             return View(employeesList);
         }
+
         [HttpPost]
         public IActionResult GetEmployeesByGymId(int gymId)
         {
@@ -68,7 +72,6 @@ namespace gym_management_system_front_end.Controllers
             return View(employee);
         }
 
-
         public IActionResult Create()
         {
             var gymList = GetGymsList();
@@ -83,17 +86,33 @@ namespace gym_management_system_front_end.Controllers
             var response = _client.PostAsync(_client.BaseAddress + "/User/RegisterEmployee", jsonContent).Result;
             var data = response.Content.ReadAsStringAsync().Result;
             var employee = JsonConvert.DeserializeObject<UserDTO>(data);
+
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["success"] = "Employee created successfully";
+            }
+            else
+            {
+                TempData["error"] = "Failed to create employee. Please try again.";
+            }
+
             return RedirectToAction("Index");
         }
 
-
         public async Task<IActionResult> Delete(int id)
         {
-
             var response = await _client.DeleteAsync(_client.BaseAddress + "/Employees/DeleteEmployeeBackEnd/" + id);
 
-            return RedirectToAction("Index");
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["success"] = "Employee deleted successfully";
+            }
+            else
+            {
+                TempData["error"] = "Failed to delete employee. Please try again.";
+            }
 
+            return RedirectToAction("Index");
         }
 
         public IActionResult Edit(int id)
@@ -130,11 +149,16 @@ namespace gym_management_system_front_end.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                // Handle successful delete here
+                TempData["success"] = "Employee updated successfully";
             }
-            return RedirectToAction("Index");
+            else
+            {
+                TempData["error"] = "Failed to update employee. Please try again.";
+            }
 
+            return RedirectToAction("Index");
         }
+
         public List<GymViewModel> GetGymsList()
         {
             Uri baseAddress = new Uri("https://localhost:7200/api/Gyms");

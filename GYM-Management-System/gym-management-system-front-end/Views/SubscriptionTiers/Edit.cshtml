@@ -2,46 +2,47 @@
 
 @{
     ViewData["Title"] = "Edit";
-   
-
 }
 
+<div class="container d-flex justify-content-center align-items-center mt-5" style="min-height: 87vh;">
+    <div class="col-md-6 bg-dark rounded p-4 border border-1 border-primary rounded">
+        <h4 class="text-white mb-4 text-center"><i class="bi bi-pencil-square me-3"></i>Edit Subscription Tier</h4>
+        <hr />
 
-
-
-<div class="row mt-5 pt-5">
-    <h1>@ViewData["Title"]</h1>
-    <hr />
-    <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
+
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label text-white">Name</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
+                <label asp-for="Price" class="control-label text-white">Price</label>
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Length" class="control-label"></label>
+                <label asp-for="Length" class="control-label text-white">Length</label>
                 <input asp-for="Length" class="form-control" />
                 <span asp-validation-for="Length" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <button type="submit" class="btn btn-success m-2">Save</button>
             </div>
         </form>
     </div>
 </div>
 
-<div>
+<div class="d-flex justify-content-start mt-3">
     <a class="btn btn-outline-danger" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
