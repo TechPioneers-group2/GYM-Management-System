@@ -44,12 +44,13 @@ namespace GYM_Management_System.Models.Services
             bool vaildtionOfPassword = await _userManager.CheckPasswordAsync(user, Password);
             if (vaildtionOfPassword)
             {
+                var role = (List<string>)await _userManager.GetRolesAsync(user);
                 return new UserDTO()
                 {
                     Id = user.Id,
                     UserName = user.UserName,
                     Token = await _tokenServices.GetToken(user, System.TimeSpan.FromMinutes(15)),
-                    Roles = (List<string>)await _userManager.GetRolesAsync(user)
+                    Roles = role
                 };
             }
             return null;

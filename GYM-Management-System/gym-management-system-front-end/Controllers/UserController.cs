@@ -1,8 +1,11 @@
 ﻿using gym_management_system_front_end.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Stripe.Checkout;
 using System.Net;
+using System.Security.Claims;
 using System.Text;
 
 namespace gym_management_system_front_end.Controllers
@@ -33,16 +36,37 @@ namespace gym_management_system_front_end.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                var result = response.Content.ReadAsStringAsync().Result;
+                var result = await response.Content.ReadAsStringAsync();
                 var userDTO = JsonConvert.DeserializeObject<UserDTO>(result);
+                // Create a ClaimsIdentity and add claims
+                var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+                identity.AddClaim(new Claim(ClaimTypes.Name, userDTO.UserName));
+                identity.AddClaim(new Claim(ClaimTypes.Role, userDTO.Roles[0]));
+
+                // Create a ClaimsPrincipal and sign in
+                var principal = new ClaimsPrincipal(identity);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
                 Response.Cookies.Append("JWTToken", userDTO.Token, new CookieOptions
                 {
                     HttpOnly = true
                 });
 
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index", "Home");
+
+            else
+            {
+                var errorResponse = await response.Content.ReadAsStringAsync();
+                var errorDetails = JsonConvert.DeserializeObject<ValidationProblemDetails>(errorResponse);
+                foreach (var error in errorDetails.Errors)
+                {
+                    ModelState.AddModelError(error.Key, string.Join("", error.Value));
+                }
+                ModelState.AddModelError(string.Empty, "wrong username or password.");
+            }
+
+            return LogIn();
         }
 
         public IActionResult RegisterAdmin()
@@ -86,49 +110,6 @@ namespace gym_management_system_front_end.Controllers
                 }
             }
             return View(adminDTO);
-        }
-
-        public IActionResult RegisterEmployee()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RegisterEmployee(RegisterEmployeeDTO employeeDTO)
-        {
-            employeeDTO.Roles = new List<string>
-            {
-                "Employee"
-            };
-            var json = JsonConvert.SerializeObject(employeeDTO);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _client.PostAsync(baseAddress + "RegisterEmployeeBackEnd", data);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var result = response.Content.ReadAsStringAsync().Result;
-                var userDTO = JsonConvert.DeserializeObject<UserDTO>(result);
-
-                Response.Cookies.Append("JWTToken", userDTO.Token, new CookieOptions
-                {
-                    HttpOnly = true
-                });
-
-                return RedirectToAction("Index", "Home");
-            }
-
-            else if (response.StatusCode == HttpStatusCode.BadRequest)
-            {
-                var errorResponse = await response.Content.ReadAsStringAsync();
-                var errorDetails = JsonConvert.DeserializeObject<ValidationProblemDetails>(errorResponse);
-                foreach (var error in errorDetails.Errors)
-                {
-                    ModelState.AddModelError(error.Key, string.Join("", error.Value));
-                }
-            }
-
-            return View(employeeDTO);
         }
 
         public async Task<IActionResult> RegisterClient()

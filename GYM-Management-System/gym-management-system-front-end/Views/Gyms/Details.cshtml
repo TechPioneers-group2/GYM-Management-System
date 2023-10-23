@@ -35,16 +35,17 @@
             </table>
 
             <!-- Action buttons -->
-            <div class="form-group text-center mt-3 d-grid gap-2">
-                @if (User.IsInRole("Admin"))
-                {
-                    <a class="btn btn-danger" asp-action="Index" asp-controller="Clients" asp-route-gymid="@Model.GymID">Get Clients</a>
-                }
-                @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
-                {
-                    <a class="btn btn-success" asp-action="AddSupplementToGym" asp-controller="Gyms" asp-route-gymid="@Model.GymID">Add Supplement</a>
-                }
-            </div>
+                <div class="form-group text-center mt-3 d-grid gap-2">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-danger" asp-action="Index" asp-controller="Clients" asp-route-gymid="@Model.GymID">Get Clients</a>
+                    }
+                    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                    {
+                        <a class="btn btn-success" asp-action="AddSupplementToGym" asp-controller="Gyms" asp-route-gymid="@Model.GymID">Add Supplement</a>
+                    }
+                </div>
+            
 
             <!-- Subscription Tiers -->
             @if (Model.SubscriptionTier != null)
@@ -54,7 +55,7 @@
                     <select class="form-select border border-1 border-primary">
                         @foreach (var tier in Model.SubscriptionTier)
                         {
-                            <option>@tier.Name @tier.Price</option>
+                            <option >@tier.Name @tier.Price</option>
                         }
                     </select>
                 </div>
