@@ -3,46 +3,44 @@
     ViewData["Title"] = "CreateGymEquipment";
 }
 
-<div class="container d-flex justify-content-center align-items-center mt-5 pt-5" style="min-height: 81vh;">
-    <div class="col-md-6 bg-dark rounded p-4 border border-1 border-primary rounded">
-        <h4 class="text-white mb-4">Create Gym Equipment</h4>
+<div class="d-flex justify-content-center align-items-center backgroundFormsClass" style="min-height: 81vh;">
+    <div class="col-md-6 bg-dark rounded p-4 border border-1 border-primary rounded glassClassForm">
+        <h4 class="text-white mb-4 text-center">Create Gym Equipment</h4>
         <form asp-action="Create" method="post" enctype="multipart/form-data">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="Name" class="control-label text-white"></label>
-                <input asp-for="Name" class="form-control rounded rounded-3 border border-1 border-primary" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+            <div class="row">
+                <div class="form-group col-md-10">
+                    <label asp-for="Name" class="control-label text-white text-center"></label>
+                    <input asp-for="Name" class="form-control rounded rounded-3 border border-1 border-primary" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-2 text-center">
+                    <label asp-for="Quantity" class="control-label text-white"></label>
+                    <input asp-for="Quantity" type="number" class="form-control rounded rounded-3 border border-1 border-primary" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Quantity" class="control-label text-white"></label>
-                <input asp-for="Quantity" type="number" class="form-control rounded rounded-3 border border-1 border-primary" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="OutOfService" class="">Out of Service</label>
-                <input asp-for="OutOfService" type="number" class="form-control rounded rounded-3  border border-1 border-primary" />
-                <span asp-validation-for="OutOfService" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="GymID">Gym</label>
-                <select class="form-select border border-1 border-primary" asp-for="GymID">
-                    @{
-                        foreach (var item in Model.GymIDsNames)
-                        {
-                            <option value="@item.GymID">@item.Name</option>
+            <div class="row">
+                <div class="form-group col-md-4 text-center">
+                    <label asp-for="GymID">Gym</label>
+                    <select class="form-select border border-1 border-primary" asp-for="GymID">
+                        @{
+                            foreach (var item in Model.GymIDsNames)
+                            {
+                                <option value="@item.GymID">@item.Name</option>
+                            }
                         }
-                    }
-                </select>
-            </div>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="formFile">Image</label>
-                <input type="file" name="file" class="form-control rounded rounded-3  border border-1 border-primary" />
+                <div class="form-group col-md-8 text-center">
+                    <label for="formFile" >Image</label>
+                    <input type="file" name="file" class="form-control rounded rounded-3  border border-1 border-primary" />
+                </div>
             </div>
 
             <div class="form-group text-center mt-3 d-grid gap-2">
