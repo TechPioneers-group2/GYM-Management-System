@@ -35,10 +35,17 @@
             </table>
 
             <!-- Action buttons -->
+            
+            @if (!User.IsInRole("User"))
+            {
             <div class="form-group text-center mt-3 d-grid gap-2">
+                @if(User.IsInRole("Admin"))
+                {
                 <a class="btn btn-danger" asp-action="Index" asp-controller="Clients" asp-route-gymid="@Model.GymID">Get Clients</a>
+                }
                 <a class="btn btn-success" asp-action="AddSupplementToGym" asp-controller="Gyms" asp-route-gymid="@Model.GymID">Add Supplement</a>
             </div>
+            }
 
             <!-- Subscription Tiers -->
             @if (Model.SubscriptionTier != null)

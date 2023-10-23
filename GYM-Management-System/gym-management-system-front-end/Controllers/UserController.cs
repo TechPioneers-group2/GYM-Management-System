@@ -33,7 +33,7 @@ namespace gym_management_system_front_end.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                var result = response.Content.ReadAsStringAsync().Result;
+                var result = await response.Content.ReadAsStringAsync();
                 var userDTO = JsonConvert.DeserializeObject<UserDTO>(result);
 
                 Response.Cookies.Append("JWTToken", userDTO.Token, new CookieOptions
@@ -41,8 +41,21 @@ namespace gym_management_system_front_end.Controllers
                     HttpOnly = true
                 });
 
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index", "Home");
+
+            else
+            {
+                var errorResponse = await response.Content.ReadAsStringAsync();
+                var errorDetails = JsonConvert.DeserializeObject<ValidationProblemDetails>(errorResponse);
+                foreach (var error in errorDetails.Errors)
+                {
+                    ModelState.AddModelError(error.Key, string.Join("", error.Value));
+                }
+                ModelState.AddModelError(string.Empty, "wrong username or password.");
+            }
+
+            return LogIn();
         }
 
         public IActionResult RegisterAdmin()
@@ -86,49 +99,6 @@ namespace gym_management_system_front_end.Controllers
                 }
             }
             return View(adminDTO);
-        }
-
-        public IActionResult RegisterEmployee()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RegisterEmployee(RegisterEmployeeDTO employeeDTO)
-        {
-            employeeDTO.Roles = new List<string>
-            {
-                "Employee"
-            };
-            var json = JsonConvert.SerializeObject(employeeDTO);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _client.PostAsync(baseAddress + "RegisterEmployeeBackEnd", data);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var result = response.Content.ReadAsStringAsync().Result;
-                var userDTO = JsonConvert.DeserializeObject<UserDTO>(result);
-
-                Response.Cookies.Append("JWTToken", userDTO.Token, new CookieOptions
-                {
-                    HttpOnly = true
-                });
-
-                return RedirectToAction("Index", "Home");
-            }
-
-            else if (response.StatusCode == HttpStatusCode.BadRequest)
-            {
-                var errorResponse = await response.Content.ReadAsStringAsync();
-                var errorDetails = JsonConvert.DeserializeObject<ValidationProblemDetails>(errorResponse);
-                foreach (var error in errorDetails.Errors)
-                {
-                    ModelState.AddModelError(error.Key, string.Join("", error.Value));
-                }
-            }
-
-            return View(employeeDTO);
         }
 
         public async Task<IActionResult> RegisterClient()
