@@ -925,7 +925,7 @@ header.masthead {
     border: 1px solid rgba(255, 255, 255, 0.64) !important;
 }
 
-.testClass {
+.backgroundFormClass {
     background-image: url('https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') !important; /* Replace with the path to your image */
     background-size: cover !important;
     background-repeat: no-repeat !important;
@@ -937,5 +937,14 @@ header.masthead {
     left: 0 !important;
     bottom: 0 !important;
     z-index: -5 !important;
+}
+
+.glassClassForm {
+    background: rgba(159, 159, 159, 0.3) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(5.9px) !important;
+    -webkit-backdrop-filter: blur(5.9px) !important;
+    border: 1px solid rgba(159, 159, 159, 0.77) !important;
 }
 

@@ -173,7 +173,7 @@ namespace gym_management_system_front_end.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                var result = response.Content.ReadAsStringAsync().Result;
+                var result = await response.Content.ReadAsStringAsync();
                 var userDTO = JsonConvert.DeserializeObject<UserDTO>(result);
 
                 Response.Cookies.Append("JWTToken", userDTO.Token, new CookieOptions
