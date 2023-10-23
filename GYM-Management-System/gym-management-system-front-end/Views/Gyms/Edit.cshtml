@@ -3,7 +3,7 @@
 <div class="container d-flex justify-content-center align-items-center mt-5 pt-5" style="min-height: 87vh;">
 	<div class="col-md-6 bg-dark rounded p-4 border border-1 border-primary rounded">
 		<h4 class="text-white mb-4">Edit Gym</h4>
-		<form asp-action="Edit" asp-controller="Gyms" asp-route-id="@Model.GymID"> 
+		<form asp-action="Edit" asp-controller="Gyms" asp-route-id="@Model.GymID" method="post" enctype="multipart/form-data">
 
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 			<input type="hidden" asp-for="GymID" />

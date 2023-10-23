@@ -76,7 +76,7 @@
                 </a>
             }
 
-            <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">WillPower</a>
+            <a class="navbar-brand text-white p-0 m-0" asp-area="" asp-controller="Home" asp-action="Index"><img src="https://techpioneers.blob.core.windows.net/images/GMSLogoSmall.png" class="w-50 h-25" /></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <img src="https://techpioneers.blob.core.windows.net/images/togellerIcon.png" class="h-75 w-75" />
             </button>
@@ -93,12 +93,12 @@
         </div>
     </nav>
 
-    <main role="main" class="pb-3">
+    <main role="main">
         <partial name="_Notification" />
         @RenderBody()
     </main>
 
-    <footer class="footer py-4" style="z-index:1 !important; position:fixed !important; bottom:0 !important; right:0 !important; left:0 !important; ">
+    <footer class="footer" style="z-index:1 !important; position:fixed !important; bottom:0 !important; right:0 !important; left:0 !important; ">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-4 text-lg-start">Copyright &copy; WillPower 2023</div>

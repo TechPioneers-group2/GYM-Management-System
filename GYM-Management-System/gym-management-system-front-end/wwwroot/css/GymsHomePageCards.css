@@ -67,7 +67,7 @@
 /* Add a custom class 'clientsGyms' to target the card */
 .clientsGyms {
     background: rgba(255, 255, 255, 0.2) !important;
- /* Apply border radius only on the top */
+    /* Apply border radius only on the top */
     border-bottom-left-radius: 0 !important; /* Make the bottom left corner sharp */
     border-bottom-right-radius: 0 !important; /* Make the bottom right corner sharp */
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
@@ -78,11 +78,11 @@
 
 
     /* Make the image fit and smaller */
-    .clientsGyms  img {
+    .clientsGyms img {
         width: 100% !important;
-        height: 100% !important;
+        height:100% !important;
         object-fit: cover !important; /* Make the image cover the entire container */
- /* Add a slight border-radius to the image */
+        /* Add a slight border-radius to the image */
     }
 
 
@@ -98,9 +98,10 @@
     }
 
 
-    .clientsGyms .card-body{
+    .clientsGyms .card-body {
         padding: 3px 3px !important;
     }
+
         .clientsGyms .card-body h6 {
             display: flex !important;
             justify-content: space-between !important;
@@ -109,15 +110,15 @@
         }
 
 
-        .clientsGyms .card-body h6 span {
-            margin: 3px 3px !important;
-            text-align: right !important; /* Align the values to the right */
-            flex: 1; /* Allow the value to take up remaining space */
-        }
-
-            .clientsGyms .card-body h6 span:first-child {
-                text-align: left !important; /* Align the titles to the left */
+            .clientsGyms .card-body h6 span {
+                margin: 3px 3px !important;
+                text-align: right !important; /* Align the values to the right */
+                flex: 1; /* Allow the value to take up remaining space */
             }
+
+                .clientsGyms .card-body h6 span:first-child {
+                    text-align: left !important; /* Align the titles to the left */
+                }
 
         /* Center the button */
         .clientsGyms .card-body .btn {
