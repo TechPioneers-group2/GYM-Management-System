@@ -3,20 +3,14 @@
     
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <link href="~/css/adminstyle.css" rel="stylesheet" />
-
-    <title>Gym Equipment List</title>
-
-</head>
-<body class="mt-5 pt-5">
-    <p>
-        <a asp-action="Create" class="btn btn-primary">Create New</a>
-    </p>
-    <div class="container">
-        <h2>Equipment List</h2>
+<div class="h-100  mh-100 my-4 pt-5 ">
+    <div class="container ">
+        <p>
+            <a asp-action="Create" class="btn btn-success mt-5 rounded rounded-3 mx-1">
+                <i class="bi bi-plus-circle me-1"></i>Create New
+            </a>
+        </p>
+        <h2 class="mt-4"><i class="bi bi-list me-3"></i>Equipment List</h2>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -40,10 +34,13 @@
                         <td>@equipment.OutOfService</td>
                         <td>@equipment.Quantity</td>
                         <td>
-                            <a asp-action="Details" asp-route-id="@equipment.GymEquipmentID" class="">Details</a>
-                            <a asp-action="Edit" asp-route-id="@equipment.GymEquipmentID" class="">Edit</a>
-                            <a asp-action="Delete" asp-route-id="@equipment.GymEquipmentID" class="">Delete</a>
-                        </td>
+                            <div class="btn-group col-lg-5 col-md-8" role="group">
+                            <a class ="btn btn-outline-primary" asp-action="Details" asp-route-id="@equipment.GymEquipmentID" class="">Details</a>
+                            <a class="btn btn-outline-warning mx-3" asp-action="Edit" asp-route-id="@equipment.GymEquipmentID" class="">Edit</a>
+                          
+                           <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@equipment.GymEquipmentID" class="">Delete</a>
+                      </div>
+                       </td>
                     </tr>
                 }
             </tbody>

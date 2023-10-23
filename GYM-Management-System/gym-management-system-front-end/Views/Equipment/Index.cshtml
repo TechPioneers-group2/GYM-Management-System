@@ -1,23 +1,17 @@
 ﻿@model List<EquipmentViewModel>
 
-
-
-<head>
-    <link href="~/css/adminstyle.css" rel="stylesheet" />
-
-    <title>Gym Equipment List</title>
-  
-</head>
-<body class="mt-5 pt-5">
-    <p>
-        <a asp-action="Create"  class="btn btn-primary">Create New</a>
-    </p>
-    <div class="container">
-        <h2>Equipment List</h2>
+<div class="h-100  mh-100 my-4 pt-5 ">
+    <div class="container ">
+        <p>
+        <a asp-action="Create" class="btn btn-success mt-5 rounded rounded-3 mx-1">
+            <i class="bi bi-plus-circle me-1"></i>Create New
+            </a>
+        </p>
+        <h2 class="mt-4"><i class="bi bi-list me-3"></i>Equipment List</h2>
         <div class="row">
             @foreach (var equipment in Model)
             {
-                <div class="col-md-4 col-sm-6 col-12">
+                <div class="col-md-4 col-sm-6 col-12 mb-4">
                     <div class="card">
                         <img src="@equipment.PhotoUrl" alt="@equipment.Name" class="card-img-top">
                         <div class="card-body">
@@ -28,9 +22,11 @@
                                 Out of Service: @equipment.OutOfService<br>
                                 Quantity: @equipment.Quantity
                             </p>
-                            <a asp-action="Details" asp-route-id="@equipment.GymEquipmentID" class="btn btn-primary">Details</a>
-                            <a asp-action="Edit" asp-route-id="@equipment.GymEquipmentID" class="btn btn-primary">Edit</a>
-                            <a asp-action="Delete" asp-route-id="@equipment.GymEquipmentID" class="btn btn-danger">Delete</a>
+                            <div class="btn-group col-lg-5 col-md-8" role="group">
+                                <a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@equipment.GymEquipmentID" >Details</a>
+                                <a class="btn btn-outline-warning mx-3" asp-action="Edit" asp-route-id="@equipment.GymEquipmentID">Edit</a>
+                                <a class="btn btn-outline-danger"  asp-action="Delete" asp-route-id="@equipment.GymEquipmentID">Delete</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -39,5 +35,5 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-
+</div>
+</html>

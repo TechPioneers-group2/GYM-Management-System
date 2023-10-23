@@ -1,72 +1,65 @@
 ﻿@model EmployeeViewModel
 
 @{
-	ViewData["Title"] = "Edit Employee";
-	var gymList = new SelectList(ViewBag.gymList, "GymID", "Name");
+    ViewData["Title"] = "Edit Employee";
+    var gymList = new SelectList(ViewBag.gymList, "GymID", "Name");
 }
 
-<div >
-	<h3 class="text-center">Edit Employee</h3>
+<div class="container d-flex justify-content-center align-items-center mt-5 pt-4" style="min-height: 87vh;">
+    <div class="col-md-6 bg-dark rounded p-4 border border-1 border-primary rounded">
+
+        <h4><i class="bi bi-pencil-square me-3"></i>Edit Employee</h4>
+        <div class="row">
+            <form method="Post" asp-controller="Employees" asp-action="Edit" class="">
+
+                <input asp-for="EmployeeID" type="hidden" />
+
+                <div class="col-md-12 form-group">
+                    <label asp-for="Name"></label>
+                    <input type="text" asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="col-md-12 form-group">
+                    <label asp-for="JobDescription"></label>
+                    <input type="text" asp-for="JobDescription" class="form-control" />
+                    <span asp-validation-for="JobDescription" class="text-danger"></span>
+                </div>
+                <div class="col-md-12 form-group">
+                    <label asp-for="WorkingDays"></label>
+                    <input type="text" asp-for="WorkingDays" class="form-control" />
+                    <span asp-validation-for="WorkingDays" class="text-danger"></span>
+                </div>
+                <div class="col-md-12 form-group">
+                    <label asp-for="WorkingHours"></label>
+                    <input type="text" asp-for="WorkingHours" class="form-control" />
+                    <span asp-validation-for="WorkingHours" class="text-danger"></span>
+                </div>
+                <div class="col-md-12 form-group">
+                    <label asp-for="Salary"></label>
+                    <input type="text" asp-for="Salary" class="form-control" />
+                    <span asp-validation-for="Salary" class="text-danger"></span>
+                </div>
+                <div class="col-md-12 form-group">
+                    @Html.CheckBoxFor(m => m.IsAvailable, new { @class = "form-check-input" })
+                    <label class="form-check-label">Is Available</label>
+                    <span asp-validation-for="IsAvailable" class="text-danger"></span>
+                </div>
+                <div class="col-md-12 form-group">
+                    <label asp-for="GymID">Gym</label>
+                    <select asp-for="GymID" asp-items="@gymList" class="form-control"></select>
+                    <span asp-validation-for="GymID" class="text-danger"></span>
+                </div>
+                <div class="form-group form-group-margin form-header-3">
+                    <input type="submit" value="Edit" class="btn btn-success" />
+                </div>
+
+            </form>
+        </div>
+    </div>
 </div>
-<div class="container mt-5 pt-5">
-	<div class="form-container">
-		<div class="form-box">
-		<form method="Post" asp-controller="Employees" asp-action="Edit" class="">
-			<input asp-for="EmployeeID" type="hidden"/>
 
-			<div class="row">
-			
-					<div class="col-md-12 form-group">
-						<label asp-for="Name"></label>
-						<input type="text" asp-for="Name" class="category-input">
-						<span asp-validation-for="Name" class="text-danger"></span>
-					</div>
-					<div class="col-md-12 form-group">
-						<label asp-for="JobDescription"></label>
-						<input type="text" asp-for="JobDescription" class="category-input"></input>
-						<span asp-validation-for="JobDescription" class="text-danger"></span>
-					</div>
-					<div class="col-md-12 form-group">
-						<label asp-for="WorkingDays"></label>
-						<input type="text" asp-for="WorkingDays" class="category-input">
-						<span asp-validation-for="WorkingDays" class="text-danger"></span>
-					</div>
-					<div class="col-md-12 form-group">
-						<label asp-for="WorkingHours"></label>
-						<input type="text" asp-for="WorkingHours" class="category-input">
-						<span asp-validation-for="WorkingHours" class="text-danger"></span>
-					</div>
-					<div class="col-md-12 form-group">
-						<label asp-for="Salary"></label>
-						<input type="text" asp-for="Salary" class="category-input">
-						<span asp-validation-for="Salary" class="text-danger"></span>
-					</div>
-					<div class="col-md-12 form-group">
-						@Html.CheckBoxFor(m=>m.IsAvailable)
-						<lable class="category-label">IsAvaliabe</lable>
-						<span asp-validation-for="IsAvailable" class="text-danger"></span>
-					</div>
-					<div class="col-md-12 form-group">
-						<label asp-for="GymID"> Gym</label>
-						<select asp-for="GymID" asp-items="@gymList" class="category-input"></select>
-						<span asp-validation-for="GymID" class="text-danger"></span>
-					</div>
-				</div>
-			
-
-
-
-			<div class="form-group form-group-margin form-header-3">
-				<input type="submit" value="Edit"  />
-			</div>
-
-		</form>
-	</div>
-
-	</div>
-</div>
-@section Scripts{
-	@{
-		await Html.RenderPartialAsync("_ValidationScriptsPartial");
-	}
-		}
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

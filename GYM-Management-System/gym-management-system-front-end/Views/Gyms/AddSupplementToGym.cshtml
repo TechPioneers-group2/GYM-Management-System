@@ -4,55 +4,56 @@
     ViewData["Title"] = "AddSupplementToGym";
 }
 
+<div class="flex-grow-1 mh-100  pt-5" style="min-height:80vh;">
+    <div class="container">
+        <h1 class="mt-5 pt-5 text-center">Add Supplement To The Gym</h1>
+        <div class="row justify-content-center col-12">
+            <div class="col-md-4">
+                <form asp-action="AddSupplementToGym">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group text-center fw-5">
+                        <label asp-for="GymID" class="">Gym</label>
+                        <label>
+                            @Model.GymIDs.Name
+                            <input type="hidden" name="GymID" value="@Model.GymID" />
+                        </label>
+                    </div>
 
-
-<div class="">
-    <h1 class="mt-5 pt-5 text-center">AddSupplementToGym</h1>
-    <div class="row justify-content-center col-12">
-        <div class="col-md-4">
-            <form asp-action="AddSupplementToGym">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group text-center fw-5">
-                    <label asp-for="GymID" class="">Gym</label>
-                    <label>
-                        @Model.GymIDs.Name
-                        <input type="hidden" name="GymID" value="@Model.GymID" />
-                    </label>
-                </div>
-
-
-                <div class="form-group">
-                    <label asp-for="SupplementID">Supplement</label>
-                    <select class="form-select border border-1 border-primary" asp-for="SupplementID">
-                        <option value="">-- Select Supplement --</option>
-                        @{
-                            foreach (var item in Model.SupplementIDs)
-                            {
-                                <option value="@item.SupplementID">@item.Name</option>
+                    <div class="form-group">
+                        <label asp-for="SupplementID">Supplement</label>
+                        <select class="form-select border border-1 border-primary" asp-for="SupplementID">
+                            <option value="">-- Select Supplement --</option>
+                            @{
+                                foreach (var item in Model.SupplementIDs)
+                                {
+                                    <option value="@item.SupplementID">@item.Name</option>
+                                }
                             }
-
-                        }
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Quantity" class="control-label"></label>
-                    <input asp-for="Quantity" class="form-control" />
-                    <span asp-validation-for="Quantity" class="text-danger"></span>
-                </div>
-                <div class="form-group mt-2">
-                    <input type="submit" value="Add" class="btn btn-primary " />
-                </div>
-            </form>
-
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Quantity" class="control-label"></label>
+                        <input asp-for="Quantity" class="form-control" />
+                        <span asp-validation-for="Quantity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-2">
+                        <div class="d-flex justify-content-between">
+                            <input type="submit" value="Add To The Gym" class="btn btn-primary" />
+                            <a class="btn btn-primary" href="#" onclick="history.back();">Back to The Gym</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
-
-<div class="d-flex justify-content-end me-4">
-    <a class="btn btn-primary" href="#" onclick="history.back();">Back to List</a>
-</div>
+<footer class="footer py-4">
+    <!-- Your footer content here -->
+</footer>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
