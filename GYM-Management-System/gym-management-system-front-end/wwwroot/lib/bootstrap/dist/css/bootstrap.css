@@ -2122,7 +2122,7 @@ progress {
     --bs-table-bg-type: initial;
     --bs-table-color-state: initial;
     --bs-table-bg-state: initial;
-    --bs-table-color: var(--bs-emphasis-color);
+    --bs-table-color: #fffd;
     --bs-table-bg: var(--bs-body-bg);
     --bs-table-border-color: rgba(0, 0, 0, 0.15);
     --bs-table-accent-bg: rgba(255, 255, 255, 0.05);
