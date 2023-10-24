@@ -1,11 +1,7 @@
 ﻿using gym_management_system_front_end.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace gym_management_system_front_end.Controllers
 {
@@ -90,7 +86,7 @@ namespace gym_management_system_front_end.Controllers
         public IActionResult Edit(int id)
         {
             CreatSubscriptionTierDTO model = new CreatSubscriptionTierDTO();
-            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/GetSubscriptionTierBackEnd" + id).Result;
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/GetSubscriptionTierBackEnd/" + id).Result;
             if (response.IsSuccessStatusCode)
             {
                 string Data = response.Content.ReadAsStringAsync().Result;

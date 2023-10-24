@@ -4,9 +4,9 @@
     ViewData["Title"] = "Edit";
 }
 
-<div class="container d-flex justify-content-center align-items-center mt-5" style="min-height: 87vh;">
-    <div class="col-md-6 bg-dark rounded p-4 border border-1 border-primary rounded">
-        <h4 class="text-white mb-4 text-center"><i class="bi bi-pencil-square me-3"></i>Edit Subscription Tier</h4>
+<div class="container-fluid backgroundFormsClass d-flex justify-content-center align-items-center" style="min-height: 87vh;">
+    <div class="col-md-4 bg-dark rounded p-4 border border-1 border-primary rounded glassClassForm">
+        <h4 class="text-white mb-4 text-center">Edit Subscription Tier</h4>
         <hr />
 
         <form asp-action="Edit">
@@ -18,27 +18,28 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+            <div class="row">
+            <div class="form-group col-md-6">
                 <label asp-for="Price" class="control-label text-white">Price</label>
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label asp-for="Length" class="control-label text-white">Length</label>
                 <input asp-for="Length" class="form-control" />
                 <span asp-validation-for="Length" class="text-danger"></span>
             </div>
+            </div>
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-success m-2">Save</button>
+            <div class="form-group text-center mt-3 d-grid gap-2">
+                <div class="row">
+                    <input type="submit" value="Save" class="btn btn-primary col-md-5 offset-1" />
+                    <a class="btn btn-secondary mx-1 col-md-5" asp-action="Index">Back to List</a>
+                </div>
             </div>
         </form>
     </div>
-</div>
-
-<div class="d-flex justify-content-start mt-3">
-    <a class="btn btn-outline-danger" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
