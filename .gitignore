@@ -397,3 +397,10 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 /GYM-Management-System/GYM-Management-System/Models/ApplicationUser.cs
+/GYM-Management-System/gym-management-system-front-end/Views/Shared/_Layout.cshtml
+/GYM-Management-System/GYM-Management-System/Migrations/20231023175938_initial.cs
+/GYM-Management-System/GYM-Management-System/Migrations/20231023175938_initial.Designer.cs
+/GYM-Management-System/GYM-Management-System/Migrations/20231023191429_intial.cs
+/GYM-Management-System/GYM-Management-System/Migrations/20231023191429_intial.Designer.cs
+*.cs
+/GYM-Management-System/GYM-Management-System/Migrations/GymDbContextModelSnapshot.cs
