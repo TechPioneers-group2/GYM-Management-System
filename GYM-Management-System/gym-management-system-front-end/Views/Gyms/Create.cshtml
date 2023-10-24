@@ -5,20 +5,20 @@
 }
 
 <div class="d-flex justify-content-center align-items-center backgroundFormsClass" style="min-height: 100vh;">
-    <div class="col-md-6 bg-dark rounded p-4 border border-1 border-primary rounded glassClassForm">
+    <div class="col-lg-6 col-11 bg-dark rounded p-4 border border-1 border-primary rounded glassClassForm">
         <h4 class="text-white mb-4">Create New Gym</h4>
         <form asp-action="Create" asp-controller="Gyms" method="post" enctype="multipart/form-data">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
                 <label asp-for="Name" class="control-label text-white"></label>
                 <input asp-for="Name" class="form-control rounded rounded-3 border border-1 border-primary" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
 
-            <div class="form-group col-md-8">
+            <div class="form-group col-md-6">
                 <label asp-for="Address" class="control-label text-white"></label>
                 <input asp-for="Address" class="form-control rounded rounded-3 border border-1 border-primary" />
                 <span asp-validation-for="Address" class="text-danger"></span>
@@ -26,19 +26,19 @@
             </div>
 
             <div class="row">
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-6">
                 <label asp-for="MaxCapacity" class="control-label text-white"></label>
                 <input asp-for="MaxCapacity" class="form-control rounded rounded-3 border border-1 border-primary" />
                 <span asp-validation-for="MaxCapacity" class="text-danger"></span>
             </div>
 
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-6">
                 <label asp-for="ActiveHours" class="control-label text-white"></label>
                 <input asp-for="ActiveHours" class="form-control rounded rounded-3 border border-1 border-primary" />
                 <span asp-validation-for="ActiveHours" class="text-danger"></span>
             </div>
 
-            <div class="form-group col-md-8">
+            <div class="form-group col-md-12">
                 <label asp-for="imageURL">Image</label>
                 <input asp-for="imageURL" type="file" name="file" class="form-control rounded rounded-3 border border-1 border-primary text-center" />
                 <span asp-validation-for="imageURL" class="text-danger"></span>
@@ -46,7 +46,8 @@
 
             </div>
             <div class="form-group text-center mt-3 d-grid gap-2">
-                <input type="submit" value="Create" class="btn btn-lg btn-primary border border-1 border-primary" />
+                <input type="submit" value="Create" class="btn btn-lg btn-primary py-1" />
+                <a class="btn btn-secondary" asp-action="Index">Back to List</a>
             </div>
         </form>
     </div>

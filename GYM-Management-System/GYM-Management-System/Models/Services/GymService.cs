@@ -291,6 +291,11 @@ namespace GYM_Management_System.Models.Services
 
             Gym currentGym = await _gymDbContext.Gyms.FindAsync(gymid);
 
+            if (updatedGym.imageURL == null)
+            {
+                updatedGym.imageURL = currentGym.imageURL;
+            }
+
             if (currentGym.Notification != notificationStatus)
             {
                 var clients = _gymDbContext.Clients
