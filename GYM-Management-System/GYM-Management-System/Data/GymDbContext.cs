@@ -223,7 +223,7 @@ namespace GYM_Management_System.Data
                     ClientID = 1,
                     GymID = 1,
                     Name = "Client",
-                    InGym = true,
+                    InGym = false,
                     SubscriptionTierID = 1,
                     SubscriptionDate = DateTime.Now,
                     SubscriptionExpiry = DateTime.Now.AddMonths(6),

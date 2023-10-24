@@ -1,0 +1,74 @@
+﻿@model gym_management_system_front_end.Models.ChartDataViewModel
+@using Newtonsoft.Json
+
+@{
+	int clientsInGymCount = ViewBag.ClientsInGymCount;
+	int clientsNotInGymCount = ViewBag.ClientsNotInGymCount;
+	int outOfServiceCount = ViewBag.OutOfServiceCount;
+	int notOutOfServiceCount = ViewBag.NotOutOfServiceCount;
+}
+<div class="d-flex  justify-content-around align-items-center">
+	<div class="pt-5 mt-5">
+		<div class="d-flex flex-column">
+			<h2 class="text-start">Clients in the Gym: @clientsInGymCount</h2>
+			<h2 class="text-start">Clients Not in the Gym: @clientsNotInGymCount</h2>
+		</div>
+
+		<div style="width:300px;height:300px">
+			<canvas id="chartClients" width="200" height="200"></canvas>
+		</div>
+
+	</div>
+
+	<div class="pt-5 mt-5">
+		<div class="d-flex flex-column ">
+
+			<h2 class="text-start">Working: @notOutOfServiceCount</h2>
+			<h2 class="text-start">Out Of Service: @outOfServiceCount</h2>
+		</div>
+
+		<div style="width:300px;height:300px">
+			<canvas id="equipmentChartOutOfService" width="200" height="200"></canvas>
+		</div>
+	</div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+	// Client data
+	var clientData = @Html.Raw(JsonConvert.SerializeObject(Model.ClientList));
+	var clientsInGymCount = clientData.filter(client => client.InGym).length;
+	var clientsNotInGymCount = clientData.filter(client => !client.InGym).length;
+
+	var ctxClients = document.getElementById('chartClients').getContext('2d');
+	var myChartClients = new Chart(ctxClients, {
+		type: 'doughnut',
+		data: {
+			labels: ['In Gym', 'Not in Gym'],
+			datasets: [{
+				data: [clientsInGymCount, clientsNotInGymCount],
+				backgroundColor: ['green', 'red']
+			}]
+		}
+	});
+
+	// Equipment data
+	var equipmentData = @Html.Raw(JsonConvert.SerializeObject(Model.EquipmentList));
+	var outOfServiceCount = equipmentData.filter(equipment => equipment.OutOfService === 1).length;
+	var notOutOfServiceCount = equipmentData.filter(equipment => equipment.OutOfService === 0).length;
+
+	var ctxEquipmentOutOfService = document.getElementById('equipmentChartOutOfService').getContext('2d');
+	var myChartEquipmentOutOfService = new Chart(ctxEquipmentOutOfService, {
+		type: 'doughnut',
+		data: {
+			labels: ['OutOfService', 'Not OutOfService'],
+			datasets: [{
+				data: [outOfServiceCount, notOutOfServiceCount],
+				backgroundColor: ['red', 'green']
+			}]
+		}
+	});
+
+
+</script>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 
 namespace GYM_Management_System.Models.Services
@@ -12,6 +13,7 @@ namespace GYM_Management_System.Models.Services
     public class jwtTokenServices
     {
         private SignInManager<ApplicationUser> _signInManager;
+        private UserManager<ApplicationUser> _userManager;
         private IConfiguration _configuration;
 
         /// <summary>
@@ -19,10 +21,11 @@ namespace GYM_Management_System.Models.Services
         /// </summary>
         /// <param name="config">The configuration.</param>
         /// <param name="manager">The SignInManager for user sign-in.</param>
-        public jwtTokenServices(IConfiguration config, SignInManager<ApplicationUser> manager)
+        public jwtTokenServices(IConfiguration config, SignInManager<ApplicationUser> manager, UserManager<ApplicationUser> userManager)
         {
             _configuration = config;
             _signInManager = manager;
+            _userManager = userManager;
         }
 
         /// <summary>
@@ -76,13 +79,23 @@ namespace GYM_Management_System.Models.Services
 
             var signinkey = GetSecurityKey(_configuration);
 
+            var claims = new List<Claim>(Principle.Claims);
+
+            // Add role claims
+            var roles = await _userManager.GetRolesAsync(User);
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
             var token = new JwtSecurityToken
             (
                 expires: DateTime.UtcNow + expiresIn,
                 signingCredentials: new SigningCredentials(signinkey, SecurityAlgorithms.HmacSha256),
-                claims: Principle.Claims
+                claims: claims
             );
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
     }
 }
