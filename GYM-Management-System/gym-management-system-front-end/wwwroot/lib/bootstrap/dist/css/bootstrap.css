@@ -2126,7 +2126,7 @@ progress {
     --bs-table-bg: var(--bs-body-bg);
     --bs-table-border-color: rgba(0, 0, 0, 0.15);
     --bs-table-accent-bg: rgba(255, 255, 255, 0.05);
-    --bs-table-striped-color: var(--bs-emphasis-color);
+    --bs-table-striped-color: #fffd;
     --bs-table-striped-bg: rgba(var(--bs-emphasis-color-rgb), 0.05);
     --bs-table-active-color: var(--bs-emphasis-color);
     --bs-table-active-bg: rgba(var(--bs-emphasis-color-rgb), 0.1);
@@ -2183,12 +2183,12 @@ progress {
 }
 
 .table-striped > tbody > tr:nth-of-type(odd) > * {
-    --bs-table-color-type: var(--bs-table-striped-color);
+    --bs-table-color-type: #fffd;
     --bs-table-bg-type: var(--bs-table-striped-bg);
 }
 
 .table-striped-columns > :not(caption) > tr > :nth-child(even) {
-    --bs-table-color-type: var(--bs-table-striped-color);
+    --bs-table-color-type: #fffd;
     --bs-table-bg-type: var(--bs-table-striped-bg);
 }
 
@@ -2198,7 +2198,7 @@ progress {
 }
 
 .table-hover > tbody > tr:hover > * {
-    --bs-table-color-state: var(--bs-table-hover-color);
+    --bs-table-color-state: #ffc107;
     --bs-table-bg-state: var(--bs-table-hover-bg);
 }
 

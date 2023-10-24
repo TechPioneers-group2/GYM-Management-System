@@ -1,5 +1,6 @@
 ﻿using gym_management_system_front_end.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -77,13 +78,13 @@ namespace gym_management_system_front_end.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(RegisterEmployeeViewModel registerEmployeeViewModel)
+        public async Task<IActionResult>  Create(RegisterEmployeeViewModel registerEmployeeViewModel)
         {
             registerEmployeeViewModel.UserId = string.Empty;
             registerEmployeeViewModel.UserName = registerEmployeeViewModel.Name;
             var jsonContent = new StringContent(JsonConvert.SerializeObject(registerEmployeeViewModel), Encoding.UTF8, "application/json");
-            var response = _client.PostAsync(_client.BaseAddress + "/User/RegisterEmployeeBackEnd", jsonContent).Result;
-            var data = response.Content.ReadAsStringAsync().Result;
+            var response = await  _client.PostAsync(_client.BaseAddress + "/User/RegisterEmployeeBackEnd", jsonContent);
+            var data =await response.Content.ReadAsStringAsync();
             var employee = JsonConvert.DeserializeObject<UserDTO>(data);
 
             if (response.IsSuccessStatusCode)
