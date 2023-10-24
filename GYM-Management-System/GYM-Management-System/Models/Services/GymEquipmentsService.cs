@@ -120,6 +120,12 @@ namespace GYM_Management_System.Models.Services
         public async Task<EquipmentDTO> UpdateGymEquipment(int GymEquipmentID, EquipmentDTOPutservice equipmentDTO)
         {
             var Selected = await _gymDbContext.GymEquipments.FindAsync(GymEquipmentID);
+
+            if (equipmentDTO.PhotoUrl == null)
+            {
+                equipmentDTO.PhotoUrl = Selected.PhotoUrl;
+            }
+
             if (Selected != null)
             {
                 Selected.Quantity = equipmentDTO.Quantity;
