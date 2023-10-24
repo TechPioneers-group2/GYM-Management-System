@@ -155,7 +155,7 @@ namespace gym_management_system_front_end.Controllers
                 {
                     { streamcontent, "file", file.FileName }
                 };
-                var imageResponse = await _client.PostAsync(_client.BaseAddress + "/Methods/AddImageToCloudBackEnd", imageContent);
+                var imageResponse = await _client.PostAsync("https://localhost:7200/api/Methods/AddImageToCloudBackEnd", imageContent);
                 gymDTO.imageURL = await imageResponse.Content.ReadAsStringAsync();
             }
 
@@ -196,7 +196,7 @@ namespace gym_management_system_front_end.Controllers
                 {
                     { streamcontent, "file", file.FileName }
                 };
-                var imageResponse = await _client.PostAsync("https://localhost:7200/api/Methods/AddImageToCloud", imageContent);
+                var imageResponse = await _client.PostAsync("https://localhost:7200/api/Methods/AddImageToCloudBackEnd", imageContent);
                 gym.imageURL = await imageResponse.Content.ReadAsStringAsync();
             }
 

@@ -1,12 +1,8 @@
 ﻿using gym_management_system_front_end.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace gym_management_system_front_end.Controllers
 {
@@ -148,6 +144,8 @@ namespace gym_management_system_front_end.Controllers
                     var imageResponse = await _client.PostAsync("https://localhost:7200/Methods/AddImageToCloud", imageContent);
                     supplementViewModel.imageURL = await imageResponse.Content.ReadAsStringAsync();
                 }
+
+
 
                 var json = JsonConvert.SerializeObject(supplementViewModel);
                 var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
