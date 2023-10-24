@@ -146,18 +146,6 @@
         }
     </script>
 
-    <script>
-        window.onscroll = function () {
-            var footer = document.querySelector('.footer');
-
-            if (window.scrollY > 0) {
-                footer.style.position = 'static';
-            } else {
-                footer.style.position = 'fixed';
-            }
-        }
-
-    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
