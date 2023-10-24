@@ -49,108 +49,114 @@ namespace gym_management_system_front_end.Controllers
             }
             catch
             {
-
+                TempData["error"] = "An error occurred while processing your request.";
                 return View(null);
             }
-
         }
 
         public async Task<ActionResult> AddToCart(int id)
         {
-            var cartCookie = HttpContext.Request.Cookies["SupplementCart"];
-            Dictionary<int, int> supplement;
-            if (cartCookie != null)
+            try
             {
-                supplement = JsonConvert.DeserializeObject<Dictionary<int, int>>(cartCookie);
-
-                if (supplement.ContainsKey(id))
+                var cartCookie = HttpContext.Request.Cookies["SupplementCart"];
+                Dictionary<int, int> supplement;
+                if (cartCookie != null)
                 {
-                    supplement[id] += 1;
+                    supplement = JsonConvert.DeserializeObject<Dictionary<int, int>>(cartCookie);
+
+                    if (supplement.ContainsKey(id))
+                    {
+                        supplement[id] += 1;
+                    }
+                    else
+                    {
+                        supplement[id] = 1;
+                    }
                 }
                 else
                 {
-                    supplement[id] = 1;
+                    supplement = new Dictionary<int, int> { { id, 1 } };
                 }
 
+                var option = new CookieOptions { Expires = DateTime.Now.AddDays(7) };
+                HttpContext.Response.Cookies.Append("SupplementCart", JsonConvert.SerializeObject(supplement), option);
+
+                TempData["success"] = "Item successfully added to the cart.";
+                string refURL = Request.Headers["Referer"].ToString();
+                return Redirect(refURL);
             }
-            else
+            catch
             {
-                supplement = new Dictionary<int, int>
-                   {
-                       { id, 1 }
-                   };
+                TempData["error"] = "An error occurred while adding the item to the cart.";
+                string refURL = Request.Headers["Referer"].ToString();
+                return Redirect(refURL);
             }
-
-            var option = new CookieOptions
-            {
-                Expires = DateTime.Now.AddDays(7)
-
-            };
-            HttpContext.Response.Cookies.Append("SupplementCart", JsonConvert.SerializeObject(supplement), option);
-
-            string refURL = Request.Headers["Referer"].ToString();
-
-            return Redirect(refURL);
         }
-
 
         public ActionResult RemoveFromCart(int id)
         {
-            var removed = HttpContext.Request.Cookies["SupplementCart"];
-            Dictionary<int, int> supplement;
-            if (removed != null)
+            try
             {
-                supplement = JsonConvert.DeserializeObject<Dictionary<int, int>>(removed);
-
-
-                if (supplement.ContainsKey(id))
+                var removed = HttpContext.Request.Cookies["SupplementCart"];
+                Dictionary<int, int> supplement;
+                if (removed != null)
                 {
-                    supplement[id] -= 1;
+                    supplement = JsonConvert.DeserializeObject<Dictionary<int, int>>(removed);
+
+                    if (supplement.ContainsKey(id))
+                    {
+                        supplement[id] -= 1;
+                    }
+                    if (supplement[id] <= 0)
+                    {
+                        supplement.Remove(id);
+                    }
+
+                    var option = new CookieOptions { Expires = DateTime.Now.AddDays(7) };
+                    HttpContext.Response.Cookies.Append("SupplementCart", JsonConvert.SerializeObject(supplement), option);
                 }
-                if (supplement[id] <= 0)
-                {
-                    supplement.Remove(id);
-                }
 
-                var option = new CookieOptions
-                {
-                    Expires = DateTime.Now.AddDays(7)
-
-                };
-                HttpContext.Response.Cookies.Append("SupplementCart", JsonConvert.SerializeObject(supplement), option);
+                TempData["success"] = "Item successfully removed from the cart.";
+                string refURL = Request.Headers["Referer"].ToString();
+                return Redirect(refURL);
             }
-            string refURL = Request.Headers["Referer"].ToString();
-
-            return Redirect(refURL);
-
+            catch
+            {
+                TempData["error"] = "An error occurred while removing the item from the cart.";
+                string refURL = Request.Headers["Referer"].ToString();
+                return Redirect(refURL);
+            }
         }
 
         public ActionResult RemoveAllFromCart(int id)
         {
-            var removed = HttpContext.Request.Cookies["SupplementCart"];
-            Dictionary<int, int> supplement;
-            if (removed != null)
+            try
             {
-                supplement = JsonConvert.DeserializeObject<Dictionary<int, int>>(removed);
-
-
-                if (supplement.ContainsKey(id))
+                var removed = HttpContext.Request.Cookies["SupplementCart"];
+                Dictionary<int, int> supplement;
+                if (removed != null)
                 {
+                    supplement = JsonConvert.DeserializeObject<Dictionary<int, int>>(removed);
 
-                    supplement.Remove(id);
+                    if (supplement.ContainsKey(id))
+                    {
+                        supplement.Remove(id);
+                    }
+
+                    var option = new CookieOptions { Expires = DateTime.Now.AddDays(7) };
+                    HttpContext.Response.Cookies.Append("SupplementCart", JsonConvert.SerializeObject(supplement), option);
                 }
 
-                var option = new CookieOptions
-                {
-                    Expires = DateTime.Now.AddDays(7)
-
-                };
-                HttpContext.Response.Cookies.Append("SupplementCart", JsonConvert.SerializeObject(supplement), option);
+                TempData["success"] = "All items of this type successfully removed from the cart.";
+                string refURL = Request.Headers["Referer"].ToString();
+                return Redirect(refURL);
             }
-            string refURL = Request.Headers["Referer"].ToString();
-
-            return Redirect(refURL);
-
+            catch
+            {
+                TempData["error"] = "An error occurred while removing items from the cart.";
+                string refURL = Request.Headers["Referer"].ToString();
+                return Redirect(refURL);
+            }
         }
 
         public async Task<IActionResult> CheckOut()
