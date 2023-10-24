@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GYM_Management_System.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    [Migration("20231023191429_intial")]
+    [Migration("20231023215320_intial")]
     partial class intial
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace GYM_Management_System.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.10")
+                .HasAnnotation("ProductVersion", "7.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -94,16 +94,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f669e750-dd3c-4aa7-bb95-6fbfc57f767b",
+                            ConcurrencyStamp = "4a4ab47e-4a91-45fa-a561-3039d96edb9c",
                             Email = "adminUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMINUSER@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKZ2AW6wOLary6bT/6dKt8g+r95B88mphNH/cDNAu5h6oXEYfpTihATRHuZC3d++Nw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECM+CQ9/3cA3vwczNYw9bZ9xFBkrnPUdVSrfzvWG5CkZFAgOkdC40O4EJRr1Tmty8Q==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "55c0a3eb-0308-465e-90e0-8e3bbe7ef194",
+                            SecurityStamp = "0c60f2ef-629e-498b-a1b9-fdf8b5861778",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
@@ -111,16 +111,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8ff03ab4-6887-47f9-a7fe-3fdd7c7c0e71",
+                            ConcurrencyStamp = "4cf04540-4427-4c47-b59b-39fad2274e7b",
                             Email = "employeeUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "EMPLOYEEUSER@EXAMPLE.COM",
                             NormalizedUserName = "EMPLOYEE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJg90c2fvUxbN1X7s+MNp+/Q//f6o6j2FRWxaU7dg/rXfkY2IHthOy36c+qssqcHAw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL4h86KiMhJTt8IaX5j3ov1ZOlqOnqmIObBlNSPfpb54L65MIJU2viqg5Lt3vNcyOg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "69a8078b-98f8-47f4-9fb6-49c4da9c0b4a",
+                            SecurityStamp = "b310dc95-e330-4d97-aa5d-3df7f48246c9",
                             TwoFactorEnabled = false,
                             UserName = "Employee"
                         },
@@ -128,16 +128,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "978f673e-ba7b-41fe-aabc-dd9f439ab474",
+                            ConcurrencyStamp = "01332a6b-4982-4430-9376-c027c03fbcc7",
                             Email = "ClientUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENTUSER@EXAMPLE.COM",
                             NormalizedUserName = "CLIENT",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMjRriI/wTAky/pjMl/VsaA124VNSCDscBrF5VLggR+8nX45pzBoELVZKenBKZGjvw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJ26h6weQkQRXL8JJeLSkTned6l4LabIP/Bdhz5gtLgf9s2YunHcm6Av7jCsIjhz+A==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1e3c4a64-8373-44fe-864f-95504ab0149e",
+                            SecurityStamp = "78c6717d-a1a4-4629-8704-12b139cdbe96",
                             TwoFactorEnabled = false,
                             UserName = "Client"
                         },
@@ -145,19 +145,61 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "946a80be-bfe4-4fc5-bf7f-1f1c5cbbd030",
+                            ConcurrencyStamp = "6f222904-b6a8-4372-b30e-e2b89a7eec0e",
                             Email = "Client2User@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENT2USER@EXAMPLE.COM",
                             NormalizedUserName = "CLIENT2",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGB5qpFIRPC8y8caFfsG5P4ck7Bri22M/nAj8zqxc0vJo1faLuOZE5mZC5F/z220SA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMrrvMlt0+9doS3XOdTd3237K2+sjWPBMQuAddNdL4fDWwH4gpLUgsGWeJZfnZdalQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "34017882-ca3d-49df-9469-a30c632e6126",
+                            SecurityStamp = "8c885189-3797-4f5e-ab81-3f6c874c6ec8",
                             TwoFactorEnabled = false,
                             UserName = "Client2"
                         });
+                });
+
+            modelBuilder.Entity("GYM_Management_System.Models.CartSupp", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SupplementId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id", "SupplementId");
+
+                    b.HasIndex("SupplementId");
+
+                    b.ToTable("CartSupp");
+                });
+
+            modelBuilder.Entity("GYM_Management_System.Models.CartViewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cart");
                 });
 
             modelBuilder.Entity("GYM_Management_System.Models.Client", b =>
@@ -206,8 +248,8 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             InGym = true,
                             Name = "Client",
-                            SubscriptionDate = new DateTime(2023, 10, 23, 22, 14, 29, 48, DateTimeKind.Local).AddTicks(323),
-                            SubscriptionExpiry = new DateTime(2024, 4, 23, 22, 14, 29, 48, DateTimeKind.Local).AddTicks(344),
+                            SubscriptionDate = new DateTime(2023, 10, 24, 0, 53, 19, 395, DateTimeKind.Local).AddTicks(3009),
+                            SubscriptionExpiry = new DateTime(2024, 4, 24, 0, 53, 19, 395, DateTimeKind.Local).AddTicks(3046),
                             SubscriptionTierID = 1,
                             UserId = "3"
                         },
@@ -217,8 +259,8 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             InGym = true,
                             Name = "Client2",
-                            SubscriptionDate = new DateTime(2023, 10, 23, 22, 14, 29, 48, DateTimeKind.Local).AddTicks(361),
-                            SubscriptionExpiry = new DateTime(2024, 4, 23, 22, 14, 29, 48, DateTimeKind.Local).AddTicks(362),
+                            SubscriptionDate = new DateTime(2023, 10, 24, 0, 53, 19, 395, DateTimeKind.Local).AddTicks(3074),
+                            SubscriptionExpiry = new DateTime(2024, 4, 24, 0, 53, 19, 395, DateTimeKind.Local).AddTicks(3075),
                             SubscriptionTierID = 1,
                             UserId = "4"
                         });
@@ -445,6 +487,55 @@ namespace GYM_Management_System.Migrations
                     b.ToTable("GymSupplements");
                 });
 
+            modelBuilder.Entity("GYM_Management_System.Models.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ShoppingCartId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StreetAdress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("ShoppingCartId");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("GYM_Management_System.Models.SubscriptionTier", b =>
                 {
                     b.Property<int>("SubscriptionTierID")
@@ -629,21 +720,21 @@ namespace GYM_Management_System.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cac5cebe-bc8a-44c3-8460-575fa0c6d9bf",
+                            Id = "bfb4d851-d52c-4709-a59c-92f1d18bac60",
                             ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "6740eb0f-cdeb-4c56-9fa0-aa9fdb9d9369",
+                            Id = "7c76fb7c-11f2-4b0b-b8db-fddd202ac0ba",
                             ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
-                            Id = "bd80ee63-4ac3-4571-be82-0b50473291c0",
+                            Id = "258fddae-a9da-4bb6-b4a8-3a368979a7b1",
                             ConcurrencyStamp = "00000000-0000-0000-0000-000000000000",
                             Name = "Client",
                             NormalizedName = "CLIENT"
@@ -680,63 +771,63 @@ namespace GYM_Management_System.Migrations
                             Id = 10,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "createAdmin",
-                            RoleId = "cac5cebe-bc8a-44c3-8460-575fa0c6d9bf"
+                            RoleId = "bfb4d851-d52c-4709-a59c-92f1d18bac60"
                         },
                         new
                         {
                             Id = 11,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "updateAdmin",
-                            RoleId = "cac5cebe-bc8a-44c3-8460-575fa0c6d9bf"
+                            RoleId = "bfb4d851-d52c-4709-a59c-92f1d18bac60"
                         },
                         new
                         {
                             Id = 12,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "deleteAdmin",
-                            RoleId = "cac5cebe-bc8a-44c3-8460-575fa0c6d9bf"
+                            RoleId = "bfb4d851-d52c-4709-a59c-92f1d18bac60"
                         },
                         new
                         {
                             Id = 13,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "readAdmin",
-                            RoleId = "cac5cebe-bc8a-44c3-8460-575fa0c6d9bf"
+                            RoleId = "bfb4d851-d52c-4709-a59c-92f1d18bac60"
                         },
                         new
                         {
                             Id = 14,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "createEmployee",
-                            RoleId = "6740eb0f-cdeb-4c56-9fa0-aa9fdb9d9369"
+                            RoleId = "7c76fb7c-11f2-4b0b-b8db-fddd202ac0ba"
                         },
                         new
                         {
                             Id = 15,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "updateEmployee",
-                            RoleId = "6740eb0f-cdeb-4c56-9fa0-aa9fdb9d9369"
+                            RoleId = "7c76fb7c-11f2-4b0b-b8db-fddd202ac0ba"
                         },
                         new
                         {
                             Id = 16,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "readEmployee",
-                            RoleId = "6740eb0f-cdeb-4c56-9fa0-aa9fdb9d9369"
+                            RoleId = "7c76fb7c-11f2-4b0b-b8db-fddd202ac0ba"
                         },
                         new
                         {
                             Id = 17,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "updateClient",
-                            RoleId = "bd80ee63-4ac3-4571-be82-0b50473291c0"
+                            RoleId = "258fddae-a9da-4bb6-b4a8-3a368979a7b1"
                         },
                         new
                         {
                             Id = 18,
                             ClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
                             ClaimValue = "readClient",
-                            RoleId = "bd80ee63-4ac3-4571-be82-0b50473291c0"
+                            RoleId = "258fddae-a9da-4bb6-b4a8-3a368979a7b1"
                         });
                 });
 
@@ -821,6 +912,25 @@ namespace GYM_Management_System.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("GYM_Management_System.Models.CartSupp", b =>
+                {
+                    b.HasOne("GYM_Management_System.Models.CartViewModel", "Cart")
+                        .WithMany("CartSupp")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GYM_Management_System.Models.Supplement", "supplement")
+                        .WithMany()
+                        .HasForeignKey("SupplementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
+
+                    b.Navigation("supplement");
+                });
+
             modelBuilder.Entity("GYM_Management_System.Models.Client", b =>
                 {
                     b.HasOne("GYM_Management_System.Models.Gym", "Gym")
@@ -881,6 +991,17 @@ namespace GYM_Management_System.Migrations
                     b.Navigation("Supplements");
                 });
 
+            modelBuilder.Entity("GYM_Management_System.Models.Order", b =>
+                {
+                    b.HasOne("GYM_Management_System.Models.CartViewModel", "ShoppingCart")
+                        .WithMany()
+                        .HasForeignKey("ShoppingCartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ShoppingCart");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -930,6 +1051,11 @@ namespace GYM_Management_System.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("GYM_Management_System.Models.CartViewModel", b =>
+                {
+                    b.Navigation("CartSupp");
                 });
 
             modelBuilder.Entity("GYM_Management_System.Models.Gym", b =>

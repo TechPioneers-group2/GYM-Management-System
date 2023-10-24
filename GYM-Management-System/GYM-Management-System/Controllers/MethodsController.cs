@@ -31,13 +31,13 @@ namespace GYM_Management_System.Controllers
             return x;
         }
 
-        public async Task<Session> PaymentBackEnd(List<CartViewModel> carts)
+       /* public async Task<Session> PaymentBackEnd(List<CartViewModel> carts)
         {
             var session = await _payment.PaymentProcess(carts);
 
             return session;
 
-        }
+        }*/
 
         public async Task<Session> SubTierPaymentBackEnd(RegisterClientDTO client)
         {

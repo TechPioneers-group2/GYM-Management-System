@@ -53,6 +53,20 @@ namespace GYM_Management_System.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Cart",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Total = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cart", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Gyms",
                 columns: table => new
                 {
@@ -209,6 +223,33 @@ namespace GYM_Management_System.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShoppingCartId = table.Column<int>(type: "int", nullable: false),
+                    StreetAdress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.OrderId);
+                    table.ForeignKey(
+                        name: "FK_Orders_Cart_ShoppingCartId",
+                        column: x => x.ShoppingCartId,
+                        principalTable: "Cart",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Employees",
                 columns: table => new
                 {
@@ -289,6 +330,32 @@ namespace GYM_Management_System.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CartSupp",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    SupplementId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartSupp", x => new { x.Id, x.SupplementId });
+                    table.ForeignKey(
+                        name: "FK_CartSupp_Cart_Id",
+                        column: x => x.Id,
+                        principalTable: "Cart",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CartSupp_Supplements_SupplementId",
+                        column: x => x.SupplementId,
+                        principalTable: "Supplements",
+                        principalColumn: "SupplementID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "GymSupplements",
                 columns: table => new
                 {
@@ -318,9 +385,9 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "6740eb0f-cdeb-4c56-9fa0-aa9fdb9d9369", "00000000-0000-0000-0000-000000000000", "Employee", "EMPLOYEE" },
-                    { "bd80ee63-4ac3-4571-be82-0b50473291c0", "00000000-0000-0000-0000-000000000000", "Client", "CLIENT" },
-                    { "cac5cebe-bc8a-44c3-8460-575fa0c6d9bf", "00000000-0000-0000-0000-000000000000", "Admin", "ADMIN" }
+                    { "258fddae-a9da-4bb6-b4a8-3a368979a7b1", "00000000-0000-0000-0000-000000000000", "Client", "CLIENT" },
+                    { "7c76fb7c-11f2-4b0b-b8db-fddd202ac0ba", "00000000-0000-0000-0000-000000000000", "Employee", "EMPLOYEE" },
+                    { "bfb4d851-d52c-4709-a59c-92f1d18bac60", "00000000-0000-0000-0000-000000000000", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -328,10 +395,10 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1", 0, "f669e750-dd3c-4aa7-bb95-6fbfc57f767b", "adminUser@example.com", true, false, null, "ADMINUSER@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAEKZ2AW6wOLary6bT/6dKt8g+r95B88mphNH/cDNAu5h6oXEYfpTihATRHuZC3d++Nw==", "1234567890", false, "55c0a3eb-0308-465e-90e0-8e3bbe7ef194", false, "Admin" },
-                    { "2", 0, "8ff03ab4-6887-47f9-a7fe-3fdd7c7c0e71", "employeeUser@example.com", true, false, null, "EMPLOYEEUSER@EXAMPLE.COM", "EMPLOYEE", "AQAAAAIAAYagAAAAEJg90c2fvUxbN1X7s+MNp+/Q//f6o6j2FRWxaU7dg/rXfkY2IHthOy36c+qssqcHAw==", "1234567890", false, "69a8078b-98f8-47f4-9fb6-49c4da9c0b4a", false, "Employee" },
-                    { "3", 0, "978f673e-ba7b-41fe-aabc-dd9f439ab474", "ClientUser@example.com", true, false, null, "CLIENTUSER@EXAMPLE.COM", "CLIENT", "AQAAAAIAAYagAAAAEMjRriI/wTAky/pjMl/VsaA124VNSCDscBrF5VLggR+8nX45pzBoELVZKenBKZGjvw==", "1234567890", false, "1e3c4a64-8373-44fe-864f-95504ab0149e", false, "Client" },
-                    { "4", 0, "946a80be-bfe4-4fc5-bf7f-1f1c5cbbd030", "Client2User@example.com", true, false, null, "CLIENT2USER@EXAMPLE.COM", "CLIENT2", "AQAAAAIAAYagAAAAEGB5qpFIRPC8y8caFfsG5P4ck7Bri22M/nAj8zqxc0vJo1faLuOZE5mZC5F/z220SA==", "1234567890", false, "34017882-ca3d-49df-9469-a30c632e6126", false, "Client2" }
+                    { "1", 0, "4a4ab47e-4a91-45fa-a561-3039d96edb9c", "adminUser@example.com", true, false, null, "ADMINUSER@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAECM+CQ9/3cA3vwczNYw9bZ9xFBkrnPUdVSrfzvWG5CkZFAgOkdC40O4EJRr1Tmty8Q==", "1234567890", false, "0c60f2ef-629e-498b-a1b9-fdf8b5861778", false, "Admin" },
+                    { "2", 0, "4cf04540-4427-4c47-b59b-39fad2274e7b", "employeeUser@example.com", true, false, null, "EMPLOYEEUSER@EXAMPLE.COM", "EMPLOYEE", "AQAAAAIAAYagAAAAEL4h86KiMhJTt8IaX5j3ov1ZOlqOnqmIObBlNSPfpb54L65MIJU2viqg5Lt3vNcyOg==", "1234567890", false, "b310dc95-e330-4d97-aa5d-3df7f48246c9", false, "Employee" },
+                    { "3", 0, "01332a6b-4982-4430-9376-c027c03fbcc7", "ClientUser@example.com", true, false, null, "CLIENTUSER@EXAMPLE.COM", "CLIENT", "AQAAAAIAAYagAAAAEJ26h6weQkQRXL8JJeLSkTned6l4LabIP/Bdhz5gtLgf9s2YunHcm6Av7jCsIjhz+A==", "1234567890", false, "78c6717d-a1a4-4629-8704-12b139cdbe96", false, "Client" },
+                    { "4", 0, "6f222904-b6a8-4372-b30e-e2b89a7eec0e", "Client2User@example.com", true, false, null, "CLIENT2USER@EXAMPLE.COM", "CLIENT2", "AQAAAAIAAYagAAAAEMrrvMlt0+9doS3XOdTd3237K2+sjWPBMQuAddNdL4fDWwH4gpLUgsGWeJZfnZdalQ==", "1234567890", false, "8c885189-3797-4f5e-ab81-3f6c874c6ec8", false, "Client2" }
                 });
 
             migrationBuilder.InsertData(
@@ -376,15 +443,15 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "Id", "ClaimType", "ClaimValue", "RoleId" },
                 values: new object[,]
                 {
-                    { 10, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createAdmin", "cac5cebe-bc8a-44c3-8460-575fa0c6d9bf" },
-                    { 11, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateAdmin", "cac5cebe-bc8a-44c3-8460-575fa0c6d9bf" },
-                    { 12, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "deleteAdmin", "cac5cebe-bc8a-44c3-8460-575fa0c6d9bf" },
-                    { 13, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readAdmin", "cac5cebe-bc8a-44c3-8460-575fa0c6d9bf" },
-                    { 14, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createEmployee", "6740eb0f-cdeb-4c56-9fa0-aa9fdb9d9369" },
-                    { 15, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateEmployee", "6740eb0f-cdeb-4c56-9fa0-aa9fdb9d9369" },
-                    { 16, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readEmployee", "6740eb0f-cdeb-4c56-9fa0-aa9fdb9d9369" },
-                    { 17, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateClient", "bd80ee63-4ac3-4571-be82-0b50473291c0" },
-                    { 18, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readClient", "bd80ee63-4ac3-4571-be82-0b50473291c0" }
+                    { 10, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createAdmin", "bfb4d851-d52c-4709-a59c-92f1d18bac60" },
+                    { 11, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateAdmin", "bfb4d851-d52c-4709-a59c-92f1d18bac60" },
+                    { 12, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "deleteAdmin", "bfb4d851-d52c-4709-a59c-92f1d18bac60" },
+                    { 13, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readAdmin", "bfb4d851-d52c-4709-a59c-92f1d18bac60" },
+                    { 14, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "createEmployee", "7c76fb7c-11f2-4b0b-b8db-fddd202ac0ba" },
+                    { 15, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateEmployee", "7c76fb7c-11f2-4b0b-b8db-fddd202ac0ba" },
+                    { 16, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readEmployee", "7c76fb7c-11f2-4b0b-b8db-fddd202ac0ba" },
+                    { 17, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "updateClient", "258fddae-a9da-4bb6-b4a8-3a368979a7b1" },
+                    { 18, "http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "readClient", "258fddae-a9da-4bb6-b4a8-3a368979a7b1" }
                 });
 
             migrationBuilder.InsertData(
@@ -392,8 +459,8 @@ namespace GYM_Management_System.Migrations
                 columns: new[] { "ClientID", "GymID", "InGym", "Name", "SubscriptionDate", "SubscriptionExpiry", "SubscriptionTierID", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, true, "Client", new DateTime(2023, 10, 23, 22, 14, 29, 48, DateTimeKind.Local).AddTicks(323), new DateTime(2024, 4, 23, 22, 14, 29, 48, DateTimeKind.Local).AddTicks(344), 1, "3" },
-                    { 2, 1, true, "Client2", new DateTime(2023, 10, 23, 22, 14, 29, 48, DateTimeKind.Local).AddTicks(361), new DateTime(2024, 4, 23, 22, 14, 29, 48, DateTimeKind.Local).AddTicks(362), 1, "4" }
+                    { 1, 1, true, "Client", new DateTime(2023, 10, 24, 0, 53, 19, 395, DateTimeKind.Local).AddTicks(3009), new DateTime(2024, 4, 24, 0, 53, 19, 395, DateTimeKind.Local).AddTicks(3046), 1, "3" },
+                    { 2, 1, true, "Client2", new DateTime(2023, 10, 24, 0, 53, 19, 395, DateTimeKind.Local).AddTicks(3074), new DateTime(2024, 4, 24, 0, 53, 19, 395, DateTimeKind.Local).AddTicks(3075), 1, "4" }
                 });
 
             migrationBuilder.InsertData(
@@ -452,6 +519,11 @@ namespace GYM_Management_System.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CartSupp_SupplementId",
+                table: "CartSupp",
+                column: "SupplementId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Clients_GymID",
                 table: "Clients",
                 column: "GymID");
@@ -475,6 +547,11 @@ namespace GYM_Management_System.Migrations
                 name: "IX_GymSupplements_SupplementID",
                 table: "GymSupplements",
                 column: "SupplementID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_ShoppingCartId",
+                table: "Orders",
+                column: "ShoppingCartId");
         }
 
         /// <inheritdoc />
@@ -496,6 +573,9 @@ namespace GYM_Management_System.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "CartSupp");
+
+            migrationBuilder.DropTable(
                 name: "Clients");
 
             migrationBuilder.DropTable(
@@ -506,6 +586,9 @@ namespace GYM_Management_System.Migrations
 
             migrationBuilder.DropTable(
                 name: "GymSupplements");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -521,6 +604,9 @@ namespace GYM_Management_System.Migrations
 
             migrationBuilder.DropTable(
                 name: "Supplements");
+
+            migrationBuilder.DropTable(
+                name: "Cart");
         }
     }
 }

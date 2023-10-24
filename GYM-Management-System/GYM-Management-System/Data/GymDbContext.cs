@@ -14,7 +14,19 @@ namespace GYM_Management_System.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<CartSupp>()
+      .HasKey(cs => new { cs.Id, cs.SupplementId }); // Assuming CartId in CartProduct matches Cart's primary key
 
+            modelBuilder.Entity<CartSupp>()
+                .HasOne(cs => cs.Cart)
+                .WithMany(c => c.CartSupp)
+                .HasForeignKey(cs => cs.Id);
+
+
+
+
+            modelBuilder.Entity<CartSupp>()
+                .HasOne(cs => cs.supplement);
             modelBuilder.Entity<GymSupplement>().HasKey(sq => new { sq.GymID, sq.SupplementID });
 
             modelBuilder.Entity<SubscriptionTier>().HasData
@@ -48,6 +60,7 @@ namespace GYM_Management_System.Data
                     Length = 12
                 }
             );
+
 
             modelBuilder.Entity<Gym>().HasData(
                 new Gym
@@ -307,6 +320,7 @@ namespace GYM_Management_System.Data
             SeedRole(modelBuilder, "Client", "updateClient", "readClient");
         }
 
+
         int nextId = 1;
         private void SeedRole(ModelBuilder modelBuilder, string roleName, params string[] permissions)
         {
@@ -340,5 +354,8 @@ namespace GYM_Management_System.Data
         public DbSet<Supplement> Supplements { get; set; }
         public DbSet<GymSupplement> GymSupplements { get; set; }
         public DbSet<SubscriptionTier> SubscriptionTiers { get; set; }
+        public DbSet<CartSupp> CartSupp { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<CartViewModel> Cart { get; set; }
     }
 }

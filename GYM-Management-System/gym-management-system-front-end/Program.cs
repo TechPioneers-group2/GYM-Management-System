@@ -1,4 +1,5 @@
 using gym_management_system_front_end.Controllers;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace gym_management_system_front_end
 {
@@ -15,7 +16,13 @@ namespace gym_management_system_front_end
 
             builder.Services.AddTransient<GymsController>();
             builder.Services.AddTransient<SupplementController>();
-
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+               .AddCookie(options =>
+               {
+                   options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
+                   options.LoginPath = "/User/Login"; // Set the login path
+                   options.AccessDeniedPath = "/Account/auth/AccessDenied"; // Set the access denied path
+               });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -30,6 +37,7 @@ namespace gym_management_system_front_end
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseAuthentication(); // Place UseAuthentication before UseAuthorization
 
             app.UseAuthorization();
 
