@@ -59,7 +59,7 @@ namespace GYM_Management_System.Data
                     MaxCapacity = "125",
                     CurrentCapacity = 1,
                     Notification = "Everything ok",
-                    imageURL = "https://techpioneers.blob.core.windows.net/images/AmmanGym.png"
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/c.jpg"
                 },
                 new Gym
                 {
@@ -70,7 +70,7 @@ namespace GYM_Management_System.Data
                     MaxCapacity = "100",
                     CurrentCapacity = 1,
                     Notification = "Everything ok",
-                    imageURL = "https://techpioneers.blob.core.windows.net/images/ZarqaGym.png"
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/v.jpg"
                 },
                 new Gym
                 {
@@ -81,7 +81,7 @@ namespace GYM_Management_System.Data
                     MaxCapacity = "150",
                     CurrentCapacity = 0,
                     Notification = "Under maintenance",
-                    imageURL = "https://techpioneers.blob.core.windows.net/images/IrbidGym.png"
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/m.jpg"
                 }
             );
 
