@@ -5,25 +5,28 @@
 }
 
 
+<div class="vh-100 d-flex  justify-content-center align-items-center">
 
 
-<div class="row mt-5 pt-5 justify-content-center">
-    <h4 class="text-center">Update Supplement For Gym</h4>
-    <div class="col-md-4">
-        <form asp-action="ConfirmUpdateSupplementForGym" asp-controller="Gyms">
-            <input type="hidden" asp-for="GymID" />
-            <input type="hidden" asp-for="SupplementID" />
+    <div class="container container-fluid mt-5 pt-5  col-md-4 d-flex  justify-content-center align-items-center glassClassForm ">
+        <div class="row">
+            <h4 class="text-center">Update Supplement For Gym</h4>
+            <hr />
+            <form asp-action="ConfirmUpdateSupplementForGym" asp-controller="Gyms">
+                <input type="hidden" asp-for="GymID" />
+                <input type="hidden" asp-for="SupplementID" />
 
-            <div class="form-group">
-                <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label asp-for="Quantity" class="control-label"></label>
+                    <input asp-for="Quantity" class="form-control" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
 
-            <div class="form-group m-1 d-flex justify-content-center">
-                <input type="submit" value="Save" class="btn btn-success m-2" />
-                <a href="#" class="btn btn-secondary m-2" onclick="history.back()">Back</a>
-            </div>
-        </form>
+                <div class="form-group m-1 d-flex justify-content-center">
+                    <input type="submit" value="Save" class="btn btn-success m-2" />
+                    <a href="#" class="btn btn-secondary m-2" onclick="history.back()">Back</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

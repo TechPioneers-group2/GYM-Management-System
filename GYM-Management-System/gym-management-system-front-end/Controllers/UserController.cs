@@ -38,6 +38,7 @@ namespace gym_management_system_front_end.Controllers
             {
                 var result = await response.Content.ReadAsStringAsync();
                 var userDTO = JsonConvert.DeserializeObject<UserDTO>(result);
+
                 // Create a ClaimsIdentity and add claims
                 var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
                 identity.AddClaim(new Claim(ClaimTypes.Name, userDTO.UserName));
@@ -52,9 +53,10 @@ namespace gym_management_system_front_end.Controllers
                     HttpOnly = true
                 });
 
+                TempData["success"] = "Wellcome!";
+
                 return RedirectToAction("Index", "Home");
             }
-
             else
             {
                 var errorResponse = await response.Content.ReadAsStringAsync();
@@ -63,11 +65,12 @@ namespace gym_management_system_front_end.Controllers
                 {
                     ModelState.AddModelError(error.Key, string.Join("", error.Value));
                 }
-                ModelState.AddModelError(string.Empty, "wrong username or password.");
+                ModelState.AddModelError(string.Empty, "Wrong username or password.");
             }
 
             return LogIn();
         }
+
 
         public IActionResult RegisterAdmin()
         {
