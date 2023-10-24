@@ -1,19 +1,19 @@
 ﻿@model gym_management_system_front_end.Models.RegisterClientDTO
 
-<div class="d-flex justify-content-center align-items-center backgroundFormClass" style="min-height: 87vh;">
-    <div class="col-md-6 bg-dark rounded p-4 border border-1 border-primary rounded glassClassForm">
+<div class="d-flex justify-content-center align-items-center backgroundFormClass mb-4" style="min-height: 87vh;">
+    <div class="col-lg-6 col-11 bg-dark rounded p-2  border border-1 border-primary rounded glassClassForm">
         <h4 class="text-white text-center mb-4">Register Client</h4>
         <form asp-action="RegisterClient" asp-controller="User">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-6">
                 <label asp-for="Email" class="control-label text-white"></label>
                 <input asp-for="Email" class="form-control rounded rounded-3 border border-1 border-primary" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group col-6">
                 <label asp-for="Password" class="control-label text-white"></label>
                 <input asp-for="Password" type="password" class="form-control rounded rounded-3 border border-1 border-primary" />
                 <span asp-validation-for="Password" class="text-danger"></span>
@@ -21,13 +21,13 @@
             </div>
 
             <div class="row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-6">
                 <label asp-for="UserName" class="control-label text-white"></label>
                 <input asp-for="UserName" class="form-control rounded border rounded-3 border-1 border-primary" />
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group col-6">
                 <label asp-for="PhoneNumber" class="control-label text-white"></label>
                 <input asp-for="PhoneNumber" type="number" class="form-control rounded rounded-3  border border-1 border-primary" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
@@ -35,7 +35,7 @@
             </div>
 
             <div class="row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-6">
                     <label asp-for="GymID" class="">Gym</label>
                     <select class="form-select border border-1 border-primary text-center" asp-for="GymID">
                         @{
@@ -47,7 +47,7 @@
                     </select>
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-6">
                     <label asp-for="SubscriptionTierID">Subscription Tier</label>
                     <select class="form-select border border-1 border-primary text-center" asp-for="SubscriptionTierID">
                         @{

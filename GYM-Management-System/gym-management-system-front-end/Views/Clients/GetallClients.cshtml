@@ -13,9 +13,8 @@
 
     <h2 class="text-center">Clients List</h2>
     <p class="text-end  mx-3">
-        <a asp-action="Create" class="btn btn-primary">Create New</a>
     </p>
-        <table class="table table-borderless table-striped text-white border border-1 border-primary ">
+        <table id="ClientTable" class="table table-borderless table-striped text-white border border-1 border-primary ">
             <thead>
                 <tr class="text-center">
                     
@@ -24,6 +23,9 @@
                     <th>@Html.DisplayNameFor(model => model.Name)</th>
                     <th>@Html.DisplayNameFor(model => model.InGym)</th>
                     <th>@Html.DisplayNameFor(model => model.SubscriptionTierID)</th>
+                    <th>
+                        Actions
+                    </th>
                     
                 </tr>
             </thead>
@@ -37,9 +39,17 @@
                         <td>@Html.DisplayFor(modelItem => item.Name)</td>
                         <td>@Html.DisplayFor(modelItem => item.InGym)</td>
                         <td class="w-25">@Html.DisplayFor(modelItem => item.SubscriptionTierID)</td>
-                       
+                       <td>
+                        <a asp-controller="Clients" asp-action="Editall" asp-route-clientID="@item.ClientID" asp-route-gymID="@item.GymID" class=" btn btn-outline-warning">Edit</a>
+                        <a asp-controller="Clients" asp-action="Deleteall" asp-route-clientID="@item.ClientID" asp-route-gymID="@item.GymID"class=" btn btn-outline-danger">Delete</a>
+
+                       </td>
                     </tr>
+                   
+                   
+                
                 }
             </tbody>
         </table>
     </div>
+    
