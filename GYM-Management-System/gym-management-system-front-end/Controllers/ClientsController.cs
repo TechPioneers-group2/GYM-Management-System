@@ -43,31 +43,7 @@ namespace gym_management_system_front_end.Controllers
 			return View(clientList);
         }
 
-        [HttpGet]
-        public IActionResult Chart()
-        { 
-             List<ClientViewModel> clientList = new List<ClientViewModel>();
-            var response = _client.GetAsync( _client.BaseAddress + "/GetAllClientsBackEnd/").Result;
-
-            if (response.IsSuccessStatusCode)
-            {
-                string data = response.Content.ReadAsStringAsync().Result;
-                clientList = JsonConvert.DeserializeObject<List<ClientViewModel>>(data);
-            }
-
-            int clientsInGymCount = clientList.Count(c => c.InGym );
-            int clientsNotInGymCount = clientList.Count(c => !c.InGym);
-
-
-            // Pass the counts to the view
-            ViewBag.ClientsInGymCount = clientsInGymCount;
-            ViewBag.ClientsNotInGymCount = clientsNotInGymCount;
-
-
-            return View(clientList);
-        }
-
-
+       
 
         public IActionResult GetallClients()
         {
@@ -82,6 +58,8 @@ namespace gym_management_system_front_end.Controllers
 
             return View(clientList);
         }
+
+
 
 
         public async Task<ActionResult<ClientViewModel>> Details(int clientID, int gymID)
@@ -100,6 +78,19 @@ namespace gym_management_system_front_end.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Edit(int clientID, int gymID)
+        {
+            ClientViewModel model = new ClientViewModel();
+            HttpResponseMessage response = _client.GetAsync($"{_client.BaseAddress}/GetClientBackEnd/{clientID}/gym/{gymID}").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string Data = response.Content.ReadAsStringAsync().Result;
+                model = JsonConvert.DeserializeObject<ClientViewModel>(Data);
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Editall(int clientID, int gymID)
         {
             ClientViewModel model = new ClientViewModel();
             HttpResponseMessage response = _client.GetAsync($"{_client.BaseAddress}/GetClientBackEnd/{clientID}/gym/{gymID}").Result;
@@ -135,7 +126,29 @@ namespace gym_management_system_front_end.Controllers
             return View();
         }
 
-       
+        [HttpPost]
+        public async Task<IActionResult> Editall(int clientID, int gymID, UpdateClientDTO clientDTO)
+        {
+            string data = JsonConvert.SerializeObject(clientDTO);
+
+            // Create the URL for the PUT request
+            string url = _client.BaseAddress + "/PutClientBackEnd/" + clientID + "/gym/" + gymID;
+
+            // Create the request content
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+
+            // Send the PUT request
+            HttpResponseMessage response = _client.PutAsync(url, content).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["success"] = "Client Updated successfully";
+                return RedirectToAction("GetallClients");
+            }
+
+            TempData["error"] = "Failed to update client. Please try again.";
+            return View();
+        }
 
 
         [HttpGet]
@@ -182,7 +195,51 @@ namespace gym_management_system_front_end.Controllers
         }
 
 
-       
+
+        [HttpGet]
+        public IActionResult Deleteall(int clientID, int gymID)
+        {
+            ClientViewModel del = new ClientViewModel();
+            HttpResponseMessage response = _client.GetAsync($"{_client.BaseAddress}/GetClientBackEnd/{clientID}/gym/{gymID}").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string Data = response.Content.ReadAsStringAsync().Result;
+                del = JsonConvert.DeserializeObject<ClientViewModel>(Data);
+            }
+            return View(del);
+        }
+
+        [HttpPost, ActionName("Deleteall")]
+        public async Task<IActionResult> DeleteallConfirmed(int clientID, int gymID)
+        {
+            try
+            {
+                // Construct the full URL for the DELETE request
+                string deleteUrl = $"{_client.BaseAddress}/DeleteClientBackEnd/{clientID}/gym/{gymID}";
+
+                // Send the HTTP DELETE request
+                HttpResponseMessage response = await _client.DeleteAsync(deleteUrl);
+
+                // Check if the request was successful
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["success"] = "Client Deleted successfully";
+                    return RedirectToAction("Index", new { gymID = gymID });
+                }
+                else
+                {
+                    TempData["error"] = "Failed to delete client. Please try again.";
+                    return RedirectToAction("Index", new { gymID = gymID });
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = "An error occurred while processing your request.";
+                return View("Error");
+            }
+        }
+
+
     }
 
 
