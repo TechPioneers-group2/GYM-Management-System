@@ -532,8 +532,8 @@
 
 @media (min-width: 992px) {
     #mainNav {
-        padding-top: 1.5rem;
-        padding-bottom: 1.5rem;
+        padding-top: 1rem;
+        padding-bottom: 0.5rem;
         border: none;
         background-color: transparent;
         transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
@@ -964,8 +964,11 @@ header.masthead {
 }
 
 .backgroundGymClass {
+
+    /*khamzat*/
+
     background-image: url('https://techpioneers.blob.core.windows.net/images/GymsBG.png') !important; /* Replace with the path to your image */
-    background-size:cover !important;
+    background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center center !important;
     width: 100vw !important;
@@ -974,6 +977,19 @@ header.masthead {
     top: 0 !important;
     left: 0 !important;
     bottom: 0 !important;
+    z-index: -5 !important;
+}
+
+.backgroundFormsClass {
+
+    /*dumbbell*/
+
+    background-image: url('https://techpioneers.blob.core.windows.net/images/W.png') !important; /* Replace with the path to your image */
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    width: 100vw !important;
+    height: 100vh !important;
     z-index: -5 !important;
 }
 
