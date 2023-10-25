@@ -348,5 +348,7 @@ namespace GYM_Management_System.Data
         public DbSet<Supplement> Supplements { get; set; }
         public DbSet<GymSupplement> GymSupplements { get; set; }
         public DbSet<SubscriptionTier> SubscriptionTiers { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Cart> Carts { get; set; }
     }
 }
