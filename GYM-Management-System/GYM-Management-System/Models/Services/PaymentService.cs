@@ -48,7 +48,7 @@ namespace GYM_Management_System.Models.Services
         {
             StripeConfiguration.ApiKey = "sk_test_51Nu9apGTsxCj81xc4G7NzFGmwMldXKwNwRsxl2dQdabXZJ8VITVSQlpREi0j8qy8qQwdMKPo0FhOVvvUlst2Bi8900rdC6MHnn";
 
-            string domain = "https://gms-front-end.azurewebsites.net/";
+            string domain = "https://gms-front-end.azurewebsites.net";
 
             var options = new SessionCreateOptions
             {
