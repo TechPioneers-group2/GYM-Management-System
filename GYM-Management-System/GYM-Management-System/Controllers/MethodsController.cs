@@ -69,5 +69,11 @@ namespace GYM_Management_System.Controllers
         {
             await _email.RecieveEmail(dto.senderEmail, dto.senderName, dto.emailBody);
         }
+
+        [HttpPost]
+        public async Task StoreOrder(Order order)
+        {
+
+        }
     }
 }

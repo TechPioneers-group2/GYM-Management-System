@@ -91,16 +91,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "faf2b4ef-56ef-43d3-878c-dc9372305e30",
+                            ConcurrencyStamp = "44e3e223-65c4-4158-93fa-799fe8d20dd8",
                             Email = "adminUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMINUSER@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAELokwKb/nTW5ldwZenJR8EmLg8Ih/l6DEvyzzmZeLUISU2Cp52Ik1L2fTAplRZz50g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIfpgyxmeps/NyuefnjW3rs+O1zOCM5DeMM481HrcmQe1fTiUMJzPqvyXRNRWGF/6Q==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "097998cb-3fdd-47e3-8da7-1748ac5af4e7",
+                            SecurityStamp = "0ef9d5cd-7815-41cf-8358-54d10c3d9ed7",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
@@ -108,16 +108,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f1aa117b-27cd-4a3a-a8b9-9c472ee4bced",
+                            ConcurrencyStamp = "002aeb8e-629b-4ef4-b7a3-3c437f338c95",
                             Email = "employeeUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "EMPLOYEEUSER@EXAMPLE.COM",
                             NormalizedUserName = "EMPLOYEE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEG8Kxq753OoAYW/yvMjU+NCLWtFhON/N8jC/wn2v3q5uFKEZ54m8x+aGZ7D3ZEFTNA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEfVEm0e8VGoItnvFLW531fvPQJMgW5eI3suhrIQqaiKj/dHhHft7lMYgumV5/jVpg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "623cb1ff-8dc4-46b6-ba88-35e327e7e973",
+                            SecurityStamp = "5ea1e9bb-840e-439c-85cd-c1eb33087615",
                             TwoFactorEnabled = false,
                             UserName = "Employee"
                         },
@@ -125,16 +125,16 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3b71e7aa-e702-4bca-a6ce-74d6a86b5a61",
+                            ConcurrencyStamp = "59c84fc0-369d-47db-8389-8c0c3a9ffe02",
                             Email = "ClientUser@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENTUSER@EXAMPLE.COM",
                             NormalizedUserName = "CLIENT",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFGCTk9USSg0/73gqFDxOuobcR82VhYZhEJDMwansVTKhP/i7x+oeuXx4gKtbEPdfg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKKD0xDdaXmXNGZXTSsQOkkY2SEc6RMy0uC1xRZ0AheCDmD9GTLuLAYke9PXjTv5+w==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fb29707d-0a6f-45d5-997e-7da01f9166cc",
+                            SecurityStamp = "59ffa87f-a077-4eb1-a629-a9d43294da39",
                             TwoFactorEnabled = false,
                             UserName = "Client"
                         },
@@ -142,19 +142,57 @@ namespace GYM_Management_System.Migrations
                         {
                             Id = "4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5b1214a4-991b-4e14-9923-25d6fb959e81",
+                            ConcurrencyStamp = "06315dbc-4292-4780-968a-721df80c95ce",
                             Email = "Client2User@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENT2USER@EXAMPLE.COM",
                             NormalizedUserName = "CLIENT2",
-                            PasswordHash = "AQAAAAIAAYagAAAAEM2LMBPGIXWoZ4D/HEgFoawMz/3dTR79xqttAdVAML6VOd/JHqZnPUeZj1qUeNhPhg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECd5N+nKyR7fH1wR8r2RJNEtSDkWZCS4mDEvzZJw9xwODeEwWs1Sdu1F5fqWhzcydQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e033792d-b7ae-4b93-bf82-9c79dd801296",
+                            SecurityStamp = "f574fe82-2567-4f42-9c6d-172a7e307d9f",
                             TwoFactorEnabled = false,
                             UserName = "Client2"
                         });
+                });
+
+            modelBuilder.Entity("GYM_Management_System.Models.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Orderid")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("imageURL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("supplementid")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Orderid");
+
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("GYM_Management_System.Models.Client", b =>
@@ -203,8 +241,8 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             InGym = false,
                             Name = "Client",
-                            SubscriptionDate = new DateTime(2023, 10, 25, 16, 38, 27, 978, DateTimeKind.Local).AddTicks(3645),
-                            SubscriptionExpiry = new DateTime(2024, 4, 25, 16, 38, 27, 978, DateTimeKind.Local).AddTicks(3655),
+                            SubscriptionDate = new DateTime(2023, 10, 25, 17, 52, 2, 319, DateTimeKind.Local).AddTicks(1751),
+                            SubscriptionExpiry = new DateTime(2024, 4, 25, 17, 52, 2, 319, DateTimeKind.Local).AddTicks(1761),
                             SubscriptionTierID = 1,
                             UserId = "3"
                         },
@@ -214,8 +252,8 @@ namespace GYM_Management_System.Migrations
                             GymID = 1,
                             InGym = true,
                             Name = "Client2",
-                            SubscriptionDate = new DateTime(2023, 10, 25, 16, 38, 27, 978, DateTimeKind.Local).AddTicks(3661),
-                            SubscriptionExpiry = new DateTime(2024, 4, 25, 16, 38, 27, 978, DateTimeKind.Local).AddTicks(3662),
+                            SubscriptionDate = new DateTime(2023, 10, 25, 17, 52, 2, 319, DateTimeKind.Local).AddTicks(1769),
+                            SubscriptionExpiry = new DateTime(2024, 4, 25, 17, 52, 2, 319, DateTimeKind.Local).AddTicks(1770),
                             SubscriptionTierID = 1,
                             UserId = "4"
                         });
@@ -440,6 +478,24 @@ namespace GYM_Management_System.Migrations
                     b.HasIndex("SupplementID");
 
                     b.ToTable("GymSupplements");
+                });
+
+            modelBuilder.Entity("GYM_Management_System.Models.Order", b =>
+                {
+                    b.Property<string>("id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("GYM_Management_System.Models.SubscriptionTier", b =>
@@ -835,6 +891,13 @@ namespace GYM_Management_System.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("GYM_Management_System.Models.Cart", b =>
+                {
+                    b.HasOne("GYM_Management_System.Models.Order", null)
+                        .WithMany("cartViewModels")
+                        .HasForeignKey("Orderid");
+                });
+
             modelBuilder.Entity("GYM_Management_System.Models.Client", b =>
                 {
                     b.HasOne("GYM_Management_System.Models.Gym", "Gym")
@@ -955,6 +1018,11 @@ namespace GYM_Management_System.Migrations
                     b.Navigation("GymEquipments");
 
                     b.Navigation("GymSupplements");
+                });
+
+            modelBuilder.Entity("GYM_Management_System.Models.Order", b =>
+                {
+                    b.Navigation("cartViewModels");
                 });
 
             modelBuilder.Entity("GYM_Management_System.Models.SubscriptionTier", b =>
