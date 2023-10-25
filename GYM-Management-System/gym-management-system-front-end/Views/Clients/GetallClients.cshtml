@@ -4,52 +4,44 @@
     ViewData["Title"] = "GetallClients";
 }
 
+<div class="container mt-5 pt-5">
 
-    
-
-   
-    <div class="container mt-5 pt-5">
-       
 
     <h2 class="text-center">Clients List</h2>
     <p class="text-end  mx-3">
     </p>
-        <table id="ClientTable" class="table table-borderless table-striped text-white border border-1 border-primary ">
-            <thead>
-                <tr class="text-center">
-                    
-                    <th>@Html.DisplayNameFor(model => model.ClientID)</th>
-                    <th>@Html.DisplayNameFor(model => model.GymID)</th>
-                    <th>@Html.DisplayNameFor(model => model.Name)</th>
-                    <th>@Html.DisplayNameFor(model => model.InGym)</th>
-                    <th>@Html.DisplayNameFor(model => model.SubscriptionTierID)</th>
-                    <th>
-                        Actions
-                    </th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr class="text-center text-primary">
-                       
-                        <td>@Html.DisplayFor(modelItem => item.ClientID)</td>
-                        <td>@Html.DisplayFor(modelItem => item.GymID)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                        <td>@Html.DisplayFor(modelItem => item.InGym)</td>
-                        <td class="w-25">@Html.DisplayFor(modelItem => item.SubscriptionTierID)</td>
-                       <td>
-                        <a asp-controller="Clients" asp-action="Editall" asp-route-clientID="@item.ClientID" asp-route-gymID="@item.GymID" class=" btn btn-outline-warning">Edit</a>
-                        <a asp-controller="Clients" asp-action="Deleteall" asp-route-clientID="@item.ClientID" asp-route-gymID="@item.GymID"class=" btn btn-outline-danger">Delete</a>
+    <table id="ClientTable" class="table table-borderless table-striped text-white border border-1 border-primary ">
+        <thead>
+            <tr class="text-center">
 
-                       </td>
-                    </tr>
-                   
-                   
-                
-                }
-            </tbody>
-        </table>
-    </div>
-    
+                <th>@Html.DisplayNameFor(model => model.ClientID)</th>
+                <th>@Html.DisplayNameFor(model => model.GymID)</th>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.InGym)</th>
+                <th>@Html.DisplayNameFor(model => model.SubscriptionTierID)</th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="text-center text-primary">
+
+                    <td>@Html.DisplayFor(modelItem => item.ClientID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.GymID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.InGym)</td>
+                    <td class="w-25">@Html.DisplayFor(modelItem => item.SubscriptionTierID)</td>
+                    <td>
+                        <a asp-controller="Clients" asp-action="Editall" asp-route-clientID="@item.ClientID" asp-route-gymID="@item.GymID" class=" btn btn-outline-warning">Edit</a>
+                        <a asp-controller="Clients" asp-action="Deleteall" asp-route-clientID="@item.ClientID" asp-route-gymID="@item.GymID" class=" btn btn-outline-danger">Delete</a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
