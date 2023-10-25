@@ -165,16 +165,12 @@ namespace gym_management_system_front_end.Controllers
             var itemlist = (ViewResult)await Index();
             var cartItems = (List<CartViewModel>)itemlist.Model;
 
-            // Use an HttpClient to send a POST request to your API
             using (HttpClient client = new HttpClient())
             {
-                // Set your API base URL here
 
-                // Serialize the cart items to JSON
                 string jsonCartItems = JsonConvert.SerializeObject(cartItems);
                 HttpContent content = new StringContent(jsonCartItems, Encoding.UTF8, "application/json");
 
-                // Send an HTTP POST request to the API Controller endpoint
                 HttpResponseMessage response = await client.PostAsync(_client.BaseAddress + "Methods/PaymentBackEnd", content);
 
                 if (response.IsSuccessStatusCode)
@@ -183,14 +179,11 @@ namespace gym_management_system_front_end.Controllers
                     var jsondata = await response.Content.ReadAsStringAsync();
                     var se = JsonConvert.DeserializeObject<Session>(jsondata);
                     Response.Headers.Add("Location", se.Url);
-                    //Response.Headers.Add("Location", jsondata);
                     return new StatusCodeResult(303);
 
                 }
                 else
                 {
-                    // Handle the API request failure, such as displaying an error message
-                    // You can redirect to an error page or show an error message to the user
                     RedirectToAction("Index,Home");
                 }
 

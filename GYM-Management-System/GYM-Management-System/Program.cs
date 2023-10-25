@@ -4,6 +4,7 @@ using GYM_Management_System.Models;
 using GYM_Management_System.Models.Interfaces;
 using GYM_Management_System.Models.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -86,6 +87,28 @@ namespace gym_management_system_front_end.Models
             });
 
             var app = builder.Build();
+
+            // Use middleware for error handling
+            app.UseExceptionHandler(errorApp =>
+            {
+                errorApp.Run(async context =>
+                {
+                    context.Response.StatusCode = 500; // or another Status according to Exception Type
+                    context.Response.ContentType = "application/json";
+
+                    var error = context.Features.Get<IExceptionHandlerFeature>();
+                    if (error != null)
+                    {
+                        var ex = error.Error;
+
+                        var logger = app.Services.GetRequiredService<ILogger<Program>>();
+                        logger.LogError(ex, "An error occurred");
+
+                        await context.Response.WriteAsync(ex.Message);
+                    }
+                });
+            });
+
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -98,7 +121,7 @@ namespace gym_management_system_front_end.Models
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/api/v1/swagger.json", "Gym-System");
-                options.RoutePrefix = "docs";
+                options.RoutePrefix = "";
             });
 
             app.MapGet("/", () => "Hello World!");
