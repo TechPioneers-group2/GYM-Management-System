@@ -10,7 +10,7 @@ namespace gym_management_system_front_end.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly HttpClient _Client;
-        private Uri baseAddress = new Uri("https://localhost:7200/api/Methods/");
+        private Uri baseAddress = new Uri("https://gym-management-system.azurewebsites.net/api/Methods/");
         public HomeController(ILogger<HomeController> logger, HttpClient httpClient)
         {
             _logger = logger;

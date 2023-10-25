@@ -7,7 +7,7 @@ namespace gym_management_system_front_end.Controllers
 {
     public class SubscriptionTiersController : Controller
     {
-        Uri baseAddress = new Uri("https://localhost:7200/api/SubscriptionTiers");
+        Uri baseAddress = new Uri("https://gym-management-system.azurewebsites.net/api/SubscriptionTiers");
         private readonly HttpClient _client;
 
         public SubscriptionTiersController()
