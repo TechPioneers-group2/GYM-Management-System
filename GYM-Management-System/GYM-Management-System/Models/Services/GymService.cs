@@ -41,7 +41,8 @@ namespace GYM_Management_System.Models.Services
                 CurrentCapacity = gym.CurrentCapacity,
                 MaxCapacity = gym.MaxCapacity,
                 ActiveHours = gym.ActiveHours,
-                Notification = gym.Notification
+                Notification = gym.Notification,
+                imageURL = gym.imageURL
             };
 
             _gymDbContext.Gyms.AddAsync(newGym);
@@ -54,7 +55,8 @@ namespace GYM_Management_System.Models.Services
                 CurrentCapacity = gym.CurrentCapacity,
                 MaxCapacity = gym.MaxCapacity,
                 ActiveHours = gym.ActiveHours,
-                Notification = gym.Notification
+                Notification = gym.Notification,
+                imageURL = gym.imageURL
             };
             return postGymDTO;
         }
@@ -94,6 +96,7 @@ namespace GYM_Management_System.Models.Services
                             Name = x.Supplements.Name,
                             Price = x.Supplements.Price,
                             Description = x.Supplements.Description,
+                            imageURL = x.Supplements.imageURL
                         }
                     })
                     .ToList();
@@ -106,6 +109,7 @@ namespace GYM_Management_System.Models.Services
                         Quantity = eqp.Quantity,
                         OutOfService = eqp.OutOfService,
                         GymEquipmentID = eqp.GymEquipmentID,
+                        PhotoUrl = eqp.PhotoUrl,
                     }).ToListAsync();
 
                 var suppTierList = await _gymDbContext.SubscriptionTiers
@@ -125,6 +129,7 @@ namespace GYM_Management_System.Models.Services
                         MaxCapacity = Gm.MaxCapacity,
                         ActiveHours = Gm.ActiveHours,
                         Notification = Gm.Notification,
+                        imageURL = Gm.imageURL
                     }).FirstOrDefaultAsync(gm => gm.GymID == gymid);
 
                 if (returnVar == null)
@@ -167,6 +172,7 @@ namespace GYM_Management_System.Models.Services
                     MaxCapacity = Gm.MaxCapacity,
                     ActiveHours = Gm.ActiveHours,
                     Notification = Gm.Notification,
+                    imageURL = Gm.imageURL,
                     Equipments = Gm.GymEquipments
                     .Where(eqid => eqid.GymID == Gm.GymID)
                     .Select(geq => new EquipmentDTO
@@ -232,6 +238,7 @@ namespace GYM_Management_System.Models.Services
                         MaxCapacity = Gm.MaxCapacity,
                         ActiveHours = Gm.ActiveHours,
                         Notification = Gm.Notification,
+                        imageURL = Gm.imageURL,
                         Equipments = Gm.GymEquipments
                         .Where(eqid => eqid.GymID == Gm.GymID)
                         .Select(geq => new EquipmentDTO()
@@ -240,6 +247,7 @@ namespace GYM_Management_System.Models.Services
                             Name = geq.Name,
                             OutOfService = geq.OutOfService,
                             Quantity = geq.Quantity,
+                            PhotoUrl = geq.PhotoUrl
                         }).ToList(),
                         Supplements = Gm.GymSupplements.Select(GS => new GymSupplementDTO()
                         {
@@ -283,6 +291,11 @@ namespace GYM_Management_System.Models.Services
 
             Gym currentGym = await _gymDbContext.Gyms.FindAsync(gymid);
 
+            if (updatedGym.imageURL == null)
+            {
+                updatedGym.imageURL = currentGym.imageURL;
+            }
+
             if (currentGym.Notification != notificationStatus)
             {
                 var clients = _gymDbContext.Clients
@@ -313,6 +326,7 @@ namespace GYM_Management_System.Models.Services
                 currentGym.CurrentCapacity = updatedGym.CurrentCapacity;
                 currentGym.ActiveHours = updatedGym.ActiveHours;
                 currentGym.Notification = updatedGym.Notification;
+                currentGym.imageURL = updatedGym.imageURL;
                 _gymDbContext.Entry(currentGym).State = EntityState.Modified;
                 await _gymDbContext.SaveChangesAsync();
 
@@ -323,6 +337,7 @@ namespace GYM_Management_System.Models.Services
                     CurrentCapacity = updatedGym.CurrentCapacity,
                     ActiveHours = updatedGym.ActiveHours,
                     Notification = updatedGym.Notification,
+                    imageURL = updatedGym.imageURL
                 };
 
                 return getGymDTO;
@@ -386,5 +401,13 @@ namespace GYM_Management_System.Models.Services
                 await _gymDbContext.SaveChangesAsync();
             }
         }
+
+        //public async Task<GetSupplementFromGymDTO> GetSupplementFromGym(int supplemendid, int gymid)
+        //{
+        //    var sup = await _gymDbContext.Gyms.Select(x => new GetSupplementFromGymDTO()
+        //    {
+        //        Qantity=x.Q
+        //    });
+        //}
     }
 }

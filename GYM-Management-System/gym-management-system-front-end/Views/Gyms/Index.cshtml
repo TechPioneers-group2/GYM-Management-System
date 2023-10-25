@@ -1,75 +1,43 @@
 ﻿@model IEnumerable<gym_management_system_front_end.Models.GymViewModel>
 
 @{
-    ViewData["Title"] = "Index";
-   
-    Layout = "_Admin";
+    ViewData["Title"] = "";
 
 }
 
-<h1>Index</h1>
+<div class="h-100  mh-100 my-4 pt-5 text-center">
+    <div class="container ">
 
-<p>
-    <a asp-action="Create" asp-controller="Gyms">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.GymID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxCapacity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CurrentCapacity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ActiveHours)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Notification)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GymID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MaxCapacity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CurrentCapacity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ActiveHours)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Notification)
-                </td>
-                <td>
-                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.GymID">Edit</a> |
-                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.GymID">Details</a> |
-                    <a class="btn btn-danger" href="@Url.Action("Delete", new {id = item.GymID}) ">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+        <div class="text-start">
+            <a class="btn btn-success mt-5" asp-action="Create" asp-controller="Gyms">Create New</a>
+        </div>
+
+        <h2 class="text-start mt-2">Gyms List</h2>
+
+        <table class="table table-bordered align-middle text-center">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th class="text-light col-md-1" scope="col">Gym ID</th>
+                    <th class="text-light col-md-3" scope="col">Name</th>
+                    <th class="text-light col-md-8 ps-5" scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var gym in Model)
+                {
+                    <tr>
+                        <th class="text-light col-md-1 px-4" scope="row">@gym.GymID</th>
+                        <td class="text-light col-md-2">@gym.Name</td>
+                        <td>
+                            <div class="d-flex justify-content-evenly" role="group">
+                                <a class="btn btn-outline-primary" asp-controller="Gyms" asp-action="Details" asp-route-id="@gym.GymID">Details</a>
+                                <a class="btn btn-outline-warning mx-3" asp-controller="Gyms" asp-action="Edit" asp-route-id="@gym.GymID">Edit</a>
+                                <a class="btn btn-outline-danger" asp-controller="Gyms" asp-action="Delete" asp-route-id="@gym.GymID">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,54 +1,55 @@
 ﻿@model IEnumerable<gym_management_system_front_end.Models.ClientViewModel>
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "_Admin";
+    ViewData["Title"] = "GetClients";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Clients List</title>
-</head>
-<body>
-    <p>
-        <a asp-action="Create" class="btn btn-primary">Create New</a>
+
+    
+
+   
+    <div class="container mt-5 pt-5">
+       
+
+    <h2 class="text-center">Clients List</h2>
+    <p class="text-end  mx-3">
     </p>
-    <div class="container">
-        <h2>Clients List</h2>
-        <table class="table table-bordered">
+        <table id="ClientTable" class="table table-borderless table-striped text-white border border-1 border-primary ">
             <thead>
-                <tr>
-                    <th>User ID</th>
-                    <th>Client ID</th>
-                    <th>Gym ID</th>
-                    <th>Name</th>
-                    <th>In Gym</th>
-                    <th>Subscription Tier ID</th>
-                    <th>Actions</th>
+                <tr class="text-center">
+                    
+                    <th>@Html.DisplayNameFor(model => model.ClientID)</th>
+                    <th>@Html.DisplayNameFor(model => model.GymID)</th>
+                    <th>@Html.DisplayNameFor(model => model.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.InGym)</th>
+                    <th>@Html.DisplayNameFor(model => model.SubscriptionTierID)</th>
+                    <th>
+                        Actions
+                    </th>
+                    
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>@item.UserId</td>
-                        <td>@item.ClientID</td>
-                        <td>@item.GymID</td>
-                        <td>@item.Name</td>
-                        <td>@item.InGym</td>
-                        <td>@item.SubscriptionTierID</td>
-                        <td>
-                            <a asp-action="Edit" asp-route-clientID="@item.ClientID" asp-route-gymID="@item.GymID" class="btn btn-warning">Edit</a>
-                            <a asp-action="Details" asp-route-clientID="@item.ClientID" asp-route-gymID="@item.GymID" class="btn btn-primary">Details</a>
-                            <a asp-action="Delete" asp-route-clientID="@item.ClientID" asp-route-gymID="@item.GymID" class="btn btn-danger">Delete</a>
-                        </td>
+                    <tr class="text-center text-primary">
+                       
+                        <td>@Html.DisplayFor(modelItem => item.ClientID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.GymID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.InGym)</td>
+                        <td class="w-25">@Html.DisplayFor(modelItem => item.SubscriptionTierID)</td>
+                       <td>
+                        <a asp-controller="Clients" asp-action="Edit" asp-route-clientID="@item.ClientID" asp-route-gymID="@item.GymID" class=" btn btn-outline-warning">Edit</a>
+                        <a asp-controller="Clients" asp-action="Delete" asp-route-clientID="@item.ClientID" asp-route-gymID="@item.GymID"class=" btn btn-outline-danger">Delete</a>
+
+                       </td>
                     </tr>
+                   
+                   
+                
                 }
             </tbody>
         </table>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+    

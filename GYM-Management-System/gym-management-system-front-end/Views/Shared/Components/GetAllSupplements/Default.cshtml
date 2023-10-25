@@ -1,19 +1,56 @@
-﻿@model IEnumerable<gym_management_system_front_end.Models.SupplementViewModel>
+@model IEnumerable<gym_management_system_front_end.Models.SupplementViewModel>
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<link href="~/css/supplementscards.css" rel="stylesheet" />
+
 
 <div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col-md-4 mb-4 supplementscard">
-            <div class="card">
-                <img src="https://cdn.pixabay.com/photo/2015/01/10/18/45/gym-595597_1280.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text">@item.Price</p>
-                    <p class="card-text">@item.Description</p>
+    @{
+        int counter = 0;
+        foreach (var item in Model)
+        {
+            if (counter < 8)
+            {
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <a asp-controller="Supplement" asp-action="Details" asp-route-id="@item.SupplementID" data-toggle="tooltip" title="Click to see the details of this supplement">
+                            <img src="@item.imageURL" class="card-img-top" alt="product.title" />
+                        </a>
+
+                        <div class="card-body">
+                            <div class="clearfix mb-3">
+                                <span class="float-start badge rounded-pill bg-success"> @item.Price.ToString("0.00") JD</span>
+                            </div>
+                            <h5 class="card-title">
+                                <a asp-controller="Supplement" asp-action="Details" asp-route-id="@item.SupplementID" class="fw-bold">@item.Name</a>
+                            </h5>
+                            <div class="d-grid gap-2 my-4">
+                                <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.SupplementID" class="btn btn-warning bold-btn">add to cart</a>
+                            </div>
+                            <div class="clearfix mb-1">
+                                <span class="float-start">
+                                    <a href="/Home/Index#contact">
+                                        <i class="fas fa-question-circle text-secondary" style="cursor: pointer"></i>
+                                </a></span>
+                                <span class="float-end">
+                                    <i class="far fa-heart " style="cursor: pointer; color:red;"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+                counter++;
+            }
+            else
+            {
+                break;
+            }
+        }
     }
 </div>
-
-<link rel="stylesheet" href="./css/site.css">
+<div class="d-grid gap-2">
+    <a class="btn btn-lg btn-outline-info seeMoreBtn" asp-controller="Supplement" asp-action="ClientIndex">SEE MORE<i class="bi bi-arrow-right ms-3 fw-bold"></i></a>
+</div>

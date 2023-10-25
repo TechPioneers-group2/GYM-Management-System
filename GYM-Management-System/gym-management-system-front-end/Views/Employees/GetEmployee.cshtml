@@ -5,57 +5,50 @@
 }
 
 
-
-<div>
-    <h2>@Model.Name</h2>
-
-    <dl class="row">
-        <dt class="col-sm-2">
-           <label asp-for="EmployeeID"> Employee ID</label>
-        </dt>
-        <dd class="col-sm-10">
-            <label asp-for="EmployeeID"> @Model.EmployeeID</label>
-
-        </dd>
-        <dt class="col-sm-2">
-            <label asp-for="JobDescription"> Job Description</label>
-        </dt>
-        <dd class="col-sm-10">
-            <label asp-for="EmployeeID"> @Model.JobDescription</label>
-        </dd>
-        <dt class="col-sm-2">
-            <label asp-for="Salary"> Salary</label>
-        </dt>
-        <dd class="col-sm-10">
-            <label asp-for="Salary"> @Model.Salary</label>
-        </dd>
-        <dt class="col-sm-2">
-            <label asp-for="GymID"> GymID</label>
-        </dt>
-        <dd class="col-sm-10">
-            <label asp-for="GymID"> @Model.GymID</label>
-        </dd>
-        <dt class="col-sm-2">
-            <label asp-for="IsAvailable"> Is Available</label>
-        </dt>
-        <dd class="col-sm-10">
-            <label asp-for="IsAvailable"> @Model.IsAvailable</label>
-        </dd>
-        <dt class="col-sm-2">
-            <label asp-for="WorkingDays"> Working Days </label>
-        </dt>
-        <dd class="col-sm-10">
-            <label asp-for="WorkingDays"> @Model.WorkingDays</label>
-        </dd>
-        <dt class="col-sm-2">
-            <label asp-for="WorkingHours"> Working Hours </label>
-        </dt>
-        <dd class="col-sm-10">
-            <label asp-for="WorkingHours"> @Model.WorkingHours</label>
-        </dd>
-     </dl>
-</div>
-<div>
-    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.EmployeeID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="container my-4 p-3 pt-5 mt-5">
+    <div class="row">
+        <div class="col-md-6 mx-auto pt-2">
+            <div class="card bg-dark">
+                <div class="card-body text-white">
+                    <h1 class="card-title">@Model.Name</h1>
+                    <table class="table text-white">
+                        <tbody>
+                            <tr>
+                                <th>Employee ID</th>
+                                <td>@Model.EmployeeID</td>
+                            </tr>
+                            <tr>
+                                <th>Job Description</th>
+                                <td>@Model.JobDescription</td>
+                            </tr>
+                            <tr>
+                                <th>Salary</th>
+                                <td>@Model.Salary</td>
+                            </tr>
+                            <tr>
+                                <th>GymID</th>
+                                <td>@Model.GymID</td>
+                            </tr>
+                            <tr>
+                                <th>Is Available</th>
+                                <td>@Model.IsAvailable</td>
+                            </tr>
+                            <tr>
+                                <th>Working Days</th>
+                                <td>@Model.WorkingDays</td>
+                            </tr>
+                            <tr>
+                                <th>Working Hours</th>
+                                <td>@Model.WorkingHours</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-between align-items-center my-4">
+                        <a asp-action="Edit" asp-route-id="@Model.EmployeeID" class="btn bold-btn btn-secondary rounded-pill">Edit</a>
+                        <a asp-action="Index" class="btn bold-btn btn-secondary rounded-pill">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

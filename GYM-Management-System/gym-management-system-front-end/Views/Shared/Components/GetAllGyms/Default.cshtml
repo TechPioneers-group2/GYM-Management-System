@@ -1,18 +1,34 @@
 ﻿@model IEnumerable<gym_management_system_front_end.Models.GymViewModel>
 
-<div class="row">
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<link href="~/css/gymshomepagecards.css" rel="stylesheet" />
+
+ 
+
+<div class="row  d-flex justify-content-center align-items-center">
     @foreach (var item in Model)
     {
-        <div class="col-md-4 mb-4 gymscard">
-            <div class="card">
-                <img src="https://cdn.pixabay.com/photo/2015/01/10/18/45/gym-595597_1280.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text">@item.Address</p>
+        <div class="col-md-6 col-lg-4 mb-4 gymscard">
+            <a href="@Url.Action("Details", "Gyms", new { id = item.GymID })" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to see the details" data-type="red">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="@item.imageURL" class="img-top " alt="...">
+                    </div>
+                    <div class="card-back">
+                        <h5 class="card-title mb-2 fw-bold text-warning">@item.Name</h5>
+                        <p class="card-text">@item.Address</p>
+                    </div>
                 </div>
-            </div>
+            </a>
+            
         </div>
     }
 </div>
 
-<link rel="stylesheet" href="./css/site.css">
+
+
+

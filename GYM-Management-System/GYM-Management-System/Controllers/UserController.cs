@@ -1,6 +1,8 @@
+using GYM_Management_System.Models;
 using GYM_Management_System.Models.DTOs;
 using GYM_Management_System.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GYM_Management_System.Controllers
@@ -12,15 +14,17 @@ namespace GYM_Management_System.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private IUser userService;
+        private readonly IUser _userService;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserController"/> class.
         /// </summary>
         /// <param name="user">The user service.</param>
-        public UserController(IUser user)
+        public UserController(IUser user, SignInManager<ApplicationUser> userMohsen)
         {
-            userService = user;
+            _userService = user;
+            _signInManager = userMohsen;
         }
 
         /// <summary>
@@ -29,9 +33,9 @@ namespace GYM_Management_System.Controllers
         /// <param name="loginDto">The login data.</param>
         /// <returns>The user's data or Unauthorized if login fails.</returns>
         [HttpPost]
-        public async Task<ActionResult<UserDTO>> Login(LogInDTO loginDto)
+        public async Task<ActionResult<UserDTO>> LoginBackEnd(LogInDTO loginDto)
         {
-            var user = await userService.LogIn(loginDto.UserName, loginDto.Password);
+            var user = await _userService.LogIn(loginDto.UserName, loginDto.Password);
             if (user == null)
             {
                 return Unauthorized();
@@ -47,9 +51,9 @@ namespace GYM_Management_System.Controllers
         //[Authorize(Roles = "Admin")]
 
         [HttpPost]
-        public async Task<ActionResult<UserDTO>> RegisterAdmin(RegisterAdminDTO Data)
+        public async Task<ActionResult<UserDTO>> RegisterAdminBackEnd(RegisterAdminDTO Data)
         {
-            var user = await userService.RegisterAdmin(Data, this.ModelState);
+            var user = await _userService.RegisterAdmin(Data, this.ModelState);
             if (ModelState.IsValid)
             {
                 if (user == null)
@@ -69,9 +73,9 @@ namespace GYM_Management_System.Controllers
         //[Authorize(Roles = "Admin, Employee")]
 
         [HttpPost]
-        public async Task<ActionResult<UserDTO>> RegisterEmployee(RegisterEmployeeDTO Data)
+        public async Task<ActionResult<UserDTO>> RegisterEmployeeBackEnd(RegisterEmployeeDTO Data)
         {
-            var user = await userService.RegisterEmployee(Data, this.ModelState);
+            var user = await _userService.RegisterEmployee(Data, this.ModelState);
             if (ModelState.IsValid)
             {
                 if (user == null)
@@ -92,9 +96,9 @@ namespace GYM_Management_System.Controllers
         [AllowAnonymous]
         [HttpPost]
 
-        public async Task<ActionResult<UserDTO>> ClientRegister(RegisterClientDTO Data)
+        public async Task<ActionResult<UserDTO>> ClientRegisterBackEnd(RegisterClientDTO Data)
         {
-            var user = await userService.RegisterUser(Data, this.ModelState);
+            var user = await _userService.RegisterUser(Data, this.ModelState);
             if (ModelState.IsValid)
             {
                 if (user == null)

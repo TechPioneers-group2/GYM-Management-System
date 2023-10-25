@@ -1,8 +1,13 @@
 ﻿@model IEnumerable<gym_management_system_front_end.Models.GymViewModel>
 
+
+@{
+    ViewData["Title"] = "Home Page";
+}
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
 
 <div class="row">
     @foreach (var item in Model)

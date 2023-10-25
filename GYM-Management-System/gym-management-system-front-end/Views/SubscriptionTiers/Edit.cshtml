@@ -2,45 +2,46 @@
 
 @{
     ViewData["Title"] = "Edit";
-    Layout = "_Admin";
-
 }
 
-<h1>@ViewData["Title"]</h1>
+<div class="container-fluid backgroundFormsClass d-flex justify-content-center align-items-center" style="min-height: 87vh;">
+    <div class="col-lg-6 col-10 bg-dark rounded p-4 border border-1 border-primary rounded glassClassForm">
+        <h4 class="text-white mb-4 text-center">Edit Subscription Tier</h4>
+        <hr />
 
-<h4>SubscriptionTiersViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
+
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label text-white">Name</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
+
+            <div class="row">
+            <div class="form-group col-md-6">
+                <label asp-for="Price" class="control-label text-white">Price</label>
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Length" class="control-label"></label>
+
+            <div class="form-group col-md-6">
+                <label asp-for="Length" class="control-label text-white">Length</label>
                 <input asp-for="Length" class="form-control" />
                 <span asp-validation-for="Length" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
+
+            <div class="form-group text-center mt-3 d-grid gap-2">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+                </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a class="btn btn-outline-danger" asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

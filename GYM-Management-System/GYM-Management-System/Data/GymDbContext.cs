@@ -58,7 +58,8 @@ namespace GYM_Management_System.Data
                     Address = "Amman - University Street - Building 25",
                     MaxCapacity = "125",
                     CurrentCapacity = 1,
-                    Notification = "Everything ok"
+                    Notification = "Everything ok",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/c.jpg"
                 },
                 new Gym
                 {
@@ -68,7 +69,8 @@ namespace GYM_Management_System.Data
                     Address = "Zarqa - 36th Street - Building 20",
                     MaxCapacity = "100",
                     CurrentCapacity = 1,
-                    Notification = "Everything ok"
+                    Notification = "Everything ok",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/v.jpg"
                 },
                 new Gym
                 {
@@ -78,7 +80,8 @@ namespace GYM_Management_System.Data
                     Address = "Irbid - Yarmouk University Street - Building 30",
                     MaxCapacity = "150",
                     CurrentCapacity = 0,
-                    Notification = "Under maintenance until 9-9-2023 AD"
+                    Notification = "Under maintenance",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/m.jpg"
                 }
             );
 
@@ -87,30 +90,75 @@ namespace GYM_Management_System.Data
                 {
                     SupplementID = 1,
                     Name = "Whey Protein Powder",
-                    Price = "80 JD",
+                    Price = 100,
                     Description = "Whey protein is a mixture of proteins isolated from whey, which is the liquid part of milk that separates during cheese production.\r\nMilk actually contains two main types of protein: casein (80%) and whey (20%).",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/WheyProteinPowder.png",
                 },
                 new Supplement
                 {
                     SupplementID = 2,
                     Name = "Creatine Monohydrate",
-                    Price = "40 JD",
+                    Price = 90,
                     Description = "Creatine is a combination of three different amino acids: glycine, arginine, and methionine.",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/CreatineMonohydrate.png",
                 },
                 new Supplement
                 {
                     SupplementID = 3,
                     Name = "Branched-Chain Amino Acids (BCAAs)",
-                    Price = "30 JD",
+                    Price = 45,
                     Description = "Branched-Chain Amino Acids (BCAAs) are a group of three essential amino acids: leucine, isoleucine, and valine. They are called branched-chain because they are the only three amino acids to have a chain that branches off to one side.",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/Branched-ChainAminoAcidsBCAAs.png",
                 },
                 new Supplement
                 {
                     SupplementID = 4,
                     Name = "Pre-Workout Blend",
-                    Price = "50 JD",
+                    Price = 60,
                     Description = "A pre-workout blend is a class of powdered drink mixes that are consumed 20-30 minutes prior to the beginning of a rigorous workout to increase exercise performance.",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/Pre-WorkoutBlend.png",
+                },
+                new Supplement
+                {
+                    SupplementID = 5,
+                    Name = "BCAA Energy Drink",
+                    Price = 5,
+                    Description = "BCAA Energy Drink is a powerful blend of Branched-Chain Amino Acids (BCAAs), providing energy and supporting muscle recovery during workouts.",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/BCAAEnergyDrink.png",
+                },
+                new Supplement
+                {
+                    SupplementID = 6,
+                    Name = "Pre-Workout Nitric Oxide Booster",
+                    Price = 60,
+                    Description = "This Pre-Workout Nitric Oxide Booster is designed to enhance focus, increase energy levels, and improve blood flow for optimal workout performance.",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/Pre-WorkoutNitricOxideBooster.png",
+                },
+                new Supplement
+                {
+                    SupplementID = 7,
+                    Name = "Glutamine Capsules",
+                    Price = 25,
+                    Description = "Glutamine Capsules provide essential amino acids that aid in muscle recovery, immune system support, and reducing muscle soreness after intense workouts.",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/GlutamineCapsules.png",
+                },
+                new Supplement
+                {
+                    SupplementID = 8,
+                    Name = "Omega-3 Fish Oil",
+                    Price = 17,
+                    Description = "Omega-3 Fish Oil supplements are rich in essential fatty acids that support cardiovascular health, joint function, and muscle recovery.",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/Omega-3FishOil.png",
+                },
+                new Supplement
+                {
+                    SupplementID = 9,
+                    Name = "L-Carnitine Fat Burner",
+                    Price = 17,
+                    Description = "L-Carnitine Fat Burner helps convert stored body fat into energy, making it an effective supplement for those looking to manage weight and increase endurance.",
+                    imageURL = "https://techpioneers.blob.core.windows.net/images/LCarnitineFatBurner.png",
                 }
+
             );
 
             modelBuilder.Entity<GymEquipment>().HasData(
@@ -121,7 +169,7 @@ namespace GYM_Management_System.Data
                     Name = "bench press",
                     Quantity = 2,
                     OutOfService = 0,
-                    img = "https://m.media-amazon.com/images/I/61cGWhpz3ZL._AC_UF1000,1000_QL80_.jpg",
+                    PhotoUrl = "https://techpioneers.blob.core.windows.net/images/61cGWhpz3ZL._AC_UF10001000_QL80_.jpg",
                 },
                 new GymEquipment
                 {
@@ -130,7 +178,7 @@ namespace GYM_Management_System.Data
                     Name = "treadmill",
                     Quantity = 10,
                     OutOfService = 2,
-                    img = "https://shop.lifefitness.com/cdn/shop/products/clubseries-plus-treadmill-titanium-storm-se3hd-1000x1000_1800x1800.jpg?v=1678726811",
+                    PhotoUrl = "https://techpioneers.blob.core.windows.net/images/clubseries-plus-treadmill-titanium-storm-se3hd-1000x1000_1800x1800.webp",
                 },
                 new GymEquipment
                 {
@@ -139,7 +187,7 @@ namespace GYM_Management_System.Data
                     Name = "dumbbells",
                     Quantity = 60,
                     OutOfService = 0,
-                    img = "https://www.bowflex.com/dw/image/v2/AAYW_PRD/on/demandware.static/-/Sites-nautilus-master-catalog/default/dwf21fb1cf/images/bfx/weights/100131/bowflex-selecttech-552-dumbbell-weights-hero.jpg?sw=2600&sh=1464&sm=fit",
+                    PhotoUrl = "https://techpioneers.blob.core.windows.net/images/bowflex-selecttech-552-dumbbell-weights-hero.webp",
                 },
                 new GymEquipment
                 {
@@ -148,7 +196,7 @@ namespace GYM_Management_System.Data
                     Name = "elliptical machine",
                     Quantity = 3,
                     OutOfService = 0,
-                    img = "https://www.precorhomefitness.com/cdn/shop/products/precor-efx-635-elliptical_5000x.jpg?v=1686422733",
+                    PhotoUrl = "https://techpioneers.blob.core.windows.net/images/precor-efx-635-elliptical_5000x.jpg",
                 });
 
 
@@ -175,7 +223,7 @@ namespace GYM_Management_System.Data
                     ClientID = 1,
                     GymID = 1,
                     Name = "Client",
-                    InGym = true,
+                    InGym = false,
                     SubscriptionTierID = 1,
                     SubscriptionDate = DateTime.Now,
                     SubscriptionExpiry = DateTime.Now.AddMonths(6),
@@ -251,8 +299,16 @@ namespace GYM_Management_System.Data
                 LockoutEnabled = false
             };
             Client2.PasswordHash = hasher.HashPassword(Client2, "Client2@123");
-
             modelBuilder.Entity<ApplicationUser>().HasData(Client2);
+
+            List<IdentityUserRole<string>> userRoles = new List<IdentityUserRole<string>>()
+    {
+            new IdentityUserRole<string> { UserId ="1" , RoleId = "Admin" },
+            new IdentityUserRole<string> { UserId = "2", RoleId = "Employee" } ,
+            new IdentityUserRole<string> { UserId = "3", RoleId = "Client" }
+
+    };
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(userRoles);
 
             SeedRole(modelBuilder, "Admin", "createAdmin", "updateAdmin", "deleteAdmin", "readAdmin");
             SeedRole(modelBuilder, "Employee", "createEmployee", "updateEmployee", "readEmployee");
@@ -264,7 +320,7 @@ namespace GYM_Management_System.Data
         {
             var role = new IdentityRole
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = roleName.ToLower(),
                 Name = roleName,
                 NormalizedName = roleName.ToUpper(),
                 ConcurrencyStamp = Guid.Empty.ToString()

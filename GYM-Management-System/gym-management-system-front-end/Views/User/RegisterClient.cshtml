@@ -1,76 +1,74 @@
 ﻿@model gym_management_system_front_end.Models.RegisterClientDTO
 
-@{
-    Layout = "_Admin";
-}
+<div class="d-flex justify-content-center align-items-center backgroundFormClass" style="min-height: 80vh;">
+    <div class="col-lg-6 col-11 bg-dark rounded p-2  border border-1 border-primary rounded glassClassForm">
+        <h4 class="text-white text-center mb-4">Register Client</h4>
+        <form asp-action="RegisterClient" asp-controller="User">
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Register Client</title>
-</head>
-<body>
-    <div class="container">
-        <h2>Register Client</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <form asp-action="RegisterClient">
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div class="form-group">
-                                <label asp-for="UserName" class="control-label"></label>
-                                <input asp-for="UserName" class="form-control" />
-                                <span asp-validation-for="UserName" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Password" class="control-label"></label>
-                                <input asp-for="Password" class="form-control" />
-                                <span asp-validation-for="Password" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Email" class="control-label"></label>
-                                <input asp-for="Email" class="form-control" />
-                                <span asp-validation-for="Email" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="PhoneNumber" class="control-label"></label>
-                                <input asp-for="PhoneNumber" class="form-control" />
-                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="UserId" class="control-label"></label>
-                                <input asp-for="UserId" class="form-control" />
-                                <span asp-validation-for="UserId" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="GymID" class="control-label"></label>
-                                <input asp-for="GymID" class="form-control" />
-                                <span asp-validation-for="GymID" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Name" class="control-label"></label>
-                                <input asp-for="Name" class="form-control" />
-                                <span asp-validation-for="Name" class="text-danger"></span>
-                            </div>
-                            <div class="form-group form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" asp-for="InGym" /> @Html.DisplayNameFor(model => model.InGym)
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="SubscriptionTierID" class="control-label"></label>
-                                <input asp-for="SubscriptionTierID" class="form-control" />
-                                <span asp-validation-for="SubscriptionTierID" class="text-danger"></span>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Create</button>
-                        </form>
-                    </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+            <div class="form-group col-6">
+                <label asp-for="Email" class="control-label text-white"></label>
+                <input asp-for="Email" class="form-control rounded rounded-3 border border-1 border-primary" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col-6">
+                <label asp-for="Password" class="control-label text-white"></label>
+                <input asp-for="Password" type="password" class="form-control rounded rounded-3 border border-1 border-primary" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="form-group col-6">
+                <label asp-for="UserName" class="control-label text-white"></label>
+                <input asp-for="UserName" class="form-control rounded border rounded-3 border-1 border-primary" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col-6">
+                <label asp-for="PhoneNumber" class="control-label text-white"></label>
+                <input asp-for="PhoneNumber" type="number" class="form-control rounded rounded-3  border border-1 border-primary" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-6">
+                    <label asp-for="GymID" class="">Gym</label>
+                    <select class="form-select border border-1 border-primary text-center" asp-for="GymID">
+                        @{
+                            foreach (var item in Model.GymIDsNames)
+                            {
+                                <option value="@item.GymID">@item.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group col-6">
+                    <label asp-for="SubscriptionTierID">Subscription Tier</label>
+                    <select class="form-select border border-1 border-primary text-center" asp-for="SubscriptionTierID">
+                        @{
+                            foreach (var item in Model.SubscriptionTierDTOs)
+                            {
+                                <option value="@item.SubscriptionTierID">@item.Name - @item.Price</option>
+                            }
+                        }
+                    </select>
                 </div>
             </div>
-        </div>
+            <div class="form-group text-center mt-3 d-grid gap-2">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+                </div>
+        </form>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

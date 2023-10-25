@@ -1,116 +1,154 @@
 ﻿@model gym_management_system_front_end.Models.GymViewModel
-
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Home Page";
 }
 
-<h1>Details</h1>
+<div class="container-fluid" style="margin-top:6.6rem;">
+    <div class="row">
+        <div class="col-md-4 bg-dark rounded p-4 mx-4 h-50">
+            <h4 class="text-white mb-4">@Model.Name</h4>
+            <table class="table">
+                <tr>
+                    <th class="text-danger">Gym ID</th>
+                    <td class="text-white">@Html.DisplayFor(model => model.GymID)</td>
+                </tr>
+                <tr>
+                    <th class="text-danger">Address</th>
+                    <td class="text-white">@Model.Address</td>
+                </tr>
+                <tr>
+                    <th class="text-danger">Current Capacity</th>
+                    <td class="text-white">@Model.CurrentCapacity</td>
+                </tr>
+                <tr>
+                    <th class="text-danger">Max Capacity</th>
+                    <td class="text-white">@Model.MaxCapacity</td>
+                </tr>
+                <tr>
+                    <th class="text-danger">Active Hours</th>
+                    <td class="text-white">@Model.ActiveHours</td>
+                </tr>
+                <tr>
+                    <th class="text-danger">Last Notification</th>
+                    <td class="text-white">@Model.Notification</td>
+                </tr>
+            </table>
 
-<div>
-    <h4>GymViewModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.GymID)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.GymID)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MaxCapacity)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MaxCapacity)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CurrentCapacity)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CurrentCapacity)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ActiveHours)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ActiveHours)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Notification)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Notification)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Equipments)
-        </dt>
-        <dd class="col-sm-10">
-            @foreach (var equipment in Model.Equipments)
-            {
-                <p>@equipment.Name</p>
-            }
-        </dd>
+            <!-- Action buttons -->
+                <div class="form-group text-center mt-3 d-grid gap-2">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-danger" asp-action="Index" asp-controller="Clients" asp-route-gymid="@Model.GymID">Get Clients</a>
+                    }
+                    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                    {
+                        <a class="btn btn-success" asp-action="AddSupplementToGym" asp-controller="Gyms" asp-route-gymid="@Model.GymID">Add Supplement</a>
+                    }
+                </div>
+            
 
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SubscriptionTier)
-        </dt>
-        <dd class="col-sm-10">
-            @foreach (var tier in Model.SubscriptionTier)
+            <!-- Subscription Tiers -->
+            @if (Model.SubscriptionTier != null)
             {
-                <p>@tier.Name</p>
+                <div class="container bg-dark rounded p-4">
+                    <h4 class="mb-3 text-white">Subscription Tiers</h4>
+                    <select class="form-select border border-1 border-primary">
+                        @foreach (var tier in Model.SubscriptionTier)
+                        {
+                            <option >@tier.Name @tier.Price</option>
+                        }
+                    </select>
+                </div>
             }
-        </dd>
-    </dl>
-    <div>
-        @if (Model.Supplements.Any())
-        {
-            <h4>Supplements</h4>
-            <ul>
-                @foreach (var supplement in Model.Supplements)
+        </div>
+
+        <!-- Equipments -->
+        <div class="col-md-7 mx-1">
+            <!-- Equipments -->
+            <div class="container bg-dark rounded mb-3 p-1">
+                <h4 class="mb-3 text-white text-center">Equipments</h4>
+                <div class="container-fluid" style="max-height: 36vh; overflow-y: auto;">
+                    <div class="row">
+                        @foreach (var equipment in Model.Equipments)
+                        {
+                            <!-- Equipment cards -->
+                            <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                                <!-- Equipment cards -->
+                                <div class="card bg-secondary text-white align-items-center mb-1 h-100">
+                                    <!-- Equipment image -->
+                                    <img src="@equipment.PhotoUrl" class="card-img-top" alt="@equipment.Name" style="object-fit:fill; height: 200px; width: 100%;">
+                                    <!-- Equipment details -->
+                                    <div class="card-body d-flex flex-column justify-content-between">
+                                        <!-- Equipment name -->
+                                        <h5 class="card-title fw-bold text-center">@equipment.Name</h5>
+                                        <!-- Equipment quantity and status -->
+                                        <h6 class="card-text d-inline-block mr-3">Quantity: @equipment.Quantity</h6>
+                                        <!-- Equipment status -->
+                                        <h6 class="card-text d-inline-block ml-3">broken: @equipment.OutOfService</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Supplements -->
+                @if (Model.Supplements != null)
                 {
-                    <li>
-                        @supplement.Supplements.Name
-                        @supplement.Supplements.Price
-                        @supplement.Quantity
-                        <a asp-action="RemoveSupplementFromGym"
-                           asp-route-gymId="@Model.GymID"
-                           asp-route-supplementId="@supplement.SupplementID">
-                            Remove
-                        </a>
-                        <a asp-action="UpdateSupplementForGym" asp-controller="Gyms"
-                           asp-route-gymId="@Model.GymID"
-                           asp-route-supplementId="@supplement.SupplementID"
-                           asp-route-quantity="@supplement.Quantity">
-                            
-                            Update
-                        </a>
-
-
-                    </li>
+                    <!-- Supplements container -->
+                    <div class="container bg-dark rounded mb-3 p-1">
+                        <!-- Supplements title -->
+                        <h4 class="mb-3 text-white text-center">Supplements</h4>
+                        <!-- Supplements list -->
+                        <div class="container-fluid" style="max-height: 33vh; overflow-y: auto;">
+                            <!-- Supplements row -->
+                            <div class="row">
+                                @foreach (var supplement in Model.Supplements)
+                                {
+                                    <!-- Supplement card -->
+                                    <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                                        <!-- Supplement card container -->
+                                        <div class="card bg-secondary text-white align-items-center mb-1 h-100">
+                                            <!-- Supplement image -->
+                                            <img src="@supplement.Supplements.imageURL" class="card-img-top mt-2" alt="@supplement.Supplements.Name" style="object-fit:contain; height: 140px; width: 100%;">
+                                            <!-- Supplement details -->
+                                            <div class="card-body d-flex flex-column align-items-center justify-content-between">
+                                                <!-- Supplement name -->
+                                                <h5 class="card-title fw-bold text-center mb-3">@supplement.Supplements.Name</h5>
+                                                <!-- Supplement price and quantity -->
+                                                <div class="d-flex w-100 justify-content-between mb-2">
+                                                    <!-- Supplement price -->
+                                                    <h6 class="card-text">Price: @supplement.Supplements.Price</h6>
+                                                    <!-- Supplement quantity -->
+                                                    <h6 class="card-text">Quantity: @supplement.Quantity</h6>
+                                                </div>
+                                                <!-- Supplement action buttons -->
+                                               
+                                                    <div class="d-flex justify-content-around w-100">
+                                                     @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                                                    {
+                                                        <!-- Remove supplement button -->
+                                                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteAlert(@Model.GymID, @supplement.SupplementID)">Remove</button>
+                                                        <!-- Update supplement button -->
+                                                        <a asp-action="UpdateSupplementForGym" asp-controller="Gyms" asp-route-gymId="@Model.GymID" asp-route-supplementId="@supplement.SupplementID" asp-route-quantity="@supplement.Quantity" class="btn btn-primary btn-sm"> Update </a>
+                                                    }
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
                 }
-            </ul>
-        }
+            </div>
+        </div>
     </div>
-
 </div>
 
-<div>
-    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.GymID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-    <a class="btn btn-primary" asp-action="Index" asp-controller="Clients" asp-route-gymid="@Model.GymID">Get Clients</a> |
-
-</div>
-
-
-
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

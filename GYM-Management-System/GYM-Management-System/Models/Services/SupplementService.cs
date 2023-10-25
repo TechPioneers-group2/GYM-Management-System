@@ -36,6 +36,7 @@ namespace GYM_Management_System.Models.Services
                     Name = supplementDTO.Name,
                     Price = supplementDTO.Price,
                     Description = supplementDTO.Description,
+                    imageURL = supplementDTO.imageURL
                 };
 
                 _supplement.Entry(newSupplement).State = EntityState.Added;
@@ -47,6 +48,7 @@ namespace GYM_Management_System.Models.Services
                     Name = newSupplement.Name,
                     Price = newSupplement.Price,
                     Description = newSupplement.Description,
+                    imageURL = newSupplement.imageURL
                 };
 
                 return SupplementDtoReturn;
@@ -89,13 +91,14 @@ namespace GYM_Management_System.Models.Services
                         Name = t.Name,
                         Price = t.Price,
                         Description = t.Description,
+                        imageURL = t.imageURL
                     }).ToListAsync();
 
                 return supplements;
             }
             catch (Exception ex)
             {
-                return new List<SupplementDTO>();
+                throw new Exception($"{ex.Message}", ex);
             }
         }
 
@@ -115,6 +118,7 @@ namespace GYM_Management_System.Models.Services
                         Name = t.Name,
                         Price = t.Price,
                         Description = t.Description,
+                        imageURL = t.imageURL
                     }).FirstOrDefaultAsync(sp => sp.SupplementID == supplementId);
 
                 return supplement;
@@ -142,6 +146,10 @@ namespace GYM_Management_System.Models.Services
                     updatedSupplement.Name = updatedSupplementDTO.Name;
                     updatedSupplement.Price = updatedSupplementDTO.Price;
                     updatedSupplement.Description = updatedSupplementDTO.Description;
+                    if (updatedSupplementDTO.imageURL != null)
+                    {
+                        updatedSupplement.imageURL = updatedSupplementDTO.imageURL;
+                    }
                     _supplement.Entry(updatedSupplement).State = EntityState.Modified;
                     await _supplement.SaveChangesAsync();
 
@@ -151,6 +159,7 @@ namespace GYM_Management_System.Models.Services
                         Name = updatedSupplementDTO.Name,
                         Price = updatedSupplementDTO.Price,
                         Description = updatedSupplementDTO.Description,
+                        imageURL = updatedSupplementDTO.imageURL
                     };
                     return supplementDTO;
                 }

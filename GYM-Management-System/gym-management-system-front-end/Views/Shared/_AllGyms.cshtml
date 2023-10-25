@@ -1,0 +1,26 @@
+﻿@model IEnumerable<gym_management_system_front_end.Models.GymViewModel>
+
+     @{
+         ViewData["Title"] = "Home Page";
+     }
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4 gymscard">
+            <div class="card">
+                <img src="https://cdn.pixabay.com/photo/2015/01/10/18/45/gym-595597_1280.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text">@item.Address</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@*Commint*@
+<link rel="stylesheet" href="./css/site.css">

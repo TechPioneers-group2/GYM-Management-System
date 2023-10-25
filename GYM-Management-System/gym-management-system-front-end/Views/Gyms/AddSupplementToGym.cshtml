@@ -4,40 +4,56 @@
     ViewData["Title"] = "AddSupplementToGym";
 }
 
-<h1>AddSupplementToGym</h1>
 
-<h4>GymSupplementViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="AddSupplementToGym">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="SupplementID" class="control-label"></label>
-                <input asp-for="SupplementID" class="form-control" />
-                <span asp-validation-for="SupplementID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GymID" class="control-label"></label>
-                <input asp-for="GymID" class="form-control" />
-                <span asp-validation-for="GymID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="body d-flex  justify-content-center align-items-center vh-100">
+    <div class="container container-fluid col-md-4 d-flex justify-content-center align-items-center ">
+        <div class="row glassClassForm">
+            <h4 class="text-center">Add Supplement To The Gym</h4>
+            <hr />
+            <form asp-action="AddSupplementToGym">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group text-center fw-5">
+                    <label asp-for="GymID">Gym</label>
+                    <label>
+                        @Model.GymIDs.Name
+                        <input type="hidden" name="GymID" value="@Model.GymID" />
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SupplementID">Supplement</label>
+                    <select class="form-select border border-1 border-primary" asp-for="SupplementID">
+                        <option value="">-- Select Supplement --</option>
+                        @{
+                            foreach (var item in Model.SupplementIDs)
+                            {
+                                <option value="@item.SupplementID">@item.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Quantity" class="control-label"></label>
+                    <input asp-for="Quantity" class="form-control" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-2 mb-2">
+                    <div class="form-group text-center mt-3 d-grid gap-2">
+                        <input type="submit" value="Add To The Gym" class="btn btn-primary" />
+                        <button class="btn btn-secondary"  onclick="history.back();">Back</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<footer class="footer py-4">
+    <!-- Your footer content here -->
+</footer>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -2,21 +2,17 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "_Admin";
+
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Subscription Tiers List</title>
-</head>
-<body>
-    <p>
-        <a asp-action="Create" class="btn btn-primary">Create New</a>
-    </p>
-    <div class="container">
+
+<div class="h-100  mh-100 my-4 pt-5 " style="min-height:78vh ;">
+    <div class="container ">
+        <p>
+            <a asp-action="Create" class="btn btn-success mt-5 rounded rounded-3 mx-1">Create New</a>
+        </p>
         <h2>Subscription Tiers List</h2>
-        <table class="table table-bordered">
+        <table class="table table-bordered align-middle text-center">
             <thead>
                 <tr>
                     <th>SubscriptionTier ID</th>
@@ -35,8 +31,10 @@
                         <td>@item.Price</td>
                         <td>@item.Length</td>
                         <td>
-                            <a asp-action="Edit" asp-route-id="@item.SubscriptionTierID" class="btn btn-warning">Edit</a>
-                            <a asp-action="Delete" asp-route-id="@item.SubscriptionTierID" class="btn btn-danger">Delete</a>
+                            <div class="d-flex justify-content-evenly">
+                                <a asp-action="Edit" asp-route-id="@item.SubscriptionTierID" class="btn btn-outline-warning">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@item.SubscriptionTierID" class="btn btn-outline-danger">Delete</a>
+                            </div>
                         </td>
                     </tr>
                 }
@@ -45,5 +43,5 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+</div>
+

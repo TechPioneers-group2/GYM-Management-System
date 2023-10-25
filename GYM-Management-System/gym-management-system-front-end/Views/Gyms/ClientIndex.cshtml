@@ -1,0 +1,33 @@
+﻿@model IEnumerable<gym_management_system_front_end.Models.GymViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container-fluid mt-5 pt-5">
+    <div class="row row-cols-3 mt-5 pt-1 d-flex justify-content-evenly align-items-center">
+        @foreach (var gym in Model)
+        {
+            <div class="col-xl-3 col-lg-6 col-9 mx-lg-1 my-5">
+                <div class="card bg-secondary text-white align-items-center border-2 border-primary">
+                    <a asp-controller="Gyms" asp-action="Details" asp-route-id="@gym.GymID">
+                        <img src="@gym.imageURL" class="card-img-top img-fluid  p-2" alt="Gym Image" />
+                    </a>
+                    <div class="card-body p-4 d-flex flex-column justify-content-evenly align-items-center">
+                        <h5 class="card-title text-primary fw-bold">@gym.Name</h5>
+                        <div class="row d-flex justify-content-between">
+                            <h6 class="card-text text-start my-3 col-md-12">Address: @gym.Address</h6>
+                            <p class="card-text col-md-11">Max Capacity: @gym.MaxCapacity</p>
+                            <p class="card-text col-md-11">Current Capacity: @gym.CurrentCapacity</p>
+                            <p class="card-text col-md-11">Active Hours: @gym.ActiveHours</p>
+                            <p class="card-text col-md-11">Notification: @gym.Notification</p>
+                        </div>
+                    </div>
+                    <div class="card-footer gap-2 d-grid col-12">
+                        <a asp-controller="Gyms" asp-action="Details" asp-route-id="@gym.GymID" class="btn btn-lg btn-primary my-2">Check Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -31,7 +31,7 @@ namespace GYM_Management_System.Controllers
 
         //[Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<ActionResult<List<GetManagerGymDTO>>> GetGymManager()
+        public async Task<ActionResult<List<GetManagerGymDTO>>> GetGymManagerBackEnd()
         {
             return Ok(await _gym.GetGymManger());
         }
@@ -42,7 +42,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>A list of gyms.</returns>
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GetUserGymDTO>>> GetGyms()
+        public async Task<ActionResult<IEnumerable<GetUserGymDTO>>> GetGymsBackEnd()
         {
             return Ok(await _gym.GetGyms());
         }
@@ -54,7 +54,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>The gym details.</returns>
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetUserGymDTO>> GetGym(int id)
+        public async Task<ActionResult<GetUserGymDTO>> GetGymBackEnd(int id)
         {
             var gym = await _gym.GetGym(id);
 
@@ -74,7 +74,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>The updated gym data.</returns>
         //[Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGym(int id, PutGymDTO gym)
+        public async Task<IActionResult> PutGymBackEnd(int id, PutGymDTO gym)
         {
             var updatedGym = await _gym.UpdateGym(id, gym);
             return Ok(updatedGym);
@@ -86,9 +86,9 @@ namespace GYM_Management_System.Controllers
         /// <param name="gym">The gym data to create.</param>
         /// <returns>The created gym data.</returns>
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<ActionResult<PostGymDTO>> PostGym(PostGymDTO gym)
+        public async Task<ActionResult<PostGymDTO>> PostGymBackEnd(PostGymDTO gym)
         {
             var newGym = await _gym.CreateGym(gym);
             if (newGym == null)
@@ -105,7 +105,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>No content if the gym was successfully deleted.</returns>
         //[Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGym(int id)
+        public async Task<IActionResult> DeleteGymBackEnd(int id)
         {
             await _gym.DeleteGym(id);
             return NoContent();
@@ -130,7 +130,7 @@ namespace GYM_Management_System.Controllers
 
         [HttpPost]
         [Route("{gymId}/Supplement/{SupplementId}")]
-        public async Task<ActionResult<ApiResponse>> AddSupplementsToGym(int gymId, int SupplementId, UpdateGymSupplementDTO newGymSupplement)
+        public async Task<ActionResult<ApiResponse>> AddSupplementsToGymBackEnd(int gymId, int SupplementId, UpdateGymSupplementDTO newGymSupplement)
         {
             try
             {
@@ -157,7 +157,7 @@ namespace GYM_Management_System.Controllers
        // [Authorize(Roles = "Admin, Employee")]
         [HttpPut]
         [Route("{gymId}/Supplement/{supplementId}")]
-        public async Task<ActionResult<ApiResponse>> UpdateSupplementForGym(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplement)
+        public async Task<ActionResult<ApiResponse>> UpdateSupplementForGymBackEnd(int gymId, int supplementId, UpdateGymSupplementDTO updateGymSupplement)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace GYM_Management_System.Controllers
        // [Authorize(Roles = "Admin, Employee")]
         [HttpDelete]
         [Route("{gymId}/Supplement/{supplementId}")]
-        public async Task<IActionResult> RemoveSupplementFromGym(int gymId, int supplementId)
+        public async Task<IActionResult> RemoveSupplementFromGymBackEnd(int gymId, int supplementId)
         {
             await _gym.RemoveSupplementFromGym(gymId, supplementId);
             return NoContent();

@@ -5,7 +5,7 @@ namespace GYM_Management_System.Models.Interfaces
     public interface IGymEquipment
     {
         // Create a GymEquipment
-        Task<EquipmentDTO> Create(CreatEquipmentDTO equipmentDTO);
+        Task<EquipmentDTO> Create(CreatEquipmentDTO equipmentDTO );
 
         // GET All GymEquipments
         Task<List<EquipmentDTO>> GetGymEquipments();

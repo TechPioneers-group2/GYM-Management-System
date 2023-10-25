@@ -12,14 +12,17 @@ namespace GYM_Management_System.Models.Services
     public class GymEquipmentsService : IGymEquipment
     {
         private readonly GymDbContext _gymDbContext;
+        private readonly IAzureBlobStorageService _blobStorageService;
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GymEquipmentsService"/> class.
         /// </summary>
         /// <param name="gymDbContext">The database context.</param>
-        public GymEquipmentsService(GymDbContext gymDbContext)
+        public GymEquipmentsService(GymDbContext gymDbContext, IAzureBlobStorageService photo)
         {
             _gymDbContext = gymDbContext;
+            _blobStorageService = photo;
         }
 
         /// <summary>
@@ -35,7 +38,7 @@ namespace GYM_Management_System.Models.Services
                 Name = equipmentDTO.Name,
                 OutOfService = equipmentDTO.OutOfService,
                 GymID = equipmentDTO.GymID,
-                img = equipmentDTO.img
+                PhotoUrl = equipmentDTO.PhotoUrl,
             };
 
             await _gymDbContext.GymEquipments.AddAsync(newEquipment);
@@ -47,7 +50,8 @@ namespace GYM_Management_System.Models.Services
                 Quantity = newEquipment.Quantity,
                 Name = newEquipment.Name,
                 OutOfService = newEquipment.OutOfService,
-                GymID = newEquipment.GymID
+                GymID = newEquipment.GymID,
+                PhotoUrl = newEquipment.PhotoUrl,
             };
 
             return equipmentDtoResult;
@@ -82,7 +86,7 @@ namespace GYM_Management_System.Models.Services
                 Name = E.Name,
                 OutOfService = E.OutOfService,
                 GymID = E.GymID,
-                img = E.img
+                PhotoUrl = E.PhotoUrl
             }).FirstOrDefaultAsync(e => e.GymEquipmentID == GymEquipmentID);
 
             return Equipment;
@@ -101,7 +105,7 @@ namespace GYM_Management_System.Models.Services
                 Name = E.Name,
                 OutOfService = E.OutOfService,
                 GymID = E.GymID,
-                img = E.img,
+                PhotoUrl = E.PhotoUrl
             }).ToListAsync();
 
             return allEquipment;
@@ -116,11 +120,17 @@ namespace GYM_Management_System.Models.Services
         public async Task<EquipmentDTO> UpdateGymEquipment(int GymEquipmentID, EquipmentDTOPutservice equipmentDTO)
         {
             var Selected = await _gymDbContext.GymEquipments.FindAsync(GymEquipmentID);
+
+            if (equipmentDTO.PhotoUrl == null)
+            {
+                equipmentDTO.PhotoUrl = Selected.PhotoUrl;
+            }
+
             if (Selected != null)
             {
                 Selected.Quantity = equipmentDTO.Quantity;
                 Selected.OutOfService = equipmentDTO.OutOfService;
-                Selected.img = equipmentDTO.img;
+                Selected.PhotoUrl = equipmentDTO.PhotoUrl;
 
                 _gymDbContext.Entry(Selected).State = EntityState.Modified;
                 await _gymDbContext.SaveChangesAsync();
@@ -132,7 +142,7 @@ namespace GYM_Management_System.Models.Services
                     Name = Selected.Name,
                     OutOfService = Selected.OutOfService,
                     GymID = Selected.GymID,
-                    img = Selected.img,
+                    PhotoUrl = Selected.PhotoUrl,
 
                 };
 

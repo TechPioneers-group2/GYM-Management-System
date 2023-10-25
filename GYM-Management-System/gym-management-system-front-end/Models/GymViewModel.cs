@@ -9,6 +9,7 @@ namespace gym_management_system_front_end.Models
         public int CurrentCapacity { get; set; }
         public string? ActiveHours { get; set; }
         public string? Notification { get; set; }
+        public string? imageURL { get; set; }
 
         //NP
 
@@ -17,18 +18,28 @@ namespace gym_management_system_front_end.Models
         public List<GymSupplementDTO>? Supplements { get; set; }
     }
 
+    public class GymIDDTO
+    {
+        public int GymID { get; set; }
+
+        public string Name { get; set; }
+    }
+
     public class EquipmentDTOPut
     {
         public int GymEquipmentID { get; set; }
         public string Name { get; set; }
         public int OutOfService { get; set; }
         public int Quantity { get; set; }
+        public string? PhotoUrl { get; set; }
 
     }
 
     public class GymSupplementDTO
     {
         public int SupplementID { get; set; }
+
+        public string Name { get; set; }
         //public int GymID { get; set; }
         public int Quantity { get; set; }
 
@@ -46,8 +57,9 @@ namespace gym_management_system_front_end.Models
     public class GetGymSupplementDTO
     {
         public string Name { get; set; }
-        public string Price { get; set; }
+        public double Price { get; set; }
         public string Description { get; set; }
+        public string? imageURL { get; set; }
     }
 
     public class PostGymDTO
@@ -58,6 +70,7 @@ namespace gym_management_system_front_end.Models
         public int CurrentCapacity { get; set; }
         public string? ActiveHours { get; set; }
         public string? Notification { get; set; }
+        public string? imageURL { get; set; }
     }
 
     public class PutGymDTO
@@ -69,6 +82,7 @@ namespace gym_management_system_front_end.Models
         public int CurrentCapacity { get; set; }
         public string? ActiveHours { get; set; }
         public string? Notification { get; set; }
+        public string? imageURL { get; set; }
 
         public static explicit operator GymViewModel(PutGymDTO gym)
         {
@@ -81,6 +95,7 @@ namespace gym_management_system_front_end.Models
                 CurrentCapacity = gym.CurrentCapacity,
                 ActiveHours = gym.ActiveHours,
                 Notification = gym.Notification,
+                imageURL = gym.imageURL,
             };
         }
 
@@ -95,6 +110,7 @@ namespace gym_management_system_front_end.Models
                 CurrentCapacity = gym.CurrentCapacity,
                 ActiveHours = gym.ActiveHours,
                 Notification = gym.Notification,
+                imageURL = gym.imageURL,
             };
         }
 
@@ -109,6 +125,7 @@ namespace gym_management_system_front_end.Models
         public int CurrentCapacity { get; set; }
         public string? ActiveHours { get; set; }
         public string? Notification { get; set; }
+        public string? imageURL { get; set; }
 
         //NP
 
@@ -131,6 +148,7 @@ namespace gym_management_system_front_end.Models
         public int CurrentCapacity { get; set; }
         public string? ActiveHours { get; set; }
         public string? Notification { get; set; }
+        public string? imageURL { get; set; }
 
         //NP
 

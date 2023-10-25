@@ -42,5 +42,38 @@ namespace GYM_Management_System.Models.Services
                 await smtp.SendMailAsync(message);
             }
         }
+
+        public async Task RecieveEmail(string senderEmail, string senderName, string emailBody)
+        {
+            var fromAddress = new MailAddress(senderEmail, senderName);
+            var toAddress = new MailAddress("hdhareth@gmail.com", "Tech Pioneers");
+            const string fromPassword = "4OhJ0cD3HY5vgdCq";
+            string subject = "Technical Support";
+            string body = emailBody;
+
+            var authAddress = new MailAddress("ahmadsa28121999@gmail.com", "ahmad saleh");
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp-relay.brevo.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(authAddress.Address, fromPassword)
+            };
+
+            using (var message = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            })
+            {
+                message.Headers.Add("ApiKey", apiKey); // add the API key to the email headers
+
+                await smtp.SendMailAsync(message);
+            }
+        }
     }
 }

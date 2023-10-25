@@ -1,13 +1,35 @@
-﻿a {
+﻿body {
+    background-color: #0F2537 !important;
+}
+nav-div {
+    background-color: #4E5D6C !important;
+}
+side-div {
+    background-color: #4E5D7C !important;
+}
+.content {
+    background-color: #0F2537 !important;
+}
+td,th{
+    color:white;
+}
+
+a {
     color: #FF771C !important;
 }
 
     a:hover {
         color: white !important;
     }
-/* Form background and button color */
+.Delete:hover {
+    color: red !important;
+}
+table-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-/* Container for the form */
 .form-container {
     display: flex;
     justify-content: center;
@@ -16,17 +38,16 @@
     margin-top: 20px;
 }
 
-/* Form background and styling */
 .form-box {
-    background-color: #0F2537;
+    background-color:#233242;
+    
     padding: 20px;
-    border: 1px solid #FF771C;
-    border-radius: 5px;
+   
     width: 100%;
     max-width: 500px;
 }
 
-/* Input and label styles */
+
 .form-group {
     margin-bottom: 15px;
 }
@@ -36,7 +57,7 @@
         margin-bottom: 5px;
     }
 
-    /* Target username, password, and select elements */
+
     .form-group select {
         width: 100%;
         padding: 10px;
@@ -44,7 +65,7 @@
         border: 1px solid #FF771C;
         color: white;
     }
-/* Custom select style */
+
 .custom-select {
     position: relative;
 }
@@ -55,11 +76,11 @@
         background-color: #0F2537;
         border: 1px solid #FF771C;
         color: white;
-        appearance: none; /* Remove default dropdown arrow on some browsers */
+        appearance: none; 
     }
 
     .custom-select::after {
-        content: "\25BC"; /* Unicode for down arrow */
+        content: "\25BC"; 
         position: absolute;
         top: 12px;
         right: 10px;
@@ -77,7 +98,7 @@
     color: white !important;
 }
 
-/* Button style */
+
 .form-group input[type="submit"] {
     background-color: #FF771C !important;
     color: white;
@@ -85,7 +106,71 @@
     padding: 10px 20px;
     cursor: pointer;
 }
+    .form-group input[type="submit"]:hover {
+        background-color: white !important;
+        color: #FF771C!important;
+    }
+    .text-danger {
+        color: #FF771C !important;
+    }
+.form-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.flex-form-div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.form-emp-T{
+    width:400px;
+}
+.form-emp-T label{
+    color:white;
+    padding-top:10px;
+    padding-bottom:10px;
+    font-weight:bold;
+}
+.btn-sub {
+    align-self: flex-end;
+}
 
-.text-danger {
-    color: #FF771C !important;
+
+table-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    margin-left:20px;
+}
+.details {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.detail-row {
+    display: flex !important;
+    justify-content: space-around !important;
+    margin-bottom: 10px !important;
+}
+
+  
+    .detail-row label {
+        margin-right: 10px !important;
+        color: white;
+    }
+
+ 
+    .detail-row label {
+        font-weight: bold;
+    }
+div h3 {
+    color: #FF771C;
+    padding:20px;
 }

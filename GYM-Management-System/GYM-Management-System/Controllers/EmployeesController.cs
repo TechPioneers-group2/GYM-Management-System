@@ -13,6 +13,7 @@ namespace GYM_Management_System.Controllers
     {
         private readonly IEmployee _employee;
 
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EmployeesController"/> class.
         /// </summary>
@@ -28,7 +29,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>A list of employees.</returns>
         //[Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetEmployees()
+        public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetEmployeesBackEnd()
         {
             var employees = await _employee.GetEmployees();
 
@@ -47,7 +48,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>The employee's details.</returns>
         //[Authorize(Roles = "Admin, Employee")]
         [HttpGet("{id}")]
-        public async Task<ActionResult<EmployeeDTO>> GetEmployee(int id)
+        public async Task<ActionResult<EmployeeDTO>> GetEmployeeBackEnd(int id)
         {
             var employee = await _employee.GetEmployee(id);
 
@@ -67,7 +68,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>The updated employee data.</returns>
        // [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
-        public async Task<ActionResult<EmployeeDTO>> PutEmployee(UpdateEmployeeDTO updateEmployeeDTO, int id)
+        public async Task<ActionResult<EmployeeDTO>> PutEmployeeBackEnd(UpdateEmployeeDTO updateEmployeeDTO, int id)
         {
             var updatedEmployee = await _employee.Update(updateEmployeeDTO, id);
 
@@ -86,7 +87,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>The created employee data.</returns>
         // [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<ActionResult<EmployeeDTO>> PostEmployee(CreatEmployeeDTO createEmployeeDTO)
+        public async Task<ActionResult<EmployeeDTO>> PostEmployeeBackEnd(CreatEmployeeDTO createEmployeeDTO)
         {
             var employee = await _employee.Create(createEmployeeDTO);
 
@@ -105,7 +106,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>No content if the employee was successfully deleted.</returns>
         //[Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEmployee(int id)
+        public async Task<IActionResult> DeleteEmployeeBackEnd(int id)
         {
             await _employee.Delete(id);
 
@@ -120,7 +121,7 @@ namespace GYM_Management_System.Controllers
         //[Authorize(Roles = "Admin")]
         //[Route("/api/Employees/Gym/{gymId}")]
         [HttpGet("{gymId}")]
-        public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetEmployeesByGymId(int gymId)
+        public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetEmployeesByGymIdBackEnd(int gymId)
         {
             var employees = await _employee.GetEmployeesByGymId(gymId);
 

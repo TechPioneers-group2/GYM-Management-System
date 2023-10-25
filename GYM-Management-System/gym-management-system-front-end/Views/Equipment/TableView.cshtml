@@ -1,21 +1,15 @@
 ﻿@model List<EquipmentViewModel>
 @{
-    Layout = "_Admin";
+
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Gym Equipment List</title>
-
-</head>
-<body>
-    <p>
-        <a asp-action="Create" class="btn btn-primary">Create New</a>
-    </p>
+<div class="h-100  mh-100 my-4 pt-5 text-center ">
     <div class="container">
-        <h2>Equipment List</h2>
-        <table class="table table-bordered">
+        <p class="text-start">
+            <a asp-action="Create" class="btn btn-success mt-5 rounded rounded-3 mx-1 ">Create New</a>
+        </p>
+        <h2 class="mt-4 text-start">Equipment List</h2>
+        <table class="table table-bordered align-middle text-center">
             <thead>
                 <tr>
                     <th>Image</th>
@@ -30,17 +24,18 @@
             <tbody>
                 @foreach (var equipment in Model)
                 {
-                    <tr>
-                        <td><img src="@equipment.img" alt="@equipment.Name" class="img-thumbnail" style="max-width: 100px;"></td>
+                    <tr class="align-middle">
+                        <td><img src="@equipment.PhotoUrl" alt="@equipment.Name" class="img-thumbnail" style="max-width: 100px;"></td>
                         <td>@equipment.Name</td>
                         <td>@equipment.GymEquipmentID</td>
                         <td>@equipment.GymID</td>
                         <td>@equipment.OutOfService</td>
                         <td>@equipment.Quantity</td>
                         <td>
-                            <a asp-action="Details" asp-route-id="@equipment.GymEquipmentID" class="btn btn-primary">Details</a>
-                            <a asp-action="Edit" asp-route-id="@equipment.GymEquipmentID" class="btn btn-primary">Edit</a>
-                            <a asp-action="Delete" asp-route-id="@equipment.GymEquipmentID" class="btn btn-danger">Delete</a>
+                            <div class="d-flex justify-content-evenly" >
+                                <a class="btn btn-outline-warning mx-3" asp-action="Edit" asp-route-id="@equipment.GymEquipmentID" class="">Edit</a>
+                                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@equipment.GymEquipmentID" class="">Delete</a>
+                            </div>
                         </td>
                     </tr>
                 }
@@ -49,5 +44,4 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+</div>

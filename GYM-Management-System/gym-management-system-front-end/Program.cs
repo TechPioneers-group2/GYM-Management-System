@@ -1,4 +1,5 @@
 using gym_management_system_front_end.Controllers;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace gym_management_system_front_end
 {
@@ -10,11 +11,14 @@ namespace gym_management_system_front_end
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
             builder.Services.AddHttpClient();
-
             builder.Services.AddTransient<GymsController>();
             builder.Services.AddTransient<SupplementController>();
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/Account/Login";
+            });
 
             var app = builder.Build();
 
@@ -27,6 +31,7 @@ namespace gym_management_system_front_end
             }
 
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();

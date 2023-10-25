@@ -28,7 +28,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>A list of subscription tiers.</returns>
         //[AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GetSubscriptionTierDTO>>> GetSubscriptionTiers()
+        public async Task<ActionResult<IEnumerable<GetSubscriptionTierDTO>>> GetSubscriptionTiersBackEnd()
         {
             return await _SubscriptionTier.GetAllSubscriptionTier();
         }
@@ -40,9 +40,10 @@ namespace GYM_Management_System.Controllers
         /// <returns>The subscription tier details.</returns>
         //[AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetSubscriptionTierDTO>> GetSubscriptionTier(int id)
+        public async Task<ActionResult<GetSubscriptionTierDTO>> GetSubscriptionTierBackEnd(int id)
         {
-            return Ok(await _SubscriptionTier.GetSubscriptionTier(id));
+            var x = await _SubscriptionTier.GetSubscriptionTier(id);
+            return Ok(x);
         }
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>The updated subscription tier data.</returns>
        // [Authorize(Roles = "Admin, Employee")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSubscriptionTier(int id, UpdateSubscriptionTierDTO subscriptionTier)
+        public async Task<IActionResult> PutSubscriptionTierBackEnd(int id, UpdateSubscriptionTierDTO subscriptionTier)
         {
             var updatedSubTier = await _SubscriptionTier.UpdateSubscriptionTier(id, subscriptionTier);
             return Ok(updatedSubTier);
@@ -66,7 +67,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>The created subscription tier data.</returns>
       //  [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<ActionResult<PostSubscriptionTierDTO>> PostSubscriptionTier(CreatSubscriptionTierDTO subscriptionTier)
+        public async Task<ActionResult<PostSubscriptionTierDTO>> PostSubscriptionTierBackEnd(CreatSubscriptionTierDTO subscriptionTier)
         {
             var createdSubTier = await _SubscriptionTier.Create(subscriptionTier);
 
@@ -80,7 +81,7 @@ namespace GYM_Management_System.Controllers
         /// <returns>No content if the subscription tier was successfully deleted.</returns>
        // [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSubscriptionTier(int id)
+        public async Task<IActionResult> DeleteSubscriptionTierBackEnd(int id)
         {
             await _SubscriptionTier.DeleteSubscriptionTier(id);
             return NoContent();
