@@ -20,7 +20,6 @@ namespace gym_management_system_front_end.Controllers
             _client = client;
             _client.BaseAddress = baseAddress;
         }
-
         public IActionResult LogIn()
         {
             TempData["ref"] = Request.Headers["Referer"].ToString();
