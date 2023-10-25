@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Stripe.Checkout;
+using System.Security.Claims;
 using System.Text;
 
 namespace gym_management_system_front_end.Controllers
@@ -49,7 +50,6 @@ namespace gym_management_system_front_end.Controllers
             }
             catch
             {
-                TempData["error"] = "An error occurred while processing your request.";
                 return View(null);
             }
         }
@@ -197,6 +197,58 @@ namespace gym_management_system_front_end.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
+        public async Task<IActionResult> summary()
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+
+            var usernameClaim = identity.FindFirst(ClaimTypes.Name)?.Value;
+            var emailClaim = identity.FindFirst(ClaimTypes.Email)?.Value;
+            var userIDClaim = identity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            try
+            {
+                var cart = HttpContext.Request.Cookies["SupplementCart"];
+                var dicCart = JsonConvert.DeserializeObject<Dictionary<int, int>>(cart);
+                var cartItems = new List<CartViewModel>();
+
+                foreach (var item in dicCart)
+                {
+                    var res = await _client.GetAsync(_client.BaseAddress + "Supplements/GetSupplementBackEnd/" + item.Key);
+                    var jsondata = await res.Content.ReadAsStringAsync();
+                    var product = JsonConvert.DeserializeObject<SupplementViewModel>(jsondata);
+                    int y;
+                    dicCart.TryGetValue(product.SupplementID, out y);
+                    var x = new CartViewModel
+                    {
+                        SupplementID = product.SupplementID,
+                        imageURL = product.imageURL,
+                        Description = product.Description,
+                        Price = product.Price,
+                        Name = product.Name,
+                        Quantity = y
+                    };
+                    cartItems.Add(x);
+                }
+
+                var order = new OrderViewModel
+                {
+                    id = userIDClaim,
+                    name = usernameClaim,
+                    email = emailClaim,
+                    cartViewModels = cartItems
+                };
+
+                Response.Cookies.Delete("SupplementCart");
+
+                return View(order);
+            }
+            catch
+            {
+                return View(null);
+            }
+        }
+
 
 
     }

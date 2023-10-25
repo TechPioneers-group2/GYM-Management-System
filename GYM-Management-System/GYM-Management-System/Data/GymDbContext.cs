@@ -299,8 +299,16 @@ namespace GYM_Management_System.Data
                 LockoutEnabled = false
             };
             Client2.PasswordHash = hasher.HashPassword(Client2, "Client2@123");
-
             modelBuilder.Entity<ApplicationUser>().HasData(Client2);
+
+            List<IdentityUserRole<string>> userRoles = new List<IdentityUserRole<string>>()
+    {
+            new IdentityUserRole<string> { UserId ="1" , RoleId = "Admin" },
+            new IdentityUserRole<string> { UserId = "2", RoleId = "Employee" } ,
+            new IdentityUserRole<string> { UserId = "3", RoleId = "Client" }
+
+    };
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(userRoles);
 
             SeedRole(modelBuilder, "Admin", "createAdmin", "updateAdmin", "deleteAdmin", "readAdmin");
             SeedRole(modelBuilder, "Employee", "createEmployee", "updateEmployee", "readEmployee");
@@ -312,7 +320,7 @@ namespace GYM_Management_System.Data
         {
             var role = new IdentityRole
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = roleName.ToLower(),
                 Name = roleName,
                 NormalizedName = roleName.ToUpper(),
                 ConcurrencyStamp = Guid.Empty.ToString()

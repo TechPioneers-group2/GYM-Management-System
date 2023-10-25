@@ -14,6 +14,7 @@ namespace GYM_Management_System.Models.Services
     {
         private readonly GymDbContext _context;
         private UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private jwtTokenServices _tokenServices;
         private ISubscriptionTier _subscriptionTier;
 
@@ -24,12 +25,13 @@ namespace GYM_Management_System.Models.Services
         /// <param name="manager">The UserManager for managing users.</param>
         /// <param name="tokenServices">The JWT token service.</param>
         /// <param name="subscriptionTier">The subscription tier service.</param>
-        public IdentityUserService(GymDbContext context, UserManager<ApplicationUser> manager, jwtTokenServices tokenServices, ISubscriptionTier subscriptionTier)
+        public IdentityUserService(GymDbContext context, UserManager<ApplicationUser> manager, jwtTokenServices tokenServices, ISubscriptionTier subscriptionTier, SignInManager<ApplicationUser> signInManager)
         {
             _context = context;
             _userManager = manager;
             _tokenServices = tokenServices;
             _subscriptionTier = subscriptionTier;
+            _signInManager = signInManager;
         }
 
         /// <summary>

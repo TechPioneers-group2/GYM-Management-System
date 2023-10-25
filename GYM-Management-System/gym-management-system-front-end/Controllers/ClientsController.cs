@@ -1,11 +1,7 @@
 ﻿using gym_management_system_front_end.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace gym_management_system_front_end.Controllers
 {
@@ -32,18 +28,18 @@ namespace gym_management_system_front_end.Controllers
                 clientList = JsonConvert.DeserializeObject<List<ClientViewModel>>(data);
             }
 
-			int clientsInGymCount = clientList.Count(c => c.InGym);
-			int clientsNotInGymCount = clientList.Count(c => !c.InGym);
+            int clientsInGymCount = clientList.Count(c => c.InGym);
+            int clientsNotInGymCount = clientList.Count(c => !c.InGym);
 
-			// Pass the counts to the view
-			ViewBag.ClientsInGymCount = clientsInGymCount;
-			ViewBag.ClientsNotInGymCount = clientsNotInGymCount;
+            // Pass the counts to the view
+            ViewBag.ClientsInGymCount = clientsInGymCount;
+            ViewBag.ClientsNotInGymCount = clientsNotInGymCount;
 
 
-			return View(clientList);
+            return View(clientList);
         }
 
-       
+
 
         public IActionResult GetallClients()
         {
@@ -114,7 +110,7 @@ namespace gym_management_system_front_end.Controllers
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
             // Send the PUT request
-            HttpResponseMessage response = _client.PutAsync(url, content).Result;
+            HttpResponseMessage response = await _client.PutAsync(url, content);
 
             if (response.IsSuccessStatusCode)
             {

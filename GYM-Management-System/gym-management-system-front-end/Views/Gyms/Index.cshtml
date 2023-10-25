@@ -2,43 +2,42 @@
 
 @{
     ViewData["Title"] = "";
-    
+
 }
 
-<div class="container mt-5 pt-5" style="min-height:80vh;">
-    <div class="row ">
-        <div class="col-md-8 offset-md-2">
-            <h1 class="text-center mt-2 text-primary">Our Branches</h1>
+<div class="h-100  mh-100 my-4 pt-5 text-center">
+    <div class="container ">
 
-            <div class="text-end mb-3">
-                <a class="btn btn-success" asp-action="Create" asp-controller="Gyms">Create New</a>
-            </div>
-
-            <table class="table table-striped border table-borderless border-primary">
-                <thead class="bg-dark text-white">
-                    <tr>
-                        <th class="text-light col-md-2" scope="col">Gym ID</th>
-                        <th class="text-light col-md-2" scope="col">Name</th>
-                        <th class="text-light col-md-2 ps-5" scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var gym in Model)
-                    {
-                        <tr>
-                            <th class="text-light col-md-1 px-4" scope="row">@gym.GymID</th>
-                            <td class="text-light col-md-2">@gym.Name</td>
-                            <td >
-                                <div class="btn-group col-lg-5 col-md-8" role="group">
-                                    <a class="btn btn-outline-primary" asp-controller="Gyms" asp-action="Details" asp-route-id="@gym.GymID">Details</a>
-                                    <a class="btn btn-outline-warning mx-3" asp-controller="Gyms" asp-action="Edit" asp-route-id="@gym.GymID">Edit</a>
-                                    <a class="btn btn-outline-danger" asp-controller="Gyms" asp-action="Delete" asp-route-id="@gym.GymID">Delete</a>
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+        <div class="text-start">
+            <a class="btn btn-success mt-5" asp-action="Create" asp-controller="Gyms">Create New</a>
         </div>
+
+        <h2 class="text-start mt-2">Gyms List</h2>
+
+        <table class="table table-bordered align-middle text-center">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th class="text-light col-md-1" scope="col">Gym ID</th>
+                    <th class="text-light col-md-3" scope="col">Name</th>
+                    <th class="text-light col-md-8 ps-5" scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var gym in Model)
+                {
+                    <tr>
+                        <th class="text-light col-md-1 px-4" scope="row">@gym.GymID</th>
+                        <td class="text-light col-md-2">@gym.Name</td>
+                        <td>
+                            <div class="d-flex justify-content-evenly" role="group">
+                                <a class="btn btn-outline-primary" asp-controller="Gyms" asp-action="Details" asp-route-id="@gym.GymID">Details</a>
+                                <a class="btn btn-outline-warning mx-3" asp-controller="Gyms" asp-action="Edit" asp-route-id="@gym.GymID">Edit</a>
+                                <a class="btn btn-outline-danger" asp-controller="Gyms" asp-action="Delete" asp-route-id="@gym.GymID">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>

@@ -353,7 +353,7 @@ namespace gym_management_system_front_end.Controllers
                 TempData["error"] = "Update Process failed";
             }
 
-            return RedirectToAction("Index", "Gyms");
+            return RedirectToAction("Details", new { id = updatedGymSupplement.GymID });
         }
 
         [HttpGet]

@@ -35,7 +35,7 @@ namespace gym_management_system_front_end.Models
                 .AddDbContext<GymDbContext>
                 (opions => opions.UseSqlServer(connString));
 
-            builder.Services.AddTransient<IUser, IdentityUserService>();
+            builder.Services.AddScoped<IUser, IdentityUserService>();
             builder.Services.AddTransient<IGym, GymService>();
             builder.Services.AddTransient<IClient, ClientService>();
             builder.Services.AddTransient<ISubscriptionTier, SubscriptionTierService>();
@@ -46,10 +46,10 @@ namespace gym_management_system_front_end.Models
             builder.Services.AddTransient<IAzureBlobStorageService, AzureBlobStorageService>();
             builder.Services.AddTransient<IPaymentService, PaymentService>();
             builder.Services.AddTransient<SubscriptionTiersController>();
-
             builder.Services.AddHostedService<SubscriptionCheckBackgroundService>();
-
             builder.Services.AddScoped<jwtTokenServices>();
+
+
 
             builder.Services.AddAuthentication(options =>
             {
@@ -75,8 +75,6 @@ namespace gym_management_system_front_end.Models
                 options.AddPolicy("readClient", policy => policy.RequireClaim("persmissions", "deposit"));
             });
 
-
-            //------------ Swagger implementation -----------------------------------------------\\
             builder.Services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo()
@@ -87,14 +85,11 @@ namespace gym_management_system_front_end.Models
                 });
             });
 
-
-
             var app = builder.Build();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
 
-            //------------ Swagger implementation -----------------------------------------------\\
             app.UseSwagger(options =>
             {
                 options.RouteTemplate = "/api/{documentName}/swagger.json";

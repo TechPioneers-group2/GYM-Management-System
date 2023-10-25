@@ -15,8 +15,8 @@ namespace GYM_Management_System.Models.Services
 
             var options = new SessionCreateOptions
             {
-                SuccessUrl = domain,
-                CancelUrl = domain,
+                SuccessUrl = domain + "/Cart/Summary",
+                CancelUrl = domain + "/Cart",
                 Mode = "payment",
                 LineItems = new List<SessionLineItemOptions>()
             };

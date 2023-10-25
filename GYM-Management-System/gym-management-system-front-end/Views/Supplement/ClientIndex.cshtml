@@ -17,7 +17,7 @@
                         <a asp-controller="Supplement" asp-action="Details" asp-route-id="@item.SupplementID">
                             <img src="@item.imageURL" class="card-img-top" alt="product.title" />
                         </a>
-                        <div class="card-body">
+                        <div class="card-body ">
                             <div class="clearfix mb-3">
                                 <span class="float-start badge rounded-pill bg-success"> @item.Price.ToString("0.00") JD</span>
                             </div>
@@ -25,7 +25,13 @@
                                 <a asp-controller="Supplement" asp-action="Details" asp-route-id="@item.SupplementID" class="fw-bold">@item.Name</a>
                             </h5>
                             <div class="d-grid gap-2 my-4">
-                                <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.SupplementID" class="btn btn-warning bold-btn">add to cart</a>
+                            @if(User.Identity.IsAuthenticated)
+                            {
+                                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.SupplementID" class="btn btn-warning bold-btn">add to cart</a>
+                                }else
+                                {
+                                    <a asp-controller="User" asp-action="Login" class="btn btn-warning bold-btn">add to cart</a>
+                                }
                             </div>
                             <div class="clearfix mb-1">
                                 <span class="float-start">

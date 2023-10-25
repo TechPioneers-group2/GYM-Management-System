@@ -23,6 +23,7 @@ namespace gym_management_system_front_end.Controllers
 
         public IActionResult LogIn()
         {
+            TempData["ref"] = Request.Headers["Referer"].ToString();
             return View();
         }
 
@@ -42,7 +43,11 @@ namespace gym_management_system_front_end.Controllers
                 // Create a ClaimsIdentity and add claims
                 var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
                 identity.AddClaim(new Claim(ClaimTypes.Name, userDTO.UserName));
-                identity.AddClaim(new Claim(ClaimTypes.Role, userDTO.Roles[0]));
+
+                if (userDTO.Roles != null && userDTO.Roles.Count > 0)
+                {
+                    identity.AddClaim(new Claim(ClaimTypes.Role, userDTO.Roles[0]));
+                }
 
                 // Create a ClaimsPrincipal and sign in
                 var principal = new ClaimsPrincipal(identity);
@@ -53,9 +58,11 @@ namespace gym_management_system_front_end.Controllers
                     HttpOnly = true
                 });
 
-                TempData["success"] = "Wellcome!";
+                TempData["success"] = "Welcome!";
 
-                return RedirectToAction("Index", "Home");
+                var refs = TempData["ref"].ToString();
+                return Redirect(refs);
+
             }
             else
             {
@@ -70,7 +77,6 @@ namespace gym_management_system_front_end.Controllers
 
             return LogIn();
         }
-
 
         public IActionResult RegisterAdmin()
         {
@@ -145,6 +151,7 @@ namespace gym_management_system_front_end.Controllers
             return View(returnClientView);
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterClient(RegisterClientDTO clientDTO)
@@ -186,8 +193,20 @@ namespace gym_management_system_front_end.Controllers
                 Response.Headers.Add("Location", session.Url);
                 return new StatusCodeResult(303);
             }
-
             return View(clientDTO);
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            // Sign out
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // Delete JWT token
+            Response.Cookies.Delete("JWTToken");
+
+            Response.Cookies.Delete("SupplementCart");
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

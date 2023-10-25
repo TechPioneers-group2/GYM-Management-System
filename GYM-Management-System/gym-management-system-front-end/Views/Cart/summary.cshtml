@@ -1,0 +1,29 @@
+﻿@model gym_management_system_front_end.Models.OrderViewModel
+
+@{
+    ViewData["Title"] = "summary";
+}
+
+<div class="container mt-5 pt-5 col-md-6">
+    <h2 class="text-center">Summary</h2>
+    <div class="text-center my-3 mx-auto d-grid gap-2">
+        <a asp-action="Index" asp-controller="Home" class="btn btn-primary col-4">Home</a>
+    </div>
+    <table id="OrderTable" class="table table-borderless table-striped text-white border border-1 border-primary ">
+        <thead>
+            <tr class="text-center">
+                <th>@Html.DisplayNameFor(model => model.cartViewModels.FirstOrDefault().Name)</th>
+                <th>@Html.DisplayNameFor(model => model.cartViewModels.FirstOrDefault().Quantity)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.cartViewModels)
+            {
+                <tr class="text-center text-primary">
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

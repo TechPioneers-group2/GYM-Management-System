@@ -11,9 +11,7 @@ namespace gym_management_system_front_end
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
             builder.Services.AddHttpClient();
-
             builder.Services.AddTransient<GymsController>();
             builder.Services.AddTransient<SupplementController>();
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -33,13 +31,12 @@ namespace gym_management_system_front_end
             }
 
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
-
-
 
             app.MapControllerRoute(
                 name: "default",
