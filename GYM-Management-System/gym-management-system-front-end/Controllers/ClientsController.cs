@@ -39,8 +39,6 @@ namespace gym_management_system_front_end.Controllers
             return View(clientList);
         }
 
-
-
         public IActionResult GetallClients()
         {
             List<ClientViewModel> clientList = new List<ClientViewModel>();
@@ -54,9 +52,6 @@ namespace gym_management_system_front_end.Controllers
 
             return View(clientList);
         }
-
-
-
 
         public async Task<ActionResult<ClientViewModel>> Details(int clientID, int gymID)
         {
