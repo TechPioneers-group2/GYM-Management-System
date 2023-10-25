@@ -215,12 +215,12 @@ namespace gym_management_system_front_end.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["success"] = "Client Deleted successfully";
-                    return RedirectToAction("Index", new { gymID = gymID });
+                    return RedirectToAction("GetallClients");
                 }
                 else
                 {
                     TempData["error"] = "Failed to delete client. Please try again.";
-                    return RedirectToAction("Index", new { gymID = gymID });
+                    return RedirectToAction("GetallClients");
                 }
             }
             catch (Exception ex)
