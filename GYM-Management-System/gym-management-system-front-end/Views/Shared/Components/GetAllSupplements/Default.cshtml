@@ -27,14 +27,18 @@
                             <h5 class="card-title">
                                 <a asp-controller="Supplement" asp-action="Details" asp-route-id="@item.SupplementID" class="fw-bold">@item.Name</a>
                             </h5>
-                            <div class="d-grid gap-2 my-4">
-                                <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.SupplementID" class="btn btn-warning bold-btn">add to cart</a>
-                            </div>
+                            @if (User.IsInRole("Client"))
+                            {
+                                <div class="d-grid gap-2 my-4">
+                                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.SupplementID" class="btn btn-warning bold-btn">add to cart</a>
+                                </div>
+                            }
                             <div class="clearfix mb-1">
                                 <span class="float-start">
                                     <a href="/Home/Index#contact">
                                         <i class="fas fa-question-circle text-secondary" style="cursor: pointer"></i>
-                                </a></span>
+                                    </a>
+                                </span>
                                 <span class="float-end">
                                     <i class="far fa-heart " style="cursor: pointer; color:red;"></i>
                                 </span>
