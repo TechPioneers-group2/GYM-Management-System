@@ -8,7 +8,7 @@ namespace gym_management_system_front_end.Controllers
 {
     public class GymsController : Controller
     {
-        Uri baseAddress = new Uri("https://gym-management-system.azurewebsites.net/api/Gyms");
+        Uri baseAddress = new Uri("https://localhost:7034/api/Gyms");
         private readonly HttpClient _client;
 
         public GymsController()

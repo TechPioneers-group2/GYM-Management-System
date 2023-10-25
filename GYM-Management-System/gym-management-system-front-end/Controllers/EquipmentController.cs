@@ -113,7 +113,7 @@ namespace gym_management_system_front_end.Controllers
             if (jsonResponse.IsSuccessStatusCode)
             {
                 TempData["success"] = "Equipment Created successfully";
-                return RedirectToAction("Index", "Equipment");
+                return RedirectToAction("TableView", "Equipment");
             }
 
             TempData["error"] = "Failed to create equipment. Please try again.";
