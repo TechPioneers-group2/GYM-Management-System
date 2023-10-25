@@ -40,7 +40,7 @@
 
             <div class="form-group col-md-12">
                 <label asp-for="imageURL">Image</label>
-                <input asp-for="imageURL" type="file" name="file" class="form-control rounded rounded-3 border border-1 border-primary text-center" />
+                <input asp-for="imageURL" type="file" name="file" class="form-control rounded rounded-3 border border-1 border-primary text-center" required/>
                 <span asp-validation-for="imageURL" class="text-danger"></span>
             </div>
 
