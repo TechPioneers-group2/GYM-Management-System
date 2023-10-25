@@ -11,12 +11,12 @@ namespace GYM_Management_System.Models.Services
         {
             StripeConfiguration.ApiKey = "sk_test_51Nu9apGTsxCj81xc4G7NzFGmwMldXKwNwRsxl2dQdabXZJ8VITVSQlpREi0j8qy8qQwdMKPo0FhOVvvUlst2Bi8900rdC6MHnn";
 
-            string domain = "https://gms-front-end.azurewebsites.net";
+            string mjhem = "https://gms-front-end.azurewebsites.net/Gyms";
 
             var options = new SessionCreateOptions
             {
-                SuccessUrl = domain + "/Cart/Summary",
-                CancelUrl = domain + "/Cart",
+                SuccessUrl = mjhem + "/Cart/Summary",
+                CancelUrl = mjhem + "/Cart",
                 Mode = "payment",
                 LineItems = new List<SessionLineItemOptions>()
             };
@@ -48,12 +48,12 @@ namespace GYM_Management_System.Models.Services
         {
             StripeConfiguration.ApiKey = "sk_test_51Nu9apGTsxCj81xc4G7NzFGmwMldXKwNwRsxl2dQdabXZJ8VITVSQlpREi0j8qy8qQwdMKPo0FhOVvvUlst2Bi8900rdC6MHnn";
 
-            string domain = "https://gms-front-end.azurewebsites.net";
+            string mjhem = "https://gms-front-end.azurewebsites.net/Supplement";
 
             var options = new SessionCreateOptions
             {
-                SuccessUrl = domain,
-                CancelUrl = domain,
+                SuccessUrl = mjhem,
+                CancelUrl = mjhem,
                 Mode = "payment",
                 LineItems = new List<SessionLineItemOptions>()
             };
