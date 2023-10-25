@@ -1,13 +1,12 @@
 ﻿using gym_management_system_front_end.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace gym_management_system_front_end.Controllers
 {
     public class ChartController : Controller
     {
-        private Uri baseAddress = new Uri("https://localhost:7200/api/");
+        private Uri baseAddress = new Uri("https://gym-management-system.azurewebsites.net/api/");
         private readonly HttpClient _client;
 
         public ChartController()

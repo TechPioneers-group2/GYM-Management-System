@@ -8,7 +8,7 @@ namespace gym_management_system_front_end.Controllers
 {
     public class SupplementController : Controller
     {
-        Uri baseAddress = new Uri("https://localhost:7200/api/Supplements");
+        Uri baseAddress = new Uri("https://gym-management-system.azurewebsites.net/api/Supplements");
         private readonly HttpClient _client;
 
         public SupplementController()
@@ -82,7 +82,7 @@ namespace gym_management_system_front_end.Controllers
                         { streamcontent, "file", file.FileName }
                     };
 
-                    var imageResponse = await _client.PostAsync("https://localhost:7200/api/Methods/AddImageToCloud", imageContent);
+                    var imageResponse = await _client.PostAsync("https://gym-management-system.azurewebsites.net/api/Methods/AddImageToCloud", imageContent);
                     supplementViewModel.imageURL = await imageResponse.Content.ReadAsStringAsync();
                 }
 
@@ -141,7 +141,7 @@ namespace gym_management_system_front_end.Controllers
                         { streamcontent, "file", file.FileName }
                     };
 
-                    var imageResponse = await _client.PostAsync("https://localhost:7200/Methods/AddImageToCloud", imageContent);
+                    var imageResponse = await _client.PostAsync("https://gym-management-system.azurewebsites.net/Methods/AddImageToCloud", imageContent);
                     supplementViewModel.imageURL = await imageResponse.Content.ReadAsStringAsync();
                 }
 

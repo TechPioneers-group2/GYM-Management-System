@@ -8,7 +8,7 @@ namespace gym_management_system_front_end.Controllers
 {
     public class EquipmentController : Controller
     {
-        Uri BaseAdress = new Uri("https://localhost:7200/api");
+        Uri BaseAdress = new Uri("https://gym-management-system.azurewebsites.net/api");
         private readonly HttpClient _httpClient;
 
         public EquipmentController()
@@ -61,7 +61,7 @@ namespace gym_management_system_front_end.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var gymResponse = await _httpClient.GetAsync("https://localhost:7200/api/Gyms/GetGymsBackEnd");
+            var gymResponse = await _httpClient.GetAsync("https://gym-management-system.azurewebsites.net/api/Gyms/GetGymsBackEnd");
             var gymResult = await gymResponse.Content.ReadAsStringAsync();
             var gymList = JsonConvert.DeserializeObject<List<GetUserGymDTO>>(gymResult);
 

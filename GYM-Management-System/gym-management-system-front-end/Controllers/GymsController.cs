@@ -8,7 +8,7 @@ namespace gym_management_system_front_end.Controllers
 {
     public class GymsController : Controller
     {
-        Uri baseAddress = new Uri("https://localhost:7200/api/Gyms");
+        Uri baseAddress = new Uri("https://gym-management-system.azurewebsites.net/api/Gyms");
         private readonly HttpClient _client;
 
         public GymsController()
@@ -155,7 +155,7 @@ namespace gym_management_system_front_end.Controllers
                 {
                     { streamcontent, "file", file.FileName }
                 };
-                var imageResponse = await _client.PostAsync("https://localhost:7200/api/Methods/AddImageToCloudBackEnd", imageContent);
+                var imageResponse = await _client.PostAsync("https://gym-management-system.azurewebsites.net/api/Methods/AddImageToCloudBackEnd", imageContent);
                 gymDTO.imageURL = await imageResponse.Content.ReadAsStringAsync();
             }
 
@@ -196,7 +196,7 @@ namespace gym_management_system_front_end.Controllers
                 {
                     { streamcontent, "file", file.FileName }
                 };
-                var imageResponse = await _client.PostAsync("https://localhost:7200/api/Methods/AddImageToCloudBackEnd", imageContent);
+                var imageResponse = await _client.PostAsync("https://gym-management-system.azurewebsites.net/api/Methods/AddImageToCloudBackEnd", imageContent);
                 gym.imageURL = await imageResponse.Content.ReadAsStringAsync();
             }
 
@@ -224,7 +224,7 @@ namespace gym_management_system_front_end.Controllers
 
         public async Task<IActionResult> AddSupplementToGym(int gymid)
         {
-            var gymResponse = await _client.GetAsync($"https://localhost:7200/api/Gyms/GetGymBackEnd/{gymid}");
+            var gymResponse = await _client.GetAsync($"https://gym-management-system.azurewebsites.net/api/Gyms/GetGymBackEnd/{gymid}");
             var gymResult = await gymResponse.Content.ReadAsStringAsync();
             var gymList = JsonConvert.DeserializeObject<GetUserGymDTO>(gymResult);
 
@@ -234,7 +234,7 @@ namespace gym_management_system_front_end.Controllers
                 Name = gymList.Name
             };
 
-            var supplementResponse = await _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplementsBackEnd");
+            var supplementResponse = await _client.GetAsync("https://gym-management-system.azurewebsites.net/api/Supplements/GetSupplementsBackEnd");
             var supplementResult = await supplementResponse.Content.ReadAsStringAsync();
             var supplementList = JsonConvert.DeserializeObject<List<SupplementIDDTO>>(supplementResult);
 
@@ -271,7 +271,7 @@ namespace gym_management_system_front_end.Controllers
         [HttpPost]
         public IActionResult AddSupplementToGym(GymSupplementViewModel newGymSupplement)
         {
-            var supplementResponse = _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplementBackEnd/" + newGymSupplement.SupplementID).Result;
+            var supplementResponse = _client.GetAsync("https://gym-management-system.azurewebsites.net/api/Supplements/GetSupplementBackEnd/" + newGymSupplement.SupplementID).Result;
 
             if (supplementResponse.IsSuccessStatusCode)
             {
@@ -310,7 +310,7 @@ namespace gym_management_system_front_end.Controllers
                 Quantity = quantity
             };
 
-            var supplementResponse = _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplementBackEnd/" + supplementId).Result;
+            var supplementResponse = _client.GetAsync("https://gym-management-system.azurewebsites.net/api/Supplements/GetSupplementBackEnd/" + supplementId).Result;
 
             if (supplementResponse.IsSuccessStatusCode)
             {
@@ -328,7 +328,7 @@ namespace gym_management_system_front_end.Controllers
         [HttpPost]
         public IActionResult ConfirmUpdateSupplementForGym(GymSupplementViewModel updatedGymSupplement)
         {
-            var supplementResponse = _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplementBackEnd/" + updatedGymSupplement.SupplementID).Result;
+            var supplementResponse = _client.GetAsync("https://gym-management-system.azurewebsites.net/api/Supplements/GetSupplementBackEnd/" + updatedGymSupplement.SupplementID).Result;
 
             if (supplementResponse.IsSuccessStatusCode)
             {
@@ -365,7 +365,7 @@ namespace gym_management_system_front_end.Controllers
                 SupplementID = supplementId
             };
 
-            var supplementResponse = _client.GetAsync("https://localhost:7200/api/Supplements/GetSupplementBackEnd/" + supplementId).Result;
+            var supplementResponse = _client.GetAsync("https://gym-management-system.azurewebsites.net/api/Supplements/GetSupplementBackEnd/" + supplementId).Result;
 
             if (supplementResponse.IsSuccessStatusCode)
             {

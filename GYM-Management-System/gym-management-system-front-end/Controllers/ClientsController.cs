@@ -7,7 +7,7 @@ namespace gym_management_system_front_end.Controllers
 {
     public class ClientsController : Controller
     {
-        private Uri baseAddress = new Uri("https://localhost:7200/api/Clients");
+        private Uri baseAddress = new Uri("https://gym-management-system.azurewebsites.net/api/Clients");
         private readonly HttpClient _client;
 
         public ClientsController()

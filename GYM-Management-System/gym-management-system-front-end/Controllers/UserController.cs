@@ -12,7 +12,7 @@ namespace gym_management_system_front_end.Controllers
 {
     public class UserController : Controller
     {
-        Uri baseAddress = new Uri("https://localhost:7200/api/User/");
+        Uri baseAddress = new Uri("https://gym-management-system.azurewebsites.net/api/User/");
         private readonly HttpClient _client;
 
         public UserController(HttpClient client)
@@ -123,7 +123,7 @@ namespace gym_management_system_front_end.Controllers
 
         public async Task<IActionResult> RegisterClient()
         {
-            var gymResponse = await _client.GetAsync("https://localhost:7200/api/Gyms/GetGymsBackEnd");
+            var gymResponse = await _client.GetAsync("https://gym-management-system.azurewebsites.net/api/Gyms/GetGymsBackEnd");
             var gymResult = await gymResponse.Content.ReadAsStringAsync();
             var gymList = JsonConvert.DeserializeObject<List<GetUserGymDTO>>(gymResult);
 
@@ -138,7 +138,7 @@ namespace gym_management_system_front_end.Controllers
                 });
             }
 
-            var subTierResponse = await _client.GetAsync("https://localhost:7200/api/SubscriptionTiers/GetSubscriptionTiersBackEnd");
+            var subTierResponse = await _client.GetAsync("https://gym-management-system.azurewebsites.net/api/SubscriptionTiers/GetSubscriptionTiersBackEnd");
             var subTierResult = await subTierResponse.Content.ReadAsStringAsync();
             var subTierList = JsonConvert.DeserializeObject<List<GetSubscriptionTierDTO>>(subTierResult);
 
@@ -184,7 +184,7 @@ namespace gym_management_system_front_end.Controllers
             }
             string jsonCartItems = JsonConvert.SerializeObject(clientDTO);
             HttpContent content = new StringContent(jsonCartItems, Encoding.UTF8, "application/json");
-            var PaymentResponse = await _client.PostAsync("https://localhost:7200/api/Methods/SubTierPaymentBackEnd", content);
+            var PaymentResponse = await _client.PostAsync("https://gym-management-system.azurewebsites.net/api/Methods/SubTierPaymentBackEnd", content);
 
             if (response.IsSuccessStatusCode)
             {
