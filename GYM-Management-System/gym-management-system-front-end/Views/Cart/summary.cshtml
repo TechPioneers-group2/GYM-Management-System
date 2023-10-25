@@ -5,10 +5,8 @@
 }
 
 <div class="container mt-5 pt-5 col-md-6">
-    <h2 class="text-center">Summary</h2>
-    <div class="text-center my-3 mx-auto d-grid gap-2">
-        <a asp-action="Index" asp-controller="Home" class="btn btn-primary col-4">Home</a>
-    </div>
+    <h2 class="mx-1">Summary</h2>
+    <p class="mx-1">Thank you for your order</p>
     <table id="OrderTable" class="table table-borderless table-striped text-white border border-1 border-primary ">
         <thead>
             <tr class="text-center">
@@ -26,4 +24,7 @@
             }
         </tbody>
     </table>
+    <div class="text-center my-3 mx-auto d-grid gap-2">
+        <a asp-action="Index" asp-controller="Home" class="btn btn-primary col-4 mx-auto">Home</a>
+    </div>
 </div>

@@ -33,7 +33,6 @@ namespace gym_management_system_front_end.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
         public IActionResult Privacy()
         {
             return View();
